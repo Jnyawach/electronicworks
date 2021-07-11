@@ -7,17 +7,12 @@
 
             <h5>Edit Profile</h5>
             <hr class="dropdown-divider">
-            <small class="text-danger">This user has super client rights</small>
+
             <div class="row">
                 <div class="col-8">
-                    <form class="mt-5" method="POST" action="{{route('client.update', $client->id)}}">
+                    <form class="mt-5" method="POST" action="{{route('dashboard.update', $client->id)}}">
                         @method('PATCH')
                         @csrf
-
-                        <div class="form-group">
-                            <input type="hidden" name="role_id" value="2">
-                            <input type="hidden" name="status_id" value="1">
-                        </div>
                         <div class="form-group row required mb-5">
                             <div class="col-sm-12 col-md-6 col-lg-6">
                                 <div class="input-group ">
@@ -67,7 +62,7 @@
                                 @enderror
                             </small>
                         </div>
-                        
+
 
                         <div class="form-group row mb-3">
                             <div class="col-sm-12 col-md-6 col-lg-6 ">

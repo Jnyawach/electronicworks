@@ -16,6 +16,13 @@ class CreateExaminationsTable extends Migration
         Schema::create('examinations', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->text('quiz');
+            $table->text('choice_a');
+            $table->text('choice_b');
+            $table->text('choice_c');
+            $table->text('answer');
+            $table->bigInteger('category_id')->unsigned()->index();
+            $table->foreign('category_id')->references('id')->on('exam_categories')->onDelete('cascade');
         });
     }
 

@@ -2,6 +2,11 @@
 @section('content')
 
         <!--page content-->
+        @if (session('status'))
+            <div class="alert alert-success">
+                {{ session('status') }}
+            </div>
+        @endif
 
             <div class="row">
                 <div class="col-sm-12 col-md-8 col-lg-8 mx-auto">

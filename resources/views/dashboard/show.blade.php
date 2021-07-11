@@ -1,8 +1,13 @@
-@extends('layouts.admin_layout')
+@extends('layouts.client_layout')
 @section('title', $client->name)
 @section('content')
-    <div class="dashboard-wrapper green-body pt-5">
-        <div class="container pt-5">
+    <div class="pt-5">
+        <div class="container pt-5 ps-5">
+            @if (session('status'))
+                <div class="alert alert-success">
+                    {{ session('status') }}
+                </div>
+            @endif
             <div class="row">
                 <div class="col-sm-12 col-md-5 col-lg-5">
                     <img src="{{url($client->getFirstMedia('avatar')? $client->getFirstMedia('avatar')
@@ -34,7 +39,7 @@
                         <h5 class="fw-bold col">{{$client->name}} &nbsp; {{$client->last_name}}</h5>
                         <!--action button-->
                         <div class=" col float-end">
-                            <a href="{{route('client.edit', $client->id)}}" class="btn-sm btn-primary hire text-decoration-none">
+                            <a href="{{route('dashboard.edit', $client->id)}}" class="btn-sm btn-primary hire text-decoration-none">
                                 Edit <i class="fas fa-pen-square ms-2"></i>
                             </a>
 
