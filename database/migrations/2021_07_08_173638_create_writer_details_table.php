@@ -26,7 +26,7 @@ class CreateWriterDetailsTable extends Migration
             $table->string('department');
             $table->string('course');
             $table->integer('graduation');
-            $table->integer('score');
+            $table->integer('score')->nullable();
             $table->bigInteger('user_id')->unsigned()->index();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 

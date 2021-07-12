@@ -11,8 +11,12 @@
                         Field Online<br>
                     </h1>
                     <h5>Best ideas turned into reality</h5>
-                    <a href="#" title="Hire a writer" class="btn btn-primary hire" >Hire a writer</a>
-                    <a href="#" title="Sign up as freelancer" class="btn btn-outline-primary free">Become a writer</a>
+                    <a href="{{route('register')}}" title="Hire a writer" class="btn btn-primary hire" >Hire a
+                        writer</a>
+                    <a href="{{route('registration.index')}}" title="Sign up as freelancer" class="btn
+                    btn-outline-primary
+                    free">Become a
+                    writer</a>
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-7 mx-auto m-2">
                     <img src="images/people-browsing.png" class="img-fluid">

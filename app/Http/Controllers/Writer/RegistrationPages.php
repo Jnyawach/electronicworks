@@ -16,7 +16,7 @@ class RegistrationPages extends Controller
     public function __invoke(Request $request)
     {
         //
-        return view('register.' . request()->segment(1));
+        return view('registration/writer_details' );
 
     }
 }

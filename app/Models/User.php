@@ -62,6 +62,10 @@ class User extends Authenticatable implements HasMedia
         return $this->hasOne(WriterDetail::class);
     }
 
+    public  function test(){
+        return $this->hasOne(Test::class);
+    }
+
     public  function registerMediaCollections():void
     {
         $this->addMediaCollection('avatar')

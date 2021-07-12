@@ -14,6 +14,8 @@ use App\Http\Controllers\Admin\AdminExamController;
 use App\Http\Controllers\Admin\AdminEssayController;
 use App\Http\Controllers\Writer\WriterRegistrationController;
 use App\Http\Controllers\Writer\RegistrationPages;
+use App\Http\Controllers\Writer\EnglishTestController;
+use App\Http\Controllers\Writer\EssayTestController;
 
 
 
@@ -47,15 +49,17 @@ Route::group(['middleware'=>'auth'], function (){
     Route::resource('dashboard', ClientController::class);
     Route::get('dashboard/wait',['as'=>'redirect_client', 'uses'=>RedirectController::class]);
 });
+//writer routes
+Route::group(['middleware'=>'auth'], function (){
+    Route::get('registration/writer_details',['as'=>'detailing', 'uses'=>RegistrationPages::class]);
+});
 //writer roots without auth
 Route::group([], function (){
     Route::resource('registration', WriterRegistrationController::class);
+    Route::resource('english_test', EnglishTestController::class);
+    Route::resource('essay_test', EssayTestController::class);
 });
-//writer routes
-Route::group(['middleware'=>'auth'], function (){
-    Route::get('{register}', RegistrationPages::class)->name('register')
-    ->where('english_test','essay_test','writer_details');
-});
+
 
 
 Auth::routes();
