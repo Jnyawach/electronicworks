@@ -39,6 +39,10 @@ class EssayTestController extends Controller
     public function store(Request $request)
     {
         //
+        $validated=$request->validate([
+            'essay_body' => 'required|min:3|max:1000',
+            'test_id' => 'required|min:1|max:5',
+        ]);
     }
 
     /**

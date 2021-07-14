@@ -19,6 +19,7 @@
 <body class="@yield('body-class')">
 <header class=" fixed-top w-100">
 
+
     <nav class="navbar navbar-expand-lg navbar-light p-2 ps-3 pe-4 w-100 main-bar">
         <a class="navbar-brand" href="/"><img src="{{asset('images/e-logo.png')}}" class="img-fluid" style="height:
         50px"></a>

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Writer;
 use App\Http\Controllers\Controller;
 
-use App\Models\Examination;
 use App\Models\User;
 use App\Models\WriterDetail;
 use Illuminate\Http\Request;
