@@ -72,7 +72,8 @@
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-end  sign-drop"
                                 aria-labelledby="dropdownMenuButton1">
-                                <li><a class="dropdown-item" href="{{route('dashboard.index')}}">Dashboard
+                                <li>
+                                    <a class="dropdown-item" href="{{route('dashboard.index')}}">Dashboard
                                         <i class="fas fa-house-user ms-2"></i></a></li>
                                 <hr>
                                 <li>

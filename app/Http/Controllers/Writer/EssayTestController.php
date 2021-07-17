@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Writer;
 use App\Http\Controllers\Controller;
 
 use App\Models\Essay;
+use App\Models\EssayWriting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EssayTestController extends Controller
 {
@@ -40,9 +42,29 @@ class EssayTestController extends Controller
     {
         //
         $validated=$request->validate([
-            'essay_body' => 'required|min:3|max:1000',
-            'test_id' => 'required|min:1|max:5',
+            'essay_body' => 'required|min:3',
+            'essay_id' => 'required|min:1|max:5',
         ]);
+        $user=Auth::user();
+
+        if($user->essay()->exists()){
+            $user->essay()->update([
+                'essay_body'=>$validated['essay_body'],
+                'essay_id' => $validated['essay_id'],
+
+            ]);
+
+            return redirect('congratulations');
+        }
+
+
+
+
+        $user->essay()->create([
+            'essay_body'=>$validated['essay_body'],
+            'essay_id' => $validated['essay_id'],
+        ]);
+        return redirect('congratulations');
     }
 
     /**

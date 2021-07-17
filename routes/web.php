@@ -16,6 +16,7 @@ use App\Http\Controllers\Writer\WriterRegistrationController;
 use App\Http\Controllers\Writer\RegistrationPages;
 use App\Http\Controllers\Writer\EnglishTestController;
 use App\Http\Controllers\Writer\EssayTestController;
+use App\Http\Controllers\Writer\WriterController;
 
 
 
@@ -47,7 +48,8 @@ Route::group(['middleware'=>'auth'], function (){
 
 Route::group(['middleware'=>'auth'], function (){
     Route::resource('dashboard', ClientController::class);
-    Route::get('dashboard/wait',['as'=>'redirect_client', 'uses'=>RedirectController::class]);
+    Route::get('/{waiting}',['as'=>'waiting', 'uses'=>RedirectController::class])->name('page')
+        ->where('waiting','wait|congratulations|deactivated');;
 });
 //writer routes
 Route::group(['middleware'=>'auth'], function (){
@@ -58,6 +60,8 @@ Route::group([], function (){
     Route::resource('registration', WriterRegistrationController::class);
     Route::resource('english_test', EnglishTestController::class);
     Route::resource('essay_test', EssayTestController::class);
+    Route::resource('freelancer', WriterController::class);
+
 });
 
 

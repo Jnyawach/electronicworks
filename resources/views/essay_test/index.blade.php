@@ -29,7 +29,7 @@
                                     <h4 style="font-size: 20px">Time: {{$test->delivery}}hr</h4>
                                     <h4 style="font-size: 20px">Words: {{$test->words}}</h4>
                                     <div class="form-group">
-                                        <input type="hidden" value="{{$test->id}}" name="test_id">
+                                        <input type="hidden" value="{{$test->id}}" name="essay_id">
                                     </div>
                                     <small class="text-danger">
                                         @error('essay_body')
@@ -38,7 +38,7 @@
                                     </small>
                                     <div class="form-group">
                                         <textarea class="form-control" name="essay_body"
-                                                  id="essay" >{{old('essaY_body')}}</textarea>
+                                                  id="essay" >{{old('essay_body')}}</textarea>
                                     </div>
 
                                 </div>
@@ -62,7 +62,6 @@
     <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
     <script>
         CKEDITOR.replace( 'essay', );
-        CKEDITOR.instances.editor1.wordCount.wordCount;
 
     </script>
     @endsection

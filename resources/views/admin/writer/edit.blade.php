@@ -5,7 +5,7 @@
         <div class="container p-5">
 
 
-            <h5>Add Writer</h5>
+            <h5>Edit Writer</h5>
             <hr class="dropdown-divider">
             <h4>Writer details</h4>
             <div class="row">

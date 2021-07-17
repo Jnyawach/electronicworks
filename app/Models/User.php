@@ -65,6 +65,9 @@ class User extends Authenticatable implements HasMedia
     public  function test(){
         return $this->hasOne(Test::class);
     }
+    public  function essay(){
+        return $this->hasOne(EssayWriting::class);
+    }
 
     public  function registerMediaCollections():void
     {
@@ -72,7 +75,7 @@ class User extends Authenticatable implements HasMedia
 
             ->registerMediaConversions(function (Media $media){
                 $this->addMediaConversion('avatar_card')
-                    ->width(1800)
+                    ->width(180)
                     ->height(180);
                 $this->addMediaConversion('avatar_icon')
                     ->width(80)

@@ -59,7 +59,7 @@ class WriterRegistrationController extends Controller
         if (Auth::attempt($validated)) {
             $request->session()->regenerate();
 
-            return redirect('regisration/writer_details');
+            return redirect('registration/writer_details');
         }
 
         return back()->withErrors([
@@ -131,28 +131,46 @@ class WriterRegistrationController extends Controller
                 'cellphone'=>$validated['cellphone'],
 
             ]);
+        if($user->detail()->exists()) {
 
             $user->detail()->update([
-                'gender'=>$validated['gender'],
-                'language'=>$validated['language'],
-                'night_calls'=>$validated['night_calls'],
-                'country'=>$validated['country'],
-                'city'=>$validated['city'],
-                'zip'=>$validated['zip'],
-                'university'=>$validated['university'],
-                'department'=>$validated['department'],
-                'course'=>$validated['course'],
-                'graduation'=>$validated['graduation'],
-                'user_id'=>$user->id,
+                'gender' => $validated['gender'],
+                'language' => $validated['language'],
+                'night_calls' => $validated['night_calls'],
+                'country' => $validated['country'],
+                'city' => $validated['city'],
+                'zip' => $validated['zip'],
+                'university' => $validated['university'],
+                'department' => $validated['department'],
+                'course' => $validated['course'],
+                'graduation' => $validated['graduation'],
+                'user_id' => $user->id,
             ]);
-            $detail=WriterDetail::where('user_id', $id)->first();
+        }else{
 
+            $user->create([
+                'gender' => $validated['gender'],
+                'language' => $validated['language'],
+                'night_calls' => $validated['night_calls'],
+                'country' => $validated['country'],
+                'city' => $validated['city'],
+                'zip' => $validated['zip'],
+                'university' => $validated['university'],
+                'department' => $validated['department'],
+                'course' => $validated['course'],
+                'graduation' => $validated['graduation'],
+                'user_id' => $user->id,]);
+        }
 
-            if($file=$request->file('cert')) {
+        $detail=WriterDetail::where('user_id', $user->id)->first();
+
+        if($file=$request->file('cert')) {
                 if ($detail->getMedia('cert')->count()>0){
                     $detail->clearMediaCollection('cert');
                     $detail->addMedia($request->cert)->toMediaCollection('cert');
+
                 }else{
+
                     $detail->addMedia($request->cert)->toMediaCollection('cert');
                 }
 
@@ -161,7 +179,9 @@ class WriterRegistrationController extends Controller
                 if ($detail->getMedia('identity')->count()>0){
                     $detail->clearMediaCollection('identity');
                     $detail->addMedia($request->identity)->toMediaCollection('identity');
+
                 }else{
+
                     $detail->addMedia($request->identity)->toMediaCollection('identity');
                 }
 

@@ -16,6 +16,6 @@ class RedirectController extends Controller
     public function __invoke(Request $request)
     {
         //
-        return view('redirect_client');
+        return view('waiting.' . request()->segment(1));
     }
 }

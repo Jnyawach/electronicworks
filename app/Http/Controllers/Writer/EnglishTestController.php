@@ -55,12 +55,16 @@ class EnglishTestController extends Controller
         }
         $result = json_encode($collect);
         $user=User::findOrFail(Auth::id());
-
-        $user->test()->findOrNew([
+        if($essay=$user->test()->exists()){
+            $user->test()->update([
                 'user_id'=>Auth::id(),
                 'test'=>$result,
             ]);
-
+        }else{
+            $user->create([
+                'user_id'=>Auth::id(),
+                'test'=>$result,]);
+        }
 
         return  redirect('essay_test');
 

@@ -19,7 +19,8 @@
 
                         <h4 class="ms-5 mt-3 mb-2" style="font-size: 18px">Email & Login: <span>{{Auth::user()
                                 ->email}}</span></h4>
-                        <form id="msform" action="{{route('registration.update', Auth::id())}}" method="POST">
+                        <form id="msform" action="{{route('registration.update', Auth::id())}}" method="POST"
+                              enctype="multipart/form-data">
                             @method('PATCH')
                             @csrf
                             <fieldset>
