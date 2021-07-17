@@ -15,7 +15,7 @@ class EssayWriting extends Model
     ];
 
     public  function  user(){
-        return $this->belongsTo(ExamCategory::class);
+        return $this->belongsTo(User::class);
     }
 
 

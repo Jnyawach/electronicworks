@@ -12,6 +12,7 @@ use \App\Http\Controllers\client\ClientController;
 use App\Http\Controllers\Allusers\RedirectController;
 use App\Http\Controllers\Admin\AdminExamController;
 use App\Http\Controllers\Admin\AdminEssayController;
+use App\Http\Controllers\Admin\AdminApplicationController;
 use App\Http\Controllers\Writer\WriterRegistrationController;
 use App\Http\Controllers\Writer\RegistrationPages;
 use App\Http\Controllers\Writer\EnglishTestController;
@@ -44,6 +45,7 @@ Route::group(['middleware'=>'auth'], function (){
     Route::resource('admin/homepage/writer', AdminWriterController::class);
     Route::resource('admin/homepage/exam', AdminExamController::class);
     Route::resource('admin/homepage/essay', AdminEssayController::class);
+    Route::resource('admin/homepage/application', AdminApplicationController::class);
 });
 
 Route::group(['middleware'=>'auth'], function (){

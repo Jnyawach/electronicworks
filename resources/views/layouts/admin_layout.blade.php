@@ -104,13 +104,13 @@
                             <div id="submenu-99" class="collapse submenu" style="">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#">Writers<span class="badge bg-danger ms-2">3
+                                        <a class="nav-link" href="{{route('application.index')}}">See applications<span
+                                                class="badge
+                                        bg-danger
+                                        ms-2">3
                                         </span></a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">Clients <span class="badge bg-danger ms-2">3
-                                        </span></a>
-                                    </li>
+
 
                                 </ul>
                             </div>

@@ -129,7 +129,6 @@ class WriterRegistrationController extends Controller
                 'name'=>$validated['name'],
                 'last_name'=>$validated['last_name'],
                 'cellphone'=>$validated['cellphone'],
-
             ]);
         if($user->detail()->exists()) {
 
@@ -148,7 +147,7 @@ class WriterRegistrationController extends Controller
             ]);
         }else{
 
-            $user->create([
+            $user->detail()->create([
                 'gender' => $validated['gender'],
                 'language' => $validated['language'],
                 'night_calls' => $validated['night_calls'],

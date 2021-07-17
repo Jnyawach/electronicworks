@@ -1,14 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Writer;
+namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 
-use App\Models\Essay;
-use App\Models\EssayWriting;
+use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class EssayTestController extends Controller
+class AdminApplicationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,8 +16,10 @@ class EssayTestController extends Controller
     public function index()
     {
         //
-        $essay=Essay::inRandomOrder()->limit(1)->get();
-        return  view('essay_test.index', compact('essay'));
+        $writers=User::where('status_id', 2)->where('condition', 1)->where('role_id', 3)->get();
+        $clients=User::where('status_id', 2)->where('condition', 1)->where('role_id', 2)->get();
+        return  view('admin.application.index', compact('writers', 'clients'));
+
     }
 
     /**
@@ -41,27 +41,6 @@ class EssayTestController extends Controller
     public function store(Request $request)
     {
         //
-        $validated=$request->validate([
-            'essay_body' => 'required|min:3',
-            'essay_id' => 'required|min:1|max:5',
-        ]);
-        $user=Auth::user();
-
-        if($user->essay()->exists()){
-            $user->essay()->update([
-                'essay_body'=>$validated['essay_body'],
-                'essay_id' => $validated['essay_id'],
-
-            ]);
-
-            return redirect('congratulations');
-        }
-
-        $user->essay()->create([
-            'essay_body'=>$validated['essay_body'],
-            'essay_id' => $validated['essay_id'],
-        ]);
-        return redirect('congratulations');
     }
 
     /**
@@ -73,6 +52,8 @@ class EssayTestController extends Controller
     public function show($id)
     {
         //
+        $client=User::findOrFail($id);
+        return  view('admin.application.show', compact('client'));
     }
 
     /**
