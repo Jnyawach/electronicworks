@@ -18,6 +18,8 @@ use App\Http\Controllers\Writer\RegistrationPages;
 use App\Http\Controllers\Writer\EnglishTestController;
 use App\Http\Controllers\Writer\EssayTestController;
 use App\Http\Controllers\Writer\WriterController;
+use App\Http\Controllers\Admin\AdminFaqsController;
+use App\Http\Controllers\Admin\FaqStatus;
 
 
 
@@ -35,6 +37,7 @@ use App\Http\Controllers\Writer\WriterController;
 Route::get('/', function () {
     return view('welcome');
 });
+//admin routes
 Route::group(['middleware'=>'auth'], function (){
     Route::resource('admin', AdminController::class);
     Route::resource('admin/homepage/user', AdminUserController::class);
@@ -46,6 +49,8 @@ Route::group(['middleware'=>'auth'], function (){
     Route::resource('admin/homepage/exam', AdminExamController::class);
     Route::resource('admin/homepage/essay', AdminEssayController::class);
     Route::resource('admin/homepage/application', AdminApplicationController::class);
+    Route::resource('admin/homepage/faqs', AdminFaqsController::class);
+    Route::patch('faq_status/{id}', [' as'=>'frequent', 'uses'=>FaqStatus::class]);
 });
 
 Route::group(['middleware'=>'auth'], function (){

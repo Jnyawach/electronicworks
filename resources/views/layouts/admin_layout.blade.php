@@ -292,10 +292,10 @@
                             <div id="submenu-9" class="collapse submenu" style="">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#">Frequently Asked Question</a>
+                                        <a class="nav-link" href="{{route('faqs.index')}}">Frequently Asked Question</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#">Create Faqs</a>
+                                        <a class="nav-link" href="{{route('faqs.create')}}">Create Faqs</a>
                                     </li>
                                 </ul>
                             </div>
