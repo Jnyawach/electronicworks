@@ -262,27 +262,14 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-7" aria-controls="submenu-7"><i class="fa fa-tasks" aria-hidden="true"></i>Jobs</a>
-                            <div id="submenu-7" class="collapse submenu" style="">
-                                <ul class="nav flex-column">
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">All Jobs</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">Create Jobs</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-8" aria-controls="submenu-8"><i class="fa fa-archive" aria-hidden="true"></i>Terms and Policy</a>
                             <div id="submenu-8" class="collapse submenu" style="">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#">Policy</a>
+                                        <a class="nav-link" href="{{route('policy.index')}}">Policy</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#">Create Policy</a>
+                                        <a class="nav-link" href="{{route('policy.create')}}">Create Policy</a>
                                     </li>
                                 </ul>
                             </div>

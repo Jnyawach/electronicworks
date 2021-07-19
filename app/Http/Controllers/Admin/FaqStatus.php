@@ -17,9 +17,12 @@ class FaqStatus extends Controller
     public function __invoke(Request $request, $id)
     {
         //
+
         $faq=Faqs::findOrFail($id);
+
         $faq->update([
-            ' status'=>$request->status,
+            'status'=>$request['status'],
         ]);
+        return redirect()->back()->with('status','Successfully Updated');
     }
 }

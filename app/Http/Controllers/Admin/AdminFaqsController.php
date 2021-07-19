@@ -44,12 +44,12 @@ class AdminFaqsController extends Controller
     {
         //
         $validated = $request->validate([
-            'category_id' => 'required','max:3',
+            'faq_category_id' => 'required','max:3',
             'question' => 'required', 'max:255',
             'answer' => 'required',
         ]);
-        $faq=Faqs::Create([
-            'category_id'=>$validated['category_id'],
+        $faq=Faqs::create([
+            'faq_category_id'=>$validated['faq_category_id'],
             'question'=>$validated['question'],
             'answer'=>$validated['answer']
 
@@ -78,8 +78,9 @@ class AdminFaqsController extends Controller
     public function edit($id)
     {
         //
+        $category=FaqCategory::pluck('name', 'id');
         $faq=Faqs::findOrFail($id);
-        return view('admin.faqs.edit', compact('faq'));
+        return view('admin.faqs.edit', compact('faq','category'));
 
     }
 
@@ -93,6 +94,19 @@ class AdminFaqsController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $faq=Faqs::findOrFail($id);
+        $validated = $request->validate([
+            'faq_category_id' => 'required','max:3',
+            'question' => 'required', 'max:255',
+            'answer' => 'required',
+        ]);
+        $faq->update([
+            'faq_category_id'=>$validated['faq_category_id'],
+            'question'=>$validated['question'],
+            'answer'=>$validated['answer']
+
+        ]);
+        return  redirect('admin/homepage/faqs')->with('status', 'Question Successfully updated');
     }
 
     /**
@@ -104,5 +118,9 @@ class AdminFaqsController extends Controller
     public function destroy($id)
     {
         //
+        $faq=Faqs::findOrFail($id);
+        $faq->delete();
+        return  redirect()->back()->with('Status','Successfully Deleted');
+
     }
 }

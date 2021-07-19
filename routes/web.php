@@ -20,6 +20,7 @@ use App\Http\Controllers\Writer\EssayTestController;
 use App\Http\Controllers\Writer\WriterController;
 use App\Http\Controllers\Admin\AdminFaqsController;
 use App\Http\Controllers\Admin\FaqStatus;
+use App\Http\Controllers\Admin\AdminPolicyController;
 
 
 
@@ -50,7 +51,8 @@ Route::group(['middleware'=>'auth'], function (){
     Route::resource('admin/homepage/essay', AdminEssayController::class);
     Route::resource('admin/homepage/application', AdminApplicationController::class);
     Route::resource('admin/homepage/faqs', AdminFaqsController::class);
-    Route::patch('faq_status/{id}', [' as'=>'frequent', 'uses'=>FaqStatus::class]);
+    Route::resource('admin/homepage/policy', AdminPolicyController::class);
+    Route::patch('frequent/{id}', ['as'=>'frequent', 'uses'=>FaqStatus::class]);
 });
 
 Route::group(['middleware'=>'auth'], function (){

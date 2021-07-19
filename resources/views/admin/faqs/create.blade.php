@@ -13,7 +13,7 @@
                     @csrf
                     <div class="form-group">
                         <label for="category" class="control-label">Category:</label>
-                        <select class="form-select complete" name="category_id" required id="category">
+                        <select class="form-select complete" name="faq_category_id" required id="category">
                             <option selected value="">Select Category</option>
                             @foreach($category as $id=>$categories)
                                 <option value="{{$id}}">{{$categories}}</option>

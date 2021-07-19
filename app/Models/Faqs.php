@@ -9,13 +9,15 @@ class Faqs extends Model
 {
     use HasFactory;
     protected $fillable=[
-        'category_id',
+        'faq_category_id',
         'answer',
         'question',
         'status',
     ];
 
-    public  function category(){
+    public  function faq_category(){
         return $this->belongsTo(FaqCategory::class);
     }
+
+
 }
