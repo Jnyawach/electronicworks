@@ -28,6 +28,7 @@ class AdminPolicyController extends Controller
     public function create()
     {
         //
+        return  view('admin.policy.create');
     }
 
     /**
@@ -39,6 +40,17 @@ class AdminPolicyController extends Controller
     public function store(Request $request)
     {
         //
+        $validate=$request->validate([
+            'category'=>'required',
+            'status'=>'required|max:3',
+            'text'=>'required'
+        ]);
+        $policy=Policy::create([
+            'category'=>$validate['category'],
+            'status'=>$validate['status'],
+            'text'=>$validate['text'],
+        ]);
+        return redirect('admin/homepage/policy')->with('status','Policy created successfully');
     }
 
     /**
@@ -50,6 +62,8 @@ class AdminPolicyController extends Controller
     public function show($id)
     {
         //
+        $policy=Policy::findOrFail($id);
+        return view('admin.policy.show', compact('policy'));
     }
 
     /**
@@ -61,6 +75,8 @@ class AdminPolicyController extends Controller
     public function edit($id)
     {
         //
+        $policy=Policy::findOrFail($id);
+        return  view('admin.policy.edit', compact('policy'));
     }
 
     /**
@@ -73,6 +89,19 @@ class AdminPolicyController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $policy=Policy::findOrFail($id);
+        $validate=$request->validate([
+            'category'=>'required',
+            'status'=>'required|max:3',
+            'text'=>'required'
+        ]);
+        $policy->update([
+            'category'=>$validate['category'],
+            'status'=>$validate['status'],
+            'text'=>$validate['text'],
+        ]);
+        return redirect('admin/homepage/policy')->with('status','Policy created updated');
+
     }
 
     /**

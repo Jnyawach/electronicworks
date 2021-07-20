@@ -386,7 +386,7 @@ footer h5{
 /*Contact us page*/
 .contact{
     background-image: url("../images/contact.png"),
-    linear-gradient(110deg, var(--primary2) 60%, var(--primary2) 60%);
+    linear-gradient(110deg, white 60%, white 60%);
    padding-top: 380px;
     background-repeat: no-repeat,
     no-repeat,
@@ -1049,5 +1049,17 @@ Container / Wrapper
     font-size: 18px;
 }
 .writer-progress h5 span{
+    color: var(--secondary);
+}
+.unread{
+    background-color:rgba(172,223,135, 0.1);
+}
+
+.contacts button{
+    background:none !important;
+    border: 0px;
+    font-size: 17px;
+    margin: 0px!important;
+    padding: 0px!important;
     color: var(--secondary);
 }

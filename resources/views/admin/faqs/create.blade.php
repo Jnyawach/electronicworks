@@ -42,7 +42,7 @@
                             </div>
                     <div class="form-group row mt-3">
                         <div class="col-12">
-                            <label for="question" class="control-label">Answer:</label><br>
+                            <label for="policy" class="control-label">Answer:</label><br>
                             <textarea id="answer" name="answer" class="form-control">
                                     {{old('answer')}}
                                 </textarea>

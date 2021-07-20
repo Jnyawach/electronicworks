@@ -28,7 +28,7 @@
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="menu">
             <div class="navbar-nav">
-                <a class="nav-item nav-link" href="#">Contact Us</a>
+                <a class="nav-item nav-link" href="{{route('contact.index')}}">Contact Us</a>
                 <a class="nav-item nav-link" href="#">Why Electronic Works?</a>
                 <a class="nav-item nav-link" href="#">Reviews</a>
 
@@ -114,7 +114,7 @@
     <div class="container p-5">
         <div class="row">
             <div class="col-sm-11 col-md-4 col-lg-4 mx-auto text-center">
-                <img src="images/e-works.png" class="img-fluid" alt="Electronic Works logo">
+                <img src="{{asset('images/e-works.png')}}" class="img-fluid" alt="Electronic Works logo">
                 <ul class="nav foot-nav justify-content-center">
                     <li class="nav-item">
                         <a class="nav-link" href="#">About Us</a>
@@ -161,7 +161,7 @@
                         <a class="nav-link" href="#">FAQS</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " href="#">Contact us</a>
+                        <a class="nav-link " href="{{route('contact.index')}}">Contact us</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link " href="#">Privacy Policy</a>

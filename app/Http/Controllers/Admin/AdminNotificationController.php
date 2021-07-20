@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\General;
+namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 
-use App\Models\contact;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 
-class ContactController extends Controller
+class AdminNotificationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +15,7 @@ class ContactController extends Controller
     public function index()
     {
         //
-        return view('contact.index');
+        return  view('admin.notifications.index');
     }
 
     /**
@@ -27,7 +25,8 @@ class ContactController extends Controller
      */
     public function create()
     {
-        //
+        //Remember to add email important notification
+        return  view('admin.notifications.create');
     }
 
     /**
@@ -39,37 +38,6 @@ class ContactController extends Controller
     public function store(Request $request)
     {
         //
-        if (is_null($request->filter)){
-            $validated = $request->validate([
-                'name' => 'required|max:255',
-                'email' => 'required|email',
-                'issue'=>'required|max:25',
-                'subject'=>'required|max:255',
-                'body'=>'required',
-            ]);
-            $mess=contact::create([
-                'name'=>$validated['name'],
-                'status'=>0,
-                'email'=>$validated['email'],
-                'issue'=>$validated['issue'],
-                'subject'=>$validated['subject'],
-                'body'=>$validated['body'],
-            ]);
-
-
-            Mail::send('emails.contact', ['mess'=>$mess], function ($message) use($mess){
-                $message->to($mess->email);
-                $message->from('nyawach41@gmail.com');
-                $message->subject($mess->subject);
-
-
-            });
-
-            return  redirect()->back()->with('status', 'Successfully received, we will get back to you');
-
-        }else{
-            return redirect()->back();
-        }
     }
 
     /**

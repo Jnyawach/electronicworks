@@ -21,6 +21,10 @@ use App\Http\Controllers\Writer\WriterController;
 use App\Http\Controllers\Admin\AdminFaqsController;
 use App\Http\Controllers\Admin\FaqStatus;
 use App\Http\Controllers\Admin\AdminPolicyController;
+use App\Http\Controllers\Admin\AdminContactController;
+use App\Http\Controllers\Admin\ResponseController;
+use App\Http\Controllers\Admin\AdminNotificationController;
+use \App\Http\Controllers\General\ContactController;
 
 
 
@@ -52,7 +56,10 @@ Route::group(['middleware'=>'auth'], function (){
     Route::resource('admin/homepage/application', AdminApplicationController::class);
     Route::resource('admin/homepage/faqs', AdminFaqsController::class);
     Route::resource('admin/homepage/policy', AdminPolicyController::class);
+    Route::resource('admin/homepage/support', AdminContactController::class);
+    Route::resource('admin/homepage/notifications', AdminNotificationController::class);
     Route::patch('frequent/{id}', ['as'=>'frequent', 'uses'=>FaqStatus::class]);
+    Route::patch('response/{id}', ['as'=>'response', 'uses'=>ResponseController::class]);
 });
 
 Route::group(['middleware'=>'auth'], function (){
@@ -71,6 +78,10 @@ Route::group([], function (){
     Route::resource('essay_test', EssayTestController::class);
     Route::resource('freelancer', WriterController::class);
 
+});
+//General controllers-serves all general pages
+Route::group([], function (){
+   Route::resource('contact', ContactController::class);
 });
 
 

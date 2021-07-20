@@ -1,7 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+use App\Http\Controllers\Controller;
 
+use App\Models\contact;
 use Illuminate\Http\Request;
 
 class AdminContactController extends Controller
@@ -14,6 +16,8 @@ class AdminContactController extends Controller
     public function index()
     {
         //
+        $messages=contact::all();
+        return  view('admin.support.index', compact('messages'));
     }
 
     /**
@@ -46,6 +50,11 @@ class AdminContactController extends Controller
     public function show($id)
     {
         //
+        $message=contact::findOrFail($id);
+        $message->update([
+            'status'=>1,
+        ]);
+        return  view('admin.support.show', compact('message'));
     }
 
     /**
@@ -69,6 +78,11 @@ class AdminContactController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $message=contact::findOrFail($id);
+        $message->update([
+            'status'=>$request->status,
+        ]);
+        return redirect()->back();
     }
 
     /**
@@ -80,5 +94,8 @@ class AdminContactController extends Controller
     public function destroy($id)
     {
         //
+        $message=Contact::findOrFail($id);
+        $message->delete();
+        return  redirect('admin/homepage/support')->with('status','Message Successfully Deleted');
     }
 }

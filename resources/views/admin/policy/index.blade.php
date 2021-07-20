@@ -14,7 +14,7 @@
                                     <a href="{{route('policy.show', $policy->id)}}" >
                                         <div class="card-body">
                                             <h5 class="text-muted">
-                                                @if($policy->category==1)
+                                                @if($policy->category=='Policy')
                                                     Privacy Policy
                                                 @else
                                                     Terms and Condition
@@ -22,7 +22,8 @@
                                             </h5>
 
                                             <div class="metric-value d-inline-block">
-                                                <h3 class="mb-1">Last Updated: {{$policy->updated_at->isoFormat('MMMM Do YYYY')}}</h3>
+                                                <h5 class="mb-1">Last Updated: {{$policy->updated_at->isoFormat('MMMM
+                                                 Do YYYY')}}</h5>
                                             </div>
 
                                         </div>

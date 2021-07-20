@@ -223,10 +223,12 @@
                             <div id="submenu-4" class="collapse submenu" style="">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#">See notifications</a>
+                                        <a class="nav-link" href="{{route('notifications.index')}}">See
+                                            notifications</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#">Create notification</a>
+                                        <a class="nav-link" href="{{route('notifications.create')}}">Create
+                                            notification</a>
                                     </li>
                                 </ul>
                             </div>
@@ -239,7 +241,7 @@
                             <div id="submenu-5" class="collapse submenu" style="">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#">See messages</a>
+                                        <a class="nav-link" href="{{route('support.index')}}">See messages</a>
                                     </li>
 
                                 </ul>
