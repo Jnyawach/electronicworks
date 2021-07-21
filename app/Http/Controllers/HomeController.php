@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Descipline;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,7 +24,8 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $fields=Descipline::all();
 
-        return view('home');
+        return view('home', compact('fields'));
     }
 }

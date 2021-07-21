@@ -9,11 +9,7 @@
                 <!--Delayed projects-->
                 <h5>All Frequently asked questions</h5>
                 <hr>
-                @if (session('status'))
-                    <div class="alert alert-success">
-                        {{ session('status') }}
-                    </div>
-                @endif
+               @include('includes.status')
                 <div class="row mt-3">
                     @if($categories->count()>0)
                         @foreach($categories as $category)

@@ -1,5 +1,6 @@
 <?php
 
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdminUserController;
@@ -24,7 +25,10 @@ use App\Http\Controllers\Admin\AdminPolicyController;
 use App\Http\Controllers\Admin\AdminContactController;
 use App\Http\Controllers\Admin\ResponseController;
 use App\Http\Controllers\Admin\AdminNotificationController;
+use App\Http\Controllers\Admin\NoteController;
+use App\Http\Controllers\Admin\AdminDisciplineController;
 use \App\Http\Controllers\General\ContactController;
+use \App\Http\Controllers\MainController;
 
 
 
@@ -39,9 +43,7 @@ use \App\Http\Controllers\General\ContactController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 //admin routes
 Route::group(['middleware'=>'auth'], function (){
     Route::resource('admin', AdminController::class);
@@ -58,8 +60,10 @@ Route::group(['middleware'=>'auth'], function (){
     Route::resource('admin/homepage/policy', AdminPolicyController::class);
     Route::resource('admin/homepage/support', AdminContactController::class);
     Route::resource('admin/homepage/notifications', AdminNotificationController::class);
+    Route::resource('admin/homepage/discipline', AdminDisciplineController::class);
     Route::patch('frequent/{id}', ['as'=>'frequent', 'uses'=>FaqStatus::class]);
     Route::patch('response/{id}', ['as'=>'response', 'uses'=>ResponseController::class]);
+    Route::patch('note/{id}', ['as'=>'note', 'uses'=>NoteController::class]);
 });
 
 Route::group(['middleware'=>'auth'], function (){
@@ -82,6 +86,7 @@ Route::group([], function (){
 //General controllers-serves all general pages
 Route::group([], function (){
    Route::resource('contact', ContactController::class);
+    Route::resource('/', MainController::class);
 });
 
 

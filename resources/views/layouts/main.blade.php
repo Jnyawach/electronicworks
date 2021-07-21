@@ -16,7 +16,8 @@
           type = "image/x-icon">
 
 </head>
-<body class="@yield('body-class')">
+<body class="@yield('body-class')" onload="myFunction()">
+<div id="loader"></div>
 <header class=" fixed-top w-100">
 
 
@@ -106,7 +107,7 @@
     </section>
 </header>
 
-<main class="main-body" style="margin-top: 120px">
+<main class="main-body" style="margin-top: 120px;" id="mydiv">
     @yield('content')
 </main>
 
@@ -182,6 +183,18 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 @yield('scripts')
+<script>
+    var myVar;
+
+    function myFunction() {
+        myVar = setTimeout(showPage, 3000);
+    }
+
+    function showPage() {
+        document.getElementById("loader").style.display = "none";
+        document.getElementById("mydiv").style.opacity ="1";
+    }
+</script>
 </body>
 <!-- JavaScript Bundle with Popper -->
 

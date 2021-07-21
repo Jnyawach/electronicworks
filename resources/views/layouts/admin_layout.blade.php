@@ -194,7 +194,7 @@
                             <div id="submenu-3" class="collapse submenu" style="">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#">All discipline</a>
+                                        <a class="nav-link" href="{{route('discipline.index')}}">All discipline</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="#">Add Discipline</a>

@@ -46,7 +46,7 @@
                 <div class="col-sm-11 col-md-4 col-lg-3 mx-auto qualified2">
                     <div class="row">
                         <div class="col-3">
-                            <h3>500</h3>
+                            <h3>{{$users}}</h3>
                         </div>
                         <div class="col-4">
                             <h4>QUALIFIED WRITERS</h4>
@@ -60,7 +60,7 @@
                 <div class="col-sm-11 col-md-4 col-lg-3 mx-auto ">
                     <div class="row">
                         <div class="col-3">
-                            <h3>50</h3>
+                            <h3>{{$fields->count()}}</h3>
                         </div>
                         <div class="col-4">
                             <h4>EXPERT AREAS</h4>
@@ -138,45 +138,16 @@
     <!--Beginning of fields-->
     <section>
         <div class="container mt-5 pt-5">
-            <h2 class="text-center">Expert in over 50 Fields</h2>
+            <h2 class="text-center">Expert in over {{$fields->count()}} Fields</h2>
             <div class="row mt-5">
-                <div class="col-sm-11 col-md-3 col-lg-3 mx-auto">
-                    <p><span class="right-pad"><i class="fas fa-caret-right"></i></span>History</p>
-                    <p><span class="right-pad"><i class="fas fa-caret-right"></i></span>Actuarial Science</p>
-                    <p><span class="right-pad"><i class="fas fa-caret-right"></i></span>Economics</p>
-                    <p><span class="right-pad"><i class="fas fa-caret-right"></i></span>Accounting</p>
-                    <p><span class="right-pad"><i class="fas fa-caret-right"></i></span>Business</p>
-                    <p><span class="right-pad"><i class="fas fa-caret-right"></i></span>Art and Design</p>
-                    <p><span class="right-pad"><i class="fas fa-caret-right"></i></span>Architecture</p>
-                </div>
-                <div class="col-sm-11 col-md-3 col-lg-3 mx-auto">
-                    <p><span class="right-pad"><i class="fas fa-caret-right"></i></span>History</p>
-                    <p><span class="right-pad"><i class="fas fa-caret-right"></i></span>Actuarial Science</p>
-                    <p><span class="right-pad"><i class="fas fa-caret-right"></i></span>Economics</p>
-                    <p><span class="right-pad"><i class="fas fa-caret-right"></i></span>Accounting</p>
-                    <p><span class="right-pad"><i class="fas fa-caret-right"></i></span>Business</p>
-                    <p><span class="right-pad"><i class="fas fa-caret-right"></i></span>Art and Design</p>
-                    <p><span class="right-pad"><i class="fas fa-caret-right"></i></span>Architecture</p>
-                </div>
-                <div class="col-sm-11 col-md-3 col-lg-3 mx-auto">
-                    <p><span class="right-pad"><i class="fas fa-caret-right"></i></span>History</p>
-                    <p><span class="right-pad"><i class="fas fa-caret-right"></i></span>Actuarial Science</p>
-                    <p><span class="right-pad"><i class="fas fa-caret-right"></i></span>Economics</p>
-                    <p><span class="right-pad"><i class="fas fa-caret-right"></i></span>Accounting</p>
-                    <p><span class="right-pad"><i class="fas fa-caret-right"></i></span>Business</p>
-                    <p><span class="right-pad"><i class="fas fa-caret-right"></i></span>Art and Design</p>
-                    <p><span class="right-pad"><i class="fas fa-caret-right"></i></span>Architecture</p>
-                </div>
-                <div class="col-sm-11 col-md-3 col-lg-3 mx-auto">
-                    <p><span class="right-pad"><i class="fas fa-caret-right"></i></span>History</p>
-                    <p><span class="right-pad"><i class="fas fa-caret-right"></i></span>Actuarial Science</p>
-                    <p><span class="right-pad"><i class="fas fa-caret-right"></i></span>Economics</p>
-                    <p><span class="right-pad"><i class="fas fa-caret-right"></i></span>Accounting</p>
-                    <p><span class="right-pad"><i class="fas fa-caret-right"></i></span>Business</p>
-                    <p><span class="right-pad"><i class="fas fa-caret-right"></i></span>Art and Design</p>
-                    <p><span class="right-pad"><i class="fas fa-caret-right"></i></span>Architecture</p>
-                </div>
+                @foreach($fields->chunk(7) as $chunk)
+                    @foreach($chunk as $field)
+                <div class="col-sm-11 col-md-3 col-lg-3">
+                    <p><span class="right-pad"><i class="fas fa-caret-right"></i></span>{{$field->name}}</p>
 
+                </div>
+                        @endforeach
+                    @endforeach
             </div>
         </div>
     </section>
