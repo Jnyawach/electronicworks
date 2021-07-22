@@ -20,7 +20,7 @@ class EnglishTestController extends Controller
     public function index()
     {
         //
-        $english=Examination::inRandomOrder()->limit(20)->get();
+        $english=Examination::inRandomOrder()->limit(15)->get();
         return view('english_test.index', compact('english'));
     }
 
@@ -45,7 +45,7 @@ class EnglishTestController extends Controller
         //
         $collect = []; // empty array for collect customised inputs
 
-        foreach($request->all() as $input_key => $input_value){ // split input one by one
+        foreach($request->except('_token') as $input_key => $input_value){ // split input one by one
 
             $collect[] = array( //customised inputs
                 "id" => $input_key,
@@ -55,13 +55,14 @@ class EnglishTestController extends Controller
         }
         $result = json_encode($collect);
         $user=User::findOrFail(Auth::id());
+
         if($essay=$user->test()->exists()){
             $user->test()->update([
                 'user_id'=>Auth::id(),
                 'test'=>$result,
             ]);
         }else{
-            $user->create([
+            $user->test()->create([
                 'user_id'=>Auth::id(),
                 'test'=>$result,]);
         }

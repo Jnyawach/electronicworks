@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Essay;
 use App\Models\EssayWriting;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -46,6 +47,7 @@ class EssayTestController extends Controller
             'essay_id' => 'required|min:1|max:5',
         ]);
         $user=Auth::user();
+        $user->update(['condition'=>1,]);
 
         if($user->essay()->exists()){
             $user->essay()->update([

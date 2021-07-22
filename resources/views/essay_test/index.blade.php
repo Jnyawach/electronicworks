@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title', 'English Test')
+@section('title', 'Essay Test')
 @section('content')
     @include('includes.ckeditor')
     <section class="become">

@@ -29,6 +29,7 @@ class User extends Authenticatable implements HasMedia
         'cellphone',
        'sec_cellphone',
         'status_id',
+        'condition'
     ];
 
     /**

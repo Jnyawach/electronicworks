@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 
+use App\Models\Test;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class AdminApplicationController extends Controller
 {
@@ -53,6 +55,7 @@ class AdminApplicationController extends Controller
     {
         //
         $client=User::findOrFail($id);
+
         return  view('admin.application.show', compact('client'));
     }
 
@@ -77,6 +80,34 @@ class AdminApplicationController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $writer=User::findOrFail($id);
+        $writer->update([
+            'status_id'=>$request->status,
+        ]);
+        $writer->detail()->update([
+            'score'=>$request->score,
+        ]);
+        if ($request->status==4){
+            Mail::send('emails.rejected', ['mess'=>$writer], function ($message) use($writer){
+                $message->to($writer->email);
+                $message->from('nyawach41@gmail.com');
+                $message->subject('Rejected');
+
+
+            });
+            return  redirect('admin/homepage/application')->with('status', 'Writer Successfully Rejected');
+        }elseif($request->status==1){
+            Mail::send('emails.approved', ['mess'=>$writer], function ($message) use($writer){
+                $message->to($writer->email);
+                $message->from('nyawach41@gmail.com');
+                $message->subject('Approved');
+
+                return  redirect('admin/homepage/application')->with('status', 'Writer Successfully Approved');
+            });
+        }else{
+            return  redirect('admin/homepage/application')->with('status', 'Please Recheck Application');
+        }
+
     }
 
     /**

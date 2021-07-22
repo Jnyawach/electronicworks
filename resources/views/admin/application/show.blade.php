@@ -2,7 +2,7 @@
 @section('title', $client->name)
 @section('content')
     <div class="dashboard-wrapper green-body pt-5">
-        <div class="container pt-5">
+        <div class="container pt-5 pb-5">
             <div class="row">
                 <div class="col-sm-12 col-md-5 col-lg-5">
                     <img src="{{url($client->getFirstMedia('avatar')? $client->getFirstMedia('avatar')
@@ -21,6 +21,7 @@
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="message1">
                                 <li>
+                                    @if($client->role=='Client')
 
                                         <form method="POST" action="{{route('disable',
                                                             $client->id)}}">
@@ -31,6 +32,7 @@
                                             <button type="submit" class="btn">Accept <i
                                                     class="fas fa-check-square ms-2"></i></button>
                                         </form>
+                                        @endif
                                 </li>
                                 <li>
                                     <form method="POST" action="{{route('client.destroy',
@@ -83,14 +85,75 @@
 
                 </div>
             </div>
+            @if($client->role->name=='Writer')
 
             <div class="">
                 <hr>
-                <h4>Essay</h4>
+                <h5>Essay</h5>
                <p> {!! $client->essay->essay_body !!}</p>
 
 
             </div>
+            <div class="mb-5">
+                <hr>
+                <h5>English Test</h5>
+                @foreach(json_decode($client->test->test) as $grammar)
+                  <p>{!! $quiz=\App\Models\Examination::findOrFail($grammar->id)->quiz !!}</p>
+              <p><span>Writer:</span>&nbsp;{{$grammar->value}}</p>
+                    <p><span>Answer:</span>&nbsp;{!! $quiz=\App\Models\Examination::findOrFail($grammar->id)->answer
+                    !!}</p>
+                    <hr class="dotted">
+
+                    @endforeach
+            <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Writer Approve/Disapprove
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="{{route('application.update',$client->id)}}" method="POST" id="approve">
+                                    @method('PATCH')
+                                    @csrf
+                                    <small class="text-danger">Please use this form to approve or reject user
+                                        application</small>
+                                    <div class="form-group">
+                                        <select class="form-select complete" name="status" required id="status">
+                                            <option value="" selected>Select action</option>
+                                            <option value="1">Approve Writer</option>
+                                            <option value="4" >Reject Writer</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group mt-2">
+                                        <input type="text" class="form-control complete" name="score"
+                                               required placeholder="Test Score"
+                                               value="{{old('score')}}">
+                                        <small class="text-danger">
+                                            @error('score')
+                                            {{ $message }}
+                                            @enderror
+                                        </small>
+                                    </div>
+
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary" form="approve">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+                @endif
+
         </div>
 
 

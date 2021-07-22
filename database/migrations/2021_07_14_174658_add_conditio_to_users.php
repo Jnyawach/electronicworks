@@ -15,7 +15,7 @@ class AddConditioToUsers extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             //
-            $table->integer('condition')->default(1)->nullable();
+            $table->integer('condition')->default(0)->nullable();
         });
     }
 

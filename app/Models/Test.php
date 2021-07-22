@@ -9,9 +9,9 @@ class Test extends Model
 {
     use HasFactory;
 
-    protected $fillable=['user_id', 'test->enabled'];
+    protected $fillable=['user_id', 'test'];
 
     public  function user(){
-        return $this->hasMany(User::class);
+        return $this->belongsTo(User::class);
     }
 }
