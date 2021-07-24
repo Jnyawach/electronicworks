@@ -1,6 +1,7 @@
 @extends('layouts.admin_layout')
 @section('title', 'Add Client')
 @section('content')
+
     <div class="dashboard-wrapper green-body pt-5">
         <div class="container p-5">
 

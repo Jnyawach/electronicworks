@@ -20,6 +20,9 @@ class EnglishTestController extends Controller
     public function index()
     {
         //
+        if (Auth::user()->condition==1){
+            return redirect('congratulations');
+        }
         $english=Examination::inRandomOrder()->limit(15)->get();
         return view('english_test.index', compact('english'));
     }
@@ -43,31 +46,31 @@ class EnglishTestController extends Controller
     public function store(Request $request)
     {
         //
-        $collect = []; // empty array for collect customised inputs
+        $user=Auth::user();
 
-        foreach($request->except('_token') as $input_key => $input_value){ // split input one by one
+            $collect = []; // empty array for collect customised inputs
 
-            $collect[] = array( //customised inputs
-                "id" => $input_key,
-                "value" => $input_value
+            foreach ($request->except('_token') as $input_key => $input_value) { // split input one by one
 
-            );
-        }
-        $result = json_encode($collect);
-        $user=User::findOrFail(Auth::id());
+                $collect[] = array( //customised inputs
+                    "id" => $input_key,
+                    "value" => $input_value
 
-        if($essay=$user->test()->exists()){
-            $user->test()->update([
-                'user_id'=>Auth::id(),
-                'test'=>$result,
-            ]);
-        }else{
-            $user->test()->create([
-                'user_id'=>Auth::id(),
-                'test'=>$result,]);
-        }
+                );
+            }
+            $result = json_encode($collect);
+            if ($essay = $user->test()->exists()) {
+                $user->test()->update([
+                    'user_id' => Auth::id(),
+                    'test' => $result,
+                ]);
+            } else {
+                $user->test()->create([
+                    'user_id' => Auth::id(),
+                    'test' => $result,]);
+            }
 
-        return  redirect('essay_test');
+            return redirect('essay_test');
 
     }
 

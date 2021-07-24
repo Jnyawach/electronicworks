@@ -27,6 +27,7 @@ use App\Http\Controllers\Admin\ResponseController;
 use App\Http\Controllers\Admin\AdminNotificationController;
 use App\Http\Controllers\Admin\NoteController;
 use App\Http\Controllers\Admin\AdminDisciplineController;
+use App\Http\Controllers\Admin\AdminProjectController;
 use \App\Http\Controllers\General\ContactController;
 use \App\Http\Controllers\MainController;
 
@@ -61,6 +62,7 @@ Route::group(['middleware'=>'auth'], function (){
     Route::resource('admin/homepage/support', AdminContactController::class);
     Route::resource('admin/homepage/notifications', AdminNotificationController::class);
     Route::resource('admin/homepage/discipline', AdminDisciplineController::class);
+    Route::resource('admin/homepage/task', AdminProjectController::class);
     Route::patch('frequent/{id}', ['as'=>'frequent', 'uses'=>FaqStatus::class]);
     Route::patch('response/{id}', ['as'=>'response', 'uses'=>ResponseController::class]);
     Route::patch('note/{id}', ['as'=>'note', 'uses'=>NoteController::class]);

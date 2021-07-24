@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Writer;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RegistrationPages extends Controller
 {
@@ -16,7 +17,12 @@ class RegistrationPages extends Controller
     public function __invoke(Request $request)
     {
         //
-        return view('registration/writer_details' );
+        if (isset(Auth::user()->name)){
+            return  redirect('english_test');
+        }else{
+            return view('registration/writer_details' );
+        }
+
 
     }
 }

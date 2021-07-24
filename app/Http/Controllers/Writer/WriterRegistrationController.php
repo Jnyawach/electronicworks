@@ -103,7 +103,13 @@ class WriterRegistrationController extends Controller
     public function update(Request $request, $id)
     {
         //
+
         $user= User::findOrFail($id);
+        if(isset($user->name)){
+            return redirect('english_test');
+        }else{
+
+
 
 
             $validated = $request->validate([
@@ -187,7 +193,7 @@ class WriterRegistrationController extends Controller
             }
 
             return redirect('english_test');
-
+        }
     }
 
     /**

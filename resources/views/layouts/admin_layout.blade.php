@@ -123,10 +123,10 @@
                             <div id="submenu-28" class="collapse submenu" style="">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#">All projects</a>
+                                        <a class="nav-link" href="{{route('task.index')}}">All projects</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#">Create project</a>
+                                        <a class="nav-link" href="{{route('task.create')}}">Create project</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="#">In progress<span class="badge bg-danger ms-2">3

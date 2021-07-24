@@ -19,6 +19,9 @@ class EssayTestController extends Controller
     public function index()
     {
         //
+        if (Auth::user()->condition==1){
+            return redirect('congratulations');
+        }
         $essay=Essay::inRandomOrder()->limit(1)->get();
         return  view('essay_test.index', compact('essay'));
     }
@@ -42,11 +45,17 @@ class EssayTestController extends Controller
     public function store(Request $request)
     {
         //
+        $user=Auth::user();
+        if ($user->essay()->exists()){
+            return redirect('congratulations');
+        }else{
+
+
         $validated=$request->validate([
             'essay_body' => 'required|min:3',
             'essay_id' => 'required|min:1|max:5',
         ]);
-        $user=Auth::user();
+
         $user->update(['condition'=>1,]);
 
         if($user->essay()->exists()){
@@ -64,6 +73,7 @@ class EssayTestController extends Controller
             'essay_id' => $validated['essay_id'],
         ]);
         return redirect('congratulations');
+        }
     }
 
     /**
