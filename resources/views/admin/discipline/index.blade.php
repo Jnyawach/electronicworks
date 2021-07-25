@@ -152,7 +152,9 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <form action="{{route('discipline.destroy', $field->id)}}">
+                                            <form action="{{route('discipline.destroy', $field->id)}}" method="POST">
+                                                @method('DELETE')
+                                                @csrf
                                                 <button type="submit" class="btn-sm btn-primary"><i class="far
                                                 fa-trash-alt"></i></button>
                                             </form>

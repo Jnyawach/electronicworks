@@ -100,5 +100,8 @@ class AdminDisciplineController extends Controller
     public function destroy($id)
     {
         //
+        $discipline=Descipline::findOrFail($id);
+        $discipline->delete();
+        return redirect()->back()->with('Status','Discipline deleted successfully');
     }
 }

@@ -4,6 +4,7 @@
     <link href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" rel="stylesheet">
 @endsection
 @section('content')
+    @include('includes.status')
     <div class="dashboard-wrapper green-body pt-5">
         <div class="container p-5">
             <div class="card">
@@ -31,12 +32,45 @@
                                 <tr>
                                     <td>{{$project->id}}</td>
                                     <td>{{$project->title}}</td>
-                                    <td>{{$project->writer_delivery}}</td>
-                                    <td >{{$project->client_delivery}}</td>
-                                    <td>{{$project->writer_id}}</td>
+                                    <td>{{\Carbon\Carbon::parse($project->writer_delivery)->diffForHumans()}}</td>
+                                    <td >{{\Carbon\Carbon::parse($project->client_delivery)->diffForHumans()}}</td>
                                     <td>
+                                        @if(isset($project->writers->name))
+                                        {{$project->writers->name}}/<span
+                                                class="text-success">{{$project->progress->name}}</span>
+                                            @else
+                                            <span class="text-danger">
+                                                 {{$project->progress->name}}
+                                            </span>
+                                        @endif
+                                    </td>
 
+                                    <td>
+                                        <div class="dropdown">
+                                            <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                               Action
+                                            </a>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                @if(!isset($project->writers->name))
+                                                <li><a class="dropdown-item" href="{{route('task.edit',$project->id)}}">Edit</a></li>
+                                                    <li>
+                                                        <form action="{{route('task.destroy',$project->id)}}"
+                                                              method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn dropdown-item
+                                                            ">Delete</button>
 
+                                                        </form>
+                                                    </li>
+                                                @endif
+                                                <li>
+                                                    <a href="{{route('task.show', $project->slug)}}"
+                                                       class="dropdown-item">View</a>
+                                                </li>
+                                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                            </ul>
+                                        </div>
                                     </td>
 
 

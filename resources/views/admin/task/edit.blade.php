@@ -15,12 +15,14 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-12">
-                                        <form class="mt-5" enctype="multipart/form-data" action="{{route('task.store')
-                                        }}" method="POST">
+                                        <form class="mt-5" enctype="multipart/form-data"
+                                              action="{{route('task.update', $project->id)}}" method="POST">
+
+                                            @method('PATCH')
                                             @csrf
                                             <div class="form-group required">
                                                 <label for="title" class="control-label">Title:</label><br>
-                                                <input type="text" value="{{old('text')}}" required class="complete"
+                                                <input type="text" value="{{$project->title}}" required class="complete"
                                                        style="width: 600px" name="title">
                                                 <small class="text-danger">
                                                     @error('title')
@@ -32,10 +34,12 @@
                                                 <label for="writing-style" class="control-label">Format or Citation styles:</label>
                                                 <select class="form-select" style="width: 400px" id="writing-style"
                                                         name="citation_id" required>
-                                                    <option value="" selected>Choose formatting style</option>
+                                                    <option value="{{$project->citation_id}}"
+                                                            selected>{{$project->citation->name}}</option>
+
                                                     @foreach($citation as $id=>$cite)
                                                         <option value="{{$id}}">{{$cite}}</option>
-                                                        @endforeach
+                                                    @endforeach
 
                                                 </select>
                                                 <small class="text-danger">
@@ -49,7 +53,8 @@
                                                 <label for="category" class="control-label">Field or Category:</label>
                                                 <select class="form-select" style="width: 400px" id="category"
                                                         name="descipline_id">
-                                                    <option selected>Choose category</option>
+                                                    <option value="{{$project->descipline_id}}"
+                                                            selected>{{$project->descipline->name}}</option>
                                                     @foreach($field as $id=>$fed)
                                                         <option value="{{$id}}">{{$fed}}</option>
                                                     @endforeach
@@ -65,7 +70,7 @@
                                                 <label for="instructions" class="control-label">Paper instructions:</label>
                                                 <textarea class="form-control complete" id="instructions"
                                                           style="height: 300px" name="instruction">
-                                                    {{old('instruction')}}
+                                                    {{$project->instruction}}
                                                 </textarea>
                                                 <small class="text-danger">
                                                     @error('instruction')
@@ -135,7 +140,7 @@
                                                     <label for="word"  class="control-label">Words
                                                         :</label><br>
                                                     <input type="text" id="word" name="words"
-                                                           class="complete" value="{{old('words')}}" required><br>
+                                                           class="complete" value="{{$project->words}}" required><br>
                                                     <small class="text-danger">
                                                         @error('words')
                                                         {{ $message }}
@@ -147,7 +152,7 @@
                                                     <label for="payment"  class="control-label">Payment
                                                         :</label><br>
                                                     <input type="number" id="payment"  class="complete" min="5"
-                                                           step="any" max="25" name="cost" value="{{old('cost')}}"
+                                                           step="any" max="25" name="cost" value="{{$project->cost}}"
                                                            required><br>
                                                     <small class="text-danger">
                                                         @error('cost')
@@ -160,9 +165,6 @@
                                                 </div>
 
                                             </div>
-
-
-
                                             <div class="form-group mt-4">
                                                 <button type="submit" class="btn btn-primary">
                                                     Save & publish for writers
@@ -180,8 +182,6 @@
                         <!--End of progress card-->
 
                     </div>
-
-
                 </div>
             </div>
         </div>
@@ -193,4 +193,5 @@
         CKEDITOR.replace( 'instructions', );
     </script>
 @endsection
+
 

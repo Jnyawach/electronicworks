@@ -18,17 +18,17 @@ class CreateProjectsTable extends Migration
             $table->timestamps();
             $table->string('title');
             $table->bigInteger('citation_id')->index()->unsigned();
-            $table->bigInteger('discipline_id')->index()->unsigned();
+            $table->bigInteger('descipline_id')->index()->unsigned();
             $table->bigInteger('client_id')->index()->unsigned();
             $table->text('instruction');
             $table->integer('writer_id')->nullable();
-            $table->timestamp('writer_delivery');
-            $table->timestamp('client_delivery');
+            $table->dateTime('writer_delivery');
+            $table->dateTime('client_delivery');
             $table->integer('words');
             $table->integer('cost');
             $table->string('slug');
             $table->foreign('citation_id')->references('id')->on('citations')->onDelete('cascade');
-            $table->foreign('discipline_id')->references('id')->on('desciplines')->onDelete('cascade');
+            $table->foreign('descipline_id')->references('id')->on('desciplines')->onDelete('cascade');
             $table->foreign('client_id')->references('id')->on('users')->onDelete('cascade');
 
         });
