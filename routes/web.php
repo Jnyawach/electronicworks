@@ -19,6 +19,7 @@ use App\Http\Controllers\Writer\RegistrationPages;
 use App\Http\Controllers\Writer\EnglishTestController;
 use App\Http\Controllers\Writer\EssayTestController;
 use App\Http\Controllers\Writer\WriterController;
+use App\Http\Controllers\Writer\WriterProjectController;
 use App\Http\Controllers\Admin\AdminFaqsController;
 use App\Http\Controllers\Admin\FaqStatus;
 use App\Http\Controllers\Admin\AdminPolicyController;
@@ -77,12 +78,13 @@ Route::group(['middleware'=>'auth'], function (){
 Route::group(['middleware'=>'auth'], function (){
     Route::get('registration/writer_details',['as'=>'detailing', 'uses'=>RegistrationPages::class]);
 });
-//writer roots without auth
+//writer roots with auth
 Route::group([], function (){
     Route::resource('registration', WriterRegistrationController::class);
     Route::resource('english_test', EnglishTestController::class);
     Route::resource('essay_test', EssayTestController::class);
     Route::resource('freelancer', WriterController::class);
+    Route::resource('freelancer/homepage/project',  WriterProjectController::class);
 
 });
 //General controllers-serves all general pages

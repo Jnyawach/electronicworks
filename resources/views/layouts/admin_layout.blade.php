@@ -30,7 +30,9 @@
     <div>
         <ul class="nav custom-menu p-1 position-fixed w-100">
             <li class="nav-item">
+                <a href="/">
                 <img src="{{asset('images/e-white.png')}}" class="img-fluid ms-3" style="height: 40px">
+                </a>
             </li>
             <li class="nav-item dropdown ms-auto">
                 <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"

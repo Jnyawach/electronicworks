@@ -102,7 +102,7 @@
         <div class="container">
             <nav class="nav">
 
-                <a class="nav-link" href="#">Browse Projects</a>
+                <a class="nav-link" href="{{route('project.index')}}">Browse Projects</a>
                 <a class="nav-link" href="#">My projects</a>
                 <a class="nav-link" href="#">Pending <span class="badge bg-danger ms-2">4</span></a>
                 <a class="nav-link" href="#">Revisions <span class="badge bg-danger ms-2">1</span></a>
@@ -137,7 +137,7 @@
                 <a href="{{route('freelancer.index')}}"><span class="fa fa-home mr-3"></span> Dashboard</a>
             </li>
             <li>
-                <a href="#"><span class="fas fa-shopping-basket"></span>Projects</a>
+                <a href="{{route('project.index')}}"><span class="fas fa-shopping-basket"></span>Projects</a>
             </li>
 
             <li>
