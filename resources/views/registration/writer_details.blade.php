@@ -227,6 +227,28 @@
                                         </small>
                                     </div>
                                 </div>
+                                <hr class="mt-5">
+                                <h4 class="m-5" style="font-size: 18px">Categories</h4>
+                                <small>Select up to categories</small>
+                                <div class="row">
+                                    @foreach($disciplines as $discipline)
+                                    <div class="col-sm-12 col-md-3 col-lg-3 m-1">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="{{$discipline->id}}"
+                                                   id="flexCheckDefault" name="field[]">
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                <h5 class="fs-6">{{$discipline->name}}</h5>
+
+                                            </label>
+                                        </div>
+                                    </div>
+                                    @endforeach
+                                </div>
+                                <small class="text-danger">
+                                    @error('field')
+                                    {{ $message }}
+                                    @enderror
+                                </small>
                                 <hr class="dropdown-divider">
                                 <button type="submit" class="btn btn-primary float-end">NEXT <i class="fas
                                 fa-long-arrow-alt-right ms-2"></i></button>

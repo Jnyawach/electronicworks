@@ -29,7 +29,7 @@ class User extends Authenticatable implements HasMedia
         'cellphone',
        'sec_cellphone',
         'status_id',
-        'condition'
+        'condition',
     ];
 
     /**
@@ -72,6 +72,10 @@ class User extends Authenticatable implements HasMedia
 
     public function projects(){
         return $this->hasMany(Project::class);
+    }
+    public function desciplines()
+    {
+        return $this->belongsToMany(Descipline::class, 'descipline_user');
     }
 
     public  function registerMediaCollections():void

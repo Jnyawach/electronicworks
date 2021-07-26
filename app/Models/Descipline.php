@@ -17,5 +17,10 @@ class Descipline extends Model
         return $this->hasMany(Project::class);
     }
 
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'descipline_user');
+    }
+
 
 }

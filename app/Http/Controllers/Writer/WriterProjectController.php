@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class WriterProjectController extends Controller
 {
@@ -86,5 +87,16 @@ class WriterProjectController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public  function filters(Request $request){
+        $projects=QueryBuilder::for(Project::class)
+            ->allowedFields(['title', 'instruction'])
+            ->allowedIncludes(['desciplines','citation'])
+            ->where('writer_id',0)
+            ->where('status',1)
+            ->get();
+        return redirect('freelancer/project/filtered');
+
     }
 }

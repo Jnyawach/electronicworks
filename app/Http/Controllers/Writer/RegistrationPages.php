@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Writer;
 use App\Http\Controllers\Controller;
 
+use App\Models\Descipline;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,7 +21,8 @@ class RegistrationPages extends Controller
         if (isset(Auth::user()->name)){
             return  redirect('english_test');
         }else{
-            return view('registration/writer_details' );
+            $disciplines=Descipline::all();
+            return view('registration/writer_details', compact('disciplines') );
         }
 
 

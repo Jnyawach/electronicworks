@@ -127,6 +127,7 @@ class WriterRegistrationController extends Controller
                 'course'=>'required|max:255',
                 'graduation'=>'required|max:5',
                 'cert'=>'',
+                'field.*'=>'required',
                 'cert.*'=>'image|mimes:jpeg,png,jpg,pdf|max:2048',
                 'identity'=>'',
                 'identity.*'=>'image|mimes:jpeg,png,jpg,pdf|max:2048',
@@ -150,7 +151,10 @@ class WriterRegistrationController extends Controller
                 'course' => $validated['course'],
                 'graduation' => $validated['graduation'],
                 'user_id' => $user->id,
+                'condition'=>0,
             ]);
+            $user->desciplines()->sync($validated['field']);
+
         }else{
 
             $user->detail()->create([
@@ -164,7 +168,10 @@ class WriterRegistrationController extends Controller
                 'department' => $validated['department'],
                 'course' => $validated['course'],
                 'graduation' => $validated['graduation'],
-                'user_id' => $user->id,]);
+                'user_id' => $user->id,
+                'condition'=>0,
+                ]);
+            $user->desciplines()->sync($validated['field']);
         }
 
         $detail=WriterDetail::where('user_id', $user->id)->first();

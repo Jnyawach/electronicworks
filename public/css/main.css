@@ -645,7 +645,15 @@ a[data-toggle="collapse"] {
     font-size: 18px;
 }
 .dashboard .card-header{
-    border-bottom:  2px solid var(--primary2);
+    border-bottom:  1px solid var(--primary2);
+}
+.dashboard .card-body h5 span{
+    color: var(--secondary);
+    font-size: 14px;
+}
+.dashboard .card-body p{
+    font-size: 16px;
+    line-height: normal;
 }
 .dashboard .card-footer{
     border-top:  2px solid var(--primary2) !important;
@@ -1111,4 +1119,15 @@ Container / Wrapper
     margin: 0px!important;
     padding: 0px!important;
     color: var(--secondary);
+}
+.jobs p{
+    line-height: normal;
+    font-size: 16px;
+    margin: 5px;
+}
+.conte:hover{
+    background-color:rgba(172,223,135, 0.1) !important;
+}
+.cate h5:hover{
+    color: var(--secondary) !important;
 }

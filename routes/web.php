@@ -20,6 +20,7 @@ use App\Http\Controllers\Writer\EnglishTestController;
 use App\Http\Controllers\Writer\EssayTestController;
 use App\Http\Controllers\Writer\WriterController;
 use App\Http\Controllers\Writer\WriterProjectController;
+use App\Http\Controllers\Writer\FilterController;
 use App\Http\Controllers\Admin\AdminFaqsController;
 use App\Http\Controllers\Admin\FaqStatus;
 use App\Http\Controllers\Admin\AdminPolicyController;
@@ -85,6 +86,8 @@ Route::group([], function (){
     Route::resource('essay_test', EssayTestController::class);
     Route::resource('freelancer', WriterController::class);
     Route::resource('freelancer/homepage/project',  WriterProjectController::class);
+    Route::post('freelancer/query',  [WriterProjectController::class, 'filters'])->name('filters');
+    Route::get('freelancer/project/filtered',  FilterController::class)->name('filter');
 
 });
 //General controllers-serves all general pages
