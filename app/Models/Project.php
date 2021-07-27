@@ -59,6 +59,10 @@ class Project extends Model implements HasMedia
         return $this->belongsTo(Progress::class);
     }
 
+    public  function bids(){
+        return $this->hasMany(Bidding::class);
+    }
+
 
 
 }

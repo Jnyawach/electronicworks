@@ -229,20 +229,24 @@
                                 </div>
                                 <hr class="mt-5">
                                 <h4 class="m-5" style="font-size: 18px">Categories</h4>
-                                <small>Select up to categories</small>
+                                <small>Select up to 8 categories</small>
                                 <div class="row">
                                     @foreach($disciplines as $discipline)
                                     <div class="col-sm-12 col-md-3 col-lg-3 m-1">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="{{$discipline->id}}"
-                                                   id="flexCheckDefault" name="field[]">
-                                            <label class="form-check-label" for="flexCheckDefault">
+                                            <input class="single-checkbox form-check-input" type="checkbox"
+                                                   value="{{$discipline->id}}"
+                                                   id="flexCheckDefault{{$discipline->id}}" name="field[]">
+                                            <label class="form-check-label" for="flexCheckDefault{{$discipline->id}}">
                                                 <h5 class="fs-6">{{$discipline->name}}</h5>
 
                                             </label>
                                         </div>
                                     </div>
+
                                     @endforeach
+
+
                                 </div>
                                 <small class="text-danger">
                                     @error('field')
@@ -269,4 +273,14 @@
         </div>
 
     </section>
+@endsection
+@section('scripts')
+    <script>
+        var limit = 3;
+        $('input.single-checkbox').on('change', function(evt) {
+            if($(this).siblings(':checked').length >= limit) {
+                this.checked = false;
+            }
+        });
+    </script>
 @endsection

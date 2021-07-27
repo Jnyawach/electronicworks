@@ -11,7 +11,7 @@
                     <ul class="m-0 cate p-0">
                         @foreach(Auth::user()->desciplines as $field)
                         <li class="list-unstyled">
-                            <a href="#" class="text-decoration-none">
+                            <a href="{{route('filters',$field->slug)}}" class="text-decoration-none">
                                 <h5 class="fw-bold">{{$field->name}}</h5>
                             </a>
                         </li>
@@ -25,12 +25,11 @@
                 <ul class="nav nav-fill">
                     <li class="nav-item mb-3">
                         <form class="d-flex" action="{{route('filter')}}" method="get">
-
                             <input class="form-control complete" type="search"
-                                   placeholder="Search titles, categories, citation"
-                                   aria-label="Search" name="title" required>
+                                   placeholder="Search titles" name="title" required>
 
-                            <button class="btn btn-primary" type="submit">Search</button>
+
+                            <button class="btn btn-primary ms-1" type="submit">Search</button>
                         </form>
                     </li>
                 </ul>
@@ -41,7 +40,8 @@
                         <div class="row">
                 @if(isset($projects))
                     @foreach($projects as $project)
-                        <a href="{{route('project.show',$project->slug)}}" class="text-decoration-none">
+                        <a href="{{route('project.show',$project->slug)}}" class="text-decoration-none"
+                           title="click to see details">
                             <div class="col-sm-12 mx-auto">
                                 <div class="conte p-2">
                                 <h5 class="m-1">{{$project->title}}</h5>
@@ -51,9 +51,10 @@
                                     &nbsp;<span>Posted:</span>{{$project->created_at ->diffForHumans()}}
                                 </h4>
                                 <p>{!!Illuminate\Support\Str::limit($project->instruction, 110)!!}</p>
-                                <h4 class="fs-6 fw-bold m-1"><span>Words:</span> {{$project->words}}&nbsp;
-                                    <span>Category:</span> {{$project->descipline->name}}&nbsp;
-                                    <span>Project ID:</span> {{$project->id}}
+                                <h4 class="fs-6 fw-bold m-1"><span>Words:</span> {{$project->words}}&nbsp;&nbsp;
+                                    <span>Category:</span> {{$project->descipline->name}}&nbsp;&nbsp;
+                                    <span>Project ID:</span> {{$project->id}}&nbsp;
+                                    <span>Bids:</span> {{count($project->bids)}}
                                 </h4>
 
                                 </div>

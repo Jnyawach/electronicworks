@@ -33,13 +33,13 @@
                         </form>
                     </li>
                 </ul>
-                <h4><i class="fas fa-long-arrow-alt-right me-1"></i>Projects in {{$_GET['title']}}</h4>
+                <h4><i class="fas fa-long-arrow-alt-right me-1"></i>Projects in {{$category->name}}</h4>
                 <div class="card jobs">
                     <div class="body pt-3">
                         <h5 class="m-2">Most Recent for you</h5>
                         <hr class="dropdown-divider">
                         <div class="row">
-                            @if(isset($projects))
+                            @if($projects->count()>0)
                                 @foreach($projects as $project)
                                     <a href="{{route('project.show',$project->slug)}}" class="text-decoration-none">
                                         <div class="col-sm-12 mx-auto">
@@ -63,6 +63,8 @@
                                     </a>
 
                                 @endforeach
+                                @else
+                                <h4 class="m-3">There are no search results in this category</h4>
                             @endif
                         </div>
 
@@ -80,4 +82,5 @@
 
     </div>
 @endsection
+
 

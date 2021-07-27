@@ -74,8 +74,14 @@
                             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-end  sign-drop"
                                 aria-labelledby="dropdownMenuButton1">
                                 <li>
-                                    <a class="dropdown-item" href="{{route('dashboard.index')}}">Dashboard
-                                        <i class="fas fa-house-user ms-2"></i></a></li>
+                                    @if(Auth::user()->role->name=='Writer')
+                                        <a class="dropdown-item" href="{{route('freelancer.index')}}">Dashboard
+                                            <i class="fas fa-house-user ms-2"></i></a>
+                                        @elseif(Auth::user()->role->name=='Client')
+                                        <a class="dropdown-item" href="{{route('dashboard.index')}}">Dashboard
+                                            <i class="fas fa-house-user ms-2"></i></a>
+                                        @endif
+                                   </li>
                                 <hr>
                                 <li>
                                    @include('includes.logout')

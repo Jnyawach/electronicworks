@@ -34,20 +34,20 @@
                     </div>
                     <div class="col-sm-12 col-md-4 col-lg-4 green-body pt-3">
                         @if(count($project->bids)==false)
-                        <form class="text-center" action="{{route('bidding')}}" method="POST">
-                            @csrf
-                            <input type="hidden" name="project_id" value="{{$project->id}}">
-                            <input type="hidden" name="user_id" value="{{Auth::id()}}">
-                            <button type="submit" class="btn btn-primary">Bid for this project</button>
-                        </form>
-                            @else
+                            <form class="text-center" action="{{route('bidding')}}" method="POST">
+                                @csrf
+                                <input type="hidden" name="project_id" value="{{$project->id}}">
+                                <input type="hidden" name="user_id" value="{{Auth::id()}}">
+                                <button type="submit" class="btn btn-primary">Bid for this project</button>
+                            </form>
+                        @else
                             <h5 class="mt-3">Bid already submitted for this project</h5>
                         @endif
                         <h4 class="mt-5 fw-bold">Total Bids Submitted: <span>{{count($project->bids)}}</span></h4>
                         <hr class="dropdown-divider">
                         <h5 class="fw-bold">About this client</h5>
-                        <p>{{$clientProject}} projects posted</p>
-                        <p>{{$active}} jobs active now</p>
+                        <p>90 projects posted</p>
+                        <p>76 jobs active now</p>
                         <p>More than Kshs. 10,000 spent</p>
                         <p>Member since {{$project->clients->created_at->isoFormat('MMM Do Y')}}</p>
                         <hr>
@@ -63,3 +63,4 @@
         </div>
     </div>
 @endsection
+

@@ -111,11 +111,13 @@
                                                         </div>
                                                         <div class="modal-body">
                                                             <form action="{{route('discipline.update',$field->id)}}"
-                                                                  method="POST" id="field-update">
+                                                                  method="POST" id="field_update{{$field->id}}">
                                                                 @method('PATCH')
                                                                 @csrf
+
                                                                 <div class="form-group">
-                                                                    <select class="form-select complete" name="status" required id="status">
+                                                                    <select class="form-select complete"
+                                                                            name="status" required id="status{{$field->id}}">
                                                                         <option value="1" selected>Visible</option>
                                                                         <option value="0" >Hidden</option>
 
@@ -145,7 +147,7 @@
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="submit" class="btn btn-primary"
-                                                                    form="field-update">Update</button>
+                                                                    form="field_update{{$field->id}}">Update</button>
                                                         </div>
                                                     </div>
                                                 </div>

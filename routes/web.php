@@ -21,6 +21,9 @@ use App\Http\Controllers\Writer\EssayTestController;
 use App\Http\Controllers\Writer\WriterController;
 use App\Http\Controllers\Writer\WriterProjectController;
 use App\Http\Controllers\Writer\FilterController;
+use App\Http\Controllers\Writer\BiddingController;
+use App\Http\Controllers\Writer\PendingProjectController;
+
 use App\Http\Controllers\Admin\AdminFaqsController;
 use App\Http\Controllers\Admin\FaqStatus;
 use App\Http\Controllers\Admin\AdminPolicyController;
@@ -68,6 +71,7 @@ Route::group(['middleware'=>'auth'], function (){
     Route::patch('frequent/{id}', ['as'=>'frequent', 'uses'=>FaqStatus::class]);
     Route::patch('response/{id}', ['as'=>'response', 'uses'=>ResponseController::class]);
     Route::patch('note/{id}', ['as'=>'note', 'uses'=>NoteController::class]);
+    Route::patch('admin/task/assign/{id}',  [AdminProjectController::class, 'assign'])->name('assign');
 });
 
 Route::group(['middleware'=>'auth'], function (){
@@ -85,8 +89,10 @@ Route::group([], function (){
     Route::resource('english_test', EnglishTestController::class);
     Route::resource('essay_test', EssayTestController::class);
     Route::resource('freelancer', WriterController::class);
+    Route::resource('freelancer/project/pending', PendingProjectController::class);
+    Route::post('bidding', ['as'=>'bidding', 'uses'=>BiddingController::class]);
     Route::resource('freelancer/homepage/project',  WriterProjectController::class);
-    Route::post('freelancer/query',  [WriterProjectController::class, 'filters'])->name('filters');
+    Route::get('freelancer/project/categories/{id}',  [WriterProjectController::class, 'filters'])->name('filters');
     Route::get('freelancer/project/filtered',  FilterController::class)->name('filter');
 
 });

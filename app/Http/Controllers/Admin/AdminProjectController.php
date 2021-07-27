@@ -203,4 +203,12 @@ class AdminProjectController extends Controller
 
 
     }
+    public function assign(Request $request,$id){
+        $project=Project::findOrFail($id);
+        $project->update([
+            'writer_id'=>$request->writer,
+            'progress_id'=>2
+        ]);
+        return redirect()->back()->with('status','Assigned Successfully');
+    }
 }

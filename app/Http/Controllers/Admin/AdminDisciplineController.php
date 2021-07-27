@@ -87,7 +87,14 @@ class AdminDisciplineController extends Controller
         ]);
 
         $field=Descipline::findOrFail($id);
-        $field->update($validated);
+
+
+
+        $field->update([
+            'name'=>$validated['name'],
+            'status'=>$validated['status'],
+            'price'=>$validated['price'],
+        ]);
         return  redirect()->back()->with('status', 'Field Successfully updated');
     }
 

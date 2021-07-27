@@ -41,7 +41,7 @@
                                             @else
                                             <span class="text-danger">
                                                  {{$project->progress->name}}
-                                            </span>
+                                            </span>/{{count($project->bids)}}Bids
                                         @endif
                                     </td>
 
@@ -68,7 +68,7 @@
                                                     <a href="{{route('task.show', $project->slug)}}"
                                                        class="dropdown-item">View</a>
                                                 </li>
-                                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+
                                             </ul>
                                         </div>
                                     </td>

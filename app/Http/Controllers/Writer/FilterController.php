@@ -20,7 +20,7 @@ class FilterController extends Controller
     {
         //
         $projects=QueryBuilder::for(Project::class)
-            ->allowedFields(['title','instructions', 'id'])
+            ->allowedFilters(['title'])
             ->where('writer_id',0)
             ->where('status',1)
             ->paginate(10);
