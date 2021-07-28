@@ -37,9 +37,9 @@
                                     <td >{{\Carbon\Carbon::parse($project->client_delivery)->diffForHumans()}}</td>
                                     <td>
                                         @if(isset($project->writers->name))
-                                        {{$project->writers->name}}/<span
+                                            {{$project->writers->name}}/<span
                                                 class="text-success">{{$project->progress->name}}</span>
-                                            @else
+                                        @else
                                             <span class="text-danger">
                                                  {{$project->progress->name}}
                                             </span>/{{count($project->bid)}}Bids
@@ -50,11 +50,11 @@
                                         <div class="dropdown">
                                             <a class="btn dropdown-toggle p-0 m-0" href="#" role="button"
                                                id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                               Action
+                                                Action
                                             </a>
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                                 @if(!isset($project->writers->name))
-                                                <li><a class="dropdown-item" href="{{route('task.edit',$project->id)}}">Edit</a></li>
+                                                    <li><a class="dropdown-item" href="{{route('task.edit',$project->id)}}">Edit</a></li>
                                                     <li>
                                                         <form action="{{route('task.destroy',$project->id)}}"
                                                               method="POST">
@@ -106,3 +106,4 @@
 
     </script>
 @endsection
+

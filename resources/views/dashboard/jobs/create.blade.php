@@ -1,10 +1,9 @@
-@extends('layouts.admin_layout')
+@extends('layouts.client_layout')
 @section('title', 'Create Project')
 @section('content')
     @include('includes.ckeditor')
-    <div class="dashboard-wrapper green-body pt-5 pb-5">
-        <div class="container">
-            <div class="container pt-3 pl-3 dashboard">
+
+            <div class="container pt-2 pl-3 dashboard">
                 <div class="row">
                     <div class="col-sm-12 mx-auto">
                         <!--In progress card-->
@@ -15,7 +14,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-12">
-                                        <form class="mt-5" enctype="multipart/form-data" action="{{route('task.store')
+                                        <form class="mt-5" enctype="multipart/form-data" action="{{route('jobs.store')
                                         }}" method="POST">
                                             @csrf
                                             <div class="form-group required">
@@ -30,20 +29,20 @@
                                             </div>
                                             <div class="form-group required mt-4 row">
                                                 <div class="col-sm-12 col-md-6 col-6">
-                                                <label for="writing-style" class="control-label">Format or Citation styles:</label>
-                                                <select class="form-select" style="width: 400px" id="writing-style"
-                                                        name="citation_id" required>
-                                                    <option value="" selected>Choose formatting style</option>
-                                                    @foreach($citation as $id=>$cite)
-                                                        <option value="{{$id}}">{{$cite}}</option>
+                                                    <label for="writing-style" class="control-label">Format or Citation styles:</label>
+                                                    <select class="form-select" style="width: 400px" id="writing-style"
+                                                            name="citation_id" required>
+                                                        <option value="" selected>Choose formatting style</option>
+                                                        @foreach($citation as $id=>$cite)
+                                                            <option value="{{$id}}">{{$cite}}</option>
                                                         @endforeach
 
-                                                </select>
-                                                <small class="text-danger">
-                                                    @error('citation_id')
-                                                    {{ $message }}
-                                                    @enderror
-                                                </small>
+                                                    </select>
+                                                    <small class="text-danger">
+                                                        @error('citation_id')
+                                                        {{ $message }}
+                                                        @enderror
+                                                    </small>
                                                 </div>
                                                 <div class="col-sm-12 col-md-6 col-6">
                                                     <label for="category" class="control-label">Field or Category:</label>
@@ -59,7 +58,7 @@
                                                         {{ $message }}
                                                         @enderror
                                                     </small>
-                                            </div>
+                                                </div>
                                             </div>
                                             <div class="form-group required mt-4">
                                                 <label for="sku" class="control-label">Project SKU:</label><br>
@@ -198,8 +197,6 @@
 
                 </div>
             </div>
-        </div>
-    </div>
 @endsection
 @section('scripts')
     <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
@@ -207,4 +204,5 @@
         CKEDITOR.replace( 'instructions', );
     </script>
 @endsection
+
 

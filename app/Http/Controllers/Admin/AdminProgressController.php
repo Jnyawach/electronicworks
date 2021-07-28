@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Writer;
+namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
+
 
 use App\Models\Project;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class PendingProjectController extends Controller
+class AdminProgressController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +17,8 @@ class PendingProjectController extends Controller
     public function index()
     {
         //
-        $projects=Project::where('status', 1)->where('progress_id', 2)
-            ->where('writer_id', Auth::id())->paginate(10);
-        return  view('freelancer.project.pending.index', compact('projects'));
+        $projects=Project::where('progress_id',2)->get();
+        return  view('admin.task.progress.index', compact('projects'));
     }
 
     /**
@@ -52,8 +51,6 @@ class PendingProjectController extends Controller
     public function show($id)
     {
         //
-        $project=Project::findBySlugOrFail($id);
-        return  view('freelancer.project.pending.show', compact('project'));
     }
 
     /**

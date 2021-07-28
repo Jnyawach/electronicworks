@@ -31,10 +31,10 @@
                 <a href="{{route('dashboard.index')}}"><span class="fa fa-home mr-3"></span> Dashboard</a>
             </li>
             <li>
-                <a href="#"><span class="fas fa-shopping-basket"></span>Projects</a>
+                <a href="{{route('jobs.index')}}"><span class="fas fa-shopping-basket"></span>Projects</a>
             </li>
             <li>
-                <a href="#"><span><i class="fas fa-clipboard-list"></i></span>Post a project</a>
+                <a href="{{route('jobs.create')}}"><span><i class="fas fa-clipboard-list"></i></span>Post a project</a>
             </li>
             <li>
                 <a href="#"><span><i class="fas fa-stopwatch"></i></span>In progress &nbsp;<span

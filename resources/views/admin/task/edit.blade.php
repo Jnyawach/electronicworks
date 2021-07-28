@@ -30,42 +30,55 @@
                                                     @enderror
                                                 </small>
                                             </div>
-                                            <div class="form-group required mt-4">
-                                                <label for="writing-style" class="control-label">Format or Citation styles:</label>
-                                                <select class="form-select" style="width: 400px" id="writing-style"
-                                                        name="citation_id" required>
-                                                    <option value="{{$project->citation_id}}"
-                                                            selected>{{$project->citation->name}}</option>
+                                            <div class="form-group required mt-4 row">
+                                                <div class="col-sm-12 col-md-6 col-6">
+                                                    <label for="writing-style" class="control-label">Format or Citation styles:</label>
+                                                    <select class="form-select" style="width: 400px" id="writing-style"
+                                                            name="citation_id" required>
+                                                        <option value="{{$project->citation_id}}"
+                                                                selected>{{$project->citation->name}}</option>
+                                                        @foreach($citation as $id=>$cite)
+                                                            <option value="{{$id}}">{{$cite}}</option>
+                                                        @endforeach
 
-                                                    @foreach($citation as $id=>$cite)
-                                                        <option value="{{$id}}">{{$cite}}</option>
-                                                    @endforeach
-
-                                                </select>
-                                                <small class="text-danger">
-                                                    @error('citation_id')
-                                                    {{ $message }}
-                                                    @enderror
-                                                </small>
-
+                                                    </select>
+                                                    <small class="text-danger">
+                                                        @error('citation_id')
+                                                        {{ $message }}
+                                                        @enderror
+                                                    </small>
+                                                </div>
+                                                <div class="col-sm-12 col-md-6 col-6">
+                                                    <label for="category" class="control-label">Field or Category:</label>
+                                                    <select class="form-select" style="width: 400px" id="category"
+                                                            name="descipline_id">
+                                                        <option selected
+                                                                value="{{$project->descipline_id}}">{{$project->descipline->name}}</option>
+                                                        @foreach($field as $id=>$fed)
+                                                            <option value="{{$id}}">{{$fed}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                    <small class="text-danger">
+                                                        @error('descipline_id')
+                                                        {{ $message }}
+                                                        @enderror
+                                                    </small>
+                                                </div>
                                             </div>
-                                            <div class="form-group required mt-4">
-                                                <label for="category" class="control-label">Field or Category:</label>
-                                                <select class="form-select" style="width: 400px" id="category"
-                                                        name="descipline_id">
-                                                    <option value="{{$project->descipline_id}}"
-                                                            selected>{{$project->descipline->name}}</option>
-                                                    @foreach($field as $id=>$fed)
-                                                        <option value="{{$id}}">{{$fed}}</option>
-                                                    @endforeach
-                                                </select>
-                                                <small class="text-danger">
-                                                    @error('descipline_id')
-                                                    {{ $message }}
-                                                    @enderror
-                                                </small>
+                                                <div class="form-group required mt-4">
+                                                    <label for="sku" class="control-label">Project SKU:</label><br>
+                                                    <input type="text" id="sku" name="sku"
+                                                           class="complete control-input" value="{{$project->sku}}"
+                                                           required
+                                                           style="width: 600px" ><br>
+                                                    <small class="text-danger">
+                                                        @error('sku')
+                                                        {{ $message }}
+                                                        @enderror
+                                                    </small><br>
+                                                    <small>Please provide a unique project sku e.g QW110-F</small>
 
-                                            </div>
+                                                </div>
                                             <div class="form-group required mt-4">
                                                 <label for="instructions" class="control-label">Paper instructions:</label>
                                                 <textarea class="form-control complete" id="instructions"

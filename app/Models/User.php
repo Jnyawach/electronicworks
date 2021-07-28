@@ -78,6 +78,7 @@ class User extends Authenticatable implements HasMedia
         return $this->belongsToMany(Descipline::class, 'descipline_user');
     }
 
+
     public  function registerMediaCollections():void
     {
         $this->addMediaCollection('avatar')

@@ -1,23 +1,21 @@
-@extends('layouts.admin_layout')
-@section('title','Projects')
+@extends('layouts.client_layout')
+@section('title', $project->sku)
 @section('content')
-    <div class="dashboard-wrapper green-body pt-5 pb-5">
-        <div class="container pt-3 pl-3 dashboard">
-            @include('includes.status')
+    @include('includes.status')
             <div class="row">
                 <div class="col-sm-12 mx-auto">
                     <!--In progress card-->
                     <div class="card  shadow-sm mb-5 view-order">
                         <div class="card-header d-inline-flex">
-                            <h5><span>ID No.{{$project->id}}</span> {{$project->title}}</h5>
-                            @if(isset($project->writers->name))
-                                <a href="{{route('task.edit', $project->id)}}" class="btn-sm
+                            <h5><span>{{$project->sku}}</span> {{$project->title}}</h5>
+                            @if(!isset($project->writers->name))
+                                <a href="{{route('jobs.edit', $project->id)}}" class="btn-sm
                                 ms-auto m-0">
                                     <i class="fas fa-pen-square me-2"></i>Edit
                                 </a>
 
-                            @endif
-                            <!--
+                        @endif
+                        <!--
                             Please remember to deactivate edit button after project is assigned
                             -->
 
@@ -48,16 +46,16 @@
                                             </span>
                                         @endif
                                     </span>&nbsp;
-                                    Payout: <span>${{$project->words/300*$project->cost}}</span>&nbsp;
-                                    Writer Pay: <span>Kshs.{{$project->words/300*350}}</span>
+                                    Cost: <span>${{$project->words/300*$project->cost}}</span>&nbsp;
+
                                 </h5>
                                 <hr class="dotted">
                                 <h5 class="mt-5">Attached Files</h5>
                                 @if($project->getMedia('materials'))
-                                @foreach($project->getMedia('materials') as $media)
+                                    @foreach($project->getMedia('materials') as $media)
                                         <a href="{{$media->getUrl()}}" target="_blank"><span><i class="fas fa-folder me-2"></i></span>{{$media->name}}</a>
                                     @endforeach
-                                    @else
+                                @else
                                     <p>No files attached</p>
                                 @endif
                                 <hr>
@@ -104,12 +102,12 @@
                                                             writer</a>
                                                     </li>
                                                     <li class="nav-item">
-                                                        <form class="ms-auto m-0" action="{{route('unassign',
+                                                        <form class="ms-auto m-0" action="{{route('reject',
                                                         $project->order->id)}}"
                                                               method="POST">
                                                             @method('DELETE')
                                                             @csrf
-                                                          <input type="hidden" value="{{$project->id}}" name="project">
+                                                            <input type="hidden" value="{{$project->id}}" name="project">
                                                             <button type="submit" class="btn btn-outline-danger
                                                         rounded-0">UnAssign</button>
 
@@ -123,46 +121,46 @@
                                         </div>
                                         <hr class="dotted">
 
-                                        @else
+                                    @else
                                         <h5>Writers who have submitted a proposal for this project</h5>
-                                    @if(count($project->bid)==true)
-                                        @foreach($project->bid as $bid)
-                                            <div class="mt-5 row">
-                                            <div class="col-sm-12 col-md-5 col-lg-5">
-                                                <img src="{{url($bid->user->getFirstMedia('avatar')?
+                                        @if(count($project->bid)==true)
+                                            @foreach($project->bid as $bid)
+                                                <div class="mt-5 row">
+                                                    <div class="col-sm-12 col-md-5 col-lg-5">
+                                                        <img src="{{url($bid->user->getFirstMedia('avatar')?
                                                 $bid->user->getFirstMedia('avatar')
                                                 ->getUrl('avatar_icon'):'/images/no-image.png' )}}"
-                                                     class="rounded float-start img-fluid me-2" style="height: 60px">
-                                                <h5 class="mb-0">{{$bid->user->name}}</h5>
-                                                <h5 class="m-0">Projects completed: 80later</h5>
+                                                             class="rounded float-start img-fluid me-2" style="height: 60px">
+                                                        <h5 class="mb-0">{{$bid->user->name}}</h5>
+                                                        <h5 class="m-0">Projects completed: 80later</h5>
 
-                                                <h4 class="mt-0 pt-0" style="font-family: 'Avenir Bold'">
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="far fa-star"></i>
-                                                    4.5/5 </h4>
-                                            </div>
+                                                        <h4 class="mt-0 pt-0" style="font-family: 'Avenir Bold'">
+                                                            <i class="fas fa-star"></i>
+                                                            <i class="fas fa-star"></i>
+                                                            <i class="fas fa-star"></i>
+                                                            <i class="fas fa-star"></i>
+                                                            <i class="far fa-star"></i>
+                                                            4.5/5 </h4>
+                                                    </div>
 
-                                            <div class="col-sm-12 col-md-5 col-lg-5">
-                                                <form class="ms-auto m-0" action="{{route('assign',$project->id)}}"
-                                                      method="POST">
-                                                    @method('PATCH')
-                                                    @csrf
-                                                    <input type="hidden" value="{{$bid->user_id}}" name="writer">
-                                                    <button type="submit" class=" btn-primary btn-sm m-0">Assign<i
-                                                            class="fas fa-long-arrow-alt-right ms-2"></i></button>
+                                                    <div class="col-sm-12 col-md-5 col-lg-5">
+                                                        <form class="ms-auto m-0" action="{{route('accept', $project->id)}}"
+                                                              method="POST">
+                                                            @method('PATCH')
+                                                            @csrf
+                                                            <input type="hidden" value="{{$bid->user_id}}" name="writer">
+                                                            <button type="submit" class=" btn-primary btn-sm m-0">Assign<i
+                                                                    class="fas fa-long-arrow-alt-right ms-2"></i></button>
 
-                                                </form>
-                                            </div>
+                                                        </form>
+                                                    </div>
 
 
-                                        </div>
-                                        <hr class="dotted">
-                                        @endforeach
+                                                </div>
+                                                <hr class="dotted">
+                                            @endforeach
                                         @endif
-                                        @endif
+                                    @endif
 
 
                                 </div>
@@ -179,6 +177,6 @@
 
 
             </div>
-        </div>
-    </div>
+
 @endsection
+

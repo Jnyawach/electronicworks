@@ -28,7 +28,6 @@
                             <input class="form-control complete" type="search"
                                    placeholder="Search titles" name="title" required>
 
-
                             <button class="btn btn-primary ms-1" type="submit">Search</button>
                         </form>
                     </li>
@@ -54,7 +53,7 @@
                                 <h4 class="fs-6 fw-bold m-1"><span>Words:</span> {{$project->words}}&nbsp;&nbsp;
                                     <span>Category:</span> {{$project->descipline->name}}&nbsp;&nbsp;
                                     <span>Project ID:</span> {{$project->id}}&nbsp;
-                                    <span>Bids:</span> {{count($project->bids)}}
+                                    <span>Bids:</span> {{count($project->bid)}}
                                 </h4>
 
                                 </div>

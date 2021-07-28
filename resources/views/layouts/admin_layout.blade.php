@@ -131,7 +131,13 @@
                                         <a class="nav-link" href="{{route('task.create')}}">Create project</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#">In progress<span class="badge bg-danger ms-2">3
+                                        <a class="nav-link" href="{{route('progress.index')}}">In progress<span
+                                                class="badge
+                                        bg-danger ms-2">3
+                                        </span></a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">Under review<span class="badge bg-danger ms-2">3
                                         </span></a>
                                     </li>
                                     <li class="nav-item">

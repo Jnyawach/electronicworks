@@ -18,7 +18,7 @@ class WriterProjectController extends Controller
     public function index()
     {
         //
-        $projects=Project::where('status', 1)->where('writer_id', 0)->paginate(3);
+        $projects=Project::where('status', 1)->where('writer_id', 0)->paginate(10);
         return  view('freelancer.project.index', compact('projects'));
     }
 

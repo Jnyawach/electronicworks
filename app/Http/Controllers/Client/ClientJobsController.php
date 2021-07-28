@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Client;
 use App\Http\Controllers\Controller;
 
 use App\Models\Citation;
@@ -9,13 +9,11 @@ use App\Models\Order;
 use App\Models\Project;
 use App\Models\User;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Mail;
-use Madnest\Madzipper\Madzipper;
-use Spatie\MediaLibrary\Support\MediaStream;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
-class AdminProjectController extends Controller
+class ClientJobsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -25,8 +23,11 @@ class AdminProjectController extends Controller
     public function index()
     {
         //
-        $projects=Project::all();
-        return  view('admin.task.index', compact('projects'));
+
+        $projects=Project::where('client_id', Auth::id())
+            ->where('writer_id',0)
+            ->paginate(10);
+        return  view('dashboard.jobs.index', compact('projects'));
     }
 
     /**
@@ -40,7 +41,7 @@ class AdminProjectController extends Controller
         $citation=Citation::pluck('name','id')->all();
         $field=Descipline::pluck('name','id')->all();
         $writer=User::where('role_id',3)->where('status_id', 1)->pluck('name','id')->all();
-        return  view('admin.task.create', compact('citation', 'field','writer'));
+        return  view('dashboard.jobs.create', compact('citation', 'field','writer'));
     }
 
     /**
@@ -66,17 +67,18 @@ class AdminProjectController extends Controller
             'sku'=>'required|unique:projects'
 
         ]);
-      $deadlineWriter=$request->deadline*0.75;
-      $dead=Carbon::now()->addHour($deadlineWriter);
-      $deadline=Carbon::now()->addHour($request->deadline);
+        $deadlineWriter=$request->deadline*0.75;
+        $dead=Carbon::now()->addHour($deadlineWriter);
+        $deadline=Carbon::now()->addHour($request->deadline);
 
-      if($request->writer_id ==0){
-          $progress=1;
-      }else{
-          $progress=2;
-      }
+        if($request->writer_id ==0){
+            $progress=1;
+        }else{
+            $progress=2;
+        }
 
-      $project=Project::create([
+
+        $project=Project::create([
             'title'=>$validated['title'],
             'citation_id'=>$validated['citation_id'],
             'descipline_id'=>$validated['descipline_id'],
@@ -87,9 +89,9 @@ class AdminProjectController extends Controller
             'client_delivery'=>$deadline,
             'words'=>$validated['words'],
             'cost'=>$validated['cost'],
-           'status'=>1,
-          'progress_id'=>$progress,
-          'sku'=>$validated['sku']
+            'status'=>1,
+            'progress_id'=>$progress,
+            'sku'=>$validated['sku']
         ]);
         if($request->writer_id>0){
             $amount=$project->words/300*350;
@@ -101,11 +103,11 @@ class AdminProjectController extends Controller
             ]);
         }
 
-      if($files=$request->file('materials')) {
-          $project->addMedia($files)->toMediaCollection('materials');
+        if($files=$request->file('materials')) {
+            $project->addMedia($files)->toMediaCollection('materials');
 
         }
-        return  redirect('admin/homepage/task')->with('status','Project created successfully');
+        return  redirect('dashboard/homepage/jobs')->with('status','Project created successfully');
     }
 
     /**
@@ -118,7 +120,7 @@ class AdminProjectController extends Controller
     {
         //
         $project=Project::findBySlugOrFail($id);
-        return  view('admin.task.show', compact('project'));
+        return  view('dashboard.jobs.show', compact('project'));
     }
 
     /**
@@ -134,7 +136,7 @@ class AdminProjectController extends Controller
         $citation=Citation::pluck('name','id')->all();
         $field=Descipline::pluck('name','id')->all();
         $writer=User::where('role_id',3)->where('status_id', 1)->pluck('name','id')->all();
-        return view('admin.task.edit', compact('project','citation', 'field','writer'));
+        return view('dashboard.jobs.edit', compact('project','citation', 'field','writer'));
     }
 
     /**
@@ -205,7 +207,7 @@ class AdminProjectController extends Controller
             }
 
         }
-        return  redirect('admin/homepage/task')->with('status','Project Updated successfully');
+        return  redirect('dashboard/homepage/jobs')->with('status','Project Updated successfully');
 
 
     }
@@ -219,14 +221,9 @@ class AdminProjectController extends Controller
     public function destroy($id)
     {
         //
-
-        $project=Project::findOrFail($id);
-        $project->delete();
-        return  redirect()->back()->with('Status','Project deleted successfully');
-
-
     }
-    public function assign(Request $request,$id){
+
+    public  function accept(Request $request, $id){
         $project=Project::findOrFail($id);
         $project->update([
             'writer_id'=>$request->writer,
@@ -245,12 +242,11 @@ class AdminProjectController extends Controller
             $message->from('nyawach41@gmail.com');
             $message->subject('Please Proceed');
 
-
         });
         return redirect()->back()->with('status','Assigned Successfully');
     }
 
-    public function unassign(Request $request,$id){
+    public  function reject(Request $request, $id){
         $order=Order::findOrFail($id);
         $order->delete();
         $project=Project::findOrFail($request->project);
@@ -267,6 +263,5 @@ class AdminProjectController extends Controller
 
         });
         return redirect()->back()->with('status','Unassigned Successfully');
-
     }
 }

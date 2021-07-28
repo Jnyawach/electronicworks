@@ -10,6 +10,8 @@ use \App\Http\Controllers\Allusers\ProfileController;
 use \App\Http\Controllers\Allusers\ChangePasswordController;
 use \App\Http\Controllers\Admin\AdminWriterController;
 use \App\Http\Controllers\client\ClientController;
+use \App\Http\Controllers\client\ClientJobsController;
+
 use App\Http\Controllers\Allusers\RedirectController;
 use App\Http\Controllers\Admin\AdminExamController;
 use App\Http\Controllers\Admin\AdminEssayController;
@@ -33,6 +35,8 @@ use App\Http\Controllers\Admin\AdminNotificationController;
 use App\Http\Controllers\Admin\NoteController;
 use App\Http\Controllers\Admin\AdminDisciplineController;
 use App\Http\Controllers\Admin\AdminProjectController;
+use App\Http\Controllers\Admin\AdminProgressController;
+
 use \App\Http\Controllers\General\ContactController;
 use \App\Http\Controllers\MainController;
 
@@ -68,16 +72,22 @@ Route::group(['middleware'=>'auth'], function (){
     Route::resource('admin/homepage/notifications', AdminNotificationController::class);
     Route::resource('admin/homepage/discipline', AdminDisciplineController::class);
     Route::resource('admin/homepage/task', AdminProjectController::class);
+    Route::resource('admin/task/progress', AdminProgressController::class);
     Route::patch('frequent/{id}', ['as'=>'frequent', 'uses'=>FaqStatus::class]);
     Route::patch('response/{id}', ['as'=>'response', 'uses'=>ResponseController::class]);
     Route::patch('note/{id}', ['as'=>'note', 'uses'=>NoteController::class]);
     Route::patch('admin/task/assign/{id}',  [AdminProjectController::class, 'assign'])->name('assign');
+    Route::delete('admin/task/unassign/{id}',  [AdminProjectController::class, 'unassign'])->name('unassign');
 });
-
+// client controller
 Route::group(['middleware'=>'auth'], function (){
     Route::resource('dashboard', ClientController::class);
     Route::get('/{waiting}',['as'=>'waiting', 'uses'=>RedirectController::class])->name('page')
-        ->where('waiting','wait|congratulations|deactivated');;
+        ->where('waiting','wait|congratulations|deactivated');
+    Route::resource('dashboard/homepage/jobs', ClientJobsController::class);
+    Route::patch('dashboard/jobs/accept/{id}',  [ClientJobsController::class, 'accept'])->name('accept');
+    Route::delete('dashboard/jobs/reject/{id}',  [ClientJobsController::class, 'reject'])->name('reject');
+
 });
 //writer routes
 Route::group(['middleware'=>'auth'], function (){

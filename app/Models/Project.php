@@ -39,6 +39,7 @@ class Project extends Model implements HasMedia
         'cost',
         'progress_id',
         'status',
+        'sku'
     ];
 
     public  function writers(){
@@ -59,10 +60,12 @@ class Project extends Model implements HasMedia
         return $this->belongsTo(Progress::class);
     }
 
-    public  function bids(){
+    public  function bid(){
         return $this->hasMany(Bidding::class);
     }
 
-
+    public  function order(){
+        return $this->hasOne(Order::class);
+    }
 
 }
