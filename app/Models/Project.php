@@ -68,4 +68,8 @@ class Project extends Model implements HasMedia
         return $this->hasOne(Order::class);
     }
 
+    public  function submission(){
+        return $this->hasOne(Submission::class);
+    }
+
 }

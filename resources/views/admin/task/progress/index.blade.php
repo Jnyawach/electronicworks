@@ -67,7 +67,7 @@
                                                     </li>
                                                 @endif
                                                 <li>
-                                                    <a href="{{route('task.show', $project->slug)}}"
+                                                    <a href="{{route('progress.show', $project->slug)}}"
                                                        class="dropdown-item">View</a>
                                                 </li>
 

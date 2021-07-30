@@ -144,7 +144,7 @@
                 <a href="{{route('pending.index')}}"><span><i class="fas fa-stopwatch"></i></span>My Projects </a>
             </li>
             <li>
-                <a href="#"><span><i class="fas fa-handshake"></i></span>Open Bids </a>
+                <a href="{{route('evaluation.index')}}"><span><i class="fas fa-history"></i></span>Under Review </a>
             </li>
 
             <li>

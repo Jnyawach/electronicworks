@@ -131,26 +131,20 @@
                                         <a class="nav-link" href="{{route('task.create')}}">Create project</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{{route('progress.index')}}">In progress<span
-                                                class="badge
-                                        bg-danger ms-2">3
-                                        </span></a>
+                                        <a class="nav-link" href="{{route('progress.index')}}">In progress</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#">Under review<span class="badge bg-danger ms-2">3
-                                        </span></a>
+                                        <a class="nav-link" href="{{route('asses.index')}}">Under review</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#">Submissions<span class="badge bg-danger ms-2">3
-                                        </span></a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">Bidding<span class="badge bg-danger ms-2">3
-                                        </span></a>
-
+                                        <a class="nav-link" href="#">Revisions</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="#">Completed</a>
+
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">Bidding</a>
                                     </li>
 
 

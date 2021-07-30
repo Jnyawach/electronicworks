@@ -49,9 +49,11 @@
                             <li>Failure to will lead to penalties that will affect your account rating</li>
                         </ol>
                        <h5>Submission form</h5>
-                        <form>
+                        <form action="{{route('pending.store')}}" method="POST" enctype="multipart/form-data">
+                            @csrf
                            <input type="hidden" value="{{$project->id}}" name="project">
                             <input type="hidden" value="{{Auth::id()}}" name="writer">
+                            <input type="hidden" value="1" name="evaluation">
                             <div class="form-group required mt-4">
                                 <label for="comment" class="control-label">Add Comment(optional):</label>
                                 <textarea class="form-control complete" id="comment"
@@ -69,7 +71,7 @@
                             <div class="form-group mt-4">
                                 <label for="materials" class="form-label">Attach Files:</label>
                                 <input class="form-control form-control-lg" id="materials"
-                                       type="file" style="width: 400px" name="attachment">
+                                       type="file" style="width: 400px" name="attachment" required>
                                 <small class="text-danger">
                                     @error('attachment')
                                     {{ $message }}

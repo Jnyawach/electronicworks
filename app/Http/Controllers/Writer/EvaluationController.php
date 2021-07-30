@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Writer;
 use App\Http\Controllers\Controller;
 
-
 use App\Models\Project;
+use App\Models\Submission;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class AdminProgressController extends Controller
+class EvaluationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +18,8 @@ class AdminProgressController extends Controller
     public function index()
     {
         //
-        $projects=Project::where('progress_id',2)->get();
-        return  view('admin.task.progress.index', compact('projects'));
+        $submissions=Submission::where('user_id', Auth::id())->where('evaluation_id',1)->get();
+        return view('freelancer.project.evaluation.index', compact('submissions'));
     }
 
     /**
@@ -52,7 +53,7 @@ class AdminProgressController extends Controller
     {
         //
         $project=Project::findBySlugOrFail($id);
-        return  view('admin.task.progress.show', compact('project'));
+        return  view('freelancer.project.evaluation.show', compact('project'));
     }
 
     /**

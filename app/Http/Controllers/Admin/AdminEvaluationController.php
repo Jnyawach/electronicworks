@@ -1,15 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\Writer;
+namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 
 use App\Models\Project;
 use App\Models\Submission;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
-class PendingProjectController extends Controller
+class AdminEvaluationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,9 +20,8 @@ class PendingProjectController extends Controller
     public function index()
     {
         //
-        $projects=Project::where('status', 1)->where('progress_id', 2)
-            ->where('writer_id', Auth::id())->paginate(10);
-        return  view('freelancer.project.pending.index', compact('projects'));
+        $submissions=Submission::where('evaluation_id',1)->get();
+        return  view('admin.task.asses.index', compact('submissions'));
     }
 
     /**
@@ -43,30 +43,6 @@ class PendingProjectController extends Controller
     public function store(Request $request)
     {
         //
-        $validated=$request->validate([
-            'project'=>'required|max:50',
-            'writer'=>'required|max:50',
-            'evaluation'=>'required|max:50',
-            'comment'=>'required',
-            'attachment'=>'',
-            'attachment.*'=>'max:10000',
-        ]);
-        $submission=Submission::create([
-            'project_id'=>$validated['project'],
-            'user_id'=>$validated['writer'],
-            'evaluation_id'=>$validated['evaluation'],
-            'comment'=>$validated['comment'],
-        ]);
-        if($files=$request->file('attachment')) {
-            $submission->addMedia($files)->toMediaCollection('attachment');
-        }
-        Mail::send('emails.assesing', ['mess'=> $submission], function ($message) use( $submission){
-            $message->to('nyawach41@gmail.com');
-            $message->from(Auth::user()->email);
-            $message->subject('Submitted');
-
-        });
-        return redirect('freelancer/project/evaluation');
     }
 
     /**
@@ -79,7 +55,7 @@ class PendingProjectController extends Controller
     {
         //
         $project=Project::findBySlugOrFail($id);
-        return  view('freelancer.project.pending.show', compact('project'));
+        return  view('admin.task.asses.show', compact('project'));
     }
 
     /**
@@ -103,6 +79,39 @@ class PendingProjectController extends Controller
     public function update(Request $request, $id)
     {
         //
+          $submission=Submission::findOrFail($id);
+          $project=Project::findOrFail($request->project);
+        if (is_null($request->reason)){
+            $client=User::findOrFail($request->client);
+            $submission->update(['evaluation_id'=>$request['evaluation_id']]);
+            Mail::send('emails.submitted', ['mess'=> $submission,'client'=>$client], function ($message) use( $submission,
+                $client){
+                $message->to($client->email);
+                $message->from(Auth::user()->email);
+                $message->subject('Submitted');
+
+            });
+            return redirect()->back();
+        }else{
+            $writer=User::findOrFail($request->writer);
+            $submission->update(
+                [
+                    'evaluation_id'=>$request['evaluation_id'],
+                    'reason'=>$request['reason'],
+                ]);
+            Mail::send('emails.revise',
+                ['mess'=> $submission,'client'=>$writer,'project'=>$project],
+                function ($message) use( $submission,$project,
+                $writer){
+                $message->to($writer->email);
+                $message->from('nyawach41@gmail.com');
+                $message->subject($project->sku.':Revision');
+
+            });
+            return redirect()->back();
+        }
+
+
     }
 
     /**
