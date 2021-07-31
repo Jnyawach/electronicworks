@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSubmissionsTable extends Migration
+class CreateRevisionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,15 @@ class CreateSubmissionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('submissions', function (Blueprint $table) {
+        Schema::create('revisions', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->bigInteger('project_id')->index()->unsigned();
             $table->bigInteger('user_id')->index()->unsigned();
             $table->text('comment')->nullable();
-
+            $table->text('reason')->nullable();
+            $table->foreign('project_id')->references('id')->on('projects')
+                ->onDelete('cascade');
         });
     }
 
@@ -30,6 +32,6 @@ class CreateSubmissionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('submissions');
+        Schema::dropIfExists('revisions');
     }
 }

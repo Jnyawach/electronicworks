@@ -26,6 +26,8 @@ use App\Http\Controllers\Writer\FilterController;
 use App\Http\Controllers\Writer\BiddingController;
 use App\Http\Controllers\Writer\PendingProjectController;
 use App\Http\Controllers\Writer\EvaluationController;
+use App\Http\Controllers\Writer\WriterAmendController;
+
 
 use App\Http\Controllers\Admin\AdminFaqsController;
 use App\Http\Controllers\Admin\FaqStatus;
@@ -38,6 +40,8 @@ use App\Http\Controllers\Admin\AdminDisciplineController;
 use App\Http\Controllers\Admin\AdminProjectController;
 use App\Http\Controllers\Admin\AdminProgressController;
 use App\Http\Controllers\Admin\AdminEvaluationController;
+use App\Http\Controllers\Admin\AdminSubmittedController;
+use App\Http\Controllers\Admin\AdminRevisionController;
 
 use \App\Http\Controllers\General\ContactController;
 use \App\Http\Controllers\MainController;
@@ -75,6 +79,8 @@ Route::group(['middleware'=>'auth'], function (){
     Route::resource('admin/homepage/discipline', AdminDisciplineController::class);
     Route::resource('admin/homepage/task', AdminProjectController::class);
     Route::resource('admin/task/progress', AdminProgressController::class);
+    Route::resource('admin/task/completed', AdminSubmittedController::class);
+    Route::resource('admin/task/revision', AdminRevisionController::class);
     Route::resource('admin/task/asses', AdminEvaluationController::class);
     Route::patch('frequent/{id}', ['as'=>'frequent', 'uses'=>FaqStatus::class]);
     Route::patch('response/{id}', ['as'=>'response', 'uses'=>ResponseController::class]);
@@ -104,6 +110,7 @@ Route::group([], function (){
     Route::resource('freelancer', WriterController::class);
     Route::resource('freelancer/project/pending', PendingProjectController::class);
     Route::resource('freelancer/project/evaluation', EvaluationController::class);
+    Route::resource('freelancer/project/amend', WriterAmendController::class);
     Route::post('bidding', ['as'=>'bidding', 'uses'=>BiddingController::class]);
     Route::resource('freelancer/homepage/project',  WriterProjectController::class);
     Route::get('freelancer/project/categories/{id}',  [WriterProjectController::class, 'filters'])->name('filters');

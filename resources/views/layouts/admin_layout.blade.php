@@ -137,10 +137,10 @@
                                         <a class="nav-link" href="{{route('asses.index')}}">Under review</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#">Revisions</a>
+                                        <a class="nav-link" href="{{route('revision.index')}}">Revisions</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#">Completed</a>
+                                        <a class="nav-link" href="{{route('completed.index')}}">Completed</a>
 
                                     </li>
                                     <li class="nav-item">

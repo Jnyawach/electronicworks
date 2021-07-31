@@ -72,4 +72,8 @@ class Project extends Model implements HasMedia
         return $this->hasOne(Submission::class);
     }
 
+    public  function revision(){
+        return $this->hasOne(Submission::class);
+    }
+
 }

@@ -21,13 +21,13 @@ class BiddingController extends Controller
 
         if($bid=Bidding::where('project_id', $request->project_id)
             ->where('user_id', $request->user_id)->exists()){
-            return  redirect()->back()->with('status','Bid already submitted for this project');
+            return  redirect()->back()->with('status','Bid already completed for this project');
         }else{
             $bid=Bidding::create([
                 'project_id'=>$request['project_id'],
                 'user_id'=>$request['user_id'],
             ]);
-            return  redirect()->back()->with('status','Bid submitted successfully');
+            return  redirect()->back()->with('status','Bid completed successfully');
         }
 
     }

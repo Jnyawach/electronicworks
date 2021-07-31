@@ -247,7 +247,7 @@
                     </div>
                 </div>
                 <!--End of Revision projects-->
-                <!--submitted projects-->
+                <!--completed projects-->
                 <div class="row mt-5">
                     <div class="col-12 mx-auto">
                         <div class="card shadow-sm">
@@ -292,7 +292,7 @@
 
                     </div>
                 </div>
-                <!--end submitted projects-->
+                <!--end completed projects-->
 
             </div>
 

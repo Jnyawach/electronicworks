@@ -43,10 +43,11 @@ class PendingProjectController extends Controller
     public function store(Request $request)
     {
         //
+
+        $project=Project::findOrFail($request->project);
         $validated=$request->validate([
             'project'=>'required|max:50',
             'writer'=>'required|max:50',
-            'evaluation'=>'required|max:50',
             'comment'=>'required',
             'attachment'=>'',
             'attachment.*'=>'max:10000',
@@ -54,7 +55,6 @@ class PendingProjectController extends Controller
         $submission=Submission::create([
             'project_id'=>$validated['project'],
             'user_id'=>$validated['writer'],
-            'evaluation_id'=>$validated['evaluation'],
             'comment'=>$validated['comment'],
         ]);
         if($files=$request->file('attachment')) {
@@ -66,6 +66,9 @@ class PendingProjectController extends Controller
             $message->subject('Submitted');
 
         });
+        $project->update([
+            'progress_id'=>3,
+        ]);
         return redirect('freelancer/project/evaluation');
     }
 

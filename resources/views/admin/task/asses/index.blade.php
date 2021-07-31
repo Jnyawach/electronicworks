@@ -28,15 +28,15 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @if($submissions->count()>0)
-                    @foreach($submissions as $submission)
+                    @if($projects->count()>0)
+                    @foreach($projects as $project)
                     <tr>
-                        <td>{{$submission->project->id}}</td>
-                        <td>{{$submission->project->sku}}</td>
-                        <td>{{\Carbon\Carbon::parse($submission->project->writer_delivery)->diffForHumans()}}</td>
-                        <td >{{\Carbon\Carbon::parse($submission->project->client_delivery)->diffForHumans()}}</td>
+                        <td>{{$project->id}}</td>
+                        <td>{{$project->sku}}</td>
+                        <td>{{\Carbon\Carbon::parse($project->writer_delivery)->diffForHumans()}}</td>
+                        <td >{{\Carbon\Carbon::parse($project->client_delivery)->diffForHumans()}}</td>
                         <td>
-                            {{$submission->project->writers->name}}
+                            {{$project->writers->name}}
                         </td>
 
                         <td>
@@ -48,7 +48,7 @@
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 
                                     <li>
-                                        <a href="{{route('asses.show', $submission->project->slug)}}"
+                                        <a href="{{route('asses.show', $project->slug)}}"
                                            class="dropdown-item">View</a>
                                     </li>
 

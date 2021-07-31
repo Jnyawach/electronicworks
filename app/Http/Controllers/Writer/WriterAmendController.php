@@ -3,12 +3,13 @@
 namespace App\Http\Controllers\Writer;
 use App\Http\Controllers\Controller;
 
-use App\Models\Descipline;
 use App\Models\Project;
+use App\Models\Revision;
 use Illuminate\Http\Request;
-use Spatie\QueryBuilder\QueryBuilder;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
-class WriterProjectController extends Controller
+class WriterAmendController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,8 +19,9 @@ class WriterProjectController extends Controller
     public function index()
     {
         //
-        $projects=Project::where('status', 1)->where('progress_id', 1)->paginate(10);
-        return  view('freelancer.project.index', compact('projects'));
+        $projects=Project::where('status', 1)->where('progress_id', 5)
+            ->where('writer_id', Auth::id())->paginate(10);
+        return  view('freelancer.project.amend.index', compact('projects'));
     }
 
     /**
@@ -41,6 +43,32 @@ class WriterProjectController extends Controller
     public function store(Request $request)
     {
         //
+        $project=Project::findOrFail($request->project);
+        $validated=$request->validate([
+            'project'=>'required|max:50',
+            'writer'=>'required|max:50',
+            'comment'=>'required',
+            'attachment'=>'',
+            'attachment.*'=>'max:10000',
+        ]);
+        $submission=Revision::create([
+            'project_id'=>$validated['project'],
+            'user_id'=>$validated['writer'],
+            'comment'=>$validated['comment'],
+        ]);
+        if($files=$request->file('attachment')) {
+            $submission->addMedia($files)->toMediaCollection('attachment');
+        }
+        Mail::send('emails.assesing', ['mess'=> $submission], function ($message) use( $submission){
+            $message->to('nyawach41@gmail.com');
+            $message->from(Auth::user()->email);
+            $message->subject('Submitted');
+
+        });
+        $project->update([
+            'progress_id'=>5,
+        ]);
+        return redirect('freelancer/project/amend')->with('status', 'Revision submitted successfully');
     }
 
     /**
@@ -53,10 +81,7 @@ class WriterProjectController extends Controller
     {
         //
         $project=Project::findBySlugOrFail($id);
-        $clientProject=Project::where('client_id', $project->client_id)->get()->count();
-        $active=Project::where('client_id', $project->client_id)->where('status', 1)->where('writer_id', 0)
-                ->get()->count();
-        return view('freelancer.project.show', compact('project', 'clientProject', 'active'));
+        return  view('freelancer.project.amend.show', compact('project'));
     }
 
     /**
@@ -91,14 +116,5 @@ class WriterProjectController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public  function filters($id){
-        $category=Descipline::findBySlugOrFail($id);
-        $projects=Project::where('descipline_id',$category->id)->where('status', 1)->where('writer_id', 0)
-            ->paginate(10);
-
-        return view('freelancer/project/categories', compact('projects','category'));
-
     }
 }

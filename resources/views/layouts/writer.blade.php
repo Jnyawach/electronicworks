@@ -148,7 +148,7 @@
             </li>
 
             <li>
-                <a href="#"><span><i class="fas fa-book-reader"></i></span>Revisions&nbsp;</a>
+                <a href="{{route('amend.index')}}"><span><i class="fas fa-book-reader"></i></span>Revisions&nbsp;</a>
             </li>
             <li>
                 <a href="#"><span><i class="fas fa-envelope"></i></span>Chat room</a>

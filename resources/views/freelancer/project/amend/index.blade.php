@@ -2,16 +2,17 @@
 @section('title','Projects')
 @section('content')
     <div>
+        @include('includes.status')
         <div class="row pb-5">
             <div class="col-sm-12 col-md-11 col-lg-11 mx-auto">
                 <div class="card jobs">
                     <div class="body pt-3">
-                        <h5 class="m-2 fw-bold">Submitted:<span class="text-danger"> Under Review</span></h5>
+                        <h5 class="m-2 fw-bold">Returned:<span class="text-danger"> Revision</span></h5>
                         <hr class="dropdown-divider">
                         <div class="row">
                             @if($projects->count()>0)
                                 @foreach($projects as $project)
-                                    <a href="{{route('evaluation.show',$project->slug)}}"
+                                    <a href="{{route('amend.show',$project->slug)}}"
                                        class="text-decoration-none"
                                        title="click to see details">
                                         <div class="col-sm-12 mx-auto">
@@ -55,5 +56,6 @@
 
     </div>
 @endsection
+
 
 

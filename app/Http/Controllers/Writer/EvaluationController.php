@@ -18,8 +18,8 @@ class EvaluationController extends Controller
     public function index()
     {
         //
-        $submissions=Submission::where('user_id', Auth::id())->where('evaluation_id',1)->get();
-        return view('freelancer.project.evaluation.index', compact('submissions'));
+        $projects=Project::where('progress_id',3)->get();
+        return view('freelancer.project.evaluation.index', compact('projects'));
     }
 
     /**

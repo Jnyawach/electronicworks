@@ -1,33 +1,27 @@
 @extends('layouts.writer')
-@section('title', $project->sku)
+@section('title', 'Bid for Projects')
 @section('content')
     @include('includes.ckeditor')
     <div class="container">
         <div class="card">
             <div class="card-header">
-                <h5>{{$project->title}}
-                <a href="#" class="btn-sm float-end hire">Ask question</a>
-                </h5>
+                <h5>{{$project->title}}</h5>
             </div>
             <div class="card-body">
                 <div class="d-inline-flex project-header">
                     <h5><span>Category:</span> {{$project->descipline->name}}</h5>
-                    <h5 class="ms-3"><span>Deadline:</span>{{\Carbon\Carbon::parse
-                                ($project->writer_delivery)->isoFormat('MMMM Do YYYY, h:mm:ss a')}}</h5>
-                    <h5 class="ms-3">
-                        <span>Posted On:</span>{{$project->created_at->isoFormat('MMMM Do YYYY, h:mm:ss a')}}
-                    </h5>
 
-                    <h5 class="ms-3">
-                        <span>Payout:</span>Ksh.{{$project->order->amount}}
-                    </h5>
+                    <h5 class="ms-3"><span>Submission:</span>{{\Carbon\Carbon::parse
+                                ($project->writer_delivery)->isoFormat('MMMM Do YYYY, h:mm:ss a')}}</h5>
+                    <h5 class="ms-3"><span><i class="fas fa-paperclip"></i>
+                                    </span>{{$project->created_at->isoFormat('MMMM Do YYYY, h:mm:ss a')}}</h5>
                 </div>
                 @include('includes.status')
                 <div class="row mt-3 p-3">
                     <div class="col-sm-12 col-md-12 col-lg-12">
                         <h4>Use <span>{{$project->citation->name}}</span> citation style</h4>
                         <p>{!! $project->instruction !!}</p>
-                        <hr class="dotted">
+
                         <h5 class="mt-4">Attached Files</h5>
                         @if($project->getMedia('materials'))
                             @foreach($project->getMedia('materials') as $media)
@@ -37,7 +31,12 @@
                             <p>No files attached</p>
                         @endif
                         <hr class="dotted">
-                        <h5>Submission</h5>
+                        <h5>Revision</h5>
+                        <h4 class="fw-bold text-danger">Attached Comments:</h4>
+                        <small class="text-success">Please revise as per the comments</small>
+                        <p>{!! $project->submission->reason !!}</p>
+                        <hr class="dotted">
+                        <h5>Submission Revision</h5>
                         <p>Please adhere to the following guidelines when submitting your work.</p>
                         <ol>
                             <li>Strictly follow the instruction as provided by the client</li>
@@ -48,10 +47,10 @@
                             <li>Please zip multiple files before upload</li>
                             <li>Failure to will lead to penalties that will affect your account rating</li>
                         </ol>
-                       <h5>Submission form</h5>
-                        <form action="{{route('pending.store')}}" method="POST" enctype="multipart/form-data">
+                        <h5>Submission form</h5>
+                        <form action="{{route('amend.store')}}" method="POST" enctype="multipart/form-data">
                             @csrf
-                           <input type="hidden" value="{{$project->id}}" name="project">
+                            <input type="hidden" value="{{$project->id}}" name="project">
                             <input type="hidden" value="{{Auth::id()}}" name="writer">
                             <div class="form-group required mt-4">
                                 <label for="comment" class="control-label">Add Comment(optional):</label>
@@ -86,6 +85,7 @@
                                 </button>
                             </div>
                         </form>
+
                     </div>
 
                 </div>
@@ -100,3 +100,4 @@
         CKEDITOR.replace( 'comment', );
     </script>
 @endsection
+

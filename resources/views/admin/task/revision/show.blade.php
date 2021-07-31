@@ -9,7 +9,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h5>{{$project->title}}
-                            <span class="float-end text-danger">Under Review</span>
+                            <span class="float-end text-danger">Revision Review</span>
                         </h5>
                     </div>
                     <div class="card-body">
@@ -40,9 +40,9 @@
                                     <p>No files attached</p>
                                 @endif
                                 <hr class="dotted">
-                                <h5>Submitted(Under Review)</h5>
+                                <h5>Initial Submission</h5>
                                 <h4>Writer:<span>{{$project->writers->name}}
-                                    {{$project->writers->last_name}}</span></h4>
+                                        {{$project->writers->last_name}}</span></h4>
                                 <h4>Client:<span>{{$project->clients->name}}
                                         {{$project->clients->last_name}}</span></h4>
                                 <h4>Attached Comments</h4>
@@ -54,6 +54,22 @@
                                             class="fas fa-folder
                         me-2"></i></span>{{$project->submission->getFirstMedia('attachment')->name}}</a>
                                 <hr class="dotted">
+                                <h5>Revision</h5>
+                                <h4 class="fw-bold text-danger">Comments:</h4>
+                                <p>{!! $project->submission->reason !!}</p>
+                                <h4 class="fw-bold text-danger">Submitted Revision:</h4>
+                                @if($project->revision)
+                                    <h4>Attached Comments</h4>
+                                    <p>{!!$project->revision->comment !!}</p>
+                                    <h4>Attached Files</h4>
+                                    <a href="{{$project->revision->getFirstMedia('attachment')->getUrl()}}"
+                                       target="_blank"><span><i
+                                                class="fas fa-folder
+                        me-2"></i></span>{{$project->revision->getFirstMedia('attachment')->name}}</a>
+                                @endif
+
+
+                                <hr class="dotted">
                                 <form action="{{route('asses.update',$project->submission->id)}}" method="POST">
                                     @method('PATCH')
                                     @csrf
@@ -64,7 +80,7 @@
                                     <button type="submit" class="btn btn-primary">Submit to Client</button>
                                 </form>
                                 <h5 class="mt-3">Or return for revision with comments</h5>
-                                <form action="{{route('asses.update',$project->submission->id)}}" method="POST">
+                                <form action="{{route('amend.update',$project->submission->id)}}" method="POST">
                                     @method('PATCH')
                                     @csrf
 
@@ -115,7 +131,7 @@
                     </div>
                 </div>
             </div>
-    </div>
+        </div>
     </div>
 @endsection
 @section('scripts')
@@ -124,5 +140,6 @@
         CKEDITOR.replace( 'reason', );
     </script>
 @endsection
+
 
 

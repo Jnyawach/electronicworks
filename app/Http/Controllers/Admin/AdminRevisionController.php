@@ -1,14 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Writer;
+namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 
-use App\Models\Descipline;
 use App\Models\Project;
 use Illuminate\Http\Request;
-use Spatie\QueryBuilder\QueryBuilder;
 
-class WriterProjectController extends Controller
+class AdminRevisionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,8 +16,8 @@ class WriterProjectController extends Controller
     public function index()
     {
         //
-        $projects=Project::where('status', 1)->where('progress_id', 1)->paginate(10);
-        return  view('freelancer.project.index', compact('projects'));
+        $projects=Project::where('progress_id',5)->get();
+        return  view('admin.task.revision.index', compact('projects'));
     }
 
     /**
@@ -53,10 +51,7 @@ class WriterProjectController extends Controller
     {
         //
         $project=Project::findBySlugOrFail($id);
-        $clientProject=Project::where('client_id', $project->client_id)->get()->count();
-        $active=Project::where('client_id', $project->client_id)->where('status', 1)->where('writer_id', 0)
-                ->get()->count();
-        return view('freelancer.project.show', compact('project', 'clientProject', 'active'));
+        return  view('admin.task.revision.show', compact('project'));
     }
 
     /**
@@ -91,14 +86,5 @@ class WriterProjectController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public  function filters($id){
-        $category=Descipline::findBySlugOrFail($id);
-        $projects=Project::where('descipline_id',$category->id)->where('status', 1)->where('writer_id', 0)
-            ->paginate(10);
-
-        return view('freelancer/project/categories', compact('projects','category'));
-
     }
 }

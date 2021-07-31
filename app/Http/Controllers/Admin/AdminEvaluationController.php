@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Project;
 use App\Models\Submission;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -20,8 +21,8 @@ class AdminEvaluationController extends Controller
     public function index()
     {
         //
-        $submissions=Submission::where('evaluation_id',1)->get();
-        return  view('admin.task.asses.index', compact('submissions'));
+       $projects=Project::where('progress_id',3)->get();
+        return  view('admin.task.asses.index', compact('projects'));
     }
 
     /**
@@ -83,11 +84,13 @@ class AdminEvaluationController extends Controller
           $project=Project::findOrFail($request->project);
         if (is_null($request->reason)){
             $client=User::findOrFail($request->client);
-            $submission->update(['evaluation_id'=>$request['evaluation_id']]);
-            Mail::send('emails.submitted', ['mess'=> $submission,'client'=>$client], function ($message) use( $submission,
+            $project->update(['progress_id'=> 4]);
+
+            Mail::send('emails.submitted', ['mess'=> $submission,'client'=>$client], function ($message) use(
+                $submission,
                 $client){
-                $message->to($client->email);
-                $message->from(Auth::user()->email);
+                $message->to('nyawach41@gmail.com');
+                $message->from('cervekenya@gmail.com');
                 $message->subject('Submitted');
 
             });
@@ -96,7 +99,6 @@ class AdminEvaluationController extends Controller
             $writer=User::findOrFail($request->writer);
             $submission->update(
                 [
-                    'evaluation_id'=>$request['evaluation_id'],
                     'reason'=>$request['reason'],
                 ]);
             Mail::send('emails.revise',
@@ -108,6 +110,15 @@ class AdminEvaluationController extends Controller
                 $message->subject($project->sku.':Revision');
 
             });
+
+            $deadlineWriter=$request->deadline*0.75;
+            $dead=Carbon::now()->addHour($deadlineWriter);
+            $deadline=Carbon::now()->addHour($request->deadline);
+            $project->update([
+                'progress_id'=> 5,
+                'writer_delivery'=>$dead,
+                'client_delivery'=>$deadline,
+            ]);
             return redirect()->back();
         }
 
