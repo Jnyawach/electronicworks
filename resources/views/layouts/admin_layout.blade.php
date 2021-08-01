@@ -144,7 +144,7 @@
 
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#">Bidding</a>
+                                        <a class="nav-link" href="{{route('bids.index')}}">Bidding</a>
                                     </li>
 
 

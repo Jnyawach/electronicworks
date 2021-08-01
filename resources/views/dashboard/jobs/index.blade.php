@@ -27,7 +27,9 @@
                                            title="click to see details">
                                             <div class="col-sm-12 mx-auto">
                                                 <div class="conte p-2">
-                                                    <h5 class="m-1">{{$project->title}}</h5>
+                                                    <h5
+                                                        class="m-1"><span class="fw-bold"
+                                                        >{{$project->sku}}</span> {{$project->title}}</h5>
                                                     <h4 class="fs-6 fw-bold m-1">Required
                                                         {{\Carbon\Carbon::parse($project->writer_delivery)
                                                     ->diffForHumans()}}&nbsp;<span>Payment</span>
@@ -37,7 +39,6 @@
                                                     <p>{!!Illuminate\Support\Str::limit($project->instruction, 110)!!}</p>
                                                     <h4 class="fs-6 fw-bold m-1"><span>Words:</span> {{$project->words}}&nbsp;&nbsp;
                                                         <span>Category:</span> {{$project->descipline->name}}&nbsp;&nbsp;
-                                                        <span>Project SKU:</span> {{$project->sku}}&nbsp;
                                                         <span>Bids:</span> {{count($project->bid)}}
                                                     </h4>
 

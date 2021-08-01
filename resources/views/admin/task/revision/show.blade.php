@@ -53,74 +53,7 @@
                                    target="_blank"><span><i
                                             class="fas fa-folder
                         me-2"></i></span>{{$project->submission->getFirstMedia('attachment')->name}}</a>
-                                <hr class="dotted">
-                                <h5>Revision</h5>
-                                <h4 class="fw-bold text-danger">Comments:</h4>
-                                <p>{!! $project->submission->reason !!}</p>
-                                <h4 class="fw-bold text-danger">Submitted Revision:</h4>
-                                @if($project->revision)
-                                    <h4>Attached Comments</h4>
-                                    <p>{!!$project->revision->comment !!}</p>
-                                    <h4>Attached Files</h4>
-                                    <a href="{{$project->revision->getFirstMedia('attachment')->getUrl()}}"
-                                       target="_blank"><span><i
-                                                class="fas fa-folder
-                        me-2"></i></span>{{$project->revision->getFirstMedia('attachment')->name}}</a>
-                                @endif
 
-
-                                <hr class="dotted">
-                                <form action="{{route('asses.update',$project->submission->id)}}" method="POST">
-                                    @method('PATCH')
-                                    @csrf
-
-                                    <input type="hidden" value="{{$project->client_id}}" name="client">
-                                    <input type="hidden" value="{{$project->id}}" name="project">
-                                    <input type="hidden" value="{{$project->writer_id}}" name="writer">
-                                    <button type="submit" class="btn btn-primary">Submit to Client</button>
-                                </form>
-                                <h5 class="mt-3">Or return for revision with comments</h5>
-                                <form action="{{route('amend.update',$project->submission->id)}}" method="POST">
-                                    @method('PATCH')
-                                    @csrf
-
-                                    <input type="hidden" value="{{$project->writer_id}}" name="writer">
-                                    <input type="hidden" value="{{$project->id}}" name="project">
-                                    <input type="hidden" value="{{$project->client_id}}" name="client">
-                                    <input type="hidden" value="" name="reason">
-                                    <div class="form-group required mt-4">
-                                        <label for="reason" class="control-label">Add Comment:</label>
-                                        <textarea class="form-control complete" id="reason"
-                                                  style="height: 300px" name="reason">
-                                                    {{old('comment')}}
-                                                </textarea>
-                                        <small class="text-danger">
-                                            @error('reason')
-                                            {{ $message }}
-                                            @enderror
-                                        </small>
-
-                                    </div>
-                                    <div class="form-group required mt-4">
-                                        <label for="deadline"  class="control-label">Delivery (in Hours)
-                                            :</label><br>
-                                        <input type="number" id="deadline" name="deadline"
-                                               class="complete" value="{{old('deadline')}}" required
-                                               min="1"><br>
-                                        <small class="text-danger">
-                                            @error('deadline')
-                                            {{ $message }}
-                                            @enderror
-                                        </small>
-                                        <small>Please provide revision deadline in hours from now. For
-                                            instance 5hrs from now</small>
-                                    </div>
-                                    <div class="form-group mt-4">
-                                        <button type="submit" class="btn btn-primary">
-                                            Return for Revision
-                                        </button>
-                                    </div>
-                                </form>
 
 
 

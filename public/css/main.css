@@ -1131,3 +1131,7 @@ Container / Wrapper
 .cate h5:hover{
     color: var(--secondary) !important;
 }
+.submission{
+    background-color:rgba(172,223,135, 0.1) !important;
+    padding: 40px;
+}

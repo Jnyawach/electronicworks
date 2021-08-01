@@ -5,7 +5,7 @@
     <div class="container">
         <div class="card">
             <div class="card-header">
-                <h5>{{$project->title}}</h5>
+                <h5><span class="fw-bold">{{$project->sku}}</span> {{$project->title}}</h5>
             </div>
             <div class="card-body">
                 <div class="d-inline-flex project-header">
@@ -48,7 +48,9 @@
                             <li>Failure to will lead to penalties that will affect your account rating</li>
                         </ol>
                         <h5>Submission form</h5>
-                        <form action="{{route('amend.store')}}" method="POST" enctype="multipart/form-data">
+                        <form action="{{route('amend.update', $project->submission->id)}}" method="POST"
+                              enctype="multipart/form-data">
+                            @method('PATCH')
                             @csrf
                             <input type="hidden" value="{{$project->id}}" name="project">
                             <input type="hidden" value="{{Auth::id()}}" name="writer">

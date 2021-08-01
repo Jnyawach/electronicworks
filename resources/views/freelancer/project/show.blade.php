@@ -41,7 +41,7 @@
                                 Bid for this project</button>
                         </form>
 
-                        <h4 class="mt-5 fw-bold">Total Bids Submitted: <span>{{count($project->bid)}}</span></h4>
+                        <h4 class="mt-5 fw-bold">Total Bids Submitted: <span>{{count($project->bids)}}</span></h4>
                         <hr class="dropdown-divider">
                         <h5 class="fw-bold">About this client</h5>
                         <p>{{$clientProject}} projects posted</p>

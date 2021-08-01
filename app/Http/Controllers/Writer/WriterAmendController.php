@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Project;
 use App\Models\Revision;
+use App\Models\Submission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -51,13 +52,28 @@ class WriterAmendController extends Controller
             'attachment'=>'',
             'attachment.*'=>'max:10000',
         ]);
-        $submission=Revision::create([
-            'project_id'=>$validated['project'],
-            'user_id'=>$validated['writer'],
-            'comment'=>$validated['comment'],
-        ]);
+        if ($submission=Revision::where('project_id',$request->project)->first()){
+            $submission->update([
+                'project_id'=>$validated['project'],
+                'user_id'=>$validated['writer'],
+                'comment'=>$validated['comment'],
+            ]);
+        }else{
+            $submission=Revision::create([
+                'project_id'=>$validated['project'],
+                'user_id'=>$validated['writer'],
+                'comment'=>$validated['comment'],
+            ]);
+        }
+
         if($files=$request->file('attachment')) {
-            $submission->addMedia($files)->toMediaCollection('attachment');
+            if ($submission->getMedia('attachment')->count()>0){
+                $submission->clearMediaCollection('attachment');
+                $submission->addMedia($files)->toMediaCollection('attachment');
+            }else{
+                $submission->addMedia($files)->toMediaCollection('attachment');
+            }
+
         }
         Mail::send('emails.assesing', ['mess'=> $submission], function ($message) use( $submission){
             $message->to('nyawach41@gmail.com');
@@ -66,7 +82,7 @@ class WriterAmendController extends Controller
 
         });
         $project->update([
-            'progress_id'=>5,
+            'progress_id'=>3,
         ]);
         return redirect('freelancer/project/amend')->with('status', 'Revision submitted successfully');
     }
@@ -105,6 +121,40 @@ class WriterAmendController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $submission=Submission::findOrFail($id);
+        $project=Project::findOrFail($request->project);
+        $validated=$request->validate([
+            'project'=>'required|max:50',
+            'writer'=>'required|max:50',
+            'comment'=>'required',
+            'attachment'=>'',
+            'attachment.*'=>'max:10000',
+        ]);
+
+            $submission->update([
+                'project_id'=>$validated['project'],
+                'user_id'=>$validated['writer'],
+                'comment'=>$validated['comment'],]);
+
+        if($files=$request->file('attachment')) {
+            if ($submission->getMedia('attachment')->count()>0){
+                $submission->clearMediaCollection('attachment');
+                $submission->addMedia($files)->toMediaCollection('attachment');
+            }else{
+                $submission->addMedia($files)->toMediaCollection('attachment');
+            }
+
+        }
+        Mail::send('emails.assesing', ['mess'=> $submission], function ($message) use( $submission){
+            $message->to('nyawach41@gmail.com');
+            $message->from(Auth::user()->email);
+            $message->subject('Submitted');
+        });
+        $project->update([
+            'progress_id'=>3,
+        ]);
+        return redirect('freelancer/project/amend')->with('status', 'Revision submitted successfully');
+
     }
 
     /**

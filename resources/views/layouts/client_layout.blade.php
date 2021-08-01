@@ -37,21 +37,24 @@
                 <a href="{{route('jobs.create')}}"><span><i class="fas fa-clipboard-list"></i></span>Post a project</a>
             </li>
             <li>
-                <a href="#"><span><i class="fas fa-stopwatch"></i></span>In progress &nbsp;<span
-                        class="badge bg-danger">
-                    5</span></a>
+                <a href="{{route('market.index')}}"><span><i class="fas fa-handshake"></i></span>Under Bidding
+                    &nbsp;
+                </a>
             </li>
             <li>
-                <a href="#"><span><i class="fas fa-handshake"></i></span>Bids &nbsp;<span class="badge bg-danger">
-                    2</span></a>
+                <a href="{{route('awaiting.index')}}"><span><i class="fas fa-stopwatch"></i></span>In progress &nbsp;
+                   </a>
             </li>
             <li>
-                <a href="#"><span><i class="fas fa-business-time"></i></span>Submissions&nbsp; <span
-                        class="badge bg-danger">3</span></a>
+                <a href="{{route('checking.index')}}"><span><i class="fas fa-th"></i></span>Under Review &nbsp;</a>
             </li>
             <li>
-                <a href="#"><span><i class="fas fa-book-reader"></i></span>Revisions&nbsp; <span
-                        class="badge bg-danger">3</span></a>
+                <a href="{{route('complete.index')}}"><span><i class="fas
+                fa-business-time"></i></span>Submissions&nbsp; </a>
+            </li>
+            <li>
+                <a href="{{route('returned.index')}}"><span><i class="fas fa-book-reader"></i></span>Revisions&nbsp;
+                </a>
             </li>
             <li>
                 <a href="#"><span><i class="fas fa-envelope"></i></span>Messages&nbsp; <span
@@ -114,7 +117,7 @@
     <div class="container p-5">
         <div class="row">
             <div class="col-sm-11 col-md-4 col-lg-4 mx-auto text-center">
-                <img src="../images/e-works.png" class="img-fluid" alt="Electronic Works logo">
+                <img src="{{asset('images/e-works.png')}}" class="img-fluid" alt="Electronic Works logo">
                 <ul class="nav foot-nav justify-content-center">
                     <li class="nav-item">
                         <a class="nav-link" href="#">About Us</a>
@@ -143,7 +146,7 @@
 
             <div class="col-sm-11 col-md-4 col-lg-4 mx-auto">
                 <h5>Find Us</h5>
-                <img src="../images/map.png" class="img-fluid mt-3" alt="Location Map">
+                <img src="{{asset('images/map.png')}}" class="img-fluid mt-3" alt="Location Map">
                 <p class="mt-3">Email:info@electronicworks.com<br>
                     Phone:+254 7111 111 110
                 </p>
@@ -188,11 +191,11 @@
     src="https://code.jquery.com/jquery-3.6.0.js"
     integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
     crossorigin="anonymous"></script>
-<script src="https://unpkg.com/@popperjs/core@2"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
         crossorigin="anonymous"></script>
-<script src="../js/main.js"></script>
+
 <script src="{{asset('js/main.js')}}"></script>
 @yield('scripts')
 

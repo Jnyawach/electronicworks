@@ -94,7 +94,7 @@ class AdminEvaluationController extends Controller
                 $message->subject('Submitted');
 
             });
-            return redirect()->back();
+            return redirect('admin/task/asses')->with('status','Project sent to client successfully');
         }else{
             $writer=User::findOrFail($request->writer);
             $submission->update(
@@ -119,7 +119,7 @@ class AdminEvaluationController extends Controller
                 'writer_delivery'=>$dead,
                 'client_delivery'=>$deadline,
             ]);
-            return redirect()->back();
+            return redirect('admin/task/asses')->with('status','Project sent for revision');
         }
 
 

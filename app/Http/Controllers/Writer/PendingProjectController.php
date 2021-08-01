@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Writer;
 use App\Http\Controllers\Controller;
 
 use App\Models\Project;
+use App\Models\Revision;
 use App\Models\Submission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -52,13 +53,27 @@ class PendingProjectController extends Controller
             'attachment'=>'',
             'attachment.*'=>'max:10000',
         ]);
-        $submission=Submission::create([
-            'project_id'=>$validated['project'],
-            'user_id'=>$validated['writer'],
-            'comment'=>$validated['comment'],
-        ]);
+        if ($submission=Submission::where('project_id',$request->project)->first()){
+            $submission->update([
+                'project_id'=>$validated['project'],
+                'user_id'=>$validated['writer'],
+                'comment'=>$validated['comment'],
+            ]);
+        }else{
+            $submission=Submission::create([
+                'project_id'=>$validated['project'],
+                'user_id'=>$validated['writer'],
+                'comment'=>$validated['comment'],
+            ]);
+        }
         if($files=$request->file('attachment')) {
-            $submission->addMedia($files)->toMediaCollection('attachment');
+            if ($submission->getMedia('attachment')->count()>0){
+                $submission->clearMediaCollection('attachment');
+                $submission->addMedia($files)->toMediaCollection('attachment');
+            }else{
+                $submission->addMedia($files)->toMediaCollection('attachment');
+            }
+
         }
         Mail::send('emails.assesing', ['mess'=> $submission], function ($message) use( $submission){
             $message->to('nyawach41@gmail.com');

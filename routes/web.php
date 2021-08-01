@@ -11,6 +11,11 @@ use \App\Http\Controllers\Allusers\ChangePasswordController;
 use \App\Http\Controllers\Admin\AdminWriterController;
 use \App\Http\Controllers\client\ClientController;
 use \App\Http\Controllers\client\ClientJobsController;
+use \App\Http\Controllers\client\ClientProgressController;
+use \App\Http\Controllers\client\ClientReviewController;
+use \App\Http\Controllers\client\ClientSubmissionController;
+use \App\Http\Controllers\client\ClientRevisionController;
+use \App\Http\Controllers\client\ClientBidsController;
 
 use App\Http\Controllers\Allusers\RedirectController;
 use App\Http\Controllers\Admin\AdminExamController;
@@ -42,6 +47,7 @@ use App\Http\Controllers\Admin\AdminProgressController;
 use App\Http\Controllers\Admin\AdminEvaluationController;
 use App\Http\Controllers\Admin\AdminSubmittedController;
 use App\Http\Controllers\Admin\AdminRevisionController;
+use App\Http\Controllers\Admin\AdminBidsController;
 
 use \App\Http\Controllers\General\ContactController;
 use \App\Http\Controllers\MainController;
@@ -82,6 +88,7 @@ Route::group(['middleware'=>'auth'], function (){
     Route::resource('admin/task/completed', AdminSubmittedController::class);
     Route::resource('admin/task/revision', AdminRevisionController::class);
     Route::resource('admin/task/asses', AdminEvaluationController::class);
+    Route::resource('admin/task/bids', AdminBidsController::class);
     Route::patch('frequent/{id}', ['as'=>'frequent', 'uses'=>FaqStatus::class]);
     Route::patch('response/{id}', ['as'=>'response', 'uses'=>ResponseController::class]);
     Route::patch('note/{id}', ['as'=>'note', 'uses'=>NoteController::class]);
@@ -91,6 +98,11 @@ Route::group(['middleware'=>'auth'], function (){
 // client controller
 Route::group(['middleware'=>'auth'], function (){
     Route::resource('dashboard', ClientController::class);
+    Route::resource('dashboard/jobs/awaiting', ClientProgressController::class);
+    Route::resource('dashboard/jobs/checking', ClientReviewController::class);
+    Route::resource('dashboard/jobs/complete', ClientSubmissionController::class);
+    Route::resource('dashboard/jobs/returned', ClientRevisionController::class);
+    Route::resource('dashboard/jobs/market', ClientBidsController::class);
     Route::get('/{waiting}',['as'=>'waiting', 'uses'=>RedirectController::class])->name('page')
         ->where('waiting','wait|congratulations|deactivated');
     Route::resource('dashboard/homepage/jobs', ClientJobsController::class);

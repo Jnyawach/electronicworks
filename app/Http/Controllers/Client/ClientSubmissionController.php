@@ -1,14 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Writer;
+namespace App\Http\Controllers\Client;
 use App\Http\Controllers\Controller;
 
-use App\Models\Descipline;
-use App\Models\Project;
-use Illuminate\Http\Request;
-use Spatie\QueryBuilder\QueryBuilder;
 
-class WriterProjectController extends Controller
+use App\Models\Project;
+use App\Models\Submission;
+use App\Models\User;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+
+class ClientSubmissionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,10 +22,10 @@ class WriterProjectController extends Controller
     public function index()
     {
         //
-        $projects=Project::where('status', 1)->where('progress_id', 1)
-            ->where('writer_id',0)
+        $projects=Project::where('client_id', Auth::id())
+            ->where('progress_id', 4)
             ->paginate(10);
-        return  view('freelancer.project.index', compact('projects'));
+        return  view('dashboard.jobs.complete.index', compact('projects'));
     }
 
     /**
@@ -55,10 +59,7 @@ class WriterProjectController extends Controller
     {
         //
         $project=Project::findBySlugOrFail($id);
-        $clientProject=Project::where('client_id', $project->client_id)->get()->count();
-        $active=Project::where('client_id', $project->client_id)->where('status', 1)->where('writer_id', 0)
-                ->get()->count();
-        return view('freelancer.project.show', compact('project', 'clientProject', 'active'));
+        return  view('dashboard.jobs.complete.show', compact('project'));
     }
 
     /**
@@ -82,6 +83,33 @@ class WriterProjectController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $submission=Submission::findOrFail($id);
+        $project=Project::findOrFail($request->project);
+
+        $writer=User::findOrFail($request->writer);
+        $submission->update(
+            [
+                'reason'=>$request['reason'],
+            ]);
+        Mail::send('emails.revise',
+            ['mess'=> $submission,'client'=>$writer,'project'=>$project],
+            function ($message) use( $submission,$project,
+                $writer){
+                $message->to($writer->email);
+                $message->from('nyawach41@gmail.com');
+                $message->subject($project->sku.':Revision');
+
+            });
+
+        $deadlineWriter=$request->deadline*0.75;
+        $dead=Carbon::now()->addHour($deadlineWriter);
+        $deadline=Carbon::now()->addHour($request->deadline);
+        $project->update([
+            'progress_id'=> 5,
+            'writer_delivery'=>$dead,
+            'client_delivery'=>$deadline,
+        ]);
+        return redirect('dashboard/jobs/complete')->with('status','project successfully sent back for revision');
     }
 
     /**
@@ -93,14 +121,5 @@ class WriterProjectController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public  function filters($id){
-        $category=Descipline::findBySlugOrFail($id);
-        $projects=Project::where('descipline_id',$category->id)->where('status', 1)->where('writer_id', 0)
-            ->paginate(10);
-
-        return view('freelancer/project/categories', compact('projects','category'));
-
     }
 }

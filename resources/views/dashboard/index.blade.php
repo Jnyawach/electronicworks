@@ -1,4 +1,5 @@
 @extends('layouts.client_layout')
+@section('title','Dashboard')
 @section('content')
 
         <!--page content-->

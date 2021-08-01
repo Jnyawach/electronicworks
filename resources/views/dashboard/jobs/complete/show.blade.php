@@ -1,8 +1,8 @@
-@extends('layouts.admin_layout')
-@section('title','Projects')
+@extends('layouts.client_layout')
+@section('title', $project->sku)
 @section('content')
     @include('includes.ckeditor')
-    <div class="dashboard-wrapper green-body pt-5 pb-5">
+    <div>
         <div class="container pt-3 pl-3 dashboard">
             @include('includes.status')
             <div class="container">
@@ -10,10 +10,10 @@
                     <div class="card-header">
                         <h5>{{$project->title}}
                             @if(is_null($project->revision))
-                            <span class="float-end text-danger">Under Review</span>
-                                @else
+                                <span class="float-end text-danger">Under Review</span>
+                            @else
                                 <span class="float-end text-danger">Revision</span>
-                                @endif
+                            @endif
                         </h5>
                     </div>
                     <div class="card-body">
@@ -44,33 +44,23 @@
                                     <p>No files attached</p>
                                 @endif
                                 <hr class="dotted">
+                                <div class="submission">
                                 <h5>Submission</h5>
-
-
-                                <h4>Writer:<span>{{$project->writers->name}}
-                                    {{$project->writers->last_name}}</span></h4>
-                                <h4>Client:<span>{{$project->clients->name}}
-                                        {{$project->clients->last_name}}</span></h4>
                                 <h4>Attached Comments</h4>
-                                <p>{!! $project->submission->comment? $project->submission->comment:'No comments attached'
-                        !!}</p>
-                                <h4>Attached Files</h4>
-                                <a href="{{$project->submission->getFirstMedia('attachment')->getUrl()}}"
-                                   target="_blank"><span><i
-                                            class="fas fa-folder
-                        me-2"></i></span>{{$project->submission->getFirstMedia('attachment')->name}}</a>
-                                <hr class="dotted">
-                                <form action="{{route('asses.update',$project->submission->id)}}" method="POST">
-                                    @method('PATCH')
-                                    @csrf
+                                    <p>{!! $project->submission->comment? $project->submission->comment:'No comments attached'
+                                 !!}</p>
+                                    <h4>Attached Files</h4>
+                                    <a href="{{$project->submission->getFirstMedia('attachment')->getUrl()}}"
+                                       target="_blank" class="text-decoration-underline"><span><i
+                                                class="fas fa-folder
+                        me-2"></i></span>{{$project->submission->getFirstMedia('attachment')->name}}(click to
+                                        download)</a>
+                                </div>
+                                    <hr class="dotted">
 
-                                    <input type="hidden" value="{{$project->client_id}}" name="client">
-                                    <input type="hidden" value="{{$project->id}}" name="project">
-                                    <input type="hidden" value="{{$project->writer_id}}" name="writer">
-                                    <button type="submit" class="btn btn-primary">Submit to Client</button>
-                                </form>
-                                <h5 class="mt-3">Or return for revision with comments</h5>
-                                <form action="{{route('amend.update',$project->submission->id)}}" method="POST">
+
+                                <h5 class="mt-3">Ask for revision</h5>
+                                <form action="{{route('complete.update',$project->submission->id)}}" method="POST">
                                     @method('PATCH')
                                     @csrf
 
@@ -121,7 +111,7 @@
                     </div>
                 </div>
             </div>
-    </div>
+        </div>
     </div>
 @endsection
 @section('scripts')

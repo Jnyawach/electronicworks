@@ -25,7 +25,7 @@ class ClientJobsController extends Controller
         //
 
         $projects=Project::where('client_id', Auth::id())
-            ->where('writer_id',0)
+            ->where('writer_id',0)->where('progress_id', 1)
             ->paginate(10);
         return  view('dashboard.jobs.index', compact('projects'));
     }
@@ -243,7 +243,7 @@ class ClientJobsController extends Controller
             $message->subject('Please Proceed');
 
         });
-        return redirect()->back()->with('status','Assigned Successfully');
+        return redirect('dashboard/jobs/market')->with('status','Assigned Successfully');
     }
 
     public  function reject(Request $request, $id){
