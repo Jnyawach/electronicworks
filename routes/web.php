@@ -50,6 +50,9 @@ use App\Http\Controllers\Admin\AdminRevisionController;
 use App\Http\Controllers\Admin\AdminBidsController;
 
 use \App\Http\Controllers\General\ContactController;
+use \App\Http\Controllers\General\TermsController;
+use \App\Http\Controllers\General\PrivacyController;
+use \App\Http\Controllers\General\SupportController;
 use \App\Http\Controllers\MainController;
 
 
@@ -133,6 +136,10 @@ Route::group([], function (){
 Route::group([], function (){
    Route::resource('contact', ContactController::class);
     Route::resource('/', MainController::class);
+    Route::resource('terms_condition', TermsController::class);
+    Route::resource('privacy', PrivacyController::class);
+    Route::resource('support', SupportController::class);
+    Route::get('about-us',  [MainController::class, 'about'])->name('about');
 });
 
 

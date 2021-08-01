@@ -30,7 +30,7 @@
         <div class="collapse navbar-collapse justify-content-end" id="menu">
             <div class="navbar-nav">
                 <a class="nav-item nav-link" href="{{route('contact.index')}}">Contact Us</a>
-                <a class="nav-item nav-link" href="#">Why Electronic Works?</a>
+                <a class="nav-item nav-link" href="{{route('about')}}">Why Electronic Works?</a>
                 <a class="nav-item nav-link" href="#">Reviews</a>
 
 
@@ -159,22 +159,22 @@
                 <h5>Company</h5>
                 <ul class="nav flex-column foot-menu">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">Help & Support</a>
+                        <a class="nav-link active" href="{{route('contact.index')}}">Help & Support</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Reviews</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">FAQS</a>
+                        <a class="nav-link" href="{{route('support.index')}}">FAQS</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link " href="{{route('contact.index')}}">Contact us</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " href="#">Privacy Policy</a>
+                        <a class="nav-link " href="{{route('privacy.index')}}">Privacy Policy</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " href="#">Terms & Conditions</a>
+                        <a class="nav-link " href="{{route('terms_condition.index')}}">Terms & Conditions</a>
                     </li>
                 </ul>
             </div>
@@ -186,14 +186,16 @@
 
 
 </footer>
-
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+
 @yield('scripts')
 <script>
     var myVar;
 
     function myFunction() {
-        myVar = setTimeout(showPage, 3000);
+        myVar = setTimeout(showPage, 2500);
     }
 
     function showPage() {

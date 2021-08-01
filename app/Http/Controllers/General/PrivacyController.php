@@ -1,16 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\General;
+use App\Http\Controllers\Controller;
+use App\Models\Policy;
 
-
-use App\Models\Descipline;
-use App\Models\Project;
-use App\Models\Role;
-use App\Models\Status;
-use App\Models\User;
 use Illuminate\Http\Request;
 
-class MainController extends Controller
+class PrivacyController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,10 +16,8 @@ class MainController extends Controller
     public function index()
     {
         //
-        $fields=Descipline::all();
-        $users=User::where('role_id', 3)->get()->count();
-
-        return  view('welcome', compact('fields', 'users'));
+        $term=Policy::where('category','Policy')->where('status',1)->get()->last();
+        return  view('privacy.index', compact('term'));
     }
 
     /**
@@ -91,11 +85,4 @@ class MainController extends Controller
     {
         //
     }
-
-    public  function about(){
-        $writers=User::where('role_id',3)->get();
-        $projects=Project::all();
-        return view('about-us', compact('writers','projects'));
-    }
-
 }

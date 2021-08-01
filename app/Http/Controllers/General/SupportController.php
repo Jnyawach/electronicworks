@@ -1,16 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\General;
+use App\Http\Controllers\Controller;
 
-
-use App\Models\Descipline;
-use App\Models\Project;
-use App\Models\Role;
-use App\Models\Status;
-use App\Models\User;
+use App\Models\FaqCategory;
 use Illuminate\Http\Request;
 
-class MainController extends Controller
+class SupportController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,10 +16,8 @@ class MainController extends Controller
     public function index()
     {
         //
-        $fields=Descipline::all();
-        $users=User::where('role_id', 3)->get()->count();
-
-        return  view('welcome', compact('fields', 'users'));
+        $categories=FaqCategory::all();
+        return  view('support.index', compact('categories'));
     }
 
     /**
@@ -91,11 +85,4 @@ class MainController extends Controller
     {
         //
     }
-
-    public  function about(){
-        $writers=User::where('role_id',3)->get();
-        $projects=Project::all();
-        return view('about-us', compact('writers','projects'));
-    }
-
 }
