@@ -48,6 +48,8 @@ use App\Http\Controllers\Admin\AdminEvaluationController;
 use App\Http\Controllers\Admin\AdminSubmittedController;
 use App\Http\Controllers\Admin\AdminRevisionController;
 use App\Http\Controllers\Admin\AdminBidsController;
+use App\Http\Controllers\Admin\AdminInvoiceController;
+use App\Http\Controllers\Admin\AdminOrderController;
 
 use \App\Http\Controllers\General\ContactController;
 use \App\Http\Controllers\General\TermsController;
@@ -92,6 +94,8 @@ Route::group(['middleware'=>'auth'], function (){
     Route::resource('admin/task/revision', AdminRevisionController::class);
     Route::resource('admin/task/asses', AdminEvaluationController::class);
     Route::resource('admin/task/bids', AdminBidsController::class);
+    Route::resource('admin/homepage/invoice', AdminInvoiceController::class);
+    Route::resource('admin/invoice/order', AdminOrderController::class);
     Route::patch('frequent/{id}', ['as'=>'frequent', 'uses'=>FaqStatus::class]);
     Route::patch('response/{id}', ['as'=>'response', 'uses'=>ResponseController::class]);
     Route::patch('note/{id}', ['as'=>'note', 'uses'=>NoteController::class]);

@@ -15,8 +15,15 @@ class Order extends Model
         'project_sku',
         'amount',
         'refund',
+        'client_id',
+        'invoice_id',
+        'cost'
     ];
     public  function project(){
         return $this->belongsTo(Project::class);
+    }
+
+    public  function invoice(){
+        return $this->belongsTo(Invoice::class);
     }
 }

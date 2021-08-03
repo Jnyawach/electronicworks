@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Citation;
 use App\Models\Descipline;
+use App\Models\Invoice;
 use App\Models\Order;
 use App\Models\Project;
 use App\Models\User;
@@ -76,8 +77,11 @@ class ClientJobsController extends Controller
         }else{
             $progress=2;
         }
+        $amount=$request->words/300*350;
+        $client_pay=$request->words/300*$request->cost;
+        $earning=0;
 
-
+        $invoice=Invoice::where('status', 1)->get()->last();
         $project=Project::create([
             'title'=>$validated['title'],
             'citation_id'=>$validated['citation_id'],
@@ -91,17 +95,13 @@ class ClientJobsController extends Controller
             'cost'=>$validated['cost'],
             'status'=>1,
             'progress_id'=>$progress,
-            'sku'=>$validated['sku']
+            'sku'=>$validated['sku'],
+            'writer_pay'=>$amount,
+            'client_pay'=>$client_pay,
+            'earning'=>$earning,
+            'invoice_id'=>$invoice->id,
         ]);
-        if($request->writer_id>0){
-            $amount=$project->words/300*350;
-            $order=Order::create([
-                'user_id'=>Auth::id(),
-                'project_id'=>$project->id,
-                'project_sku'=>$project->sku,
-                'amount'=>$amount,
-            ]);
-        }
+
 
         if($files=$request->file('materials')) {
             $project->addMedia($files)->toMediaCollection('materials');
@@ -172,7 +172,11 @@ class ClientJobsController extends Controller
         }else{
             $progress=2;
         }
+        $amount=$request->words/300*350;
+        $client_pay=$request->words/300*$request->cost;
+        $earning=0;
         $project=Project::findOrFail($id);
+        $invoice=Invoice::where('status', 1)->get()->last();
         $project->update([
             'title'=>$validated['title'],
             'citation_id'=>$validated['citation_id'],
@@ -186,17 +190,13 @@ class ClientJobsController extends Controller
             'cost'=>$validated['cost'],
             'status'=>1,
             'progress_id'=>$progress,
-            'sku'=>$validated['sku']
+            'sku'=>$validated['sku'],
+            'writer_pay'=>$amount,
+            'client_pay'=>$client_pay,
+            'earning'=>$earning,
+            'invoice_id'=>$invoice->id,
         ]);
-        if($request->writer_id>0){
-            $amount=$project->words/300*350;
-            $order=Order::create([
-                'user_id'=>Auth::id(),
-                'project_id'=>$project->id,
-                'project_sku'=>$project->sku,
-                'amount'=>$amount,
-            ]);
-        }
+
 
         if($files=$request->file('materials')) {
             if ($project->getMedia('materials')->count()>0){
@@ -229,15 +229,8 @@ class ClientJobsController extends Controller
             'writer_id'=>$request->writer,
             'progress_id'=>2
         ]);
-        $amount=$project->words/300*350;
-        $order=Order::create([
-            'user_id'=>$request->writer,
-            'project_id'=>$id,
-            'project_sku'=>$project->sku,
-            'amount'=>$amount,
-        ]);
         $user=Auth::user();
-        Mail::send('emails.assign', ['mess'=>$order,'user'=> $user], function ($message) use($order,$user){
+        Mail::send('emails.assign', ['user'=> $user], function ($message) use($user){
             $message->to($user->email);
             $message->from('nyawach41@gmail.com');
             $message->subject('Please Proceed');
@@ -247,15 +240,14 @@ class ClientJobsController extends Controller
     }
 
     public  function reject(Request $request, $id){
-        $order=Order::findOrFail($id);
-        $order->delete();
+
         $project=Project::findOrFail($request->project);
         $project->update([
             'writer_id'=>0,
             'progress_id'=>1,
         ]);
         $user=Auth::user();
-        Mail::send('emails.unassigned', ['mess'=>$order,'user'=> $user], function ($message) use($order,$user){
+        Mail::send('emails.unassigned', ['user'=> $user], function ($message) use($user){
             $message->to($user->email);
             $message->from('nyawach41@gmail.com');
             $message->subject('Project Unassigned');

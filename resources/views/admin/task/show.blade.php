@@ -125,8 +125,8 @@
 
                                         @else
                                         <h5>Writers who have submitted a proposal for this project</h5>
-                                    @if(count($project->bid)==true)
-                                        @foreach($project->bid as $bid)
+                                    @if(count($project->bids)==true)
+                                        @foreach($project->bids as $bid)
                                             <div class="mt-5 row">
                                             <div class="col-sm-12 col-md-5 col-lg-5">
                                                 <img src="{{url($bid->user->getFirstMedia('avatar')?

@@ -42,7 +42,7 @@
                                             @else
                                             <span class="text-danger">
                                                  {{$project->progress->name}}
-                                            </span>/{{count($project->bid)}}Bids
+                                            </span>/{{count($project->bids)}}Bids
                                         @endif
                                     </td>
 

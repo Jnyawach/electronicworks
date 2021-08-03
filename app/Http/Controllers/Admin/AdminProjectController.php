@@ -5,11 +5,13 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Citation;
 use App\Models\Descipline;
+use App\Models\Invoice;
 use App\Models\Order;
 use App\Models\Project;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Validation\Rules\In;
 use Madnest\Madzipper\Madzipper;
 use Spatie\MediaLibrary\Support\MediaStream;
 use Illuminate\Http\Request;
@@ -75,6 +77,10 @@ class AdminProjectController extends Controller
       }else{
           $progress=2;
       }
+        $amount=$request->words/300*350;
+        $client_pay=$request->words/300*$request->cost;
+        $earning=0;
+        $invoice=Invoice::where('status', 1)->get()->last();
 
       $project=Project::create([
             'title'=>$validated['title'],
@@ -89,17 +95,13 @@ class AdminProjectController extends Controller
             'cost'=>$validated['cost'],
            'status'=>1,
           'progress_id'=>$progress,
-          'sku'=>$validated['sku']
+          'sku'=>$validated['sku'],
+          'writer_pay'=>$amount,
+          'client_pay'=>$client_pay,
+          'earning'=>$earning,
+          'invoice_id'=>$invoice->id,
         ]);
-        if($request->writer_id>0){
-            $amount=$project->words/300*350;
-            $order=Order::create([
-                'user_id'=>Auth::id(),
-                'project_id'=>$project->id,
-                'project_sku'=>$project->sku,
-                'amount'=>$amount,
-            ]);
-        }
+
 
       if($files=$request->file('materials')) {
           $project->addMedia($files)->toMediaCollection('materials');
@@ -170,12 +172,15 @@ class AdminProjectController extends Controller
         }else{
             $progress=2;
         }
+        $amount=$request->words/300*350;
+        $client_pay=$request->words/300*$request->cost;
+        $earning=0;
+        $invoice=Invoice::where('status', 1)->get()->last();
         $project=Project::findOrFail($id);
         $project->update([
             'title'=>$validated['title'],
             'citation_id'=>$validated['citation_id'],
             'descipline_id'=>$validated['descipline_id'],
-            'client_id'=>Auth::id(),
             'instruction'=>$validated['instruction'],
             'writer_id'=>$validated['writer_id'],
             'writer_delivery'=>$dead,
@@ -184,17 +189,12 @@ class AdminProjectController extends Controller
             'cost'=>$validated['cost'],
             'status'=>1,
             'progress_id'=>$progress,
-            'sku'=>$validated['sku']
+            'sku'=>$validated['sku'],
+            'writer_pay'=>$amount,
+            'client_pay'=>$client_pay,
+            'earning'=>$earning,
+            'invoice_id'=>$invoice->id,
         ]);
-        if($request->writer_id>0){
-            $amount=$project->words/300*350;
-            $order=Order::create([
-                'user_id'=>Auth::id(),
-                'project_id'=>$project->id,
-                'project_sku'=>$project->sku,
-                'amount'=>$amount,
-            ]);
-        }
 
         if($files=$request->file('materials')) {
             if ($project->getMedia('materials')->count()>0){

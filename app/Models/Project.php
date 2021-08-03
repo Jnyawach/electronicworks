@@ -39,7 +39,13 @@ class Project extends Model implements HasMedia
         'cost',
         'progress_id',
         'status',
-        'sku'
+        'sku',
+        'delivery',
+        'writer_pay',
+        'client_pay',
+        'earning',
+        'refund',
+        'invoice_id',
     ];
 
     public  function writers(){
@@ -64,16 +70,12 @@ class Project extends Model implements HasMedia
         return $this->hasMany(Bidding::class);
     }
 
-    public  function order(){
-        return $this->hasOne(Order::class);
-    }
-
     public  function submission(){
         return $this->hasOne(Submission::class);
     }
 
-    public  function revision(){
-        return $this->hasOne(Submission::class);
+    public  function invoice(){
+        return $this->belongsTo(Invoice::class);
     }
 
 }
