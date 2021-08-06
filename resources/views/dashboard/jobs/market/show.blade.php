@@ -103,7 +103,7 @@
                                             </li>
                                             <li class="nav-item">
                                                 <form class="ms-auto m-0" action="{{route('reject',
-                                                        $project->order->id)}}"
+                                                        $project->id)}}"
                                                       method="POST">
                                                     @method('DELETE')
                                                     @csrf

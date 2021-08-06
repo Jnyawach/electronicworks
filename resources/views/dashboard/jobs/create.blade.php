@@ -18,8 +18,8 @@
                                         }}" method="POST">
                                             @csrf
                                             <div class="form-group required">
-                                                <label for="title" class="control-label">Title:</label><br>
-                                                <input type="text" value="{{old('text')}}" required class="complete"
+                                                <label for="title" class="control-label">Title:</label>
+                                                <input type="text" value="{{old('text')}}" required class="complete form-control"
                                                        style="width: 600px" name="title">
                                                 <small class="text-danger">
                                                     @error('title')
@@ -63,14 +63,15 @@
                                             <div class="form-group required mt-4">
                                                 <label for="sku" class="control-label">Project SKU:</label><br>
                                                 <input type="text" id="sku" name="sku"
-                                                       class="complete control-input" value="{{old('sku')}}" required
+                                                       class="complete control-input" value="EL00{{$project->id+1}}"
+                                                       required
                                                        style="width: 600px" ><br>
                                                 <small class="text-danger">
                                                     @error('sku')
                                                     {{ $message }}
                                                     @enderror
                                                 </small><br>
-                                                <small>Please provide a unique project sku e.g QW110-F</small>
+
 
                                             </div>
                                             <div class="form-group required mt-4">
@@ -105,7 +106,7 @@
                                             </div>
                                             <div class="form-group mt-4">
                                                 <label for="writer" class="control-label">Request for a
-                                                    specific writer:</label>
+                                                    specific writer(optional):</label>
                                                 <select class="form-select" style="width: 400px" id="writer"
                                                         name="writer_id">
                                                     <option selected value="0">Choose writer</option>
@@ -131,8 +132,8 @@
                                                 <label for="deadline"  class="control-label">Delivery (in Hours)
                                                     :</label><br>
                                                 <input type="number" id="deadline" name="deadline"
-                                                       class="complete" value="{{old('deadline')}}" required
-                                                       min="1"><br>
+                                                       class="complete form-control" value="{{old('deadline')}}" required
+                                                       min="1" style="width: 600px"><br>
                                                 <small class="text-danger">
                                                     @error('deadline')
                                                     {{ $message }}
@@ -145,9 +146,9 @@
                                             <div class="form-group required mt-4 row">
                                                 <div class="col-6">
                                                     <label for="word"  class="control-label">Words
-                                                        :</label><br>
+                                                        :</label>
                                                     <input type="text" id="word" name="words"
-                                                           class="complete" value="{{old('words')}}" required><br>
+                                                           class="complete form-control" value="{{old('words')}}" required><br>
                                                     <small class="text-danger">
                                                         @error('words')
                                                         {{ $message }}
@@ -155,21 +156,7 @@
                                                     </small>
                                                     <small>Please provide number of words for the task</small>
                                                 </div>
-                                                <div class="col-6">
-                                                    <label for="payment"  class="control-label">Payment
-                                                        :</label><br>
-                                                    <input type="number" id="payment"  class="complete" min="5"
-                                                           step="any" max="25" name="cost" value="{{old('cost')}}"
-                                                           required><br>
-                                                    <small class="text-danger">
-                                                        @error('cost')
-                                                        {{ $message }}
-                                                        @enderror
-                                                    </small>
-                                                    <small>Please provide payment per page in dollars<br>
-                                                        A minimum of $5 per page
-                                                    </small>
-                                                </div>
+
 
                                             </div>
 
@@ -177,7 +164,7 @@
 
                                             <div class="form-group mt-4">
                                                 <button type="submit" class="btn btn-primary">
-                                                    Save & publish for writers
+                                                    Save & publish for bidding
                                                 </button>
                                             </div>
 

@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 
-use App\Models\Invoice;
-use App\Models\Project;
+use App\Models\Costing;
 use Illuminate\Http\Request;
 
-class AdminOrderController extends Controller
+class AdminCostingController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +16,8 @@ class AdminOrderController extends Controller
     public function index()
     {
         //
-        $invoice=Invoice::where('status',1)->get()->last();
-        $projects=Project::where('progress_id',4)->get();
-        return  view('admin.invoice.order.index', compact('projects', 'invoice'));
+        $cost=Costing::latest()->first();
+        return  view('admin.costing.index', compact('cost'));
     }
 
     /**
@@ -75,6 +73,10 @@ class AdminOrderController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $data=$request->all();
+        $cost=Costing::findOrFail($id);
+        $cost->update(['percentage'=>$data['percentage']]);
+        return redirect()->back()->with('status', 'Percentile Updated');
     }
 
     /**

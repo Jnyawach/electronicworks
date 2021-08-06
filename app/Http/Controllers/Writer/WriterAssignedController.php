@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Writer;
 use App\Http\Controllers\Controller;
-
-use App\Models\Invoice;
+use App\Models\Bidding;
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class AdminOrderController extends Controller
+
+class WriterAssignedController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +18,9 @@ class AdminOrderController extends Controller
     public function index()
     {
         //
-        $invoice=Invoice::where('status',1)->get()->last();
-        $projects=Project::where('progress_id',4)->get();
-        return  view('admin.invoice.order.index', compact('projects', 'invoice'));
+        $projects=Project::where('progress_id', 8)->where('writer_id', Auth::id())
+            ->paginate(10);
+        return  view('freelancer.project.allocated.index', compact('projects'));
     }
 
     /**
@@ -52,6 +53,13 @@ class AdminOrderController extends Controller
     public function show($id)
     {
         //
+        $project=Project::findBySlugOrFail($id);
+        $bid=Bidding::where('user_id',Auth::id())
+            ->where('project_id',$project->id)->first();
+        $clientProject=Project::where('client_id', $project->client_id)->get()->count();
+        $active=Project::where('client_id', $project->client_id)->where('status', 1)->where('writer_id', 0)
+            ->get()->count();
+        return  view('freelancer.project.allocated.show', compact('project', 'clientProject', 'active', 'bid'));
     }
 
     /**

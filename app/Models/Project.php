@@ -36,7 +36,6 @@ class Project extends Model implements HasMedia
         'writer_delivery',
         'client_delivery',
         'words',
-        'cost',
         'progress_id',
         'status',
         'sku',
@@ -46,6 +45,7 @@ class Project extends Model implements HasMedia
         'earning',
         'refund',
         'invoice_id',
+        'deadline',
     ];
 
     public  function writers(){

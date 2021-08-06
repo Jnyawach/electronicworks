@@ -32,14 +32,13 @@
                                                         >{{$project->sku}}</span> {{$project->title}}</h5>
                                                     <h4 class="fs-6 fw-bold m-1">Required
                                                         {{\Carbon\Carbon::parse($project->writer_delivery)
-                                                    ->diffForHumans()}}&nbsp;<span>Payment</span>
-                                                        ${{number_format($project->words/300*$project->cost, 2)}}
+                                                    ->diffForHumans()}}&nbsp;
                                                         &nbsp;<span>Posted:</span>{{$project->created_at ->diffForHumans()}}
                                                     </h4>
                                                     <p>{!!Illuminate\Support\Str::limit($project->instruction, 110)!!}</p>
                                                     <h4 class="fs-6 fw-bold m-1"><span>Words:</span> {{$project->words}}&nbsp;&nbsp;
                                                         <span>Category:</span> {{$project->descipline->name}}&nbsp;&nbsp;
-                                                        <span>Bids:</span> {{count($project->bid)}}
+                                                        <span>Bids:</span> {{count($project->bids)}}
                                                     </h4>
 
                                                 </div>

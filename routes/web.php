@@ -16,6 +16,7 @@ use \App\Http\Controllers\client\ClientReviewController;
 use \App\Http\Controllers\client\ClientSubmissionController;
 use \App\Http\Controllers\client\ClientRevisionController;
 use \App\Http\Controllers\client\ClientBidsController;
+use \App\Http\Controllers\client\ClientAssignedController;
 
 use App\Http\Controllers\Allusers\RedirectController;
 use App\Http\Controllers\Admin\AdminExamController;
@@ -32,6 +33,7 @@ use App\Http\Controllers\Writer\BiddingController;
 use App\Http\Controllers\Writer\PendingProjectController;
 use App\Http\Controllers\Writer\EvaluationController;
 use App\Http\Controllers\Writer\WriterAmendController;
+use App\Http\Controllers\Writer\WriterAssignedController;
 
 
 use App\Http\Controllers\Admin\AdminFaqsController;
@@ -50,6 +52,7 @@ use App\Http\Controllers\Admin\AdminRevisionController;
 use App\Http\Controllers\Admin\AdminBidsController;
 use App\Http\Controllers\Admin\AdminInvoiceController;
 use App\Http\Controllers\Admin\AdminOrderController;
+use App\Http\Controllers\Admin\AdminCostingController;
 
 use \App\Http\Controllers\General\ContactController;
 use \App\Http\Controllers\General\TermsController;
@@ -94,6 +97,7 @@ Route::group(['middleware'=>'auth'], function (){
     Route::resource('admin/task/revision', AdminRevisionController::class);
     Route::resource('admin/task/asses', AdminEvaluationController::class);
     Route::resource('admin/task/bids', AdminBidsController::class);
+    Route::resource('admin/homepage/costing', AdminCostingController::class);
     Route::resource('admin/homepage/invoice', AdminInvoiceController::class);
     Route::resource('admin/invoice/order', AdminOrderController::class);
     Route::patch('frequent/{id}', ['as'=>'frequent', 'uses'=>FaqStatus::class]);
@@ -110,6 +114,7 @@ Route::group(['middleware'=>'auth'], function (){
     Route::resource('dashboard/jobs/complete', ClientSubmissionController::class);
     Route::resource('dashboard/jobs/returned', ClientRevisionController::class);
     Route::resource('dashboard/jobs/market', ClientBidsController::class);
+    Route::resource('dashboard/jobs/assigned', ClientAssignedController::class);
     Route::get('/{waiting}',['as'=>'waiting', 'uses'=>RedirectController::class])->name('page')
         ->where('waiting','wait|congratulations|deactivated');
     Route::resource('dashboard/homepage/jobs', ClientJobsController::class);
@@ -132,6 +137,7 @@ Route::group([], function (){
     Route::resource('freelancer/project/amend', WriterAmendController::class);
     Route::post('bidding', ['as'=>'bidding', 'uses'=>BiddingController::class]);
     Route::resource('freelancer/homepage/project',  WriterProjectController::class);
+    Route::resource('freelancer/project/allocated',  WriterAssignedController::class);
     Route::get('freelancer/project/categories/{id}',  [WriterProjectController::class, 'filters'])->name('filters');
     Route::get('freelancer/project/filtered',  FilterController::class)->name('filter');
 

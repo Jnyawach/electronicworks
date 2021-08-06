@@ -3,17 +3,13 @@
 @section('content')
     @include('includes.ckeditor')
     <div>
-        <div class="container pt-3 pl-3 dashboard">
+        <div class="container  dashboard">
             @include('includes.status')
             <div class="container">
                 <div class="card">
                     <div class="card-header">
                         <h5>{{$project->title}}
-                            @if(is_null($project->revision))
-                                <span class="float-end text-danger">Under Review</span>
-                            @else
-                                <span class="float-end text-danger">Revision</span>
-                            @endif
+                            <span class="float-end">Completed</span>
                         </h5>
                     </div>
                     <div class="card-body">
@@ -26,7 +22,7 @@
                             </h5>
 
                             <h5 class="ms-3">
-                                <span>Payout:</span>Ksh.{{$project->order->amount}}
+                                <span>Payout:</span>${{$project->client_pay}}
                             </h5>
                         </div>
                         @include('includes.status')
@@ -60,7 +56,8 @@
 
 
                                 <h5 class="mt-3">Ask for revision</h5>
-                                <form action="{{route('complete.update',$project->submission->id)}}" method="POST">
+                                <form action="{{route('complete.update',$project->submission->id)}}" method="POST"
+                                     >
                                     @method('PATCH')
                                     @csrf
 

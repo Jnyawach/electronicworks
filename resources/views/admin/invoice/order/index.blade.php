@@ -50,19 +50,39 @@
                                     <td>{{$project->writers->name}}</td>
                                     <td>{{$project->clients->name}}</td>
                                     <td>
-                                        <div class="dropdown">
-                                            <a class="btn-sm dropdown-toggle p-0 m-0 text-decoration-none" href="#" role="button"
-                                               id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                                Action
-                                            </a>
-                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 
-                                                <li>
-                                                    <a href="{{route('task.show', $project->slug)}}"
-                                                       class="dropdown-item">View</a>
-                                                </li>
+                                        <h4 data-bs-toggle="modal"
+                                            data-bs-target="#staticBackdrop{{$project->invoice_id}}" style="cursor:
+                                            pointer">
+                                            {{$project->invoice->number}} <i class="fas fa-pen-square"></i></h4>
 
-                                            </ul>
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="staticBackdrop{{$project->invoice_id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="staticBackdropLabel">Attach
+                                                            invoice</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                       <form>
+                                                           <select class="form-select" aria-label="Default select example">
+                                                               <option selected
+                                                                       value="{{$project->invoice_id}}">{{$project->invoice->number}}</option>
+                                                               <option
+                                                                   value="{{$invoice->id}}">{{$invoice->number}}</option>
+
+                                                           </select>
+                                                       </form>
+                                                    </div>
+                                                    <div class="modal-footer">
+
+                                                        <button type="submit" class="btn
+                                                        btn-primary">Save</button>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </td>
 

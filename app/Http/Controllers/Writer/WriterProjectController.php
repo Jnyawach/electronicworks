@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Writer;
 use App\Http\Controllers\Controller;
 
+use App\Models\Bidding;
 use App\Models\Descipline;
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class WriterProjectController extends Controller
@@ -55,10 +57,12 @@ class WriterProjectController extends Controller
     {
         //
         $project=Project::findBySlugOrFail($id);
+        $bid=Bidding::where('user_id',Auth::id())
+            ->where('project_id',$project->id)->first();
         $clientProject=Project::where('client_id', $project->client_id)->get()->count();
         $active=Project::where('client_id', $project->client_id)->where('status', 1)->where('writer_id', 0)
                 ->get()->count();
-        return view('freelancer.project.show', compact('project', 'clientProject', 'active'));
+        return view('freelancer.project.show', compact('project', 'clientProject', 'active', 'bid'));
     }
 
     /**

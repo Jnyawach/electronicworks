@@ -14,7 +14,7 @@
                     <h5 class="ms-3"><span>Deadline:</span>{{\Carbon\Carbon::parse
                                 ($project->writer_delivery)->isoFormat('MMMM Do YYYY, h:mm:ss a')}}</h5>
                     <h5 class="ms-3"><span>Posted: </span>
-                                   {{$project->created_at->isoFormat('MMMM Do YYYY, h:mm:ss a')}}</h5>
+                        {{$project->created_at->isoFormat('MMMM Do YYYY, h:mm:ss a')}}</h5>
                 </div>
                 @include('includes.status')
                 <div class="row mt-3 p-3">
@@ -49,7 +49,7 @@
 
 
                             </form>
-                            @else
+                        @else
                             <form action="{{route('bidding')}}" method="POST" class="bidding">
                                 @csrf
                                 <input type="hidden" name="project_id" value="{{$project->id}}">
@@ -66,7 +66,7 @@
 
                             </form>
 
-                            @endif
+                        @endif
 
 
 
@@ -90,3 +90,4 @@
         </div>
     </div>
 @endsection
+

@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Client;
 use App\Http\Controllers\Controller;
 
+use App\Models\Bidding;
 use App\Models\Citation;
 use App\Models\Descipline;
 use App\Models\Invoice;
-use App\Models\Order;
 use App\Models\Project;
 use App\Models\User;
 use Carbon\Carbon;
@@ -40,9 +40,10 @@ class ClientJobsController extends Controller
     {
         //
         $citation=Citation::pluck('name','id')->all();
+        $project=Project::latest()->first();
         $field=Descipline::pluck('name','id')->all();
         $writer=User::where('role_id',3)->where('status_id', 1)->pluck('name','id')->all();
-        return  view('dashboard.jobs.create', compact('citation', 'field','writer'));
+        return  view('dashboard.jobs.create', compact('citation', 'field','writer','project'));
     }
 
     /**
@@ -64,7 +65,6 @@ class ClientJobsController extends Controller
             'writer_id'=>'',
             'deadline'=>'required',
             'words'=>'required',
-            'cost'=>'required',
             'sku'=>'required|unique:projects'
 
         ]);
@@ -75,13 +75,16 @@ class ClientJobsController extends Controller
         if($request->writer_id ==0){
             $progress=1;
         }else{
-            $progress=2;
-        }
-        $amount=$request->words/300*350;
-        $client_pay=$request->words/300*$request->cost;
-        $earning=0;
+            $progress=8;
+            $user=User::findOrfail($request->writer_id);
+            Mail::send('emails.pre_assign', ['user'=> $user], function ($message) use($user){
+                $message->to($user->email);
+                $message->from('nyawach41@gmail.com');
+                $message->subject('You have a Pre-Assigned in your account');
+            });
 
-        $invoice=Invoice::where('status', 1)->get()->last();
+        }
+
         $project=Project::create([
             'title'=>$validated['title'],
             'citation_id'=>$validated['citation_id'],
@@ -92,14 +95,12 @@ class ClientJobsController extends Controller
             'writer_delivery'=>$dead,
             'client_delivery'=>$deadline,
             'words'=>$validated['words'],
-            'cost'=>$validated['cost'],
             'status'=>1,
             'progress_id'=>$progress,
             'sku'=>$validated['sku'],
-            'writer_pay'=>$amount,
-            'client_pay'=>$client_pay,
-            'earning'=>$earning,
-            'invoice_id'=>$invoice->id,
+            'deadline'=>$validated['deadline'],
+
+
         ]);
 
 
@@ -159,7 +160,6 @@ class ClientJobsController extends Controller
             'writer_id'=>'',
             'deadline'=>'required',
             'words'=>'required',
-            'cost'=>'required',
             'sku'=>'required'
 
         ]);
@@ -172,9 +172,7 @@ class ClientJobsController extends Controller
         }else{
             $progress=2;
         }
-        $amount=$request->words/300*350;
-        $client_pay=$request->words/300*$request->cost;
-        $earning=0;
+
         $project=Project::findOrFail($id);
         $invoice=Invoice::where('status', 1)->get()->last();
         $project->update([
@@ -187,13 +185,10 @@ class ClientJobsController extends Controller
             'writer_delivery'=>$dead,
             'client_delivery'=>$deadline,
             'words'=>$validated['words'],
-            'cost'=>$validated['cost'],
             'status'=>1,
             'progress_id'=>$progress,
             'sku'=>$validated['sku'],
-            'writer_pay'=>$amount,
-            'client_pay'=>$client_pay,
-            'earning'=>$earning,
+            'deadline'=>$validated['deadline'],
             'invoice_id'=>$invoice->id,
         ]);
 
@@ -225,11 +220,15 @@ class ClientJobsController extends Controller
 
     public  function accept(Request $request, $id){
         $project=Project::findOrFail($id);
+        $bid=Bidding::findOrFail($request->bid);
         $project->update([
             'writer_id'=>$request->writer,
-            'progress_id'=>2
+            'progress_id'=>2,
+            'writer_pay'=>$bid->amount,
+            'client_pay'=>$bid->cost,
+            'earning'=>$bid->cost-$bid->amount,
         ]);
-        $user=Auth::user();
+        $user=User::findOrfail($request->writer);
         Mail::send('emails.assign', ['user'=> $user], function ($message) use($user){
             $message->to($user->email);
             $message->from('nyawach41@gmail.com');
@@ -241,12 +240,20 @@ class ClientJobsController extends Controller
 
     public  function reject(Request $request, $id){
 
-        $project=Project::findOrFail($request->project);
+        $project=Project::findOrFail($id);
+        $deadlineWriter=$project->deadline*0.75;
+        $dead=Carbon::now()->addHour($deadlineWriter);
+        $deadline=Carbon::now()->addHour($project->deadline);
         $project->update([
             'writer_id'=>0,
             'progress_id'=>1,
+            'writer_pay'=>0,
+            'client_pay'=>0,
+            'earning'=>0,
+            'writer_delivery'=>$dead,
+            'client_delivery'=>$deadline,
         ]);
-        $user=Auth::user();
+        $user=User::findOrfail($request->writer);
         Mail::send('emails.unassigned', ['user'=> $user], function ($message) use($user){
             $message->to($user->email);
             $message->from('nyawach41@gmail.com');

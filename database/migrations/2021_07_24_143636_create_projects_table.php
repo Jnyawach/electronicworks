@@ -25,7 +25,6 @@ class CreateProjectsTable extends Migration
             $table->dateTime('writer_delivery');
             $table->dateTime('client_delivery');
             $table->integer('words');
-            $table->integer('cost');
             $table->string('slug');
             $table->foreign('citation_id')->references('id')->on('citations')->onDelete('cascade');
             $table->foreign('descipline_id')->references('id')->on('desciplines')->onDelete('cascade');

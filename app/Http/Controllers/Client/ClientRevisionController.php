@@ -53,6 +53,8 @@ class ClientRevisionController extends Controller
     public function show($id)
     {
         //
+        $project=Project::findBySlugOrFail($id);
+        return  view('dashboard.jobs.returned.show', compact('project'));
     }
 
     /**

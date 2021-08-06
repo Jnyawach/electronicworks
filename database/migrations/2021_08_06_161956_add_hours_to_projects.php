@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddColumnsToProjectsTable extends Migration
+class AddHoursToProjects extends Migration
 {
     /**
      * Run the migrations.
@@ -15,12 +15,7 @@ class AddColumnsToProjectsTable extends Migration
     {
         Schema::table('projects', function (Blueprint $table) {
             //
-            $table->integer('delivery')->default(0);
-            $table->text('writer_pay')->default(0);
-            $table->text('client_pay')->default(0);
-            $table->text('earning')->default(0);
-            $table->text('refund')->default(0);
-            $table->bigInteger('invoice_id')->unsigned()->index()->nullable();
+            $table->integer('deadline');
         });
     }
 
@@ -31,7 +26,7 @@ class AddColumnsToProjectsTable extends Migration
      */
     public function down()
     {
-        Schema::table('projects', function (Blueprint $table) {
+        Schema::table('=projects', function (Blueprint $table) {
             //
         });
     }

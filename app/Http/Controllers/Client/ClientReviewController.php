@@ -18,7 +18,7 @@ class ClientReviewController extends Controller
     {
         //
         $projects=Project::where('client_id', Auth::id())
-            ->where('progress_id', 2)
+            ->where('progress_id', 3)
             ->paginate(10);
         return  view('dashboard.jobs.checking.index', compact('projects'));
     }

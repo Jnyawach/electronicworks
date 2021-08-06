@@ -26,7 +26,7 @@
                                                         {{\Carbon\Carbon::parse($project->revision->created_at)
                                           ->diffForHumans()}}&nbsp;
                                                     @endif
-                                                    <span>Payment</span> Kshs.{{number_format($project->words/300*350, 2)}}
+                                                    <span>Payment</span> ${{$project->client_pay}}
                                                     &nbsp;<span>Posted:</span>{{$project->created_at ->diffForHumans()}}
                                                 </h4>
                                                 <p>{!!Illuminate\Support\Str::limit($project->instruction, 110)!!}</p>

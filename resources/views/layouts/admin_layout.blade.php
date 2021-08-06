@@ -295,6 +295,19 @@
                                 </ul>
                             </div>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false"
+                               data-target="#submenu-34" aria-controls="submenu-34"><i class="fas
+                               fa-money-check-alt"></i>Costing</a>
+                            <div id="submenu-34" class="collapse submenu" style="">
+                                <ul class="nav flex-column">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{route('costing.index')}}">Cost panel</a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </li>
 
 
                     </ul>
