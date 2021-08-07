@@ -1,4 +1,4 @@
-@extends('layouts.admin_layout')
+@extends('layouts.manager_layout')
 @section('title','Projects')
 @section('content')
     <div class="dashboard-wrapper green-body pt-5 pb-5">
@@ -37,8 +37,7 @@
                                             </span>
                                         @endif
                                     </span>&nbsp;
-                                    Payout: <span>${{$project->client_pay}}</span>&nbsp;
-                                    Writer Pay: <span>Kshs.{{$project->writer_pay}}</span>
+
                                     Client: <span>{{$project->clients->name}}</span>
                                 </h5>
                                 <hr class="dotted">
@@ -52,19 +51,17 @@
                                 @endif
                                 <hr>
                                 <div class="mt-4">
-                                    <h5>Writer handling the project</h5>
+                                    <h5>Writers who have submitted a proposal for this project</h5>
+                                    @foreach($project->bids as $bid)
+
                                         <div class="mt-5 row">
-                                            <div class="col-sm-12 col-md-12 col-lg-12">
-                                                <img src="{{url($project->writers->getFirstMedia('avatar')?
-                                                $project->writers->getFirstMedia('avatar')
+                                            <div class="col-sm-12 col-md-5 col-lg-5">
+                                                <img src="{{url($bid->user->getFirstMedia('avatar')?
+                                                $bid->user->getFirstMedia('avatar')
                                                 ->getUrl('avatar_icon'):'/images/no-image.png' )}}"
                                                      class="rounded float-start img-fluid me-2" style="height: 60px">
-                                                <a href="{{route('writer.show',$project->writer_id)}}">
-                                                    <h5 class="mb-0">
-                                                        {{$project->writers->name}}</h5>
-                                                </a>
-
-                                                <h5 class="m-0">Projects completed: 80</h5>
+                                                <h5 class="mb-0">{{$bid->user->name}}</h5>
+                                                <h5 class="m-0">Projects completed: 80later</h5>
 
                                                 <h4 class="mt-0 pt-0" style="font-family: 'Avenir Bold'">
                                                     <i class="fas fa-star"></i>
@@ -73,33 +70,24 @@
                                                     <i class="fas fa-star"></i>
                                                     <i class="far fa-star"></i>
                                                     4.5/5 </h4>
-                                                <ul class="nav">
-                                                    <li class="nav-item">
-                                                        <form class="ms-auto m-0">
-                                                            <button type="submit" class="btn btn-outline-primary rounded-0">Request
-                                                                progress</button>
-
-                                                        </form>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <form class="ms-auto m-0">
-                                                            <button type="submit" class="btn btn-outline-primary rounded-0">Request
-                                                                submission</button>
-
-                                                        </form>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a href="#" class="btn btn-outline-primary rounded-0">Chat with the
-                                                            writer</a>
-                                                    </li>
-
-                                                </ul>
-
-
                                             </div>
+
+                                            <div class="col-sm-12 col-md-5 col-lg-5">
+                                                <form class="ms-auto m-0" action="{{route('assign',$project->id)}}"
+                                                      method="POST">
+                                                    @method('PATCH')
+                                                    @csrf
+                                                    <input type="hidden" value="{{$bid->user_id}}" name="writer">
+                                                    <button type="submit" class=" btn-primary btn-sm m-0">Assign<i
+                                                            class="fas fa-long-arrow-alt-right ms-2"></i></button>
+
+                                                </form>
+                                            </div>
+
 
                                         </div>
                                         <hr class="dotted">
+                                    @endforeach
 
 
 
@@ -120,4 +108,6 @@
         </div>
     </div>
 @endsection
+
+
 

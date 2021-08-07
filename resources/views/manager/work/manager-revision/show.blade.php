@@ -1,4 +1,4 @@
-@extends('layouts.admin_layout')
+@extends('layouts.manager_layout')
 @section('title','Projects')
 @section('content')
     @include('includes.ckeditor')
@@ -73,6 +73,7 @@
         CKEDITOR.replace( 'reason', );
     </script>
 @endsection
+
 
 
 

@@ -1,10 +1,9 @@
-@extends('layouts.admin_layout')
-@section('title', 'Projects')
+@extends('layouts.manager_layout')
+@section('title', 'Pre-assigned Projects')
 @section('styles')
     <link href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" rel="stylesheet">
 @endsection
 @section('content')
-
     <div class="dashboard-wrapper green-body pt-5">
         <div class="container p-5">
             @include('includes.status')
@@ -42,7 +41,7 @@
                                         @else
                                             <span class="text-danger">
                                                  {{$project->progress->name}}
-                                            </span>/{{count($project->bid)}}Bids
+                                            </span>/{{count($project->bids)}}Bids
                                         @endif
                                     </td>
 
@@ -55,7 +54,7 @@
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 
                                                 <li>
-                                                    <a href="{{route('progress.show', $project->slug)}}"
+                                                    <a href="{{route('manager-assigned.show', $project->slug)}}"
                                                        class="dropdown-item">View</a>
                                                 </li>
 
@@ -94,4 +93,3 @@
 
     </script>
 @endsection
-

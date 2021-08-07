@@ -48,8 +48,7 @@
                                             </span>
                                         @endif
                                     </span>&nbsp;
-                                    Payout: <span>${{$project->words/300*$project->cost}}</span>&nbsp;
-                                    Writer Pay: <span>Kshs.{{$project->words/300*350}}</span>
+
                                 </h5>
                                 <hr class="dotted">
                                 <h5 class="mt-5">Attached Files</h5>
@@ -105,11 +104,13 @@
                                                     </li>
                                                     <li class="nav-item">
                                                         <form class="ms-auto m-0" action="{{route('unassign',
-                                                        $project->order->id)}}"
+                                                        $project->id)}}"
                                                               method="POST">
                                                             @method('DELETE')
                                                             @csrf
                                                           <input type="hidden" value="{{$project->id}}" name="project">
+                                                            <input type="hidden" value="{{$project->writer_id}}"
+                                                                   name="writer">
                                                             <button type="submit" class="btn btn-outline-danger
                                                         rounded-0">UnAssign</button>
 

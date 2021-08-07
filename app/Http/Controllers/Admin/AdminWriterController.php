@@ -243,5 +243,8 @@ class AdminWriterController extends Controller
     public function destroy($id)
     {
         //
+        $writer=User::findOrFail($id);
+        $writer->delete();
+        return redirect()->back()->with('status','Writer Successfully deleted');
     }
 }

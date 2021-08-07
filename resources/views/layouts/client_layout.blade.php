@@ -37,7 +37,7 @@
                 <a href="{{route('jobs.create')}}"><span><i class="fas fa-clipboard-list"></i></span>Post a project</a>
             </li>
             <li>
-                <a href="{{route('assigned.index')}}"><span><i class="fas fa-handshake"></i></span>Pre-assigned
+                <a href="{{route('assigned.index')}}"><span><i class="fas fa-pen-square"></i></span>Pre-assigned
                     &nbsp;
                 </a>
             </li>

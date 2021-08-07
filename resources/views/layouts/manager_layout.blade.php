@@ -31,7 +31,7 @@
         <ul class="nav custom-menu p-1 position-fixed w-100">
             <li class="nav-item">
                 <a href="/">
-                <img src="{{asset('images/e-white.png')}}" class="img-fluid ms-3" style="height: 40px">
+                    <img src="{{asset('images/e-white.png')}}" class="img-fluid ms-3" style="height: 40px">
                 </a>
             </li>
             <li class="nav-item dropdown ms-auto">
@@ -56,7 +56,7 @@
                         <hr class="dropdown-divider">
                     </li>
                     <li class="dropdown-item d-grid gap-2">
-                      @include('includes.logout')
+                        @include('includes.logout')
                     </li>
                 </ul>
             </li>
@@ -77,24 +77,18 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav flex-column">
                         <li class="nav-item ">
-                            <a class="nav-link" href="{{route('admin.index')}}"  aria-expanded="false" >ADMIN PANEL</a>
+                            <a class="nav-link" href="{{route('manager.index')}}"  aria-expanded="false" >MANAGER
+                                PANEL</a>
 
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fa fa-user" aria-hidden="true"></i>Users</a>
                             <div id="submenu-2" class="collapse submenu" style="">
                                 <ul class="nav flex-column">
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{route('user.index')}}">Admin</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{route('writer.index')}}">Writers</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{route('client.index')}}">Client</a>
-                                    </li>
 
-
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{route('author.index')}}">Writer</a>
+                                    </li>
                                 </ul>
                             </div>
                         </li>
@@ -106,11 +100,9 @@
                             <div id="submenu-99" class="collapse submenu" style="">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{{route('application.index')}}">See applications<span
-                                                class="badge
-                                        bg-danger
-                                        ms-2">3
-                                        </span></a>
+                                        <a class="nav-link" href="{{route('writer_application.index')}}">See
+                                            applications
+                                       </a>
                                     </li>
 
 
@@ -125,28 +117,28 @@
                             <div id="submenu-28" class="collapse submenu" style="">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{{route('task.create')}}">Create project</a>
+                                        <a class="nav-link" href="{{route('work.create')}}">Create project</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{{route('task.index')}}">All projects</a>
+                                        <a class="nav-link" href="{{route('work.index')}}">All projects</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{{route('bids.index')}}">Bidding</a>
+                                        <a class="nav-link" href="{{route('manager_bidding.index')}}">Bidding</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{{route('set.index')}}">Pre-assigned</a>
+                                        <a class="nav-link" href="{{route('manager-assigned.index')}}">Pre-assigned</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{{route('progress.index')}}">In progress</a>
+                                        <a class="nav-link" href="{{route('manager-progress.index')}}">In progress</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{{route('asses.index')}}">Under review</a>
+                                        <a class="nav-link" href="{{route('manager-asses.index')}}">Under review</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{{route('revision.index')}}">Revisions</a>
+                                        <a class="nav-link" href="{{route('manager-revision.index')}}">Revisions</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{{route('completed.index')}}">Completed</a>
+                                        <a class="nav-link" href="{{route('manager-completed.index')}}">Completed</a>
 
                                     </li>
 
@@ -179,14 +171,12 @@
                             <div id="submenu-21" class="collapse submenu" style="">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{{route('exam.index')}}">English Test</a>
+                                        <a class="nav-link" href="{{route('manager-english.index')}}">English Test</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{{route('essay.index')}}">Essay Test</a>
+                                        <a class="nav-link" href="{{route('manager-essay.index')}}">Essay Test</a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{route('exam.index')}}">View exams and essays</a>
-                                    </li>
+
 
                                 </ul>
                             </div>
@@ -331,7 +321,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                    Copyright © 2021 Electronic Works</a>.
+                    Copyright © 2021 Electronic Works.
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
                     <div class="text-md-right footer-links d-none d-sm-block">
@@ -348,9 +338,9 @@
     <!-- end footer -->
     <!-- ============================================================== -->
 
-<!-- ============================================================== -->
-<!-- end wrapper  -->
-<!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- end wrapper  -->
+    <!-- ============================================================== -->
 
 </div>
 <!-- ============================================================== -->
@@ -374,5 +364,6 @@
 </body>
 
 </html>
+
 
 

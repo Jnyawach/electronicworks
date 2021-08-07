@@ -1,4 +1,4 @@
-@extends('layouts.admin_layout')
+@extends('layouts.manager_layout')
 @section('title', 'Projects')
 @section('styles')
     <link href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" rel="stylesheet">
@@ -20,10 +20,10 @@
                         <thead>
                         <tr>
                             <th>Project Id</th>
-                            <th>Title</th>
+                            <th>SKU</th>
                             <th>Writer Delivery</th>
                             <th>Deadline</th>
-                            <th>Status/Writer</th>
+                            <th>Writer</th>
                             <th>Action </th>
                         </tr>
                         </thead>
@@ -36,14 +36,7 @@
                                     <td>{{\Carbon\Carbon::parse($project->writer_delivery)->diffForHumans()}}</td>
                                     <td >{{\Carbon\Carbon::parse($project->client_delivery)->diffForHumans()}}</td>
                                     <td>
-                                        @if(isset($project->writers->name))
-                                            {{$project->writers->name}}/<span
-                                                class="text-success">{{$project->progress->name}}</span>
-                                        @else
-                                            <span class="text-danger">
-                                                 {{$project->progress->name}}
-                                            </span>/{{count($project->bid)}}Bids
-                                        @endif
+                                        {{$project->progress->name}}
                                     </td>
 
                                     <td>
@@ -55,7 +48,7 @@
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 
                                                 <li>
-                                                    <a href="{{route('progress.show', $project->slug)}}"
+                                                    <a href="{{route('manager_bidding.show', $project->slug)}}"
                                                        class="dropdown-item">View</a>
                                                 </li>
 
@@ -71,7 +64,7 @@
                         </tbody>
                         <tfoot>
                         <th>Project Id</th>
-                        <th>Title</th>
+                        <th>SKU</th>
                         <th>Writer Delivery</th>
                         <th>Deadline</th>
                         <th>Status/Writer</th>
@@ -94,4 +87,7 @@
 
     </script>
 @endsection
+
+
+
 

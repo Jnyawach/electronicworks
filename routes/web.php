@@ -53,12 +53,26 @@ use App\Http\Controllers\Admin\AdminBidsController;
 use App\Http\Controllers\Admin\AdminInvoiceController;
 use App\Http\Controllers\Admin\AdminOrderController;
 use App\Http\Controllers\Admin\AdminCostingController;
+use App\Http\Controllers\Admin\AdminPreassignedController;
 
 use \App\Http\Controllers\General\ContactController;
 use \App\Http\Controllers\General\TermsController;
 use \App\Http\Controllers\General\PrivacyController;
 use \App\Http\Controllers\General\SupportController;
 use \App\Http\Controllers\MainController;
+
+use \App\Http\Controllers\Manager\ManagerController;
+use \App\Http\Controllers\Manager\ManagerUserController;
+use \App\Http\Controllers\Manager\ManagerApplicationController;
+use \App\Http\Controllers\Manager\ManagerProjectController;
+use \App\Http\Controllers\Manager\ManagerBiddingController;
+use \App\Http\Controllers\Manager\ManagerAssignedController;
+use \App\Http\Controllers\Manager\ManagerProgressController;
+use \App\Http\Controllers\Manager\ManagerAssesController;
+use \App\Http\Controllers\Manager\ManagerRevisionController;
+use \App\Http\Controllers\Manager\ManagerCompletedController;
+use \App\Http\Controllers\Manager\ManagerEnglishController;
+use \App\Http\Controllers\Manager\ManagerEssayController;
 
 
 
@@ -97,6 +111,7 @@ Route::group(['middleware'=>'auth'], function (){
     Route::resource('admin/task/revision', AdminRevisionController::class);
     Route::resource('admin/task/asses', AdminEvaluationController::class);
     Route::resource('admin/task/bids', AdminBidsController::class);
+    Route::resource('admin/task/set', AdminPreassignedController::class);
     Route::resource('admin/homepage/costing', AdminCostingController::class);
     Route::resource('admin/homepage/invoice', AdminInvoiceController::class);
     Route::resource('admin/invoice/order', AdminOrderController::class);
@@ -152,6 +167,23 @@ Route::group([], function (){
     Route::get('about-us',  [MainController::class, 'about'])->name('about');
 });
 
+// manager controller
+Route::group([], function (){
+    Route::resource('manager', ManagerController::class);
+    Route::resource('manager/homepage/author', ManagerUserController::class);
+    Route::resource('manager/homepage/work', ManagerProjectController::class);
+    Route::resource('manager/work/manager_bidding', ManagerBiddingController::class);
+    Route::resource('manager/work/manager-assigned', ManagerAssignedController::class);
+    Route::resource('manager/work/manager-progress', ManagerProgressController::class);
+    Route::resource('manager/work/manager-asses', ManagerAssesController::class);
+    Route::resource('manager/work/manager-revision', ManagerRevisionController::class);
+    Route::resource('manager/work/manager-completed', ManagerCompletedController::class);
+    Route::resource('manager/test/manager-english', ManagerEnglishController::class);
+    Route::resource('manager/test/manager-essay', ManagerEssayController::class);
+    Route::patch('manager/work/allocate/{id}',  [ManagerProjectController::class, 'allocate'])->name('allocate');
+    Route::delete('manager/work/relocate/{id}',  [ManagerProjectController::class, 'relocate'])->name('relocate');
+    Route::resource('manager/homepage/writer_application', ManagerApplicationController::class);
+});
 
 
 Auth::routes();

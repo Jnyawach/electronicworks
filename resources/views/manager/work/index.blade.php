@@ -1,4 +1,4 @@
-@extends('layouts.admin_layout')
+@extends('layouts.manager_layout')
 @section('title', 'Projects')
 @section('styles')
     <link href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" rel="stylesheet">
@@ -42,7 +42,7 @@
                                         @else
                                             <span class="text-danger">
                                                  {{$project->progress->name}}
-                                            </span>/{{count($project->bid)}}Bids
+                                            </span>/{{count($project->bids)}}Bids
                                         @endif
                                     </td>
 
@@ -53,9 +53,22 @@
                                                 Action
                                             </a>
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                @if(!isset($project->writers->name))
+                                                    <li><a class="dropdown-item" href="{{route('work.edit',$project->id)
+                                                    }}">Edit</a></li>
+                                                    <li>
+                                                        <form action="{{route('work.destroy',$project->id)}}"
+                                                              method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn dropdown-item
+                                                            ">Delete</button>
 
+                                                        </form>
+                                                    </li>
+                                                @endif
                                                 <li>
-                                                    <a href="{{route('progress.show', $project->slug)}}"
+                                                    <a href="{{route('work.show', $project->slug)}}"
                                                        class="dropdown-item">View</a>
                                                 </li>
 

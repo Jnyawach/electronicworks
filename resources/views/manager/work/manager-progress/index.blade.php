@@ -1,4 +1,4 @@
-@extends('layouts.admin_layout')
+@extends('layouts.manager_layout')
 @section('title', 'Projects')
 @section('styles')
     <link href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" rel="stylesheet">
@@ -55,7 +55,7 @@
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 
                                                 <li>
-                                                    <a href="{{route('progress.show', $project->slug)}}"
+                                                    <a href="{{route('manager-progress.show', $project->slug)}}"
                                                        class="dropdown-item">View</a>
                                                 </li>
 
@@ -94,4 +94,5 @@
 
     </script>
 @endsection
+
 

@@ -8,7 +8,7 @@
                         <!--In progress card-->
                         <div class="card  shadow-sm mb-5 projects">
                             <div class="card-header">
-                                <h5>Add order to your details</h5>
+                                <h5>Update Project details</h5>
                             </div>
                             <div class="card-body">
                                 <div class="row">
@@ -134,7 +134,7 @@
                                                     <label for="deadline"  class="control-label">Delivery (in Hours)
                                                         :</label><br>
                                                     <input type="number" id="deadline" name="deadline"
-                                                           class="complete form-control" value="{{old('deadline')}}" required
+                                                           class="complete form-control" value="{{$project->deadline}}" required
                                                            min="1" style="width: 400px">
                                                     <small class="text-danger">
                                                         @error('deadline')

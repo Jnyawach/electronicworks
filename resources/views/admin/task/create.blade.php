@@ -20,8 +20,9 @@
                                             @csrf
                                             <div class="form-group required">
                                                 <label for="title" class="control-label">Title:</label><br>
-                                                <input type="text" value="{{old('text')}}" required class="complete"
-                                                       style="width: 600px" name="title">
+                                                <input type="text" value="{{old('text')}}" required class="complete
+                                                form-control" style="width: 600px" name="title">
+
                                                 <small class="text-danger">
                                                     @error('title')
                                                     {{ $message }}
@@ -64,14 +65,15 @@
                                             <div class="form-group required mt-4">
                                                 <label for="sku" class="control-label">Project SKU:</label><br>
                                                 <input type="text" id="sku" name="sku"
-                                                       class="complete control-input" value="{{old('sku')}}" required
+                                                       class="complete form-control" value="EL00{{$project->id+1}}"
+                                                       required
                                                        style="width: 600px" ><br>
                                                 <small class="text-danger">
                                                     @error('sku')
                                                     {{ $message }}
                                                     @enderror
-                                                </small><br>
-                                                <small>Please provide a unique project sku e.g QW110-F</small>
+                                                </small>
+
 
                                             </div>
                                             <div class="form-group required mt-4">
@@ -120,7 +122,7 @@
                                                     {{ $message }}
                                                     @enderror
                                                 </small>
-                                                <small>The writers will submit a proposal.
+                                                <small>The writers will submit a bid.
                                                     If you want a specific writer for the project please select the
                                                     writer. This project will automatically assigned to the writer.
                                                     <a href="#" class="text-success">See writer rating & reviews</a>
@@ -148,7 +150,8 @@
                                                     <label for="word"  class="control-label">Words
                                                         :</label><br>
                                                     <input type="text" id="word" name="words"
-                                                           class="complete" value="{{old('words')}}" required><br>
+                                                           class="complete form-control" value="{{old('words')}}" required
+                                                    style="width: 400px">
                                                     <small class="text-danger">
                                                         @error('words')
                                                         {{ $message }}
@@ -156,21 +159,7 @@
                                                     </small>
                                                     <small>Please provide number of words for the task</small>
                                                 </div>
-                                                <div class="col-6">
-                                                    <label for="payment"  class="control-label">Payment
-                                                        :</label><br>
-                                                    <input type="number" id="payment"  class="complete" min="5"
-                                                           step="any" max="25" name="cost" value="{{old('cost')}}"
-                                                           required><br>
-                                                    <small class="text-danger">
-                                                        @error('cost')
-                                                        {{ $message }}
-                                                        @enderror
-                                                    </small>
-                                                    <small>Please provide payment per page in dollars<br>
-                                                        A minimum of $5 per page
-                                                    </small>
-                                                </div>
+
 
                                             </div>
 

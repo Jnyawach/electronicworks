@@ -1,26 +1,28 @@
-@extends('layouts.client_layout')
-@section('title', 'Create Project')
+@extends('layouts.manager_layout')
+@section('title', 'Edit Project')
 @section('content')
     @include('includes.ckeditor')
-
-            <div class="container pt-2 pl-3 dashboard">
+    <div class="dashboard-wrapper green-body pt-5 pb-5">
+        <div class="container">
+            <div class="container pt-3 pl-3 dashboard">
                 <div class="row">
                     <div class="col-sm-12 mx-auto">
                         <!--In progress card-->
                         <div class="card  shadow-sm mb-5 projects">
                             <div class="card-header">
-                                <h5>Add order to your details</h5>
+                                <h5>Update Project details</h5>
                             </div>
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-12">
-                                        <form class="mt-5" enctype="multipart/form-data" action="{{route('jobs.store')
-                                        }}" method="POST">
+                                        <form class="mt-5" enctype="multipart/form-data"
+                                              action="{{route('work.update', $project->id)}}" method="POST">
+                                            @method('PATCH')
                                             @csrf
                                             <div class="form-group required">
                                                 <label for="title" class="control-label">Title:</label>
-                                                <input type="text" value="{{old('text')}}" required class="complete form-control"
-                                                       style="width: 600px" name="title">
+                                                <input type="text" value="{{$project->title}}" required
+                                                       class="complete form-control"  style="width: 600px" name="title">
                                                 <small class="text-danger">
                                                     @error('title')
                                                     {{ $message }}
@@ -32,7 +34,8 @@
                                                     <label for="writing-style" class="control-label">Format or Citation styles:</label>
                                                     <select class="form-select" style="width: 400px" id="writing-style"
                                                             name="citation_id" required>
-                                                        <option value="" selected>Choose formatting style</option>
+                                                        <option value="{{$project->citation_id}}"
+                                                                selected>{{$project->citation->name}}</option>
                                                         @foreach($citation as $id=>$cite)
                                                             <option value="{{$id}}">{{$cite}}</option>
                                                         @endforeach
@@ -48,7 +51,8 @@
                                                     <label for="category" class="control-label">Field or Category:</label>
                                                     <select class="form-select" style="width: 400px" id="category"
                                                             name="descipline_id">
-                                                        <option selected>Choose category</option>
+                                                        <option selected
+                                                                value="{{$project->descipline_id}}">{{$project->descipline->name}}</option>
                                                         @foreach($field as $id=>$fed)
                                                             <option value="{{$id}}">{{$fed}}</option>
                                                         @endforeach
@@ -63,7 +67,7 @@
                                             <div class="form-group required mt-4">
                                                 <label for="sku" class="control-label">Project SKU:</label><br>
                                                 <input type="text" id="sku" name="sku"
-                                                       class="complete control-input" value="EL00{{$project->id+1}}"
+                                                       class="complete control-input" value="{{$project->sku}}"
                                                        required
                                                        style="width: 600px" ><br>
                                                 <small class="text-danger">
@@ -78,7 +82,7 @@
                                                 <label for="instructions" class="control-label">Paper instructions:</label>
                                                 <textarea class="form-control complete" id="instructions"
                                                           style="height: 300px" name="instruction">
-                                                    {{old('instruction')}}
+                                                    {{$project->instruction}}
                                                 </textarea>
                                                 <small class="text-danger">
                                                     @error('instruction')
@@ -106,7 +110,7 @@
                                             </div>
                                             <div class="form-group mt-4">
                                                 <label for="writer" class="control-label">Request for a
-                                                    specific writer(optional):</label>
+                                                    specific writer:</label>
                                                 <select class="form-select" style="width: 400px" id="writer"
                                                         name="writer_id">
                                                     <option selected value="0">Choose writer</option>
@@ -120,7 +124,7 @@
                                                     {{ $message }}
                                                     @enderror
                                                 </small>
-                                                <small>The writers will submit a bid.
+                                                <small>The writers will submit a proposal.
                                                     If you want a specific writer for the project please select the
                                                     writer. This project will automatically assigned to the writer.
                                                     <a href="#" class="text-success">See writer rating & reviews</a>
@@ -132,8 +136,9 @@
                                                 <label for="deadline"  class="control-label">Delivery (in Hours)
                                                     :</label><br>
                                                 <input type="number" id="deadline" name="deadline"
-                                                       class="complete form-control" value="{{old('deadline')}}" required
-                                                       min="1" style="width: 600px"><br>
+                                                       class="complete form-control" value="{{$project->deadline}}"
+                                                       required
+                                                       min="1" style="width: 400px">
                                                 <small class="text-danger">
                                                     @error('deadline')
                                                     {{ $message }}
@@ -146,9 +151,10 @@
                                             <div class="form-group required mt-4 row">
                                                 <div class="col-6">
                                                     <label for="word"  class="control-label">Words
-                                                        :</label>
+                                                        :</label><br>
                                                     <input type="text" id="word" name="words"
-                                                           class="complete form-control" value="{{old('words')}}" required><br>
+                                                           class="complete form-control" value="{{$project->words}}"
+                                                           required>
                                                     <small class="text-danger">
                                                         @error('words')
                                                         {{ $message }}
@@ -159,12 +165,9 @@
 
 
                                             </div>
-
-
-
                                             <div class="form-group mt-4">
                                                 <button type="submit" class="btn btn-primary">
-                                                    Save & publish for bidding
+                                                    Save & publish for writers
                                                 </button>
                                             </div>
 
@@ -180,10 +183,10 @@
                         <!--End of progress card-->
 
                     </div>
-
-
                 </div>
             </div>
+        </div>
+    </div>
 @endsection
 @section('scripts')
     <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
@@ -191,5 +194,6 @@
         CKEDITOR.replace( 'instructions', );
     </script>
 @endsection
+
 
 

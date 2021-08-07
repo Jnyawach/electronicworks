@@ -10,6 +10,17 @@
                     <div class="card  shadow-sm mb-5 view-order">
                         <div class="card-header d-inline-flex">
                             <h5><span>ID No.{{$project->id}}</span> {{$project->title}}</h5>
+                            @if(isset($project->writers->name))
+                                <a href="{{route('task.edit', $project->id)}}" class="btn-sm
+                                ms-auto m-0">
+                                    <i class="fas fa-pen-square me-2"></i>Edit
+                                </a>
+
+                        @endif
+                        <!--
+                            Please remember to deactivate edit button after project is assigned
+                            -->
+
                         </div>
                         <div class="card-body">
                             <div class="d-inline-flex project-header">
@@ -37,9 +48,7 @@
                                             </span>
                                         @endif
                                     </span>&nbsp;
-                                    Payout: <span>${{$project->client_pay}}</span>&nbsp;
-                                    Writer Pay: <span>Kshs.{{$project->writer_pay}}</span>
-                                    Client: <span>{{$project->clients->name}}</span>
+
                                 </h5>
                                 <hr class="dotted">
                                 <h5 class="mt-5">Attached Files</h5>
@@ -52,55 +61,49 @@
                                 @endif
                                 <hr>
                                 <div class="mt-4">
-                                    <h5>Writer handling the project</h5>
-                                        <div class="mt-5 row">
-                                            <div class="col-sm-12 col-md-12 col-lg-12">
-                                                <img src="{{url($project->writers->getFirstMedia('avatar')?
+                                    <h5>Pre-assigned Writer</h5>
+
+                                    <div class="mt-5 row">
+                                        <div class="col-sm-12 col-md-5 col-lg-5">
+                                            <img src="{{url($project->writers->getFirstMedia('avatar')?
                                                 $project->writers->getFirstMedia('avatar')
                                                 ->getUrl('avatar_icon'):'/images/no-image.png' )}}"
-                                                     class="rounded float-start img-fluid me-2" style="height: 60px">
-                                                <a href="{{route('writer.show',$project->writer_id)}}">
-                                                    <h5 class="mb-0">
-                                                        {{$project->writers->name}}</h5>
-                                                </a>
+                                                 class="rounded float-start img-fluid me-2" style="height: 60px">
+                                            <h5 class="mb-0">{{$project->writers->name}}</h5>
+                                            <h5 class="m-0">Projects completed: 80later</h5>
 
-                                                <h5 class="m-0">Projects completed: 80</h5>
-
-                                                <h4 class="mt-0 pt-0" style="font-family: 'Avenir Bold'">
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="far fa-star"></i>
-                                                    4.5/5 </h4>
-                                                <ul class="nav">
-                                                    <li class="nav-item">
-                                                        <form class="ms-auto m-0">
-                                                            <button type="submit" class="btn btn-outline-primary rounded-0">Request
-                                                                progress</button>
-
-                                                        </form>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <form class="ms-auto m-0">
-                                                            <button type="submit" class="btn btn-outline-primary rounded-0">Request
-                                                                submission</button>
-
-                                                        </form>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a href="#" class="btn btn-outline-primary rounded-0">Chat with the
-                                                            writer</a>
-                                                    </li>
-
-                                                </ul>
-
-
-                                            </div>
-
+                                            <h4 class="mt-0 pt-0" style="font-family: 'Avenir Bold'">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="far fa-star"></i>
+                                                4.5/5 </h4>
                                         </div>
-                                        <hr class="dotted">
 
+                                        <div class="col-sm-12 col-md-5 col-lg-5">
+                                            @if(count($project->bids)==true)
+                                                @foreach($project->bids as $bid)
+                                                    <form class="ms-auto m-0" action="{{route('accept', $project->id)}}"
+                                                          method="POST">
+                                                        @method('PATCH')
+                                                        @csrf
+                                                        <input type="hidden" value="{{$project->writer_id}}" name="writer">
+                                                        <input type="hidden" value="{{$bid->id}}" name="bid">
+                                                        <button type="submit" class=" btn-primary btn-sm m-0">Assign<i
+                                                                class="fas fa-long-arrow-alt-right ms-2"></i></button>
+                                                        <h4>Bid Amount: <span>${{$bid->cost}}</span></h4>
+
+                                                    </form>
+                                                @endforeach
+                                            @else
+                                                <h4>Writer has not submitted Bid</h4>
+                                            @endif
+                                        </div>
+
+
+                                    </div>
+                                    <hr class="dotted">
 
 
                                 </div>

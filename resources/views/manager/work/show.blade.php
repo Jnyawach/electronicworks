@@ -1,15 +1,17 @@
-@extends('layouts.client_layout')
-@section('title', $project->sku)
+@extends('layouts.manager_layout')
+@section('title','Projects')
 @section('content')
-    @include('includes.status')
+    <div class="dashboard-wrapper green-body pt-5 pb-5">
+        <div class="container pt-3 pl-3 dashboard">
+            @include('includes.status')
             <div class="row">
                 <div class="col-sm-12 mx-auto">
                     <!--In progress card-->
                     <div class="card  shadow-sm mb-5 view-order">
                         <div class="card-header d-inline-flex">
-                            <h5><span>{{$project->sku}}</span> {{$project->title}}</h5>
-                            @if(!isset($project->writers->name))
-                                <a href="{{route('jobs.edit', $project->id)}}" class="btn-sm
+                            <h5><span>ID No.{{$project->id}}</span> {{$project->title}}</h5>
+                            @if(isset($project->writers->name))
+                                <a href="{{route('task.edit', $project->id)}}" class="btn-sm
                                 ms-auto m-0">
                                     <i class="fas fa-pen-square me-2"></i>Edit
                                 </a>
@@ -25,8 +27,9 @@
                                 <h5><span>Category:</span> {{$project->descipline->name}}</h5>
                                 <h5 class="ms-3"><span>Deadline:</span>{{\Carbon\Carbon::parse
                                 ($project->client_delivery)->isoFormat('MMMM Do YYYY, h:mm:ss a')}}</h5>
-                                <h5 class="ms-3"><span>Words:</span>{{$project->words}}</h5>
-                                <h5 class="ms-3"><span>Posted On:
+                                <h5 class="ms-3"><span>Submission:</span>{{\Carbon\Carbon::parse
+                                ($project->writer_delivery)->isoFormat('MMMM Do YYYY, h:mm:ss a')}}</h5>
+                                <h5 class="ms-3"><span><i class="fas fa-paperclip"></i>
                                     </span>{{$project->created_at->isoFormat('MMMM Do YYYY, h:mm:ss a')}}</h5>
 
 
@@ -43,10 +46,8 @@
                                             <span class="text-danger">
                                                  {{$project->progress->name}}
                                             </span>
-                                            /{{$project->bids->count()}}Bids
                                         @endif
                                     </span>&nbsp;
-
 
                                 </h5>
                                 <hr class="dotted">
@@ -102,13 +103,14 @@
                                                             writer</a>
                                                     </li>
                                                     <li class="nav-item">
-                                                        <form class="ms-auto m-0" action="{{route('reject',
+                                                        <form class="ms-auto m-0" action="{{route('relocate',
                                                         $project->id)}}"
                                                               method="POST">
                                                             @method('DELETE')
                                                             @csrf
                                                             <input type="hidden" value="{{$project->writer_id}}"
                                                                    name="writer">
+
                                                             <input type="hidden" value="{{$project->id}}" name="project">
                                                             <button type="submit" class="btn btn-outline-danger
                                                         rounded-0">UnAssign</button>
@@ -146,7 +148,8 @@
                                                     </div>
 
                                                     <div class="col-sm-12 col-md-5 col-lg-5">
-                                                        <form class="ms-auto m-0" action="{{route('accept', $project->id)}}"
+                                                        <form class="ms-auto m-0" action="{{route('allocate',
+                                                        $project->id)}}"
                                                               method="POST">
                                                             @method('PATCH')
                                                             @csrf
@@ -156,8 +159,6 @@
                                                                     class="fas fa-long-arrow-alt-right ms-2"></i></button>
 
                                                         </form>
-                                                        <h4 class="mt-2 fw-bold">Bid Amount:
-                                                            <span>${{$bid->cost}}</span></h4>
                                                     </div>
 
 
@@ -182,6 +183,7 @@
 
 
             </div>
-
+        </div>
+    </div>
 @endsection
 

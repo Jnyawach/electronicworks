@@ -1,24 +1,20 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\manager;
 use App\Http\Controllers\Controller;
 
 use App\Models\Bidding;
 use App\Models\Citation;
 use App\Models\Descipline;
 use App\Models\Invoice;
-use App\Models\Order;
 use App\Models\Project;
 use App\Models\User;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Validation\Rules\In;
-use Madnest\Madzipper\Madzipper;
-use Spatie\MediaLibrary\Support\MediaStream;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
-class AdminProjectController extends Controller
+class ManagerProjectController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -29,7 +25,7 @@ class AdminProjectController extends Controller
     {
         //
         $projects=Project::all();
-        return  view('admin.task.index', compact('projects'));
+        return  view('manager.work.index', compact('projects'));
     }
 
     /**
@@ -44,7 +40,7 @@ class AdminProjectController extends Controller
         $citation=Citation::pluck('name','id')->all();
         $field=Descipline::pluck('name','id')->all();
         $writer=User::where('role_id',3)->where('status_id', 1)->pluck('name','id')->all();
-        return  view('admin.task.create',
+        return  view('manager.work.create',
             compact('citation', 'field','writer','project'));
     }
 
@@ -110,7 +106,8 @@ class AdminProjectController extends Controller
             $project->addMedia($files)->toMediaCollection('materials');
 
         }
-        return  redirect('admin/homepage/task')->with('status','Project created successfully');
+        return  redirect('manager/homepage/work')->with('status','Project created successfully');
+
     }
 
     /**
@@ -123,7 +120,7 @@ class AdminProjectController extends Controller
     {
         //
         $project=Project::findBySlugOrFail($id);
-        return  view('admin.task.show', compact('project'));
+        return  view('manager.work.show', compact('project'));
     }
 
     /**
@@ -139,7 +136,7 @@ class AdminProjectController extends Controller
         $citation=Citation::pluck('name','id')->all();
         $field=Descipline::pluck('name','id')->all();
         $writer=User::where('role_id',3)->where('status_id', 1)->pluck('name','id')->all();
-        return view('admin.task.edit', compact('project','citation', 'field','writer'));
+        return view('manager.work.edit', compact('project','citation', 'field','writer'));
     }
 
     /**
@@ -204,9 +201,7 @@ class AdminProjectController extends Controller
             }
 
         }
-        return  redirect('admin/homepage/task')->with('status','Project Updated successfully');
-
-
+        return  redirect('manager/homepage/work')->with('status','Project Updated successfully');
     }
 
     /**
@@ -218,14 +213,8 @@ class AdminProjectController extends Controller
     public function destroy($id)
     {
         //
-
-        $project=Project::findOrFail($id);
-        $project->delete();
-        return  redirect()->back()->with('Status','Project deleted successfully');
-
-
     }
-    public function assign(Request $request,$id){
+    public function allocate(Request $request,$id){
         $project=Project::findOrFail($id);
         $bid=Bidding::findOrFail($request->bid);
         $project->update([
@@ -245,7 +234,7 @@ class AdminProjectController extends Controller
         return redirect()->back()->with('status','Assigned Successfully');
     }
 
-    public function unassign(Request $request,$id){
+    public function relocate(Request $request,$id){
         $project=Project::findOrFail($id);
         $deadlineWriter=$project->deadline*0.75;
         $dead=Carbon::now()->addHour($deadlineWriter);
