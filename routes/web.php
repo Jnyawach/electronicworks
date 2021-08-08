@@ -60,6 +60,7 @@ use \App\Http\Controllers\General\ContactController;
 use \App\Http\Controllers\General\TermsController;
 use \App\Http\Controllers\General\PrivacyController;
 use \App\Http\Controllers\General\SupportController;
+use \App\Http\Controllers\General\CheckComplete;
 use \App\Http\Controllers\MainController;
 
 use \App\Http\Controllers\Manager\ManagerController;
@@ -99,8 +100,6 @@ Route::group(['middleware'=>'auth'], function (){
     Route::resource('admin/homepage/user', AdminUserController::class);
     Route::resource('admin/homepage/client', AdminClientController::class);
     Route::patch('disable/{id}',['as'=>'disable', 'uses'=>DisableUser::class]);
-    Route::patch('pass/{id}',['as'=>'pass', 'uses'=>ChangePasswordController::class]);
-    Route::post('/profile',['as'=>'profile', 'uses'=>ProfileController::class]);
     Route::resource('admin/homepage/writer', AdminWriterController::class);
     Route::resource('admin/homepage/exam', AdminExamController::class);
     Route::resource('admin/homepage/essay', AdminEssayController::class);
@@ -172,6 +171,9 @@ Route::group([], function (){
     Route::patch('response/{id}', ['as'=>'response', 'uses'=>ResponseController::class]);
     Route::patch('note/{id}', ['as'=>'note', 'uses'=>NoteController::class]);
     Route::patch('frequent/{id}', ['as'=>'frequent', 'uses'=>FaqStatus::class]);
+    Route::patch('mark/{id}',['as'=>'mark', 'uses'=>CheckComplete::class]);
+    Route::patch('pass/{id}',['as'=>'pass', 'uses'=>ChangePasswordController::class]);
+    Route::post('/profile',['as'=>'profile', 'uses'=>ProfileController::class]);
 });
 
 // manager controller

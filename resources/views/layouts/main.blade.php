@@ -16,8 +16,8 @@
           type = "image/x-icon">
 
 </head>
-<body class="@yield('body-class')" onload="myFunction()">
-<div id="loader"></div>
+<body class="@yield('body-class')">
+
 <header class=" fixed-top w-100">
 
 
@@ -124,13 +124,13 @@
                 <img src="{{asset('images/e-works.png')}}" class="img-fluid" alt="Electronic Works logo">
                 <ul class="nav foot-nav justify-content-center">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">About Us</a>
+                        <a class="nav-link" href="{{route('about')}}">About Us</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Privacy</a>
+                        <a class="nav-link" href="{{route('privacy.index')}}">Privacy</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Work</a>
+                        <a class="nav-link" href="{{route('registration.index')}}">Work</a>
                     </li>
 
                 </ul>
@@ -191,18 +191,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 
 @yield('scripts')
-<script>
-    var myVar;
 
-    function myFunction() {
-        myVar = setTimeout(showPage, 2500);
-    }
-
-    function showPage() {
-        document.getElementById("loader").style.display = "none";
-        document.getElementById("mydiv").style.opacity ="1";
-    }
-</script>
 </body>
 <!-- JavaScript Bundle with Popper -->
 

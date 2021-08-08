@@ -23,8 +23,8 @@
                         <tr>
                             <th>Id</th>
                             <th>SKU</th>
-                            <th>Invoice</th>
-                            <th>Amount(KES)</th>
+                            <th>Delivery</th>
+                            <th>Amount($)</th>
                             <th>Sale($)</th>
                             <th>Writer</th>
                             <th>Client</th>
@@ -42,9 +42,8 @@
                                         <a href="{{route('order.show', $project->id)}}"
                                         class="text-decoration-none text-primary" style="font-size: 0.9em">
                                             {{$project->sku}}</a>
-
                                     </td>
-                                    <td>{{$project->invoice->number}}</td>
+                                    <td>{{\Carbon\Carbon::parse($project->client_delivery)->isoFormat('MMM Do Y')}}</td>
                                     <td>{{$project->writer_pay}}</td>
                                     <td>{{$project->client_pay}}</td>
                                     <td>{{$project->writers->name}}</td>
@@ -52,34 +51,36 @@
                                     <td>
 
                                         <h4 data-bs-toggle="modal"
-                                            data-bs-target="#staticBackdrop{{$project->invoice_id}}" style="cursor:
+                                            data-bs-target="#staticBackdrop{{$project->sku}}" style="cursor:
                                             pointer">
-                                            {{$project->invoice->number}} <i class="fas fa-pen-square"></i></h4>
+
+                                           Unpaid <i class="fas fa-pen-square"></i></h4>
 
                                         <!-- Modal -->
-                                        <div class="modal fade" id="staticBackdrop{{$project->invoice_id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                        <div class="modal fade" id="staticBackdrop{{$project->sku}}"
+                                             data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="staticBackdropLabel">Attach
-                                                            invoice</h5>
+                                                        <h5 class="modal-title" id="staticBackdropLabel">Mark as
+                                                            Paid</h5>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
-                                                       <form>
-                                                           <select class="form-select" aria-label="Default select example">
-                                                               <option selected
-                                                                       value="{{$project->invoice_id}}">{{$project->invoice->number}}</option>
-                                                               <option
-                                                                   value="{{$invoice->id}}">{{$invoice->number}}</option>
-
-                                                           </select>
+                                                       <form id="paid" action="" method="POST">
+                                                           <div class="form-check">
+                                                               <input class="form-check-input" type="checkbox"
+                                                                      value="" id="flexCheckChecked" name="payment">
+                                                               <label class="form-check-label" for="flexCheckChecked">
+                                                                   Mark as Paid
+                                                               </label>
+                                                           </div>
                                                        </form>
                                                     </div>
                                                     <div class="modal-footer">
 
                                                         <button type="submit" class="btn
-                                                        btn-primary">Save</button>
+                                                        btn-primary" for="paid">Save</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -96,8 +97,8 @@
                         <tfoot>
                         <th>Id</th>
                         <th>SKU</th>
-                        <th>Invoice</th>
-                        <th>Amount(KES)</th>
+                        <th>Delivery</th>
+                        <th>Amount($)</th>
                         <th>Sale($)</th>
                         <th>Writer</th>
                         <th>Client</th>

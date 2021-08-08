@@ -18,7 +18,8 @@ class AdminOrderController extends Controller
     {
         //
         $invoice=Invoice::where('status',1)->get()->last();
-        $projects=Project::where('progress_id',4)->get();
+        $projects=Project::where('progress_id',4)
+            ->where('payment',0)->get();
         return  view('admin.invoice.order.index', compact('projects', 'invoice'));
     }
 
