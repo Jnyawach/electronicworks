@@ -50,9 +50,9 @@ class AdminNotificationController extends Controller
 
         $notification=Notification::create($validated);
         if(isset($request->email)){
-            $users=User::where('status_id',1)->get();
+            $users=User::where('status_id',1)->where('role_id', $request->email)->get();
             foreach ($users as $user){
-                Mail::send('emails.contact', ['mess'=>$notification,'user'=>$user], function ($message) use
+                Mail::send('emails.notification', ['mess'=>$notification,'user'=>$user], function ($message) use
                 ($notification,$user){
                     $message->to($user->email);
                     $message->from('nyawach41@gmail.com');
@@ -108,9 +108,9 @@ class AdminNotificationController extends Controller
         $note=Notification::findOrFail($id);
         $notification=$note->update();
         if(isset($request->email)){
-            $users=User::where('status_id',1)->get();
+            $users=User::where('status_id',1)->where('role_id', $request->email)->get();
             foreach ($users as $user){
-                Mail::send('emails.contact', ['mess'=>$notification,'user'=>$user], function ($message) use
+                Mail::send('emails.notification', ['mess'=>$notification,'user'=>$user], function ($message) use
                 ($notification,$user){
                     $message->to($user->email);
                     $message->from('nyawach41@gmail.com');

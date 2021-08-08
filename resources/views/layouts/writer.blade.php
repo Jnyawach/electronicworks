@@ -141,7 +141,7 @@
             </li>
 
             <li>
-                <a href="{{route('pending.index')}}"><span><i class="fas fa-stopwatch"></i></span>My Projects </a>
+                <a href="{{route('pending.index')}}"><span><i class="fas fa-stopwatch"></i></span>Assigned Projects </a>
             </li>
             <li>
                 <a href="{{route('allocated.index')}}"><span><i class="fas fa-pen-square"></i></span>Pre-assigned </a>

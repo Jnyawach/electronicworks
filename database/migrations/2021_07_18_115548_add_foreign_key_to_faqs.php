@@ -15,7 +15,7 @@ class AddForeignKeyToFaqs extends Migration
     {
         Schema::table('faqs', function (Blueprint $table) {
             //
-            $table->foreign('faq_category_id')->references('id')->on('faqs')->onDelete('cascade');
+            $table->foreign('faq_category_id')->references('id')->on('faq_categories')->onDelete('cascade');
         });
     }
 

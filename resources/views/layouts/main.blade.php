@@ -165,7 +165,7 @@
                         <a class="nav-link" href="#">Reviews</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('support.index')}}">FAQS</a>
+                        <a class="nav-link" href="{{route('help-and-support.index')}}">FAQS</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link " href="{{route('contact.index')}}">Contact us</a>

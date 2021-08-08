@@ -312,7 +312,7 @@ ambulance:
       - er
       - help
       - hospital
-      - support
+      - help-and-support
       - vehicle
   styles:
     - solid
@@ -4697,7 +4697,7 @@ concierge-bell:
       - hotel
       - receptionist
       - service
-      - support
+      - help-and-support
   styles:
     - solid
   unicode: f562
@@ -6323,7 +6323,7 @@ envelope:
       - mail
       - message
       - notification
-      - support
+      - help-and-support
   styles:
     - solid
     - regular
@@ -6344,7 +6344,7 @@ envelope-open:
       - mail
       - message
       - notification
-      - support
+      - help-and-support
   styles:
     - solid
     - regular
@@ -6364,7 +6364,7 @@ envelope-open-text:
       - mail
       - message
       - notification
-      - support
+      - help-and-support
   styles:
     - solid
   unicode: f658
@@ -6382,7 +6382,7 @@ envelope-square:
       - mail
       - message
       - notification
-      - support
+      - help-and-support
   styles:
     - solid
   unicode: f199
@@ -9955,7 +9955,7 @@ headset:
       - microphone
       - shot caller
       - sound
-      - support
+      - help-and-support
       - telemarketer
   styles:
     - solid
@@ -10773,7 +10773,7 @@ info:
       - help
       - information
       - more
-      - support
+      - help-and-support
   styles:
     - solid
   unicode: f129
@@ -10789,7 +10789,7 @@ info-circle:
       - help
       - information
       - more
-      - support
+      - help-and-support
   styles:
     - solid
   unicode: f05a
@@ -11623,7 +11623,7 @@ life-ring:
       - help
       - overboard
       - save
-      - support
+      - help-and-support
   styles:
     - solid
     - regular
@@ -12451,7 +12451,7 @@ medkit:
       - firstaid
       - health
       - help
-      - support
+      - help-and-support
   styles:
     - solid
   unicode: f0fa
@@ -14162,7 +14162,7 @@ phone:
       - call
       - earphone
       - number
-      - support
+      - help-and-support
       - telephone
       - voice
   styles:
@@ -14180,7 +14180,7 @@ phone-alt:
       - call
       - earphone
       - number
-      - support
+      - help-and-support
       - telephone
       - voice
   styles:
@@ -14199,7 +14199,7 @@ phone-slash:
       - earphone
       - mute
       - number
-      - support
+      - help-and-support
       - telephone
       - voice
   styles:
@@ -14216,7 +14216,7 @@ phone-square:
       - call
       - earphone
       - number
-      - support
+      - help-and-support
       - telephone
       - voice
   styles:
@@ -14233,7 +14233,7 @@ phone-square-alt:
       - call
       - earphone
       - number
-      - support
+      - help-and-support
       - telephone
       - voice
   styles:
@@ -14253,7 +14253,7 @@ phone-volume:
       - earphone
       - number
       - sound
-      - support
+      - help-and-support
       - telephone
       - voice
       - volume-control-phone
@@ -15017,7 +15017,7 @@ question:
     terms:
       - help
       - information
-      - support
+      - help-and-support
       - unknown
   styles:
     - solid
@@ -15032,7 +15032,7 @@ question-circle:
     terms:
       - help
       - information
-      - support
+      - help-and-support
       - unknown
   styles:
     - solid
@@ -19043,7 +19043,7 @@ ticket-alt:
     terms:
       - movie
       - pass
-      - support
+      - help-and-support
       - ticket
   styles:
     - solid

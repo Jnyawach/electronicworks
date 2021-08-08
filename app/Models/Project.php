@@ -46,6 +46,7 @@ class Project extends Model implements HasMedia
         'refund',
         'invoice_id',
         'deadline',
+        'payment'
     ];
 
     public  function writers(){

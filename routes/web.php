@@ -54,6 +54,7 @@ use App\Http\Controllers\Admin\AdminInvoiceController;
 use App\Http\Controllers\Admin\AdminOrderController;
 use App\Http\Controllers\Admin\AdminCostingController;
 use App\Http\Controllers\Admin\AdminPreassignedController;
+use App\Http\Controllers\Admin\AdminLedgerController;
 
 use \App\Http\Controllers\General\ContactController;
 use \App\Http\Controllers\General\TermsController;
@@ -73,6 +74,10 @@ use \App\Http\Controllers\Manager\ManagerRevisionController;
 use \App\Http\Controllers\Manager\ManagerCompletedController;
 use \App\Http\Controllers\Manager\ManagerEnglishController;
 use \App\Http\Controllers\Manager\ManagerEssayController;
+use \App\Http\Controllers\Manager\ManagerDisciplineController;
+use \App\Http\Controllers\Manager\ManagerNotificationController;
+use \App\Http\Controllers\Manager\ManagerContactController;
+use \App\Http\Controllers\Manager\ManagerFaqController;
 
 
 
@@ -115,9 +120,8 @@ Route::group(['middleware'=>'auth'], function (){
     Route::resource('admin/homepage/costing', AdminCostingController::class);
     Route::resource('admin/homepage/invoice', AdminInvoiceController::class);
     Route::resource('admin/invoice/order', AdminOrderController::class);
-    Route::patch('frequent/{id}', ['as'=>'frequent', 'uses'=>FaqStatus::class]);
-    Route::patch('response/{id}', ['as'=>'response', 'uses'=>ResponseController::class]);
-    Route::patch('note/{id}', ['as'=>'note', 'uses'=>NoteController::class]);
+    Route::resource('admin/homepage/accounts', AdminLedgerController::class);
+
     Route::patch('admin/task/assign/{id}',  [AdminProjectController::class, 'assign'])->name('assign');
     Route::delete('admin/task/unassign/{id}',  [AdminProjectController::class, 'unassign'])->name('unassign');
 });
@@ -163,8 +167,11 @@ Route::group([], function (){
     Route::resource('/', MainController::class);
     Route::resource('terms_condition', TermsController::class);
     Route::resource('privacy', PrivacyController::class);
-    Route::resource('support', SupportController::class);
+    Route::resource('help-and-support', SupportController::class);
     Route::get('about-us',  [MainController::class, 'about'])->name('about');
+    Route::patch('response/{id}', ['as'=>'response', 'uses'=>ResponseController::class]);
+    Route::patch('note/{id}', ['as'=>'note', 'uses'=>NoteController::class]);
+    Route::patch('frequent/{id}', ['as'=>'frequent', 'uses'=>FaqStatus::class]);
 });
 
 // manager controller
@@ -172,6 +179,10 @@ Route::group([], function (){
     Route::resource('manager', ManagerController::class);
     Route::resource('manager/homepage/author', ManagerUserController::class);
     Route::resource('manager/homepage/work', ManagerProjectController::class);
+    Route::resource('manager/homepage/manager-discipline', ManagerDisciplineController::class);
+    Route::resource('manager/homepage/manager-notification', ManagerNotificationController::class);
+    Route::resource('manager/homepage/manager-contact', ManagerContactController::class);
+    Route::resource('manager/homepage/manager-faqs', ManagerFaqController::class);
     Route::resource('manager/work/manager_bidding', ManagerBiddingController::class);
     Route::resource('manager/work/manager-assigned', ManagerAssignedController::class);
     Route::resource('manager/work/manager-progress', ManagerProgressController::class);

@@ -1,7 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\manager;
+use App\Http\Controllers\Controller;
 
+use App\Models\Descipline;
 use Illuminate\Http\Request;
 
 class ManagerDisciplineController extends Controller
@@ -14,6 +16,8 @@ class ManagerDisciplineController extends Controller
     public function index()
     {
         //
+        $fields=Descipline::all();
+        return  view('manager.manager-discipline.index', compact('fields'));
     }
 
     /**
@@ -35,6 +39,14 @@ class ManagerDisciplineController extends Controller
     public function store(Request $request)
     {
         //
+        $validated=$request->validate([
+            'name'=>'required|max:50',
+            'price'=>'required',
+            'status'=>'required'
+        ]);
+
+        $field=Descipline::create($validated);
+        return  redirect()->back()->with('status', 'Field Successfully added');
     }
 
     /**
@@ -69,6 +81,22 @@ class ManagerDisciplineController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $validated=$request->validate([
+            'name'=>'required|max:50',
+            'price'=>'required',
+            'status'=>'required'
+        ]);
+
+        $field=Descipline::findOrFail($id);
+
+
+
+        $field->update([
+            'name'=>$validated['name'],
+            'status'=>$validated['status'],
+            'price'=>$validated['price'],
+        ]);
+        return  redirect()->back()->with('status', 'Field Successfully updated');
     }
 
     /**

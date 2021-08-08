@@ -190,11 +190,10 @@
                             <div id="submenu-3" class="collapse submenu" style="">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{{route('discipline.index')}}">All discipline</a>
+                                        <a class="nav-link" href="{{route('manager-discipline.index')}}">All
+                                            Fields</a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">Add Discipline</a>
-                                    </li>
+
 
                                 </ul>
                             </div>
@@ -219,11 +218,11 @@
                             <div id="submenu-4" class="collapse submenu" style="">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{{route('notifications.index')}}">See
+                                        <a class="nav-link" href="{{route('manager-notification.index')}}">See
                                             notifications</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{{route('notifications.create')}}">Create
+                                        <a class="nav-link" href="{{route('manager-notification.create')}}">Create
                                             notification</a>
                                     </li>
                                 </ul>
@@ -237,7 +236,7 @@
                             <div id="submenu-5" class="collapse submenu" style="">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{{route('support.index')}}">See messages</a>
+                                        <a class="nav-link" href="{{route('manager-contact.index')}}">See messages</a>
                                     </li>
 
                                 </ul>
@@ -264,44 +263,20 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-8" aria-controls="submenu-8"><i class="fa fa-archive" aria-hidden="true"></i>Terms and Policy</a>
-                            <div id="submenu-8" class="collapse submenu" style="">
-                                <ul class="nav flex-column">
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{route('policy.index')}}">Policy</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{route('policy.create')}}">Create Policy</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-9" aria-controls="submenu-9"><i class="far fa-question-circle"></i>Faqs</a>
                             <div id="submenu-9" class="collapse submenu" style="">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{{route('faqs.index')}}">Frequently Asked Question</a>
+                                        <a class="nav-link" href="{{route('manager-faqs.index')}}">Frequently Asked
+                                            Question</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{{route('faqs.create')}}">Create Faqs</a>
+                                        <a class="nav-link" href="{{route('manager-faqs.create')}}">Create Faqs</a>
                                     </li>
                                 </ul>
                             </div>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false"
-                               data-target="#submenu-34" aria-controls="submenu-34"><i class="fas
-                               fa-money-check-alt"></i>Costing</a>
-                            <div id="submenu-34" class="collapse submenu" style="">
-                                <ul class="nav flex-column">
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{route('costing.index')}}">Cost panel</a>
-                                    </li>
 
-                                </ul>
-                            </div>
-                        </li>
 
 
                     </ul>

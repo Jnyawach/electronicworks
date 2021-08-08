@@ -17,7 +17,7 @@ class SupportController extends Controller
     {
         //
         $categories=FaqCategory::all();
-        return  view('support.index', compact('categories'));
+        return  view('help-and-support.index', compact('categories'));
     }
 
     /**

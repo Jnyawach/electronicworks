@@ -59,6 +59,9 @@ class ClientSubmissionController extends Controller
     {
         //
         $project=Project::findBySlugOrFail($id);
+        $project->update([
+            'delivery'=>1,
+        ]);
         return  view('dashboard.jobs.complete.show', compact('project'));
     }
 

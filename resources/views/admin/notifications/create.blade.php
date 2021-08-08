@@ -10,12 +10,16 @@
                 <form action="{{route('notifications.store')}}" method="POST">
                     @csrf
                     <div class="form-group">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="1" id="email" name="email">
-                            <label class="form-check-label" for="email">
-                               Email Notification to users
-                            </label>
-                        </div>
+                        <label class="form-check-label" for="email">
+                            Email Notification(optional):
+                        </label>
+                        <select class="form-select" aria-label="Default select example" name="email"
+                                style="width: 600px">
+                            <option selected>Email to</option>
+                            <option value="2">Email Notification to client</option>
+                            <option value="3"> Email Notification to Writers</option>
+
+                        </select>
                     </div>
 
                     <div class="form-group required mt-3 row">
