@@ -15,8 +15,8 @@ class AddColumnsToBidding extends Migration
     {
         Schema::table('biddings', function (Blueprint $table) {
             //
-            $table->text('amount');
-            $table->text('cost');
+            $table->string('amount');
+            $table->string('cost');
         });
     }
 

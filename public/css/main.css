@@ -1168,3 +1168,7 @@ Container / Wrapper
     background-color:rgba(172,223,135, 0.1) !important;
     padding: 40px;
 }
+.indoor .active{
+    color: white!important;
+    background-color: var(--primary2) !important;
+}

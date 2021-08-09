@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLedgersTable extends Migration
+class CreatePaymentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,15 @@ class CreateLedgersTable extends Migration
      */
     public function up()
     {
-        Schema::create('ledgers', function (Blueprint $table) {
+        Schema::create('payments', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('balance');
-            $table->string('client');
-            $table->string('writer');
-            $table->string('expenditure');
+            $table->bigInteger('user_id')->unsigned()->index();
+            $table->string('trans_code');
+            $table->string('amount');
+            $table->foreign('user_id')->references('id')
+                ->on('users')->onDelete('cascade');
+
         });
     }
 
@@ -30,6 +32,6 @@ class CreateLedgersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ledgers');
+        Schema::dropIfExists('payments');
     }
 }

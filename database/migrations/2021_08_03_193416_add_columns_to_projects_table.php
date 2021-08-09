@@ -16,10 +16,10 @@ class AddColumnsToProjectsTable extends Migration
         Schema::table('projects', function (Blueprint $table) {
             //
             $table->integer('delivery')->default(0);
-            $table->text('writer_pay')->default(0);
-            $table->text('client_pay')->default(0);
-            $table->text('earning')->default(0);
-            $table->text('refund')->default(0);
+            $table->string('writer_pay')->default(0);
+            $table->string('client_pay')->default(0);
+            $table->string('earning')->default(0);
+            $table->string('refund')->default(0);
             $table->bigInteger('invoice_id')->unsigned()->index()->nullable();
         });
     }

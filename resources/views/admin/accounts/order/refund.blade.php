@@ -2,16 +2,23 @@
 @section('title', 'Projects')
 @section('styles')
     <link href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" rel="stylesheet">
-<style>
-    table.dataTable td {
-        font-size: 0.8em;
-    }
-</style>
+    <style>
+        table.dataTable td {
+            font-size: 0.8em;
+        }
+    </style>
 @endsection
 @section('content')
 
     <div class="dashboard-wrapper green-body pt-5">
         <div class="container p-5">
+            <nav class="nav indoor">
+                <a class="nav-link" href="{{route('order.index')}}">All</a>
+                <a class="nav-link" href="{{route('unpaid')}}">Unpaid</a>
+                <a class="nav-link" href="{{route('paid')}}">Paid</a>
+                <a class="nav-link active" href="{{route('refund')}}">Refunds</a>
+            </nav>
+            <hr class="dropdown-divider">
             @include('includes.status')
             <div class="card">
                 <div class="card-header">
@@ -26,7 +33,7 @@
                             <th>Delivery</th>
                             <th>Amount($)</th>
                             <th>Sale($)</th>
-                            <th>Writer</th>
+                            <th>Status</th>
                             <th>Client</th>
                             <th>Action </th>
                         </tr>
@@ -40,52 +47,55 @@
                                     <td>{{$project->id}}</td>
                                     <td>
                                         <a href="{{route('order.show', $project->id)}}"
-                                        class="text-decoration-none text-primary" style="font-size: 0.9em">
+                                           class="text-decoration-none text-primary" style="font-size: 0.9em">
                                             {{$project->sku}}</a>
                                     </td>
                                     <td>{{\Carbon\Carbon::parse($project->client_delivery)->isoFormat('MMM Do Y')}}</td>
                                     <td>{{$project->writer_pay}}</td>
                                     <td>{{$project->client_pay}}</td>
-                                    <td>{{$project->writers->name}}</td>
+                                    <td>{{$project->progress->name}}</td>
                                     <td>{{$project->clients->name}}</td>
                                     <td>
 
-                                        <h4 data-bs-toggle="modal"
-                                            data-bs-target="#staticBackdrop{{$project->sku}}" style="cursor:
-                                            pointer">
-
-                                           Unpaid <i class="fas fa-pen-square"></i></h4>
-
+                                        <h4 data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                            style="cursor:pointer" class="text-success">
+                                            Action<i class="fas fa-pen-square ms-1"></i>
+                                        </h4>
                                         <!-- Modal -->
-                                        <div class="modal fade" id="staticBackdrop{{$project->sku}}"
-                                             data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="staticBackdropLabel">Mark as
-                                                            Paid</h5>
+                                                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
-                                                       <form id="paid" action="" method="POST">
-                                                           <div class="form-check">
-                                                               <input class="form-check-input" type="checkbox"
-                                                                      value="" id="flexCheckChecked" name="payment">
-                                                               <label class="form-check-label" for="flexCheckChecked">
-                                                                   Mark as Paid
-                                                               </label>
-                                                           </div>
-                                                       </form>
+                                                        <form id="paid" action="{{route('mark',$project->id)}}"
+                                                              method="POST">
+                                                            @method('PATCH')
+                                                            @csrf
+                                                            <label for="action">Mark as:</label>
+                                                            <select class="form-select" id="action" name="action" required>
+                                                                <option selected value="">Select Action</option>
+                                                                <option value="0">Unpaid</option>
+                                                                <option value="1">Paid</option>
+                                                                <option value="2">Refund</option>
+                                                            </select>
+
+                                                        </form>
                                                     </div>
                                                     <div class="modal-footer">
-
-                                                        <button type="submit" class="btn
-                                                        btn-primary" for="paid">Save</button>
+                                                        <button type="submit" class="btn-sm btn-primary"
+                                                                form="paid">Save
+                                                            changes</button>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </td>
+
+
+
 
 
 
@@ -100,7 +110,7 @@
                         <th>Delivery</th>
                         <th>Amount($)</th>
                         <th>Sale($)</th>
-                        <th>Writer</th>
+                        <th>Status</th>
                         <th>Client</th>
                         <th>Action </th>
                         </tfoot>
@@ -121,4 +131,6 @@
 
     </script>
 @endsection
+
+
 

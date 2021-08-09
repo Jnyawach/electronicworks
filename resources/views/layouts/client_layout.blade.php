@@ -66,7 +66,8 @@
                         class="badge bg-danger">1</span></a>
             </li>
             <li>
-                <a href="#"><span><i class="fas fa-file-invoice"></i></span>Invoices</a>
+                <a href="{{route('client-invoice.index')}}"><span><i class="fas
+                fa-file-invoice"></i></span>Invoices</a>
             </li>
         </ul>
 

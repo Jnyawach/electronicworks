@@ -17,6 +17,7 @@ use \App\Http\Controllers\client\ClientSubmissionController;
 use \App\Http\Controllers\client\ClientRevisionController;
 use \App\Http\Controllers\client\ClientBidsController;
 use \App\Http\Controllers\client\ClientAssignedController;
+use \App\Http\Controllers\client\ClientInvoiceController;
 
 use App\Http\Controllers\Allusers\RedirectController;
 use App\Http\Controllers\Admin\AdminExamController;
@@ -61,6 +62,7 @@ use \App\Http\Controllers\General\TermsController;
 use \App\Http\Controllers\General\PrivacyController;
 use \App\Http\Controllers\General\SupportController;
 use \App\Http\Controllers\General\CheckComplete;
+use \App\Http\Controllers\General\CheckNotPaid;
 use \App\Http\Controllers\MainController;
 
 use \App\Http\Controllers\Manager\ManagerController;
@@ -118,9 +120,11 @@ Route::group(['middleware'=>'auth'], function (){
     Route::resource('admin/task/set', AdminPreassignedController::class);
     Route::resource('admin/homepage/costing', AdminCostingController::class);
     Route::resource('admin/homepage/invoice', AdminInvoiceController::class);
-    Route::resource('admin/invoice/order', AdminOrderController::class);
+    Route::get('admin/accounts/order/unpaid',  [AdminOrderController::class, 'unpaid'])->name('unpaid');
+    Route::get('admin/accounts/order/paid',  [AdminOrderController::class, 'paid'])->name('paid');
+    Route::get('admin/accounts/order/refund',  [AdminOrderController::class, 'refund'])->name('refund');
+    Route::resource('admin/accounts/order', AdminOrderController::class);
     Route::resource('admin/homepage/accounts', AdminLedgerController::class);
-
     Route::patch('admin/task/assign/{id}',  [AdminProjectController::class, 'assign'])->name('assign');
     Route::delete('admin/task/unassign/{id}',  [AdminProjectController::class, 'unassign'])->name('unassign');
 });
@@ -133,11 +137,13 @@ Route::group(['middleware'=>'auth'], function (){
     Route::resource('dashboard/jobs/returned', ClientRevisionController::class);
     Route::resource('dashboard/jobs/market', ClientBidsController::class);
     Route::resource('dashboard/jobs/assigned', ClientAssignedController::class);
+    Route::resource('dashboard/homepage/client-invoice', ClientInvoiceController::class);
     Route::get('/{waiting}',['as'=>'waiting', 'uses'=>RedirectController::class])->name('page')
         ->where('waiting','wait|congratulations|deactivated');
     Route::resource('dashboard/homepage/jobs', ClientJobsController::class);
     Route::patch('dashboard/jobs/accept/{id}',  [ClientJobsController::class, 'accept'])->name('accept');
     Route::delete('dashboard/jobs/reject/{id}',  [ClientJobsController::class, 'reject'])->name('reject');
+
 
 });
 //writer routes
@@ -172,6 +178,7 @@ Route::group([], function (){
     Route::patch('note/{id}', ['as'=>'note', 'uses'=>NoteController::class]);
     Route::patch('frequent/{id}', ['as'=>'frequent', 'uses'=>FaqStatus::class]);
     Route::patch('mark/{id}',['as'=>'mark', 'uses'=>CheckComplete::class]);
+    Route::patch('unmark/{id}',['as'=>'unmark', 'uses'=>CheckNotPaid::class]);
     Route::patch('pass/{id}',['as'=>'pass', 'uses'=>ChangePasswordController::class]);
     Route::post('/profile',['as'=>'profile', 'uses'=>ProfileController::class]);
 });

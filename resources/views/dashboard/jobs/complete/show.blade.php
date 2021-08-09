@@ -52,16 +52,8 @@
                         me-2"></i></span>{{$project->submission->getFirstMedia('attachment')->name}}(click to
                                         download)</a>
                                     <hr class="dotted">
-                                    @if($project->delivery==0)
-                                        <form class="mt-3"  method="POST" action="{{route('mark',$project->id)}}">
-                                            @method('PATCH')
-                                            @csrf
-                                        <button type="submit" class="btn-sm btn-primary">Mark as complete<i
-                                                class="fas fa-check-square ms-2"></i></button>
-                                    </form>
-                                        @else
 
-                                        <form class="w-100 green-body p-3">
+                                    <form class="w-100 green-body p-3">
                                             <h5 class="fw-bold">Be the first to review this work</h5>
                                             <input type="hidden" value="{{$project->id}}" name="project">
                                             <div class="form-group">
@@ -95,8 +87,6 @@
                                             </div>
 
                                         </form>
-
-                                        @endif
                                 </div>
                                     <hr class="dotted">
 

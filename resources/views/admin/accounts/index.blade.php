@@ -12,7 +12,9 @@
                         <div class="col-sm-12 col-md-4 col-lg-4 mx-auto text-center m-2">
                             <div class="card shadow-sm">
                                 <div class="card-body p-4">
-                                    <h4 class="fs-4 fw-bold">$. {{$account->balance}}</h4>
+                                    <h4 class="fs-4 fw-bold">
+                                        $. {{$balance}}
+                                    </h4>
                                     <h5 class="fs-5">ACCOUNT BALANCE</h5>
 
                                 </div>
@@ -22,7 +24,7 @@
                         <div class="col-sm-12 col-md-4 col-lg-4 mx-auto text-center m-2">
                             <div class="card shadow-sm">
                                 <div class="card-body p-4">
-                                    <h4 class="fs-4 fw-bold">$. {{$account->writer}}</h4>
+                                    <h4 class="fs-4 fw-bold">$. 40</h4>
                                     <h5 class="fs-5 text-danger">OWED TO WRITERS</h5>
 
                                 </div>
@@ -31,7 +33,7 @@
                         <div class="col-sm-12 col-md-4 col-lg-4 mx-auto text-center m-2">
                             <div class="card shadow-sm">
                                 <div class="card-body p-4">
-                                    <h4 class="fs-4 fw-bold">$. {{$account->client}}</h4>
+                                    <h4 class="fs-4 fw-bold">$. {{$client}}</h4>
                                     <h5 class="fs-5 text-success">OWED BY CLIENTS</h5>
 
                                 </div>

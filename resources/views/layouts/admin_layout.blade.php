@@ -254,24 +254,6 @@
                             </div>
                         </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false"
-                               data-target="#submenu-6" aria-controls="submenu-6"><i class="fas fa-file-invoice"></i>
-                                Invoices</a>
-                            <div id="submenu-6" class="collapse submenu" style="">
-                                <ul class="nav flex-column">
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{route('invoice.index')}}">See invoices
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{route('order.index')}}">Orders
-                                        </a>
-                                    </li>
-
-                                </ul>
-                            </div>
-                        </li>
 
                         <li class="nav-item">
                             <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-8" aria-controls="submenu-8"><i class="fa fa-archive" aria-hidden="true"></i>Terms and Policy</a>
@@ -321,6 +303,10 @@
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{route('accounts.index')}}">Accounts</a>
                                     </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{route('order.index')}}">Orders
+                                        </a>
+                                    </li>
 
                                 </ul>
                             </div>
@@ -344,7 +330,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                    Copyright © 2021 Electronic Works</a>.
+                    Copyright © 2021 Electronic Works.
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
                     <div class="text-md-right footer-links d-none d-sm-block">

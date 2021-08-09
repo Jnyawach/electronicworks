@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Client;
 use App\Http\Controllers\Controller;
 
-use App\Models\Invoice;
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class AdminOrderController extends Controller
+class ClientInvoiceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +17,13 @@ class AdminOrderController extends Controller
     public function index()
     {
         //
-
-        $projects=Project::all();
-        return  view('admin.accounts.order.index', compact('projects'));
+        $projects=Project::where('client_id', Auth::id())->get();
+        $total=Project::where('progress_id',4)->where('delivery',1)
+            ->where('payment',1)->sum('client_pay');
+        $unpaid=Project::where('progress_id',4)->where('delivery',1)
+            ->where('payment',0)->sum('client_pay');
+        return  view('dashboard.client-invoice.index',
+            compact('projects','total', 'unpaid'));
     }
 
     /**
@@ -86,23 +90,5 @@ class AdminOrderController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public  function unpaid(){
-        $projects=Project::where('progress_id',4)->where('delivery',1)
-            ->where('payment',0)->get();
-        return view('admin/accounts/order/unpaid', compact('projects'));
-    }
-
-    public  function paid(){
-        $projects=Project::where('progress_id',4)->where('delivery',1)
-            ->where('payment',1)->get();
-        return view('admin/accounts/order/paid', compact('projects'));
-    }
-
-    public  function refund(){
-        $projects=Project::where('progress_id',4)->where('delivery',1)
-            ->where('payment',2)->where('refund','>',0)->get();
-        return view('admin/accounts/order/refund', compact('projects'));
     }
 }

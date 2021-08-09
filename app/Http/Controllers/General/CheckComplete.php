@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\General;
 use App\Http\Controllers\Controller;
 
+use App\Models\Account;
 use App\Models\Ledger;
 use App\Models\Project;
 use Illuminate\Http\Request;
@@ -19,15 +20,29 @@ class CheckComplete extends Controller
     {
         //
         $project=Project::findOrFail($id);
-        $project->update([
-            'delivery'=>1,
-        ]);
-        $account=Ledger::latest()->first();
-        $account->update([
-            'balance'=>$project->client_pay+$account->balance,
-            'writer'=>$project->writer_pay+$account->writer,
-            'client'=>$project->client_pay+$account->client
-        ]);
-        return redirect()->back()->with('Successfully marked as complete');
+        if($request->action==1){
+            $project->update([
+                'delivery'=>1,
+                'payment'=>1,
+                'refund'=>0,
+                'earning'=>$project->client_pay-$project->writer_pay
+            ]);
+        }elseif ($request->action==0){
+            $project->update([
+                'delivery'=>1,
+                'payment'=>0,
+                'refund'=>0,
+                'earning'=>0,
+            ]);
+        }elseif ($request->action==2){
+            $project->update([
+                'delivery'=>1,
+                'payment'=>2,
+                'refund'=>$project->writer_pay,
+                'earning'=>0,
+            ]);
+        }
+
+        return redirect()->back()->with('status','Successfully marked as paid');
     }
 }

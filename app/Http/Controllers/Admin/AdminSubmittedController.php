@@ -17,7 +17,7 @@ class AdminSubmittedController extends Controller
     public function index()
     {
         //
-        $projects=Project::where('progress_id',4)->get();
+        $projects=Project::where('progress_id',4)->where('delivery',1)->get();
         return  view('admin.task.completed.index', compact('projects'));
     }
 

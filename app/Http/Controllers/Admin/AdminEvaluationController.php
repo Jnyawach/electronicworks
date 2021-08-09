@@ -84,7 +84,10 @@ class AdminEvaluationController extends Controller
           $project=Project::findOrFail($request->project);
         if (is_null($request->reason)){
             $client=User::findOrFail($request->client);
-            $project->update(['progress_id'=> 4]);
+            $project->update([
+                'progress_id'=>4,
+                'delivery'=>1,
+            ]);
 
             Mail::send('emails.submitted', ['mess'=> $submission,'client'=>$client], function ($message) use(
                 $submission,

@@ -16,10 +16,10 @@ class AdminLedgerController extends Controller
     public function index()
     {
         //
-        $account=Ledger::latest()->first();
-        $orders=Project::where('delivery',1)
-            ->where('payment',0)->get();
-        return view('admin.accounts.index', compact('account' ,'orders'));
+        $orders=Project::all();
+        $client=Project::where('delivery',1)->where('progress_id',4)
+            ->where('payment',0)->sum('client_pay');
+        return view('admin.accounts.index', compact('orders','balance'));
     }
 
     /**

@@ -86,7 +86,8 @@ class ManagerAssesController extends Controller
         if (is_null($request->reason)){
             $client=User::findOrFail($request->client);
             $project->update([
-                'progress_id'=> 4,
+                'progress_id'=>4,
+                'delivery'=>1,
 
             ]);
 
