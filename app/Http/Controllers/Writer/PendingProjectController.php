@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Writer;
 use App\Http\Controllers\Controller;
-
 use App\Models\Project;
-use App\Models\Revision;
 use App\Models\Submission;
+use Ledger\TransactionAccount;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Money\Money;
 
 class PendingProjectController extends Controller
 {
@@ -84,6 +84,12 @@ class PendingProjectController extends Controller
         $project->update([
             'progress_id'=>3,
         ]);
+        $user=Auth::user();
+        $user->createAccount('orders','order-handled-by-user');
+        $amount=new Money::USD(500);
+
+
+
         return redirect('freelancer/project/evaluation');
     }
 

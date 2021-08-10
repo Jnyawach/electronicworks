@@ -18,7 +18,7 @@
                     </h5>
 
                     <h5 class="ms-3">
-                        <span>Payout:</span>Ksh.{{$project->order->amount}}
+                        <span>Payout:</span>$.{{$project->writer_pay}}
                     </h5>
                 </div>
                 @include('includes.status')

@@ -19,6 +19,7 @@ class DisableUser extends Controller
         //
         $client=User::findOrFail($id);
         $client->update(['status_id'=>$request->status_id]);
+        $client->createAccount('orders','order-handled-by-user');
         return redirect()->back()->with('status', 'User status changed');
 
     }

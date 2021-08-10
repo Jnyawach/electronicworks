@@ -84,6 +84,8 @@ class AdminApplicationController extends Controller
         $writer->update([
             'status_id'=>$request->status,
         ]);
+        $writer->createAccount('orders','order-handled-by-user');
+
         $writer->detail()->update([
             'score'=>$request->score,
         ]);
@@ -101,9 +103,8 @@ class AdminApplicationController extends Controller
                 $message->to($writer->email);
                 $message->from('nyawach41@gmail.com');
                 $message->subject('Approved');
-
-                return  redirect('admin/homepage/application')->with('status', 'Writer Successfully Approved');
             });
+            return  redirect('admin/homepage/application')->with('status', 'Writer Successfully Approved');
         }else{
             return  redirect('admin/homepage/application')->with('status', 'Please Recheck Application');
         }

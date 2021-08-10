@@ -21,7 +21,7 @@
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="message1">
                                 <li>
-                                    @if($client->role=='Client')
+                                    @if($client->role->name=='Client')
 
                                         <form method="POST" action="{{route('disable',
                                                             $client->id)}}">

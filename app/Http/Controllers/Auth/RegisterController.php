@@ -75,5 +75,6 @@ class RegisterController extends Controller
             'condition'=>1,
             'password' => Hash::make($data['password']),
         ]);
+
     }
 }
