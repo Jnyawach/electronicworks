@@ -95,6 +95,13 @@
                     <li>
                         <hr class="dropdown-divider">
                     </li>
+                    <li><a class="dropdown-item" href="#">Balance <span>
+                                $. {{Auth::user()->balanceFloat}}
+                            </span></a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
                     <li><a class="dropdown-item" href="#">Messages &nbsp; <span class="badge bg-danger">5</span></a>
                     </li>
                     <li>

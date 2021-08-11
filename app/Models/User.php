@@ -5,16 +5,21 @@ namespace App\Models;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Ledger\Accountable;
+
 use Illuminate\Notifications\Notifiable;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Bavix\Wallet\Traits\HasWallet;
+use Bavix\Wallet\Interfaces\Wallet;
+use Bavix\Wallet\Traits\HasWalletFloat;
+use Bavix\Wallet\Interfaces\WalletFloat;
 
 
-class User extends Authenticatable implements HasMedia
+
+class User extends Authenticatable implements HasMedia,Wallet, WalletFloat
 {
-    use HasFactory, Notifiable, InteractsWithMedia, Accountable;
+    use HasFactory, Notifiable, InteractsWithMedia,HasWallet,HasWalletFloat;
 
     /**
      * The attributes that are mass assignable.

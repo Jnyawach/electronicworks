@@ -18,7 +18,7 @@
                     </ul>
                     <div class="card jobs">
                         <div class="body pt-3">
-                            <h5 class="m-2">Under Bidding</h5>
+                            <h5 class="m-2">All Projects</h5>
                             <hr class="dropdown-divider">
                             <div class="row">
                                 @if(isset($projects))

@@ -165,7 +165,7 @@ return [
         /*
          * Package Service Providers...
          */
-        Ledger\LedgerServiceProvider::class,
+
 
         /*
          * Application Service Providers...
