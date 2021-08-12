@@ -18,15 +18,15 @@
                     </div>
                     <div class="card-body">
                         <div class="d-inline-flex project-header">
-                            <h5><span>Category:</span> {{$project->descipline->name}}</h5>
-                            <h5 class="ms-3"><span>Deadline:</span>{{\Carbon\Carbon::parse
+                            <h5 class="fw-bold"><span>Category:</span> {{$project->descipline->name}}</h5>
+                            <h5 class="ms-3 fw-bold"><span>Deadline:</span>{{\Carbon\Carbon::parse
                                 ($project->writer_delivery)->isoFormat('MMMM Do YYYY, h:mm:ss a')}}</h5>
-                            <h5 class="ms-3">
+                            <h5 class="ms-3 fw-bold">
                                 <span>Posted On:</span>{{$project->created_at->isoFormat('MMMM Do YYYY, h:mm:ss a')}}
                             </h5>
 
-                            <h5 class="ms-3">
-                                <span>Payout:</span>Ksh.{{$project->order->amount}}
+                            <h5 class="ms-3 fw-bold">
+                                <span>Payout:</span>$.{{$project->client_pay}}
                             </h5>
                         </div>
                         @include('includes.status')

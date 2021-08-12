@@ -25,6 +25,7 @@ class BiddingController extends Controller
         ]);
         $percentile=Costing::latest()->first();
         $cost=number_format($validated['amount']*(100/$percentile->percentage),2);
+        $amount=number_format($validated['amount'],2);
 
 
         if($bid=Bidding::where('project_id', $request->project_id)
@@ -32,7 +33,7 @@ class BiddingController extends Controller
             $bidding=Bidding::where('project_id', $request->project_id)
                 ->where('user_id', $request->user_id)->first();
             $bidding->update([
-                'amount'=>$validated['amount'],
+                'amount'=>$amount,
                 'cost'=>$cost,
             ]);
             return  redirect()->back()->with('status','Bid edited succesfully');
@@ -40,7 +41,7 @@ class BiddingController extends Controller
             $bid=Bidding::create([
                 'project_id'=>$validated['project_id'],
                 'user_id'=>$validated['user_id'],
-                'amount'=>$validated['amount'],
+                'amount'=>$amount,
                 'cost'=>$cost
             ]);
             return  redirect()->back()->with('status','Bid completed successfully');

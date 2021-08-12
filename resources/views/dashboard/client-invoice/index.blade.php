@@ -25,7 +25,7 @@
             <div class="col-sm-12 col-md-4 col-lg-4 mx-auto text-center m-2">
                 <div class="card shadow-sm">
                     <div class="card-body p-4">
-                        <h4 class="fs-4 fw-bold">$. {{$unpaid}}</h4>
+                        <h4 class="fs-4 fw-bold">$. 0.00</h4>
                         <h5 class="fs-5">REFUNDS</h5>
 
                     </div>
@@ -46,9 +46,9 @@
         <nav class="nav indoor">
             <a class="nav-link active" aria-current="page"
                href="{{route('client-invoice.index')}}">All</a>
-            <a class="nav-link" href="{{route('unpaid')}}">Unpaid</a>
-            <a class="nav-link" href="{{route('paid')}}">Paid</a>
-            <a class="nav-link" href="{{route('refund')}}">Refunds</a>
+            <a class="nav-link" href="{{route('client-unpaid')}}">Unpaid</a>
+            <a class="nav-link" href="{{route('client-paid')}}">Paid</a>
+            <a class="nav-link" href="{{route('client-refund')}}">Refunds</a>
         </nav>
         <hr class="dropdown-divider">
         @include('includes.status')

@@ -18,12 +18,8 @@ class ClientInvoiceController extends Controller
     {
         //
         $projects=Project::where('client_id', Auth::id())->get();
-        $total=Project::where('progress_id',4)->where('delivery',1)
-            ->where('payment',1)->sum('client_pay');
-        $unpaid=Project::where('progress_id',4)->where('delivery',1)
-            ->where('payment',0)->sum('client_pay');
         return  view('dashboard.client-invoice.index',
-            compact('projects','total', 'unpaid'));
+            compact('projects'));
     }
 
     /**
@@ -91,4 +87,29 @@ class ClientInvoiceController extends Controller
     {
         //
     }
+
+    public  function client_unpaid(){
+
+        $projects=Project::where('progress_id',4)->where('delivery',1)
+            ->where('payment',0)
+            ->where('client_id', Auth::id())->get();
+        return view('dashboard/client-invoice/client-unpaid', compact('projects'));
+    }
+
+    public  function client_paid(){
+
+        $projects=Project::where('progress_id',4)->where('delivery',1)
+            ->where('payment',1)
+            ->where('client_id', Auth::id())->get();
+        return view('dashboard/client-invoice/client-paid', compact('projects'));
+    }
+
+    public  function client_refund(){
+
+        $projects=Project::where('progress_id',4)->where('delivery',1)
+            ->where('payment',2)->where('refund','>',0)
+            ->where('client_id', Auth::id())->get();
+        return view('dashboard/client-invoice/client-refund', compact('projects'));
+    }
+
 }

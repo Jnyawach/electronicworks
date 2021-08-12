@@ -137,6 +137,9 @@ Route::group(['middleware'=>'auth'], function (){
     Route::resource('dashboard/jobs/returned', ClientRevisionController::class);
     Route::resource('dashboard/jobs/market', ClientBidsController::class);
     Route::resource('dashboard/jobs/assigned', ClientAssignedController::class);
+    Route::get('dashboard/client-invoice/client-unpaid',  [ClientInvoiceController::class, 'client_unpaid'])->name('client-unpaid');
+    Route::get('dashboard/client-invoice/client-paid',  [ClientInvoiceController::class, 'client_paid'])->name('client-paid');
+    Route::get('dashboard/client-invoice/client-refund',  [ClientInvoiceController::class, 'client_refund'])->name('client-refund');
     Route::resource('dashboard/homepage/client-invoice', ClientInvoiceController::class);
     Route::get('/{waiting}',['as'=>'waiting', 'uses'=>RedirectController::class])->name('page')
         ->where('waiting','wait|congratulations|deactivated');

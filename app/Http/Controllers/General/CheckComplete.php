@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\General;
 use App\Http\Controllers\Controller;
 
-use Illuminatech\Balance\BalanceContract;
-use Illuminate\Container\Container;
+
 use App\Models\Project;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class CheckComplete extends Controller
@@ -20,6 +20,9 @@ class CheckComplete extends Controller
     {
         //
         $project=Project::findOrFail($id);
+        $super_wallet=User::findOrFail(1);
+        $client=User::findOrfail($project->client_id);
+        $writer=User::findOrFail($project->writer_id);
 
         if($request->action==1){
             $project->update([
@@ -28,6 +31,9 @@ class CheckComplete extends Controller
                 'refund'=>0,
                 'earning'=>$project->client_pay-$project->writer_pay
             ]);
+            $client->transferFloat($super_wallet,$project->client_pay);
+            $super_wallet->transferFloat($writer,$project->writer_pay);
+
         }elseif ($request->action==0){
             $project->update([
                 'delivery'=>1,
