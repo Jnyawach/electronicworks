@@ -12,6 +12,7 @@
 
     <div class="dashboard-wrapper green-body pt-5">
         <div class="container p-5">
+            @include('includes.balance')
             <nav class="nav indoor">
                 <a class="nav-link" href="{{route('order.index')}}">All</a>
                 <a class="nav-link" href="{{route('unpaid')}}">Unpaid</a>
@@ -57,8 +58,8 @@
                                     <td>{{$project->clients->name}}</td>
                                     <td>
 
-                                        <h4 data-bs-toggle="modal" data-bs-target="#exampleModal"
-                                            style="cursor:pointer" class="text-success">
+                                        <h4 data-bs-toggle="#" data-bs-target="#exampleModal"
+                                            class="text-secondary ">
                                             Action<i class="fas fa-pen-square ms-1"></i>
                                         </h4>
                                         <!-- Modal -->

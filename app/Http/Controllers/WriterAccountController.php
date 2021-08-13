@@ -1,15 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
-use App\Http\Controllers\Controller;
+namespace App\Http\Controllers;
 
-use App\Models\Invoice;
-use App\Models\Project;
-use App\Models\Store;
-use App\Models\User;
 use Illuminate\Http\Request;
 
-class AdminOrderController extends Controller
+class WriterAccountController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,12 +14,6 @@ class AdminOrderController extends Controller
     public function index()
     {
         //
-
-        $projects=Project::all();
-        $store=Store::first();
-        $users=User::where('role_id', 3)->get();
-        return  view('admin.accounts.order.index',
-            compact('projects','store','users'));
     }
 
     /**
@@ -91,26 +80,5 @@ class AdminOrderController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public  function unpaid(){
-        $projects=Project::where('progress_id',4)->where('delivery',1)
-            ->where('payment',0)->get();
-        $store=Store::first();
-        return view('admin/accounts/order/unpaid', compact('projects','store'));
-    }
-
-    public  function paid(){
-        $projects=Project::where('progress_id',4)->where('delivery',1)
-            ->where('payment',1)->get();
-        $store=Store::first();
-        return view('admin/accounts/order/paid', compact('projects','store'));
-    }
-
-    public  function refund(){
-        $projects=Project::where('progress_id',4)->where('delivery',1)
-            ->where('payment',2)->where('refund','>',0)->get();
-        $store=Store::first();
-        return view('admin/accounts/order/refund', compact('projects','store'));
     }
 }

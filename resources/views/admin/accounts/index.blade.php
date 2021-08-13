@@ -7,13 +7,14 @@
     <div class="dashboard-wrapper green-body pt-5">
         <div class="container-fluid dashboard-content">
             <div class="container">
+
                 <section class="green-body p-4 shadow-sm">
                     <div class="row">
                         <div class="col-sm-12 col-md-4 col-lg-4 mx-auto text-center m-2">
                             <div class="card shadow-sm">
                                 <div class="card-body p-4">
                                     <h4 class="fs-4 fw-bold">
-                                        $. {{$balance}}
+                                        $. 0.00
                                     </h4>
                                     <h5 class="fs-5">ACCOUNT BALANCE</h5>
 
@@ -48,45 +49,35 @@
                         <div class="col-12 mx-auto">
                             <div class="card shadow-sm">
                                 <div class="card-header p-3">
-                                    <h5 style="font-size: 18px">Orders pending payment<span
-                                            class="float-end">12</span></h5>
+                                    <h5 class="fw-bold fs-5">Writer Balances</h5>
                                 </div>
                                 <div class="card-body">
                                     <table id="table_id6" class="display">
                                         <thead>
                                         <tr>
-                                            <th>SKU</th>
+                                            <th>Name</th>
                                             <th>Amount($)</th>
-                                            <th>Order Date</th>
-                                            <th>Delivery date</th>
-                                            <th>Client</th>
                                             <th>Action</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        @if($orders->count()>0)
-                                            @foreach($orders as $order)
+                                        @if($writers->count()>0)
+                                            @foreach($writers as $writer)
                                         <tr>
-                                            <td>{{$order->sku}}</td>
-                                            <td>{{$order->client_pay}}</td>
-                                            <td>{{$order->created_at->isoFormat('MMM Do Y')}}</td>
-                                            <td>{{\Carbon\Carbon::parse($order->client_delivery)->isoFormat('MMM Do Y')
-                                            }}</td>
-                                            <td>{{$order->clients->name}}</td>
+                                            <td>{{$writer->name}}</td>
+                                            <td>{{$writer->balanceFloat}}</td>
                                             <td>N/A</td>
                                         </tr>
                                         @endforeach
                                         @endif
-
+                                        </tbody>
+                                        <tfoot>
                                         <tr>
-                                            <th>SKU</th>
+                                            <th>Name</th>
                                             <th>Amount($)</th>
-                                            <th>Order Date</th>
-                                            <th>Delivery date</th>
-                                            <th>Client</th>
                                             <th>Action</th>
                                         </tr>
-                                        </tbody>
+                                        </tfoot>
                                     </table>
                                 </div>
                             </div>

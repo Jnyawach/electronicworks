@@ -14,12 +14,13 @@ use Bavix\Wallet\Traits\HasWallet;
 use Bavix\Wallet\Interfaces\Wallet;
 use Bavix\Wallet\Traits\HasWalletFloat;
 use Bavix\Wallet\Interfaces\WalletFloat;
+use Bavix\Wallet\Traits\HasWallets;
 
 
 
 class User extends Authenticatable implements HasMedia,Wallet, WalletFloat
 {
-    use HasFactory, Notifiable, InteractsWithMedia,HasWallet,HasWalletFloat;
+    use HasFactory, Notifiable, InteractsWithMedia,HasWallet,HasWalletFloat, HasWallets;
 
     /**
      * The attributes that are mass assignable.

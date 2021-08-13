@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Ledger;
 use App\Models\Project;
+use App\Models\Store;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AdminLedgerController extends Controller
@@ -19,7 +21,10 @@ class AdminLedgerController extends Controller
         $orders=Project::all();
         $client=Project::where('delivery',1)->where('progress_id',4)
             ->where('payment',0)->sum('client_pay');
-        return view('admin.accounts.index', compact('orders','balance'));
+        $store=Store::first();
+        $writers=User::where('role_id', 3)
+            ->where('condition',1)->get();
+        return view('admin.accounts.index', compact('orders','client','store','writers'));
     }
 
     /**

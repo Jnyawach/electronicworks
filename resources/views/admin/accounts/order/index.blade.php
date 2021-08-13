@@ -12,6 +12,7 @@
 
     <div class="dashboard-wrapper green-body pt-5">
         <div class="container p-5">
+            @include('includes.balance')
             <nav class="nav indoor">
                 <a class="nav-link active" aria-current="page"
                    href="{{route('order.index')}}">All</a>

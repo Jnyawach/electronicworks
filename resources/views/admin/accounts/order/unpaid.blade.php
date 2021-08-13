@@ -12,6 +12,7 @@
 
     <div class="dashboard-wrapper green-body pt-5">
         <div class="container p-5">
+            @include('includes.balance')
             <nav class="nav indoor">
                 <a class="nav-link " aria-current="page"
                    href="{{route('order.index')}}">All</a>
@@ -80,7 +81,7 @@
                                                                 <option selected value="">Select Action</option>
                                                                 <option value="0">Unpaid</option>
                                                                 <option value="1">Paid</option>
-                                                                <option value="2">Refund</option>
+
                                                             </select>
 
                                                         </form>
