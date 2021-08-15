@@ -307,6 +307,10 @@
                                         <a class="nav-link" href="{{route('order.index')}}">Orders
                                         </a>
                                     </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{route('withdrawal.index')}}">Withdrawal
+                                        </a>
+                                    </li>
 
                                 </ul>
                             </div>

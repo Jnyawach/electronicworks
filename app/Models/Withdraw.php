@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Withdraw extends Model
 {
     use HasFactory;
+    protected $fillable=['amount','status','user_id','processing','text'];
+
+    public  function  users(){
+        return $this->belongsTo(User::class);
+    }
 }

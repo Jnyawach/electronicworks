@@ -13,8 +13,12 @@ class AddAuthorToPayment extends Migration
      */
     public function up()
     {
-        Schema::table('=payments', function (Blueprint $table) {
+        Schema::table('payments', function (Blueprint $table) {
             //
+            $table->bigInteger('authorized_by_id')->index()->unsigned();
+            $table->bigInteger('withdraw_id')->index()->unsigned();
+            $table->foreign('withdraw_id')->references('id')
+                ->on('withdraws')->onDelete('cascade');
         });
     }
 
@@ -27,10 +31,7 @@ class AddAuthorToPayment extends Migration
     {
         Schema::table('payments', function (Blueprint $table) {
             //
-            $table->bigInteger('authorized_by_id')->index()->unsigned();
-            $table->bigInteger('withdraw_id')->index()->unsigned();
-            $table->foreign('user_id')->references('id')
-                ->on('users')->onDelete('cascade');
+
         });
     }
 }

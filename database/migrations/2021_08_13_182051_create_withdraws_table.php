@@ -19,6 +19,8 @@ class CreateWithdrawsTable extends Migration
             $table->bigInteger('user_id')->unsigned()->index();
             $table->string('amount');
             $table->integer('status')->default(0);
+            $table->integer('processing')->default(0);
+            $table->text('reason')->nullable();
             $table->foreign('user_id')->references('id')
                 ->on('users')->onDelete('cascade');
         });

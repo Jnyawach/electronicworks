@@ -81,6 +81,9 @@ class User extends Authenticatable implements HasMedia,Wallet, WalletFloat
     public function projects(){
         return $this->hasMany(Project::class);
     }
+    public function withdrawal(){
+        return $this->hasMany(Withdraw::class);
+    }
     public function desciplines()
     {
         return $this->belongsToMany(Descipline::class, 'descipline_user');

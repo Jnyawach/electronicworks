@@ -122,16 +122,17 @@
                      40px;border-radius: 50%">
                     <a href="{{route('freelancer.show', Auth::id())}}">
                         <h4 class="fs-5 fw-bold">{{Auth::user()->name}}</h4>
+
                     </a>
-
-
                 </div>
+
                 <h6 style="font-size: 13px"><span><i class="fas fa-star">
                            </i><i class="fas fa-star"></i>
                                <i class="fas fa-star"></i>
                                <i class="fas fa-star"></i>
                                <i class="far fa-star"></i>
                            </span>4.5/5 &nbsp|&nbsp800 Rating</h6>
+                <h6 class="fw-light fst-italic">Account Status: {{Auth::user()->status->name}}</h6>
             </li>
             <li>
                 <a href="{{route('freelancer.index')}}"><span class="fa fa-home mr-3"></span> Dashboard</a>
@@ -157,7 +158,7 @@
                 <a href="#"><span><i class="fas fa-envelope"></i></span>Chat room</a>
             </li>
             <li>
-                <a href="#"><span><i class="fas fa-file-invoice"></i></span>Invoices</a>
+                <a href="{{route('finances.index')}}"><span><i class="fas fa-file-invoice"></i></span>Finances</a>
             </li>
         </ul>
 

@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 
-class WriterAccountController extends Controller
+class AdminWithdrawalController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,6 +15,7 @@ class WriterAccountController extends Controller
     public function index()
     {
         //
+        return  view('admin.accounts.withdrawal.index');
     }
 
     /**

@@ -35,6 +35,7 @@ use App\Http\Controllers\Writer\PendingProjectController;
 use App\Http\Controllers\Writer\EvaluationController;
 use App\Http\Controllers\Writer\WriterAmendController;
 use App\Http\Controllers\Writer\WriterAssignedController;
+use App\Http\Controllers\Writer\WriterAccountController;
 
 
 use App\Http\Controllers\Admin\AdminFaqsController;
@@ -56,6 +57,7 @@ use App\Http\Controllers\Admin\AdminOrderController;
 use App\Http\Controllers\Admin\AdminCostingController;
 use App\Http\Controllers\Admin\AdminPreassignedController;
 use App\Http\Controllers\Admin\AdminLedgerController;
+use App\Http\Controllers\Admin\AdminWithdrawalController;
 
 use \App\Http\Controllers\General\ContactController;
 use \App\Http\Controllers\General\TermsController;
@@ -124,6 +126,7 @@ Route::group(['middleware'=>'auth'], function (){
     Route::get('admin/accounts/order/paid',  [AdminOrderController::class, 'paid'])->name('paid');
     Route::get('admin/accounts/order/refund',  [AdminOrderController::class, 'refund'])->name('refund');
     Route::resource('admin/accounts/order', AdminOrderController::class);
+    Route::resource('admin/accounts/withdrawal', AdminWithdrawalController::class);
     Route::resource('admin/homepage/accounts', AdminLedgerController::class);
     Route::patch('admin/task/assign/{id}',  [AdminProjectController::class, 'assign'])->name('assign');
     Route::delete('admin/task/unassign/{id}',  [AdminProjectController::class, 'unassign'])->name('unassign');
@@ -159,6 +162,10 @@ Route::group([], function (){
     Route::resource('english_test', EnglishTestController::class);
     Route::resource('essay_test', EssayTestController::class);
     Route::resource('freelancer', WriterController::class);
+    Route::get('freelancer/finances/writer-unpaid',  [WriterAccountController::class, 'writerUnpaid'])->name('writer-unpaid');
+    Route::get('freelancer/finances/writer-paid',  [WriterAccountController::class, 'writerPaid'])->name('writer-paid');
+    Route::get('freelancer/finances/writer-refund',  [WriterAccountController::class, 'writerRefund'])->name('writer-refund');
+    Route::resource('freelancer/homepage/finances', WriterAccountController::class);
     Route::resource('freelancer/project/pending', PendingProjectController::class);
     Route::resource('freelancer/project/evaluation', EvaluationController::class);
     Route::resource('freelancer/project/amend', WriterAmendController::class);
