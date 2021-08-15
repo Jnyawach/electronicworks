@@ -50,7 +50,7 @@
                     <li>
                         <hr class="dropdown-divider">
                     </li>
-                    <li><a class="dropdown-item" href="#">Projects &nbsp;
+                    <li><a class="dropdown-item" href="{{route('task.index')}}">Projects &nbsp;
                             <i class="fas fa-long-arrow-alt-right"></i></a></li>
                     <li>
                         <hr class="dropdown-divider">

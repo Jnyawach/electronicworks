@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 
+use App\Models\Withdraw;
 use Illuminate\Http\Request;
 
 class AdminWithdrawalController extends Controller
@@ -15,7 +16,8 @@ class AdminWithdrawalController extends Controller
     public function index()
     {
         //
-        return  view('admin.accounts.withdrawal.index');
+        $withdrawals=Withdraw::where('status',0)->get();
+        return  view('admin.accounts.withdrawal.index', compact('withdrawals'));
     }
 
     /**
@@ -48,6 +50,9 @@ class AdminWithdrawalController extends Controller
     public function show($id)
     {
         //
+        $withdraw=Withdraw::findOrFail($id);
+        return  view('admin.accounts.withdrawal.show',
+        compact('withdraw'));
     }
 
     /**
