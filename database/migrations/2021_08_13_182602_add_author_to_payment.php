@@ -16,9 +16,7 @@ class AddAuthorToPayment extends Migration
         Schema::table('payments', function (Blueprint $table) {
             //
             $table->bigInteger('authorized_by_id')->index()->unsigned();
-            $table->bigInteger('withdraw_id')->index()->unsigned();
-            $table->foreign('withdraw_id')->references('id')
-                ->on('withdraws')->onDelete('cascade');
+
         });
     }
 

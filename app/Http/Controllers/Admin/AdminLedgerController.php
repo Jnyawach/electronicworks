@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Ledger;
+use App\Models\Payment;
 use App\Models\Project;
 use App\Models\Store;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminLedgerController extends Controller
 {
@@ -19,12 +21,10 @@ class AdminLedgerController extends Controller
     {
         //
         $orders=Project::all();
-        $client=Project::where('delivery',1)->where('progress_id',4)
-            ->where('payment',0)->sum('client_pay');
         $store=Store::first();
         $writers=User::where('role_id', 3)
             ->where('condition',1)->get();
-        return view('admin.accounts.index', compact('orders','client','store','writers'));
+        return view('admin.accounts.index', compact('orders','store','writers'));
     }
 
     /**
@@ -46,6 +46,22 @@ class AdminLedgerController extends Controller
     public function store(Request $request)
     {
         //
+
+        $validated=$request->validate([
+            'amount'=>'required|max:25',
+            'trans_code'=>'required|max:25',
+            'writer'=>'required|max:25'
+        ]);
+        $user=User::findOrFail($validated['writer']);
+
+        $user->payment()->create([
+            'amount'=>$validated['amount'],
+           'trans_code'=>$validated['trans_code'],
+           'authorized_by_id'=>Auth::id(),
+       ]);
+       $user->withdrawFloat($validated['amount']);
+       //Send email to user
+       return redirect()->back()->with('status','Writer Paid Successfully');
     }
 
     /**
@@ -57,6 +73,8 @@ class AdminLedgerController extends Controller
     public function show($id)
     {
         //
+        $writer=User::findOrFail($id);
+        return view('admin.accounts.show', compact('writer'));
     }
 
     /**

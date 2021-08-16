@@ -81,6 +81,10 @@ class User extends Authenticatable implements HasMedia,Wallet, WalletFloat
     public function projects(){
         return $this->hasMany(Project::class);
     }
+
+    public function payment(){
+        return $this->hasMany(Payment::class);
+    }
     public function withdrawal(){
         return $this->hasMany(Withdraw::class);
     }
