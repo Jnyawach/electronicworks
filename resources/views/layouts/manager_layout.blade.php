@@ -277,6 +277,23 @@
                             </div>
                         </li>
 
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-49" aria-controls="submenu-9"><i class="fas fa-receipt"></i>Accounts</a>
+                            <div id="submenu-49" class="collapse submenu" style="">
+                                <ul class="nav flex-column">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{route('statement.index')}}">Accounts</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{route('orders.index')}}">Orders
+                                        </a>
+                                    </li>
+
+
+                                </ul>
+                            </div>
+                        </li>
+
 
 
                     </ul>

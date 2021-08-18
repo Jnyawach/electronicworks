@@ -1,16 +1,14 @@
 <?php
 
-
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Manager;
 use App\Http\Controllers\Controller;
+
 use App\Models\Project;
 use App\Models\Store;
 use App\Models\User;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 
-
-class AdminController extends Controller
+class ManagerStatementController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,13 +18,11 @@ class AdminController extends Controller
     public function index()
     {
         //
-        $users=User::all();
-        $projects=Project::all();
+        $orders=Project::all();
         $store=Store::first();
-        $delayed=Project::where('writer_delivery','<',Carbon::now())->where('delivery',0)
-            ->where('writer_id','>',0)->get();
-        return  view('admin.index', compact('users','projects','store'
-        ,'delayed'));
+        $writers=User::where('role_id', 3)
+            ->where('condition',1)->get();
+        return  view('manager.statement.index', compact('orders','store','writers'));
     }
 
     /**
@@ -59,6 +55,8 @@ class AdminController extends Controller
     public function show($id)
     {
         //
+        $writer=User::findOrFail($id);
+        return view('manager.statement.show', compact('writer'));
     }
 
     /**

@@ -83,6 +83,8 @@ use \App\Http\Controllers\Manager\ManagerDisciplineController;
 use \App\Http\Controllers\Manager\ManagerNotificationController;
 use \App\Http\Controllers\Manager\ManagerContactController;
 use \App\Http\Controllers\Manager\ManagerFaqController;
+use \App\Http\Controllers\Manager\ManagerStatementController;
+use \App\Http\Controllers\Manager\ManagerOrdersController;
 
 
 
@@ -210,6 +212,11 @@ Route::group([], function (){
     Route::resource('manager/work/manager-completed', ManagerCompletedController::class);
     Route::resource('manager/test/manager-english', ManagerEnglishController::class);
     Route::resource('manager/test/manager-essay', ManagerEssayController::class);
+    Route::get('manager/statement/orders/uncleared',  [ManagerOrdersController::class, 'uncleared'])->name('uncleared');
+    Route::get('manager/statement/orders/cleared',  [ManagerOrdersController::class, 'cleared'])->name('cleared');
+    Route::get('manager/statement/orders/refunded',  [ManagerOrdersController::class, 'refunded'])->name('refunded');
+    Route::resource('manager/homepage/statement', ManagerStatementController::class);
+    Route::resource('manager/statement/orders', ManagerOrdersController::class);
     Route::patch('manager/work/allocate/{id}',  [ManagerProjectController::class, 'allocate'])->name('allocate');
     Route::delete('manager/work/relocate/{id}',  [ManagerProjectController::class, 'relocate'])->name('relocate');
     Route::resource('manager/homepage/writer_application', ManagerApplicationController::class);

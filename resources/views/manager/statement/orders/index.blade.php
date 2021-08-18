@@ -1,12 +1,12 @@
-@extends('layouts.admin_layout')
+@extends('layouts.manager_layout')
 @section('title', 'Orders')
 @section('styles')
     <link href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" rel="stylesheet">
-<style>
-    table.dataTable td {
-        font-size: 0.8em;
-    }
-</style>
+    <style>
+        table.dataTable td {
+            font-size: 0.8em;
+        }
+    </style>
 @endsection
 @section('content')
 
@@ -15,10 +15,10 @@
             @include('includes.balance')
             <nav class="nav indoor">
                 <a class="nav-link active" aria-current="page"
-                   href="{{route('order.index')}}">All</a>
-                <a class="nav-link" href="{{route('unpaid')}}">Unpaid</a>
-                <a class="nav-link" href="{{route('paid')}}">Paid</a>
-                <a class="nav-link" href="{{route('refund')}}">Refunds</a>
+                   href="{{route('orders.index')}}">All</a>
+                <a class="nav-link" href="{{route('uncleared')}}">Unpaid</a>
+                <a class="nav-link" href="{{route('cleared')}}">Paid</a>
+                <a class="nav-link" href="{{route('refunded')}}">Refunds</a>
             </nav>
             <hr class="dropdown-divider">
             @include('includes.status')
@@ -49,7 +49,7 @@
                                     <td>{{$project->id}}</td>
                                     <td>
                                         <a href="{{route('order.show', $project->id)}}"
-                                        class="text-decoration-none text-primary" style="font-size: 0.9em">
+                                           class="text-decoration-none text-primary" style="font-size: 0.9em">
                                             {{$project->sku}}</a>
                                     </td>
                                     <td>{{\Carbon\Carbon::parse($project->client_delivery)->isoFormat('MMM Do Y')}}</td>
@@ -58,12 +58,12 @@
                                     <td>{{$project->progress->name}}</td>
                                     <td>{{$project->clients->name}}</td>
                                     <td>
-                                    @if($project->payment==1)
-                                        <span class="text-success">Paid</span>
-                                    @elseif($project->payment==0)
-                                        <span class="text-danger">Unpaid</span>
-                                    @elseif($project->payment==2)
-                                        <span class="text-warning">Refund</span>
+                                        @if($project->payment==1)
+                                            <span class="text-success">Paid</span>
+                                        @elseif($project->payment==0)
+                                            <span class="text-danger">Unpaid</span>
+                                        @elseif($project->payment==2)
+                                            <span class="text-warning">Refund</span>
                                         @endif
                                     </td>
 

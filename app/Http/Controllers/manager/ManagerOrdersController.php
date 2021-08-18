@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Manager;
 use App\Http\Controllers\Controller;
 
-use App\Models\Invoice;
 use App\Models\Project;
 use App\Models\Store;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class AdminOrderController extends Controller
+class ManagerOrdersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,13 +18,12 @@ class AdminOrderController extends Controller
     public function index()
     {
         //
-
         $projects=Project::all();
         $store=Store::first();
         $users=User::where('role_id', 3)->get();
         $unpaid=Project::where('progress_id',4)->where('delivery',0)->sum('client_pay');
         $earning=$projects->sum('client_pay');
-        return  view('admin.accounts.order.index',
+        return  view('manager.statement.orders.index',
             compact('projects','store','users', 'unpaid','earning'));
     }
 
@@ -95,30 +93,34 @@ class AdminOrderController extends Controller
         //
     }
 
-    public  function unpaid(){
-        $projects=Project::where('progress_id',4)->where('delivery',1)
-            ->where('payment',0)->get();
-        $store=Store::first();
-        $unpaid=Project::where('progress_id',4)->where('delivery',0)->sum('client_pay');
-        $earning=$projects->sum('client_pay');
-        return view('admin/accounts/order/unpaid', compact('projects','store','unpaid','earning'));
-    }
-
-    public  function paid(){
+    public  function cleared(){
         $projects=Project::where('progress_id',4)->where('delivery',1)
             ->where('payment',1)->get();
         $store=Store::first();
         $unpaid=Project::where('progress_id',4)->where('delivery',0)->sum('client_pay');
         $earning=$projects->sum('client_pay');
-        return view('admin/accounts/order/paid', compact('projects','store','unpaid','earning'));
+        return view('manager/statement/orders/cleared', compact('projects','store','unpaid','earning'));
+
     }
 
-    public  function refund(){
+    public  function uncleared(){
+        $projects=Project::where('progress_id',4)->where('delivery',1)
+            ->where('payment',0)->get();
+        $store=Store::first();
+        $unpaid=Project::where('progress_id',4)->where('delivery',0)->sum('client_pay');
+        $earning=$projects->sum('client_pay');
+        return view('manager/statement/orders/uncleared', compact('projects','store','unpaid','earning'));
+
+    }
+
+    public  function refunded(){
         $projects=Project::where('progress_id',4)->where('delivery',1)
             ->where('payment',2)->where('refund','>',0)->get();
         $store=Store::first();
         $unpaid=Project::where('progress_id',4)->where('delivery',0)->sum('client_pay');
         $earning=$projects->sum('client_pay');
-        return view('admin/accounts/order/refund', compact('projects','store','unpaid','earning'));
+        return view('manager/statement/orders/refunded', compact('projects','store','unpaid','earning'));
+
     }
+
 }
