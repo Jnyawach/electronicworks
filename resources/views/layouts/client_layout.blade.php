@@ -58,7 +58,15 @@
                 fa-business-time"></i></span>Submissions&nbsp; </a>
             </li>
             <li>
-                <a href="{{route('returned.index')}}"><span><i class="fas fa-book-reader"></i></span>Revisions&nbsp;
+                <a href="{{route('returned.index')}}"><span><i class="fas fa-book-reader"></i></span>Revisions
+                </a>
+            </li>
+            <li>
+                <a href="{{route('cancelled.index')}}"><span><i class="fas fa-window-close"></i></span>Cancelled
+                </a>
+            </li>
+            <li>
+                <a href="{{route('refund.index')}}"><span><i class="fas fa-file-invoice-dollar"></i></span>Refunds
                 </a>
             </li>
             <li>
@@ -71,7 +79,7 @@
             </li>
         </ul>
 
-        <p class="m-3" style="font-size: 16px">&copy;&nbsp;2021 Electronic Works<br>Cerve ltd</p>
+
 
     </nav>
 

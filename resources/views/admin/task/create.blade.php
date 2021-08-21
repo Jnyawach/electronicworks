@@ -62,20 +62,7 @@
                                                     </small>
                                             </div>
                                             </div>
-                                            <div class="form-group required mt-4">
-                                                <label for="sku" class="control-label">Project SKU:</label><br>
-                                                <input type="text" id="sku" name="sku"
-                                                       class="complete form-control" value="EL00{{$project->id+1}}"
-                                                       required
-                                                       style="width: 600px" ><br>
-                                                <small class="text-danger">
-                                                    @error('sku')
-                                                    {{ $message }}
-                                                    @enderror
-                                                </small>
 
-
-                                            </div>
                                             <div class="form-group required mt-4">
                                                 <label for="instructions" class="control-label">Paper instructions:</label>
                                                 <textarea class="form-control complete" id="instructions"

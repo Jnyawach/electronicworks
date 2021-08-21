@@ -18,7 +18,7 @@
                                                 <h5 class="m-1"><span class="fw-bold">{{$project->sku}}</span>
                                                     {{$project->title}}</h5>
                                                 <h4 class="fs-6 fw-bold m-1">Remaining
-                                                    {{\Carbon\Carbon::parse($project->writer_delivery)
+                                                    {{\Carbon\Carbon::parse($project->client_delivery)
                                            ->diffForHumans()}}&nbsp
                                                     &nbsp;<span>Posted:</span>{{$project->created_at ->diffForHumans()}}
                                                 </h4>

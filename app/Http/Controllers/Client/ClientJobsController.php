@@ -26,7 +26,6 @@ class ClientJobsController extends Controller
         //
 
         $projects=Project::where('client_id', Auth::id())
-            ->where('writer_id',0)->where('progress_id', 1)
             ->paginate(10);
         return  view('dashboard.jobs.index', compact('projects'));
     }
@@ -65,7 +64,7 @@ class ClientJobsController extends Controller
             'writer_id'=>'',
             'deadline'=>'required',
             'words'=>'required',
-            'sku'=>'required|unique:projects'
+
 
         ]);
         $deadlineWriter=$request->deadline*0.75;
@@ -99,9 +98,8 @@ class ClientJobsController extends Controller
             'progress_id'=>$progress,
             'sku'=>$validated['sku'],
             'deadline'=>$validated['deadline'],
-
-
         ]);
+        $project->update(['sku'=>'EL00'.$project->id]);
 
 
         if($files=$request->file('materials')) {
@@ -160,7 +158,7 @@ class ClientJobsController extends Controller
             'writer_id'=>'',
             'deadline'=>'required',
             'words'=>'required',
-            'sku'=>'required'
+
 
         ]);
         $deadlineWriter=$request->deadline*0.75;
@@ -187,7 +185,6 @@ class ClientJobsController extends Controller
             'words'=>$validated['words'],
             'status'=>1,
             'progress_id'=>$progress,
-            'sku'=>$validated['sku'],
             'deadline'=>$validated['deadline'],
             'invoice_id'=>$invoice->id,
         ]);

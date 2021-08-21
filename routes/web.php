@@ -18,6 +18,8 @@ use \App\Http\Controllers\client\ClientRevisionController;
 use \App\Http\Controllers\client\ClientBidsController;
 use \App\Http\Controllers\client\ClientAssignedController;
 use \App\Http\Controllers\client\ClientInvoiceController;
+use \App\Http\Controllers\client\ClientCancelController;
+use \App\Http\Controllers\client\ClientReturnController;
 
 use App\Http\Controllers\Allusers\RedirectController;
 use App\Http\Controllers\Admin\AdminExamController;
@@ -142,6 +144,7 @@ Route::group(['middleware'=>'auth'], function (){
     Route::resource('dashboard/jobs/returned', ClientRevisionController::class);
     Route::resource('dashboard/jobs/market', ClientBidsController::class);
     Route::resource('dashboard/jobs/assigned', ClientAssignedController::class);
+    Route::resource('dashboard/jobs/cancelled', ClientCancelController::class);
     Route::get('dashboard/client-invoice/client-unpaid',  [ClientInvoiceController::class, 'client_unpaid'])->name('client-unpaid');
     Route::get('dashboard/client-invoice/client-paid',  [ClientInvoiceController::class, 'client_paid'])->name('client-paid');
     Route::get('dashboard/client-invoice/client-refund',  [ClientInvoiceController::class, 'client_refund'])->name('client-refund');
@@ -149,6 +152,7 @@ Route::group(['middleware'=>'auth'], function (){
     Route::get('/{waiting}',['as'=>'waiting', 'uses'=>RedirectController::class])->name('page')
         ->where('waiting','wait|congratulations|deactivated');
     Route::resource('dashboard/homepage/jobs', ClientJobsController::class);
+    Route::resource('dashboard/homepage/refund', ClientReturnController::class);
     Route::patch('dashboard/jobs/accept/{id}',  [ClientJobsController::class, 'accept'])->name('accept');
     Route::delete('dashboard/jobs/reject/{id}',  [ClientJobsController::class, 'reject'])->name('reject');
 

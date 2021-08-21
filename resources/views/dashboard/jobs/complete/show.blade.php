@@ -16,7 +16,7 @@
                         <div class="d-inline-flex project-header">
                             <h5><span>Category:</span> {{$project->descipline->name}}</h5>
                             <h5 class="ms-3"><span>Deadline:</span>{{\Carbon\Carbon::parse
-                                ($project->writer_delivery)->isoFormat('MMMM Do YYYY, h:mm:ss a')}}</h5>
+                                ($project->client_delivery)->isoFormat('MMMM Do YYYY, h:mm:ss a')}}</h5>
                             <h5 class="ms-3">
                                 <span>Posted On:</span>{{$project->created_at->isoFormat('MMMM Do YYYY, h:mm:ss a')}}
                             </h5>
@@ -89,6 +89,7 @@
                                         </form>
                                 </div>
                                     <hr class="dotted">
+                                @if(\Carbon\Carbon::now()<=$project->created_at->addMonths(4))
 
 
                                 <h5 class="mt-3">Ask for revision</h5>
@@ -134,6 +135,9 @@
                                         </button>
                                     </div>
                                 </form>
+                                    @else
+                                    <h5 class="mt-3 text-danger">Revision closed for this task</h5>
+                                    @endif
 
 
 

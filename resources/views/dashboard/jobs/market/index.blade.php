@@ -7,6 +7,7 @@
             <div class="col-sm-12 col-md-11 col-lg-11 mx-auto">
                 <div class="card jobs">
                     <div class="body pt-3">
+
                         <h5 class="m-2 fw-bold">Project(s) undergoing Bidding</h5>
                         <hr class="dropdown-divider">
                         <div class="row">
@@ -20,7 +21,7 @@
                                                     class="m-1"><span class="fw-bold"
                                                     >{{$project->sku}}</span> {{$project->title}}</h5>
                                                 <h4 class="fs-6 fw-bold m-1">Required
-                                                    {{\Carbon\Carbon::parse($project->writer_delivery)
+                                                    {{\Carbon\Carbon::parse($project->client_delivery)
                                                 ->diffForHumans()}}&nbsp;
                                                     &nbsp;<span>Posted:</span>{{$project->created_at ->diffForHumans()}}
                                                 </h4>
@@ -29,7 +30,20 @@
                                                     <span>Category:</span> {{$project->descipline->name}}&nbsp;&nbsp;
                                                     <span>Bids:</span> {{count($project->bids)}}
                                                 </h4>
-
+                                                <a class="text-danger" href="{{ route('cancelled.update',$project->id) }}"
+                                                   onclick="event.preventDefault();
+                                                     document.getElementById('cancel-form').submit();">
+                                                    {{ __('Cancel') }}
+                                                </a>
+                                                <form id="cancel-form" action="{{ route('cancelled.update',$project->id) }}" method="POST" class="d-none">
+                                                    @csrf
+                                                    @method('PATCH')
+                                                    <input type="hidden" name="progress" value="9">
+                                                </form>
+                                                <a href="{{route('jobs.edit', $project->id)}}" class="btn-sm
+                                                    ms-auto m-0 text-success">
+                                                    Edit
+                                                </a>
                                             </div>
 
                                             <hr class="dropdown-divider">

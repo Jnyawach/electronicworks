@@ -79,7 +79,7 @@ class User extends Authenticatable implements HasMedia,Wallet, WalletFloat
     }
 
     public function projects(){
-        return $this->hasMany(Project::class);
+        return $this->hasMany(Project::class, 'client_id');
     }
 
     public function payment(){
@@ -87,6 +87,9 @@ class User extends Authenticatable implements HasMedia,Wallet, WalletFloat
     }
     public function withdrawal(){
         return $this->hasMany(Withdraw::class);
+    }
+    public function refunds(){
+        return $this->hasMany(Refund::class);
     }
     public function desciplines()
     {

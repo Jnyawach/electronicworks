@@ -79,4 +79,9 @@ class Project extends Model implements HasMedia
         return $this->belongsTo(Invoice::class);
     }
 
+    public  function refunds(){
+        return $this->hasMany(Refund::class);
+    }
+
+
 }

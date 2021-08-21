@@ -67,7 +67,7 @@ class AdminProjectController extends Controller
             'writer_id'=>'',
             'deadline'=>'required',
             'words'=>'required',
-            'sku'=>'required|unique:projects'
+
 
         ]);
         $deadlineWriter=$request->deadline*0.75;
@@ -99,11 +99,11 @@ class AdminProjectController extends Controller
             'words'=>$validated['words'],
             'status'=>1,
             'progress_id'=>$progress,
-            'sku'=>$validated['sku'],
             'deadline'=>$validated['deadline'],
 
 
         ]);
+        $project->update(['sku'=>'EL00'.$project->id]);
 
 
         if($files=$request->file('materials')) {
@@ -162,7 +162,7 @@ class AdminProjectController extends Controller
             'writer_id'=>'',
             'deadline'=>'required',
             'words'=>'required',
-            'sku'=>'required'
+
 
         ]);
         $deadlineWriter=$request->deadline*0.75;
@@ -189,7 +189,6 @@ class AdminProjectController extends Controller
             'words'=>$validated['words'],
             'status'=>1,
             'progress_id'=>$progress,
-            'sku'=>$validated['sku'],
             'deadline'=>$validated['deadline'],
             'invoice_id'=>$invoice->id,
         ]);

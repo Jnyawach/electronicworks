@@ -10,43 +10,12 @@
         }
     </style>
 @section('content')
-    <section>
-        <div class="row">
-            <div class="col-sm-12 col-md-4 col-lg-4 mx-auto text-center m-2">
-                <div class="card shadow-sm">
-                    <div class="card-body p-4">
-                        <h4 class="fs-4 fw-bold">$. {{Auth::user()->balanceFloat}}</h4>
-                        <h5 class="fs-5">DUE AND UNPAID</h5>
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-12 col-md-4 col-lg-4 mx-auto text-center m-2">
-                <div class="card shadow-sm">
-                    <div class="card-body p-4">
-                        <h4 class="fs-4 fw-bold">$. 0.00</h4>
-                        <h5 class="fs-5">REFUNDS</h5>
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-12 col-md-4 col-lg-4 mx-auto text-center m-2">
-                <div class="card shadow-sm">
-                    <div class="card-body p-4">
-                        <h4 class="fs-4 fw-bold">$. 73400</h4>
-                        <h5 class="fs-5">TOTAL SPENT</h5>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    @include('includes.client_balances')
     <div class="container p-5">
         <nav class="nav indoor">
             <a class="nav-link" aria-current="page"
                href="{{route('client-invoice.index')}}">All</a>
-            <a class="nav-link" href="{{route('unpaid')}}">Unpaid</a>
+            <a class="nav-link" href="{{route('client-unpaid')}}">Unpaid</a>
             <a class="nav-link active" href="{{route('client-paid')}}">Paid</a>
             <a class="nav-link" href="{{route('client-refund')}}">Refunds</a>
         </nav>
@@ -66,6 +35,7 @@
                         <th>Amount($)</th>
                         <th>Status</th>
                         <th>Payment</th>
+                        <th>Refund</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -92,6 +62,52 @@
                                         <span class="text-warning">Refund</span>
                                     @endif
                                 </td>
+                                @if(\Carbon\Carbon::now()<=$project->created_at->addMonths(3))
+                                <td> <!-- Button trigger modal -->
+                                    <button type="button" class="btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal{{$project->id}}">
+                                        Claim Refund
+                                    </button>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="exampleModal{{$project->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Claim Refund</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form id="refund" action="{{route('refund.store')}}" method="POST" style="width: 600px"
+                                                    enctype="multipart/form-data">
+                                                        @csrf
+                                                        <input type="hidden" name="project" value="{{$project->id}}">
+                                                        <div class=" form-group required">
+                                                            <label class="control-label" for="reason">
+                                                                Reason For Refund:
+                                                            </label>
+                                                            <textarea class="form-control complete mt-3" required name="reason" style="height: 100px">
+                                                            </textarea>
+                                                        </div>
+                                                        <div class="form-group mt-3">
+                                                            <label for="formFile" class="form-label">Attach files(optional)</label>
+                                                            <input class="form-control" type="file" id="formFile" name="evidence">
+                                                            <small class="text-success">Please compress if the files are multiple</small>
+                                                        </div>
+
+
+                                                    </form>
+                                                </div>
+                                                <div class="modal-footer">
+
+                                                    <button type="submit" class="btn btn-primary" form="refund">Save changes</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                    @else
+                                    <td>Refund Unavailable</td>
+                                    @endif
 
 
 
@@ -109,6 +125,7 @@
                     <th>Amount($)</th>
                     <th>Status</th>
                     <th>Payment </th>
+                    <th>Refund</th>
                     </tfoot>
 
                 </table>

@@ -19,7 +19,7 @@
                             <div class="d-inline-flex project-header">
                                 <h5><span>Category:</span> {{$project->descipline->name}}</h5>
                                 <h5 class="ms-3"><span>Deadline:</span>{{\Carbon\Carbon::parse
-                                ($project->writer_delivery)->isoFormat('MMMM Do YYYY, h:mm:ss a')}}</h5>
+                                ($project->client_delivery)->isoFormat('MMMM Do YYYY, h:mm:ss a')}}</h5>
                                 <h5 class="ms-3"><span><i class="fas fa-paperclip"></i>
                                     </span>{{$project->created_at->isoFormat('MMMM Do YYYY, h:mm:ss a')}}</h5>
                             </div>

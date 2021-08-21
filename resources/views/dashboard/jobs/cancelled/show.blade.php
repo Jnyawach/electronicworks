@@ -8,16 +8,13 @@
             <div class="card  shadow-sm mb-5 view-order">
                 <div class="card-header d-inline-flex">
                     <h5><span>{{$project->sku}}</span> {{$project->title}}</h5>
-                    @if(!isset($project->writers->name))
-                        <a href="{{route('jobs.edit', $project->id)}}" class="btn-sm
-                                ms-auto m-0">
-                            <i class="fas fa-pen-square me-2"></i>Edit
-                        </a>
-
-                @endif
-                <!--
-                            Please remember to deactivate edit button after project is assigned
-                            -->
+                   <form class="ms-auto" action="{{route('cancelled.update',$project->id)}}"
+                   method="POST">
+                       @method('PATCH')
+                       @csrf
+                       <input type="hidden" name="progress" value="1">
+                       <button type="submit" class="btn-sm btn-primary">Publish Again</button>
+                   </form>
 
                 </div>
                 <div class="card-body">
@@ -25,6 +22,7 @@
                         <h5><span>Category:</span> {{$project->descipline->name}}</h5>
                         <h5 class="ms-3"><span>Deadline:</span>{{\Carbon\Carbon::parse
                                 ($project->client_delivery)->isoFormat('MMMM Do YYYY, h:mm:ss a')}}</h5>
+
                         <h5 class="ms-3"><span><i class="fas fa-paperclip"></i>
                                     </span>{{$project->created_at->isoFormat('MMMM Do YYYY, h:mm:ss a')}}</h5>
 
@@ -177,4 +175,5 @@
     </div>
 
 @endsection
+
 
