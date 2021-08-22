@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Manager;
 use App\Http\Controllers\Controller;
 
 use App\Models\Project;
+use App\Models\Review;
 use Illuminate\Http\Request;
 
 class ManagerCompletedController extends Controller
@@ -51,7 +52,8 @@ class ManagerCompletedController extends Controller
     {
         //
         $project=Project::findBySlugOrFail($id);
-        return  view('manager.work.manager-completed.show', compact('project'));
+        $review=Review::where('project_id',$project->id)->first();
+        return  view('manager.work.manager-completed.show', compact('project','review'));
     }
 
     /**

@@ -9,7 +9,7 @@
                     <!--In progress card-->
                     <div class="card  shadow-sm mb-5 view-order">
                         <div class="card-header d-inline-flex">
-                            <h5><span>ID No.{{$project->id}}</span> {{$project->title}}</h5>
+                            <h5><span>{{$project->sku}}</span> {{$project->title}}</h5>
                         </div>
                         <div class="card-body">
                             <div class="d-inline-flex project-header">
@@ -37,8 +37,8 @@
                                             </span>
                                         @endif
                                     </span>&nbsp;
-                                    Payout: <span>${{number_format($project->words/300*$project->cost,2)}}</span>&nbsp;
-                                    Writer Pay: <span>Kshs.{{number_format($project->words/300*350,2)}}</span>
+                                    Payout: <span>${{$project->client_pay}}</span>&nbsp;
+                                    Writer Pay: <span>${{$project->writer_pay}}</span>
                                     Client: <span>{{$project->clients->name}}</span>
                                 </h5>
                                 <hr class="dotted">
@@ -79,6 +79,8 @@
                                                     @method('PATCH')
                                                     @csrf
                                                     <input type="hidden" value="{{$bid->user_id}}" name="writer">
+                                                    <input type="hidden" value="{{$bid->id}}" name="bid">
+
                                                     <button type="submit" class=" btn-primary btn-sm m-0">Assign<i
                                                             class="fas fa-long-arrow-alt-right ms-2"></i></button>
 

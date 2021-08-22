@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 
 
 use App\Models\Project;
+use App\Models\Review;
 use App\Models\Submission;
 use App\Models\User;
 use Carbon\Carbon;
@@ -59,8 +60,9 @@ class ClientSubmissionController extends Controller
     {
         //
         $project=Project::findBySlugOrFail($id);
+        $review=Review::where('project_id',$project->id)->first();
 
-        return  view('dashboard.jobs.complete.show', compact('project'));
+        return  view('dashboard.jobs.complete.show', compact('project','review'));
     }
 
     /**

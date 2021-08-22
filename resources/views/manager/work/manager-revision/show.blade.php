@@ -25,7 +25,7 @@
                                 <span>Payout:</span>${{$project->client_pay}}
                             </h5>
                         </div>
-                        @include('includes.status')
+
                         <div class="row mt-3 p-3">
                             <div class="col-sm-12 col-md-12 col-lg-12">
                                 <h4>Use <span>{{$project->citation->name}}</span> citation style</h4>

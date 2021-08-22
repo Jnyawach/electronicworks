@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 
 
 use App\Models\Project;
+use App\Models\Review;
 use Illuminate\Http\Request;
 
 class AdminSubmittedController extends Controller
@@ -52,7 +53,8 @@ class AdminSubmittedController extends Controller
     {
         //
         $project=Project::findBySlugOrFail($id);
-        return  view('admin.task.completed.show', compact('project'));
+        $review=Review::where('project_id',$project->id)->first();
+        return  view('admin.task.completed.show', compact('project','review'));
     }
 
     /**

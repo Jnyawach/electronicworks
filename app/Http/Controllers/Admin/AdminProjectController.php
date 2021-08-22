@@ -227,12 +227,17 @@ class AdminProjectController extends Controller
     public function assign(Request $request,$id){
         $project=Project::findOrFail($id);
         $bid=Bidding::findOrFail($request->bid);
+        $deadlineWriter=$project->deadline*0.75;
+        $dead=Carbon::now()->addHour($deadlineWriter);
+        $deadline=Carbon::now()->addHour($project->deadline);
         $project->update([
             'writer_id'=>$request->writer,
             'progress_id'=>2,
             'writer_pay'=>$bid->amount,
             'client_pay'=>$bid->cost,
             'earning'=>$bid->cost-$bid->amount,
+            'writer_delivery'=>$dead,
+            'client_delivery'=>$deadline,
         ]);
         $user=User::findOrfail($request->writer);
         Mail::send('emails.assign', ['user'=> $user], function ($message) use($user){
@@ -241,7 +246,7 @@ class AdminProjectController extends Controller
             $message->subject('Please Proceed');
 
         });
-        return redirect()->back()->with('status','Assigned Successfully');
+        return redirect('admin/task/bids')->with('status','Assigned Successfully');
     }
 
     public function unassign(Request $request,$id){

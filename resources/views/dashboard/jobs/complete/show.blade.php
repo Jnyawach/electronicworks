@@ -52,7 +52,7 @@
                         me-2"></i></span>{{$project->submission->getFirstMedia('attachment')->name}}(click to
                                         download)</a>
                                     <hr class="dotted">
-                                    @if($project->reviews)
+                                    @if(is_null($review))
 
                                     <form class="w-100 green-body p-3" action="{{route('reviewSubmit')}}" method="POST">
                                             <h5 class="fw-bold">Be the first to review this work</h5>
@@ -90,7 +90,23 @@
                                             </div>
 
                                         </form>
+                                        @else
+                                        <div class="review-block">
+                                            <h5 class="fw-bold">Reviews</h5>
+                                            <div class="rating-star">
+                                                @for($i = 0; $i < 5; $i++)
+                                                    <span><i class="fa{{ $review->stars  <= $i ? 'r' : '' }} fa-star"></i></span>
+                                                @endfor
+                                            </div>
+                                            <p class="review-text font-italic m-0">{{$review->comment}}</p>
+                                            <p class="text-success mt-2">By {{$review->clients->name}} on {{$review->created_at->isoFormat('M-D-Y')}}</p>
+
+
+                                        </div>
+
+                                    @endif
                                 </div>
+
                                     <hr class="dotted">
                                 @if(\Carbon\Carbon::now()<=$project->created_at->addMonths(4))
 
