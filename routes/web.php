@@ -60,6 +60,8 @@ use App\Http\Controllers\Admin\AdminCostingController;
 use App\Http\Controllers\Admin\AdminPreassignedController;
 use App\Http\Controllers\Admin\AdminLedgerController;
 use App\Http\Controllers\Admin\AdminWithdrawalController;
+use App\Http\Controllers\Admin\AdminRefundController;
+use App\Http\Controllers\Admin\AdminCancelController;
 
 use \App\Http\Controllers\General\ContactController;
 use \App\Http\Controllers\General\TermsController;
@@ -67,7 +69,13 @@ use \App\Http\Controllers\General\PrivacyController;
 use \App\Http\Controllers\General\SupportController;
 use \App\Http\Controllers\General\CheckComplete;
 use \App\Http\Controllers\General\CheckNotPaid;
+use \App\Http\Controllers\General\DeclineRefundRequest;
+use \App\Http\Controllers\General\ApproveRefundRequest;
+use \App\Http\Controllers\General\ReviewSubmitController;
+
 use \App\Http\Controllers\MainController;
+
+
 
 use \App\Http\Controllers\Manager\ManagerController;
 use \App\Http\Controllers\Manager\ManagerUserController;
@@ -87,6 +95,8 @@ use \App\Http\Controllers\Manager\ManagerContactController;
 use \App\Http\Controllers\Manager\ManagerFaqController;
 use \App\Http\Controllers\Manager\ManagerStatementController;
 use \App\Http\Controllers\Manager\ManagerOrdersController;
+use \App\Http\Controllers\Manager\ManagerRefundController;
+use \App\Http\Controllers\Manager\ManagerCancelController;
 
 
 
@@ -124,6 +134,7 @@ Route::group(['middleware'=>'auth'], function (){
     Route::resource('admin/task/asses', AdminEvaluationController::class);
     Route::resource('admin/task/bids', AdminBidsController::class);
     Route::resource('admin/task/set', AdminPreassignedController::class);
+    Route::resource('admin/task/admin-cancelled', AdminCancelController::class);
     Route::resource('admin/homepage/costing', AdminCostingController::class);
     Route::resource('admin/homepage/invoice', AdminInvoiceController::class);
     Route::get('admin/accounts/order/unpaid',  [AdminOrderController::class, 'unpaid'])->name('unpaid');
@@ -134,6 +145,7 @@ Route::group(['middleware'=>'auth'], function (){
     Route::resource('admin/homepage/accounts', AdminLedgerController::class);
     Route::patch('admin/task/assign/{id}',  [AdminProjectController::class, 'assign'])->name('assign');
     Route::delete('admin/task/unassign/{id}',  [AdminProjectController::class, 'unassign'])->name('unassign');
+    Route::resource('admin/homepage/admin-refund', AdminRefundController::class);
 });
 // client controller
 Route::group(['middleware'=>'auth'], function (){
@@ -196,7 +208,10 @@ Route::group([], function (){
     Route::patch('mark/{id}',['as'=>'mark', 'uses'=>CheckComplete::class]);
     Route::patch('unmark/{id}',['as'=>'unmark', 'uses'=>CheckNotPaid::class]);
     Route::patch('pass/{id}',['as'=>'pass', 'uses'=>ChangePasswordController::class]);
+    Route::patch('refund_decline/{id}',['as'=>'refundDecline', 'uses'=>DeclineRefundRequest::class]);
+    Route::patch('refund_approve/{id}',['as'=>'refundApprove', 'uses'=>ApproveRefundRequest::class]);
     Route::post('/profile',['as'=>'profile', 'uses'=>ProfileController::class]);
+    Route::post('review_submit',['as'=>'reviewSubmit', 'uses'=>ReviewSubmitController::class]);
 });
 
 // manager controller
@@ -214,6 +229,7 @@ Route::group([], function (){
     Route::resource('manager/work/manager-asses', ManagerAssesController::class);
     Route::resource('manager/work/manager-revision', ManagerRevisionController::class);
     Route::resource('manager/work/manager-completed', ManagerCompletedController::class);
+    Route::resource('manager/work/manager-cancelled', ManagerCancelController::class);
     Route::resource('manager/test/manager-english', ManagerEnglishController::class);
     Route::resource('manager/test/manager-essay', ManagerEssayController::class);
     Route::get('manager/statement/orders/uncleared',  [ManagerOrdersController::class, 'uncleared'])->name('uncleared');
@@ -224,6 +240,7 @@ Route::group([], function (){
     Route::patch('manager/work/allocate/{id}',  [ManagerProjectController::class, 'allocate'])->name('allocate');
     Route::delete('manager/work/relocate/{id}',  [ManagerProjectController::class, 'relocate'])->name('relocate');
     Route::resource('manager/homepage/writer_application', ManagerApplicationController::class);
+    Route::resource('manager/homepage/manager-refund', ManagerRefundController::class);
 });
 
 

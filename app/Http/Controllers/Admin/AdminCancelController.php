@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Client;
+namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
-use App\Models\Project;
-use App\Models\Refund;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class ClientReturnController extends Controller
+use App\Models\Project;
+use Illuminate\Http\Request;
+
+class AdminCancelController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +16,9 @@ class ClientReturnController extends Controller
     public function index()
     {
         //
-        $refunds=Auth::user()->refunds()
-        ->paginate(10);
-        return view('dashboard.refund.index', compact('refunds'));
+        $projects=Project::where('progress_id',9)->get();
+        return  view('admin.task.admin-cancelled.index', compact('projects'));
+
     }
 
     /**
@@ -41,30 +40,6 @@ class ClientReturnController extends Controller
     public function store(Request $request)
     {
         //
-        $validated=$request->validate([
-            'evidence'=>'',
-            'evidence.*'=>'max:10000',
-            'reason'=>'required',
-            'project'=>'required'
-        ]);
-        $project=Project::findOrFail($validated['project']);
-        if ($refund=Refund::where('project_id',$project->id)->exists()){
-            return redirect()->back()->with('status', 'Refund claim exists for this order');
-        }else{
-            $evidence=$project->refunds()->create([
-                'reason'=>$validated['reason'],
-                'amount'=>$project->client_pay,
-                'user_id'=>Auth::id(),
-            ]);
-            if($files=$request->file('evidence')) {
-                $evidence->addMedia($files)->toMediaCollection('evidence');
-
-            }
-            return redirect()->back()->with('status', 'Request Successful');
-        }
-
-
-
     }
 
     /**
@@ -76,8 +51,6 @@ class ClientReturnController extends Controller
     public function show($id)
     {
         //
-        $project=Project::findBySlugOrFail($id);
-        return  view('dashboard.refund.show', compact('project'));
     }
 
     /**
@@ -101,6 +74,15 @@ class ClientReturnController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $project=Project::findOrFail($id);
+        if($project->writer_id>0){
+            return  redirect()->back()->with('status','Cancel Failed because the project is assigned to a writer');
+        }else{
+            $project->update([
+                'progress_id'=>$request->progress
+            ]);
+            return  redirect()->back()->with('status','Project Status changed Successfully');
+        }
     }
 
     /**

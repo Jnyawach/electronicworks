@@ -18,6 +18,7 @@ class Refund extends Model implements HasMedia
         'reason',
         'reject_reason',
         'user_id',
+        'authority_id',
     ];
 
     public function project(){

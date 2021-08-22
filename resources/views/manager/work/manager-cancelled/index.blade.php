@@ -1,4 +1,4 @@
-@extends('layouts.admin_layout')
+@extends('layouts.manager_layout')
 @section('title', 'Projects')
 @section('styles')
     <link href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" rel="stylesheet">
@@ -10,7 +10,7 @@
             @include('includes.status')
             <div class="card">
                 <div class="card-header">
-                    <h5>Projects under bidding</h5>
+                    <h5>Cancelled Projects</h5>
                 </div>
                 <div class="card-body">
                     <table id="task" class="display">
@@ -20,7 +20,7 @@
                             <th>SKU</th>
                             <th>Writer Delivery</th>
                             <th>Deadline</th>
-                            <th>Writer</th>
+                            <th>Status</th>
                             <th>Action </th>
                         </tr>
                         </thead>
@@ -43,18 +43,13 @@
                                                 Action
                                             </a>
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-
                                                 <li>
-                                                    <a href="{{route('bids.show', $project->slug)}}"
-                                                       class="dropdown-item">View</a>
-                                                </li>
-                                                <li>
-                                                    <form class="ms-auto" action="{{route('manager-cancelled.update',$project->id)}}"
+                                                    <form class="ms-auto" action="{{route('admin-cancelled.update',$project->id)}}"
                                                           method="POST">
                                                         @method('PATCH')
                                                         @csrf
-                                                        <input type="hidden" name="progress" value="9">
-                                                        <button type="submit" class="btn dropdown-item">Cancel</button>
+                                                        <input type="hidden" name="progress" value="1">
+                                                        <button type="submit" class="btn dropdown-item">Publish Again</button>
                                                     </form>
                                                 </li>
 
@@ -73,7 +68,7 @@
                         <th>SKU</th>
                         <th>Writer Delivery</th>
                         <th>Deadline</th>
-                        <th>Status/Writer</th>
+                        <th>Status</th>
                         <th>Action </th>
                         </tfoot>
 
@@ -93,6 +88,8 @@
 
     </script>
 @endsection
+
+
 
 
 

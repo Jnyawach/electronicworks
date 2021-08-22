@@ -83,5 +83,9 @@ class Project extends Model implements HasMedia
         return $this->hasMany(Refund::class);
     }
 
+    public  function reviews(){
+        return $this->hasMany(Review::class);
+    }
+
 
 }

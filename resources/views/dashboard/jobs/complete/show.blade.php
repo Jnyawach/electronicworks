@@ -25,7 +25,7 @@
                                 <span>Payout:</span>${{$project->client_pay}}
                             </h5>
                         </div>
-                        @include('includes.status')
+
                         <div class="row mt-3 p-3">
                             <div class="col-sm-12 col-md-12 col-lg-12">
                                 <h4>Use <span>{{$project->citation->name}}</span> citation style</h4>
@@ -52,26 +52,29 @@
                         me-2"></i></span>{{$project->submission->getFirstMedia('attachment')->name}}(click to
                                         download)</a>
                                     <hr class="dotted">
+                                    @if($project->reviews)
 
-                                    <form class="w-100 green-body p-3">
+                                    <form class="w-100 green-body p-3" action="{{route('reviewSubmit')}}" method="POST">
                                             <h5 class="fw-bold">Be the first to review this work</h5>
+                                           @csrf
                                             <input type="hidden" value="{{$project->id}}" name="project">
+                                        <input type="hidden" value="{{$project->writer_id}}" name="writer">
                                             <div class="form-group">
                                                 <h4 class="m-0 p-0">Rating:</h4>
                                                 <div class="stars">
-                                                    <input class="star star-5" id="star-5" type="radio" name="star"
+                                                    <input class="star star-5" id="star-5" type="radio" name="stars"
                                                            value="5"/>
                                                     <label class="star star-5" for="star-5"></label>
-                                                    <input class="star star-4" id="star-4" type="radio" name="star"
+                                                    <input class="star star-4" id="star-4" type="radio" name="stars"
                                                            value="4"/>
                                                     <label class="star star-4" for="star-4"></label>
-                                                    <input class="star star-3" id="star-3" type="radio" name="star"
+                                                    <input class="star star-3" id="star-3" type="radio" name="stars"
                                                            value="3"/>
                                                     <label class="star star-3" for="star-3"></label>
-                                                    <input class="star star-2" id="star-2" type="radio" name="star"
+                                                    <input class="star star-2" id="star-2" type="radio" name="stars"
                                                            value="2"/>
                                                     <label class="star star-2" for="star-2"></label>
-                                                    <input class="star star-1" id="star-1" type="radio" name="star"
+                                                    <input class="star star-1" id="star-1" type="radio" name="stars"
                                                            value="1"/>
                                                     <label class="star star-1" for="star-1"></label>
 

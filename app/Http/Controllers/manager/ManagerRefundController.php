@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Client;
+namespace App\Http\Controllers\Manager;
 use App\Http\Controllers\Controller;
-use App\Models\Project;
+
 use App\Models\Refund;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class ClientReturnController extends Controller
+class ManagerRefundController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +16,10 @@ class ClientReturnController extends Controller
     public function index()
     {
         //
-        $refunds=Auth::user()->refunds()
-        ->paginate(10);
-        return view('dashboard.refund.index', compact('refunds'));
+        $refunds=Refund::all();
+        $pendingRefund=Refund::where('status',0)->get();
+
+        return  view('manager.manager-refund.index', compact('refunds','pendingRefund'));
     }
 
     /**
@@ -41,30 +41,6 @@ class ClientReturnController extends Controller
     public function store(Request $request)
     {
         //
-        $validated=$request->validate([
-            'evidence'=>'',
-            'evidence.*'=>'max:10000',
-            'reason'=>'required',
-            'project'=>'required'
-        ]);
-        $project=Project::findOrFail($validated['project']);
-        if ($refund=Refund::where('project_id',$project->id)->exists()){
-            return redirect()->back()->with('status', 'Refund claim exists for this order');
-        }else{
-            $evidence=$project->refunds()->create([
-                'reason'=>$validated['reason'],
-                'amount'=>$project->client_pay,
-                'user_id'=>Auth::id(),
-            ]);
-            if($files=$request->file('evidence')) {
-                $evidence->addMedia($files)->toMediaCollection('evidence');
-
-            }
-            return redirect()->back()->with('status', 'Request Successful');
-        }
-
-
-
     }
 
     /**
@@ -76,8 +52,8 @@ class ClientReturnController extends Controller
     public function show($id)
     {
         //
-        $project=Project::findBySlugOrFail($id);
-        return  view('dashboard.refund.show', compact('project'));
+        $refund=Refund::findOrFail($id);
+        return  view('manager.manager-refund.show', compact('refund'));
     }
 
     /**

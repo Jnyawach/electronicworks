@@ -16,8 +16,8 @@
             <nav class="nav indoor">
                 <a class="nav-link" aria-current="page"
                    href="{{route('orders.index')}}">All</a>
-                <a class="nav-link" href="{{route('uncleared')}}">Unpaid</a>
-                <a class="nav-link active" href="{{route('cleared')}}">Paid</a>
+                <a class="nav-link active" href="{{route('uncleared')}}">Unpaid</a>
+                <a class="nav-link " href="{{route('cleared')}}">Paid</a>
                 <a class="nav-link" href="{{route('refunded')}}">Refunds</a>
             </nav>
             <hr class="dropdown-divider">

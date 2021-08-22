@@ -141,6 +141,10 @@
                                         <a class="nav-link" href="{{route('manager-completed.index')}}">Completed</a>
 
                                     </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{route('manager-cancelled.index')}}">Cancelled</a>
+
+                                    </li>
 
 
 
@@ -286,6 +290,11 @@
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{route('orders.index')}}">Orders
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{route('manager-refund.index')}}">
+                                            Refund
                                         </a>
                                     </li>
 

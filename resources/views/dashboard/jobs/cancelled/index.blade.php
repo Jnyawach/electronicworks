@@ -8,7 +8,7 @@
                 <div class="card jobs">
                     <div class="body pt-3">
 
-                        <h5 class="m-2 fw-bold">Project(s) undergoing Bidding</h5>
+                        <h5 class="m-2 fw-bold">Project(s) Cancelled</h5>
                         <hr class="dropdown-divider">
                         <div class="row">
                             @if(isset($projects))

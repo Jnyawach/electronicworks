@@ -10,10 +10,7 @@
             @include('includes.status')
             <div class="card">
                 <div class="card-header">
-                    <h5>Projects
-                        <a href="{{route('task.create')}}" class="float-end text-decoration-none btn">Publish
-                            Project</a>
-                    </h5>
+                    <h5>Projects under Bidding</h5>
                 </div>
                 <div class="card-body">
                     <table id="task" class="display">
@@ -46,10 +43,19 @@
                                                 Action
                                             </a>
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-
                                                 <li>
                                                     <a href="{{route('manager_bidding.show', $project->slug)}}"
                                                        class="dropdown-item">View</a>
+                                                </li>
+                                                <li>
+                                                <li>
+                                                    <form class="ms-auto" action="{{route('manager-cancelled.update',$project->id)}}"
+                                                          method="POST">
+                                                        @method('PATCH')
+                                                        @csrf
+                                                        <input type="hidden" name="progress" value="9">
+                                                        <button type="submit" class="btn dropdown-item">Cancel</button>
+                                                    </form>
                                                 </li>
 
                                             </ul>

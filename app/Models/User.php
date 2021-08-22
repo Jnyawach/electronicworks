@@ -96,6 +96,11 @@ class User extends Authenticatable implements HasMedia,Wallet, WalletFloat
         return $this->belongsToMany(Descipline::class, 'descipline_user');
     }
 
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+
 
     public  function registerMediaCollections():void
     {

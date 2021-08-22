@@ -30,20 +30,21 @@
                                                     <span>Category:</span> {{$project->descipline->name}}&nbsp;&nbsp;
                                                     <span>Bids:</span> {{count($project->bids)}}
                                                 </h4>
-                                                <a class="text-danger" href="{{ route('cancelled.update',$project->id) }}"
-                                                   onclick="event.preventDefault();
-                                                     document.getElementById('cancel-form').submit();">
-                                                    {{ __('Cancel') }}
-                                                </a>
-                                                <form id="cancel-form" action="{{ route('cancelled.update',$project->id) }}" method="POST" class="d-none">
-                                                    @csrf
-                                                    @method('PATCH')
-                                                    <input type="hidden" name="progress" value="9">
-                                                </form>
-                                                <a href="{{route('jobs.edit', $project->id)}}" class="btn-sm
-                                                    ms-auto m-0 text-success">
-                                                    Edit
-                                                </a>
+                                                <div class="d-inline-flex">
+                                                    <form action="{{route('cancelled.update',$project->id)}}"
+                                                          method="POST">
+                                                        @method('PATCH')
+                                                        @csrf
+                                                        <input type="hidden" name="progress" value="9">
+                                                        <button type="submit" class="btn-sm btn-primary">Cancel</button>
+                                                    </form>
+
+                                                    <a href="{{route('jobs.edit', $project->id)}}" class="btn-sm
+                                                    ms-2 m-0 btn-primary hire text-decoration-none">
+                                                        Edit
+                                                    </a>
+                                                </div>
+
                                             </div>
 
                                             <hr class="dropdown-divider">

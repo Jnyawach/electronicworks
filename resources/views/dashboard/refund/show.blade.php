@@ -51,7 +51,7 @@
 
                                 @if($project->refunds->last()->status==2)
                                     <h4 class="mt-3 fw-bold">Reason</h4>
-                                   <p>{{$project->refunds->last()->reject_reason}}</p>
+                                   <p>{!! $project->refunds->last()->reject_reason !!}</p>
                                 @endif
 
                             </div>

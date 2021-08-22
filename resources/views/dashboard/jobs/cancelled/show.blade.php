@@ -78,38 +78,7 @@
                                             <i class="fas fa-star"></i>
                                             <i class="far fa-star"></i>
                                             4.5/5 </h4>
-                                        <ul class="nav">
-                                            <li class="nav-item">
-                                                <form class="ms-auto m-0">
-                                                    <button type="submit" class="btn btn-outline-primary rounded-0">Request
-                                                        progress</button>
 
-                                                </form>
-                                            </li>
-                                            <li class="nav-item">
-                                                <form class="ms-auto m-0">
-                                                    <button type="submit" class="btn btn-outline-primary rounded-0">Request
-                                                        submission</button>
-
-                                                </form>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="#" class="btn btn-outline-primary rounded-0">Chat with the
-                                                    writer</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <form class="ms-auto m-0" action="{{route('reject',
-                                                        $project->id)}}"
-                                                      method="POST">
-                                                    @method('DELETE')
-                                                    @csrf
-                                                    <input type="hidden" value="{{$project->id}}" name="project">
-                                                    <button type="submit" class="btn btn-outline-danger
-                                                        rounded-0">UnAssign</button>
-
-                                                </form>
-                                            </li>
-                                        </ul>
 
 
                                     </div>
