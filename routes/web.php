@@ -38,6 +38,8 @@ use App\Http\Controllers\Writer\EvaluationController;
 use App\Http\Controllers\Writer\WriterAmendController;
 use App\Http\Controllers\Writer\WriterAssignedController;
 use App\Http\Controllers\Writer\WriterAccountController;
+use App\Http\Controllers\Writer\WriterCompletedController;
+use App\Http\Controllers\Writer\WriterReturnController;
 
 
 use App\Http\Controllers\Admin\AdminFaqsController;
@@ -72,6 +74,7 @@ use \App\Http\Controllers\General\CheckNotPaid;
 use \App\Http\Controllers\General\DeclineRefundRequest;
 use \App\Http\Controllers\General\ApproveRefundRequest;
 use \App\Http\Controllers\General\ReviewSubmitController;
+use \App\Http\Controllers\General\ReviewController;
 
 use \App\Http\Controllers\MainController;
 
@@ -182,11 +185,13 @@ Route::group([], function (){
     Route::resource('freelancer', WriterController::class);
     Route::get('freelancer/finances/writer-unpaid',  [WriterAccountController::class, 'writerUnpaid'])->name('writer-unpaid');
     Route::get('freelancer/finances/writer-paid',  [WriterAccountController::class, 'writerPaid'])->name('writer-paid');
-    Route::get('freelancer/finances/writer-refund',  [WriterAccountController::class, 'writerRefund'])->name('writer-refund');
+    Route::get('freelancer/finances/writer-refund',  [WriterAccountController::class, 'writerRefund'])->name('writer-returned');
     Route::resource('freelancer/homepage/finances', WriterAccountController::class);
+    Route::resource('freelancer/homepage/writer-returned', WriterReturnController::class);
     Route::resource('freelancer/project/pending', PendingProjectController::class);
     Route::resource('freelancer/project/evaluation', EvaluationController::class);
     Route::resource('freelancer/project/amend', WriterAmendController::class);
+    Route::resource('freelancer/project/finished', WriterCompletedController::class);
     Route::post('bidding', ['as'=>'bidding', 'uses'=>BiddingController::class]);
     Route::resource('freelancer/homepage/project',  WriterProjectController::class);
     Route::resource('freelancer/project/allocated',  WriterAssignedController::class);
@@ -200,6 +205,7 @@ Route::group([], function (){
     Route::resource('/', MainController::class);
     Route::resource('terms_condition', TermsController::class);
     Route::resource('privacy', PrivacyController::class);
+    Route::resource('reviews', ReviewController::class);
     Route::resource('help-and-support', SupportController::class);
     Route::get('about-us',  [MainController::class, 'about'])->name('about');
     Route::patch('response/{id}', ['as'=>'response', 'uses'=>ResponseController::class]);

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Writer;
 use App\Http\Controllers\Controller;
+use App\Models\Bidding;
 use App\Models\Project;
 use App\Models\Submission;
 use App\Models\User;
@@ -119,6 +120,7 @@ class PendingProjectController extends Controller
     public function edit($id)
     {
         //
+
     }
 
     /**
@@ -131,6 +133,13 @@ class PendingProjectController extends Controller
     public function update(Request $request, $id)
     {
         //
+       $project=Project::findOrFail($id);
+       $project->update([
+           'writer_id'=>0,
+           'progress_id'=>0
+       ]);
+       $bid=Bidding::where('user_id', Auth::id())->where('project_id',$id)->delete();
+       return redirect('freelancer/project/pending')->with('status','Project Successfully Unclaimed');
     }
 
     /**

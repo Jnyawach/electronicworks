@@ -13,13 +13,13 @@
         @include('includes.writer_withdraw')
         <section class="mb-5">
             <nav class="nav indoor">
-                <a class="nav-link active" aria-current="page"
+                <a class="nav-link" aria-current="page"
                    href="{{route('finances.index')}}">All</a>
                 <a class="nav-link" href="{{route('writer-unpaid')}}">Unpaid
                     <span class="badge bg-primary">{{$unpaid}}</span>
                 </a>
                 <a class="nav-link" href="{{route('writer-paid')}}">Paid</a>
-                <a class="nav-link active" href="{{route('writer-refund')}}">Refunds</a>
+                <a class="nav-link active" href="{{route('writer-returned')}}">Refunds</a>
             </nav>
             <hr class="dropdown-divider">
             <div class="card">

@@ -19,7 +19,7 @@
                     <span class="badge bg-primary">{{$unpaid}}</span>
                 </a>
                 <a class="nav-link active" href="{{route('writer-paid')}}">Paid</a>
-                <a class="nav-link" href="{{route('writer-refund')}}">Refunds</a>
+                <a class="nav-link" href="{{route('writer-returned')}}">Refunds</a>
             </nav>
             <hr class="dropdown-divider">
             <div class="card">

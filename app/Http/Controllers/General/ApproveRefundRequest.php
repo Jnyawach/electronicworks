@@ -43,6 +43,7 @@ class ApproveRefundRequest extends Controller
             'payment'=>2,
             'refund'=>$project->writer_pay,
             'earning'=>0,
+            'progress_id'=>7,
         ]);
 
         return  redirect()->back()->with('status','Refund initiated successfully');

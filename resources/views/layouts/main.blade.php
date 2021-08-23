@@ -31,7 +31,7 @@
             <div class="navbar-nav">
                 <a class="nav-item nav-link" href="{{route('contact.index')}}">Contact Us</a>
                 <a class="nav-item nav-link" href="{{route('about')}}">Why Electronic Works?</a>
-                <a class="nav-item nav-link" href="#">Reviews</a>
+                <a class="nav-item nav-link" href="{{route('reviews.index')}}">Reviews</a>
 
 
             </div>
@@ -162,7 +162,7 @@
                         <a class="nav-link active" href="{{route('contact.index')}}">Help & Support</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Reviews</a>
+                        <a class="nav-link" href="{{route('reviews.index')}}">Reviews</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('help-and-support.index')}}">FAQS</a>

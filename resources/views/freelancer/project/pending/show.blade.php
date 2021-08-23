@@ -6,8 +6,15 @@
         <div class="card">
             <div class="card-header">
                 <h5>{{$project->title}}
-                <a href="#" class="btn-sm float-end hire">Ask question</a>
+                    @if(\Carbon\Carbon::now()<=$project->updated_at->addMinutes(1500))
+               <button type="submit" class="float-end btn-sm btn-danger " form="unclaim">Un-claim Project</button>
+                @endif
                 </h5>
+                <form action="{{route('pending.update',$project->id)}}" id="unclaim" method="POST">
+                    @method('PATCH')
+                    @csrf
+
+                </form>
             </div>
             <div class="card-body">
                 <div class="d-inline-flex project-header">

@@ -31,9 +31,9 @@
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="menu">
             <div class="navbar-nav">
-                <a class="nav-item nav-link" href="#">Contact Us</a>
-                <a class="nav-item nav-link" href="#">Why Electronic Works?</a>
-                <a class="nav-item nav-link" href="#">Reviews</a>
+                <a class="nav-item nav-link" href="{{route('contact.index')}}">Contact Us</a>
+                <a class="nav-item nav-link" href="{{route('about')}}">Why Electronic Works?</a>
+                <a class="nav-item nav-link" href="{{route('reviews.index')}}">Reviews</a>
 
 
             </div>
@@ -155,6 +155,14 @@
                 <a href="{{route('amend.index')}}"><span><i class="fas fa-book-reader"></i></span>Revisions&nbsp;</a>
             </li>
             <li>
+                <a href="{{route('finished.index')}}"><span><i class="fas
+                fa-business-time"></i></span>Completed</a>
+            </li>
+            <li>
+                <a href="{{route('writer-returned.index')}}"><span><i class="fas fa-file-invoice-dollar"></i></span>Returned
+                </a>
+            </li>
+            <li>
                 <a href="#"><span><i class="fas fa-envelope"></i></span>Chat room</a>
             </li>
             <li>
@@ -218,22 +226,22 @@
                 <h5>Company</h5>
                 <ul class="nav flex-column foot-menu">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">Help & Support</a>
+                        <a class="nav-link active" href="{{route('contact.index')}}">Help & Support</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Reviews</a>
+                        <a class="nav-link" href="{{route('reviews.index')}}">Reviews</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">FAQS</a>
+                        <a class="nav-link" href="{{route('help-and-support.index')}}">FAQS</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " href="#">Contact us</a>
+                        <a class="nav-link " href="{{route('contact.index')}}">Contact us</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " href="#">Privacy Policy</a>
+                        <a class="nav-link " href="{{route('privacy.index')}}">Privacy Policy</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " href="#">Terms & Conditions</a>
+                        <a class="nav-link " href="{{route('terms_condition.index')}}">Terms & Conditions</a>
                     </li>
                 </ul>
             </div>

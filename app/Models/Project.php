@@ -80,7 +80,7 @@ class Project extends Model implements HasMedia
     }
 
     public  function refunds(){
-        return $this->hasMany(Refund::class);
+        return $this->hasOne(Refund::class);
     }
 
     public  function reviews(){
