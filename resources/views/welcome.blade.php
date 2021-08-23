@@ -84,33 +84,38 @@
                 <div class="col-sm-11 col-md-3 col-lg-3 mx-auto text-center">
                     <img src="images/badge.png" class="img-fluid" alt="Quality Badge">
                     <h5 class="mt-3">BEST QUALITY</h5>
-                    <p>Lorem Ipsum is simply dummy text of the printing
-                        and typesetting industry. Lorem Ipsum has
-                        been the industry's standard dummy text ever since the 1500s</p>
+                    <p>We are dedicated to ensuring that our
+                        clients receive top-quality content.
+                        We assess the quality of every task assigned to
+                        a writer to certify the quality.
+
+                    </p>
 
                 </div>
                 <div class="col-sm-11 col-md-3 col-lg-3 mx-auto text-center">
                     <img src="images/notebbok.png" class="img-fluid" alt="Notebook">
                     <h5 class="mt-3">PROFESSIONAL WRITERS</h5>
-                    <p>Lorem Ipsum is simply dummy text of the printing
-                        and typesetting industry. Lorem Ipsum has
-                        been the industry's standard dummy text ever since the 1500s</p>
+                    <p>Our writers are highly vetted in their various fields and
+                        certified before they are allowed to undertake a task.
+                        Work with the best!</p>
 
                 </div>
                 <div class="col-sm-11 col-md-3 col-lg-3 mx-auto text-center">
                     <img src="images/clock.png" class="img-fluid" alt="Clock">
                     <h5 class="mt-3">ON TIME DELIVERY</h5>
-                    <p>Lorem Ipsum is simply dummy text of the printing
-                        and typesetting industry. Lorem Ipsum has
-                        been the industry's standard dummy text ever since the 1500s</p>
+                    <p>Delivering quality content within the specified
+                        time is a challenge that faces many.
+                        We stay ahead of our game by delivering good quality
+                        on time.
+                    </p>
 
                 </div>
                 <div class="col-sm-11 col-md-3 col-lg-3 mx-auto text-center">
                     <img src="images/finger-print.png" class="img-fluid" alt="Finger Print">
                     <h5 class="mt-3">UNIQUE CONTENT</h5>
-                    <p>Lorem Ipsum is simply dummy text of the printing
-                        and typesetting industry. Lorem Ipsum has
-                        been the industry's standard dummy text ever since the 1500s</p>
+                    <p>Our writers go the extra mile to extensively research topics.
+                        Every product is original and unique with proper argumentation.
+                        </p>
 
                 </div>
             </div>

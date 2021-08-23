@@ -174,7 +174,7 @@
                         <a class="nav-link " href="{{route('privacy.index')}}">Privacy Policy</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " href="{{route('terms_condition.index')}}">Terms & Conditions</a>
+                        <a class="nav-link " href="{{route('terms_condition.index')}}">Terms of use</a>
                     </li>
                 </ul>
             </div>
