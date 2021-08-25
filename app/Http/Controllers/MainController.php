@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Descipline;
 use App\Models\Project;
+use App\Models\Review;
 use App\Models\Role;
 use App\Models\Status;
 use App\Models\User;
@@ -93,9 +94,11 @@ class MainController extends Controller
     }
 
     public  function about(){
-        $writers=User::where('role_id',3)->get();
+        $writer=User::where('role_id',3)->count();
         $projects=Project::all();
-        return view('about-us', compact('writers','projects'));
+        $fields=Descipline::all();
+        $reviews=Review::latest()->take(4)->get();
+        return view('about-us', compact('writer','projects','fields','reviews'));
     }
 
 }

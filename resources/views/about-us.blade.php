@@ -5,87 +5,43 @@
     <section class="pt-5">
         <div class="container mt-5 about-card">
             <div class="row">
-                <div class="col-sm-11 col-md-7 col-lg-8 mx-auto">
+                <div class="col-sm-11 col-md-8 col-lg-8 mx-auto">
 
                             <h5>Why Electronic Works?</h5>
-                    <p>What's more, our customers do not need to commit to a writer or send any payment
-                                before they settle for a writer whose working approach resonates with them. Such an
-                                innovative approach allows us to create clear competition
-                                among our writers and motivates them to work at their best.</p>
-                            <p>First, our writers check instructions and deadlines of orders,
-                                and place their bids in accordance with the complexity and the urgency
-                                of particular orders. The system automatically adds a service fee and the
-                                total price is displayed to the customer. Then the customer is able to
-                                compare all of the bids that different writers suggest for their work,
-                                as well as get acquainted with each writer's level of cooperation and
-                                writing skills by watching him or her start working on the order.
-                                This way, a customer can settle for a particular writer whose approach
-                                to work and bid requested is most suitable for his or her needs.</p>
-                            <p>On the other hand, we know that half of the process depends on customers
-                                and their ability to articulate instructions in an effective way.
-                                Their views on desired final products must be made clear to the writers.
-                                So, in an effort to encourage customers to communicate with writers in the
-                                best possible manner, we have invented the customer rating system.
-                                All our writers can rate their customers' level of cooperation with an order's successful
-                                completion, and writers too have the unique
-                                opportunity to choose the customer with whom they want to work.</p>
-                            <p>All in all, EssayShark.com offers a convenient, simple,
-                                and unique platform for collaboration between customers who
-                                struggle with their studying and professional writers willing and able
-                                to dedicate their skills towards customers' academic success. Our mission is
-                                to make both sides satisfied with the final product. We believe no other company
-                                on the market can
-                                offer a better solution to make that happen. Try now and decide for yourself!</p>
+                    <p>
+                    Our most valuable resource is our people.
+                    Diversity of background, ideas, options, and
+                    life experiences. We are open to ideas and taking risks
+                    because all this is learning and mastery. This is why we are
+                    dedicated to research and innovation to ensure that what we
+                    deliver to our clients is the best.</p>
+                    <p>At Electronic Works, be confident to get:</p>
+                    <ol>
+                        <li>The best quality papers</li>
+                        <li>Original and unique content</li>
+                        <li>Right on-time delivery</li>
+                        <li>Original and based on proper argumentation</li>
 
+                    </ol>
+                    <section>
+                        <div class="container mt-4 pt-5">
+                            <h2>Expert in over {{$fields->count()}} Fields</h2>
+                            <div class="row mt-5">
+                                @foreach($fields->chunk(7) as $chunk)
+                                    @foreach($chunk as $field)
+                                        <div class="col-sm-11 col-md-6 col-lg-6">
+                                            <p style="line-height: normal; font-size: 15px"><span class="right-pad"><i class="fas fa-caret-right"></i></span>{{$field->name}}</p>
+
+                                        </div>
+                                    @endforeach
+                                @endforeach
+                            </div>
+                        </div>
+                    </section>
                 </div>
-                <div class="col-sm-11 col-md-5 col-lg-4 mx-auto">
-                    <div class="card shadow-sm mt-3">
-                        <div class="card-header">
-                            <h5>Electronic Works Statistics</h5>
-                        </div>
-                        <div class="card-body">
-                            <h6><span><i class="fas fa-star">
-                           </i><i class="fas fa-star"></i>
-                               <i class="fas fa-star"></i>
-                               <i class="fas fa-star"></i>
-                               <i class="far fa-star"></i>
-                           </span>4.5/5 &nbsp;| &nbsp;800 Reviews</h6>
-                            <h6><span>100K+</span> &nbsp;Visitors per month</h6>
-                            <h6><span>{{$writers->count()}}</span> &nbsp;Active Writers</h6>
-                            <h6><span>{{$projects->count()}}</span> &nbspProjects Completed</h6>
-                            <hr>
-                            <h5 style="font-size: 24px">Sign up to<br>
-                                access high quality papers</h5>
-                            <a href="{{route('register')}}" class="btn btn-primary hire mt-3 mb-4">Click to Sign Up</a>
-                        </div>
-                    </div>
-                    <div class="card shadow-sm mt-3">
-                        <div class="card-header">
-                            <h5>Reviews</h5>
-                        </div>
-                        <div class="card-body">
-                            <h6 class="m-0"><span>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                               <i class="fas fa-star"></i>
-                               <i class="fas fa-star"></i>
-                               <i class="far fa-star"></i>
-                           </span>4.5/5 &nbsp;| &nbsp;Mikel</h6>
-                            <p>I loved the work. It was high quality</p>
-                            <h5>QW110-W | Writer: Jonah</h5>
-                            <hr class="w-100">
+                <div class="col-sm-11 col-md-4 col-lg-4 mx-auto">
+                    @include('includes.statistics')
 
-                            <h6 class="m-0"><span><i class="fas fa-star">
-                           </i><i class="fas fa-star"></i>
-                               <i class="fas fa-star"></i>
-                               <i class="fas fa-star"></i>
-                               <i class="far fa-star"></i>
-                           </span>4.5/5 &nbsp;| &nbsp;Mikel</h6>
-                            <p>I loved the work. It was high quality</p>
-                            <h5>QW110-W | Writer: Jonah</h5>
-                            <hr class="w-100">
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -99,104 +55,44 @@
 
             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
                 <ol class="carousel-indicators">
-                    <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" ></li>
-                    <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></li>
-                    <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"></li>
+                    @foreach($reviews as $photo)
+                    <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ $loop->index }}" class="{{ $loop->first ? 'active' : '' }}" ></li>
+                   @endforeach
                 </ol>
                 <div class="carousel-inner">
-                    <div class="carousel-item active">
+                    @foreach($reviews as $key=>$review)
+                    <div class="carousel-item {{ $key == 0 ? ' active' : '' }}">
                         <div class="row m-5">
                             <div class="col-sm-11 col-md-5 col-lg-4 mx-auto">
                                 <h6>Client Feedback &nbsp;&nbsp;<span>
-                     <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                               <i class="fas fa-star"></i>
-                               <i class="fas fa-star"></i>
-                               <i class="far fa-star"></i>
-                    4.5/5
+                                @for($i = 0; $i < 5; $i++)
+                                            <i class="fa{{ $review->stars  <= $i ? 'r' : '' }} fa-star"></i>
+                                        @endfor
+                                    {{$review->stars}}/5
 
                       </span></h6>
-                                <p>Excellent Work!</p>
-                                <h6><span>Submitted 11hours ago</span></h6>
+                                <p>{{Coduo\PHPHumanizer\StringHumanizer::truncate($review->comment,70,'...')}}</p>
+                                <h6><span>Submitted {{$review->created_at->diffForHumans()}}</span></h6>
 
                             </div>
                             <div class="col-sm-11 col-md-2 col-lg-1 mx-auto">
                                 <hr style="width: 1px; height: 100px">
                             </div>
                             <div class="col-sm-11 col-md-5 col-lg-4 mx-auto">
-                                <h6>Motion Graphics</h6>
-                                <p>Coursework, ID. 293043</p>
+                                <h6>{{$review->project->title}}</h6>
+                                <p>{{$review->project->descipline->name}}, ID. {{$review->project->sku}}</p>
                                 <div class="d-inline-flex">
-                                    <img src="images/tulah.png" class="img-fluid" align="Profile Photo" style="height: 50px">
-                                    <p class="m-2">Witer: Tulah</p>
+                                    <img src="{{url($review->writers->getFirstMedia('avatar')?
+                                                $review->writers->getFirstMedia('avatar')
+                                                ->getUrl('avatar_icon'):'/images/no-image.png' )}}" class="img-fluid"  style="height: 50px">
+                                    <p class="m-2">Writer: {{$review->writers->name}}</p>
                                 </div>
 
                             </div>
 
                         </div>
                     </div>
-                    <div class="carousel-item">
-                        <div class="row m-5">
-                            <div class="col-sm-11 col-md-5 col-lg-4 mx-auto">
-                                <h6>Client Feedback &nbsp;&nbsp;<span>
-                     <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                               <i class="fas fa-star"></i>
-                               <i class="fas fa-star"></i>
-                               <i class="far fa-star"></i>
-                    4.5/5
-
-                </span></h6>
-                                <p>Excellent Work!</p>
-                                <h6><span>Submitted 11hours ago</span></h6>
-
-                            </div>
-                            <div class="col-sm-11 col-md-2 col-lg-1 mx-auto">
-                                <hr style="width: 1px; height: 100px">
-                            </div>
-                            <div class="col-sm-11 col-md-5 col-lg-4 mx-auto">
-                                <h6>Motion Graphics</h6>
-                                <p>Coursework, ID. 293043</p>
-                                <div class="d-inline-flex">
-                                    <img src="images/tulah.png" class="img-fluid" align="Profile Photo" style="height: 50px">
-                                    <p class="m-2">Witer: Tulah</p>
-                                </div>
-
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="row m-5">
-                            <div class="col-sm-11 col-md-5 col-lg-4 mx-auto">
-                                <h6>Client Feedback &nbsp;&nbsp;<span>
-                     <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                               <i class="fas fa-star"></i>
-                               <i class="fas fa-star"></i>
-                               <i class="far fa-star"></i>
-                    4.5/5
-
-                </span></h6>
-                                <p>Excellent Work!</p>
-                                <h6><span>Submitted 11hours ago</span></h6>
-
-                            </div>
-                            <div class="col-sm-11 col-md-2 col-lg-1 mx-auto">
-                                <hr style="width: 1px; height: 100px">
-                            </div>
-                            <div class="col-sm-11 col-md-5 col-lg-4 mx-auto">
-                                <h6>Motion Graphics</h6>
-                                <p>Coursework, ID. 293043</p>
-                                <div class="d-inline-flex">
-                                    <img src="images/tulah.png" class="img-fluid" align="Profile Photo" style="height: 50px">
-                                    <p class="m-2">Witer: Tulah</p>
-                                </div>
-
-                            </div>
-
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
 
             </div>

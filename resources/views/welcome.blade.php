@@ -19,7 +19,7 @@
                     writer</a>
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-7 mx-auto m-2">
-                    <img src="images/people-browsing.png" class="img-fluid">
+                    <img src="{{asset('images/people-browsing.png')}}" class="img-fluid">
 
                 </div>
             </div>
