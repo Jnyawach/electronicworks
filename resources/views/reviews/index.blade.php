@@ -34,6 +34,7 @@
                                                    <i class="fa{{ $review->stars  <= $i ? 'r' : '' }} fa-star"></i>
                                                 @endfor
                                                 {{$review->stars}}/5
+
                                             </h5>
 
                                         </div>

@@ -83,8 +83,8 @@ class AdminApplicationController extends Controller
         $writer=User::findOrFail($id);
         $writer->update([
             'status_id'=>$request->status,
+
         ]);
-        $writer->createAccount('orders','order-handled-by-user');
 
         $writer->detail()->update([
             'score'=>$request->score,
@@ -99,6 +99,9 @@ class AdminApplicationController extends Controller
             });
             return  redirect('admin/homepage/application')->with('status', 'Writer Successfully Rejected');
         }elseif($request->status==1){
+            $writer->update([
+               'level_id'=>1,
+            ]);
             Mail::send('emails.approved', ['mess'=>$writer], function ($message) use($writer){
                 $message->to($writer->email);
                 $message->from('nyawach41@gmail.com');

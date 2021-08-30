@@ -24,6 +24,7 @@ class MainController extends Controller
         $fields=Descipline::all();
         $users=User::where('role_id', 3)->get()->count();
 
+
         return  view('welcome', compact('fields', 'users'));
     }
 

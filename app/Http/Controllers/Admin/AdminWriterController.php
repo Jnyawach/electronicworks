@@ -92,7 +92,8 @@ class AdminWriterController extends Controller
             'role_id'=>$validated['role_id'],
             'cellphone'=>$validated['cellphone'],
             'sec_cellphone'=>$validated['sec_cellphone'],
-            'status_id'=>$validated['status_id']
+            'status_id'=>$validated['status_id'],
+            'level_id'=>1,
         ]);
 
         $writerDetails=WriterDetail::create([
@@ -119,6 +120,7 @@ class AdminWriterController extends Controller
 
             $writerDetails->addMedia($request->identity)->toMediaCollection('identity');
         }
+
 
         return redirect('admin/homepage/writer')->with('status', 'Writer Added');
 

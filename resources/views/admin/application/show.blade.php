@@ -124,6 +124,7 @@
                                     @csrf
                                     <small class="text-danger">Please use this form to approve or reject user
                                         application</small>
+
                                     <div class="form-group">
                                         <select class="form-select complete" name="status" required id="status">
                                             <option value="" selected>Select action</option>

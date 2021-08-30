@@ -19,6 +19,7 @@
         "madnest/madzipper": "^1.1",
         "moneyphp/money": "^4.0",
         "spatie/laravel-medialibrary": "^9.0.0",
+        "spatie/laravel-permission": "^4.4",
         "spatie/laravel-query-builder": "^3.5"
     },
     "require-dev": {

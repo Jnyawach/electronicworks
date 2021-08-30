@@ -1,7 +1,15 @@
 @extends('layouts.writer')
 @section('title','Projects')
 @section('content')
-    <div class="p-3">
+    <div>
+        @if(Auth::user()->level_id>0)
+        @if(Auth::user()->jobs->where('progress_id',2)->count()>=Auth::user()->level->quantity)
+        <div class="alert alert-danger p-2" role="alert">
+            <p class="p-0 m-0">You have reached the maximum bid limit! Submit the assigned order
+            before you can bid for another project</p>
+        </div>
+        @endif
+        @endif
         <div class="row pb-5">
             <div class="col-sm-12 col-md-3 col-lg-3 mx-auto">
                 <h5>Find Projects</h5>

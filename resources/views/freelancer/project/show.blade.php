@@ -2,6 +2,14 @@
 @section('title', 'Bid for Projects')
 @section('content')
     <div class="container">
+        @if(Auth::user()->level_id>0)
+            @if(Auth::user()->jobs->where('progress_id',2)->count()>=Auth::user()->level->quantity)
+                <div class="alert alert-danger p-2" role="alert">
+                    <p class="p-0 m-0">You have reached the maximum bid limit! Submit the assigned order
+                        before you can bid for another project</p>
+                </div>
+            @endif
+        @endif
         <div class="card">
             <div class="card-header">
                 <h5><span class="fw-bold">{{$project->sku}}</span> {{$project->title}}</h5>
@@ -42,10 +50,13 @@
                                     <label for="amount" class="control-label">Bid Amount($):</label>
                                     <input type="text" class="complete form-control" name="amount" value="{{old
                                     ('amount')
-                                }}">
+                                }}"  @if(Auth::user()->jobs->where('progress_id',2)->count()>=Auth::user()->level->quantity)
+                                    disabled @endif>
                                     <small>Bid currency is dollars($)</small>
                                 </div>
-                                <button type="submit" class="btn btn-primary mt-3 form-control"> Bid for this project</button>
+                                <button type="submit" class="btn btn-primary mt-3 form-control"
+                                @if(Auth::user()->jobs->where('progress_id',2)->count()>=Auth::user()->level->quantity)
+                                    disabled @endif> Bid for this project</button>
 
 
                             </form>

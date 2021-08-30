@@ -121,18 +121,26 @@
                     ->getUrl('avatar_icon'):'/images/no-image.png' )}}" class="img-fluid bg-light" style="height: 40px; width:
                      40px;border-radius: 50%">
                     <a href="{{route('freelancer.show', Auth::id())}}">
-                        <h4 class="fs-5 fw-bold">{{Auth::user()->name}}</h4>
+                        <h4 class="fs-5 fw-bold">{{Auth::user()->name}} {{Auth::user()->last_name}}</h4>
 
                     </a>
                 </div>
 
-                <h6 style="font-size: 13px"><span><i class="fas fa-star">
-                           </i><i class="fas fa-star"></i>
-                               <i class="fas fa-star"></i>
-                               <i class="fas fa-star"></i>
-                               <i class="far fa-star"></i>
-                           </span>4.5/5 &nbsp|&nbsp800 Rating</h6>
-                <h6 class="fw-light fst-italic">Account Status: {{Auth::user()->status->name}}</h6>
+                <h4 style="font-size: 13px" class="fw-bold">
+                    @if(Auth::user()->reviewing->count()>0)
+                           @for($i = 0; $i < 5; $i++)
+                                <i class="fa{{Auth::user()->reviewing->sum('stars')/Auth::user()->reviewing->count()  <= $i ? 'r' : '' }} fa-star"></i>
+                            @endfor
+
+
+                               {{round(Auth::user()->reviewing->sum('stars')/Auth::user()->reviewing->count())}}/5 &nbsp|&nbsp{{Auth::user()->reviewing->count()}} Ratings
+                    @else
+                        No Reviews
+                    @endif</h4>
+                @if(Auth::user()->level_id>0)
+                <h4>Account Level: <span>{{Auth::user()->level->name}}</span></h4>
+                @endif
+                <h4>Account Status: <span>{{Auth::user()->status->name}}</span></h4>
             </li>
             <li>
                 <a href="{{route('freelancer.index')}}"><span class="fa fa-home mr-3"></span> Dashboard</a>
@@ -170,6 +178,7 @@
             </li>
         </ul>
 
+
         <p class="m-3" style="font-size: 16px">&copy;&nbsp;2021 Electronic Works<br>Cerve ltd</p>
 
     </nav>
@@ -178,7 +187,9 @@
     <div id="content" class="">
 
         <div class="container pt-5 pl-3 dashboard">
+
             @yield('content')
+
         </div>
     </div>
 

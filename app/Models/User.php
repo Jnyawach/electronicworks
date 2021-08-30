@@ -15,12 +15,16 @@ use Bavix\Wallet\Interfaces\Wallet;
 use Bavix\Wallet\Traits\HasWalletFloat;
 use Bavix\Wallet\Interfaces\WalletFloat;
 use Bavix\Wallet\Traits\HasWallets;
+use Spatie\Permission\Traits\HasRoles;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 
 
 class User extends Authenticatable implements HasMedia,Wallet, WalletFloat
 {
-    use HasFactory, Notifiable, InteractsWithMedia,HasWallet,HasWalletFloat, HasWallets;
+    use HasFactory, Notifiable, InteractsWithMedia,HasWallet,HasWalletFloat, HasWallets,
+        HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -32,12 +36,10 @@ class User extends Authenticatable implements HasMedia,Wallet, WalletFloat
         'email',
         'password',
         'last_name',
-        'role_id',
         'is_active',
         'cellphone',
        'sec_cellphone',
-        'status_id',
-        'condition',
+        'level_id'
     ];
 
     /**
@@ -59,9 +61,9 @@ class User extends Authenticatable implements HasMedia,Wallet, WalletFloat
         'email_verified_at' => 'datetime',
     ];
 
-    public  function role(){
-        return $this->belongsTo(Role::class);
-    }
+//    public  function role(){
+//        return $this->belongsTo(Role::class);
+//    }
 
     public  function status(){
         return $this->belongsTo(Status::class);
@@ -81,6 +83,10 @@ class User extends Authenticatable implements HasMedia,Wallet, WalletFloat
     public function projects(){
         return $this->hasMany(Project::class, 'client_id');
     }
+    public  function jobs(){
+        return $this->hasMany(Project::class, 'writer_id');
+    }
+
 
     public function payment(){
         return $this->hasMany(Payment::class);
@@ -98,8 +104,20 @@ class User extends Authenticatable implements HasMedia,Wallet, WalletFloat
 
     public function reviews()
     {
-        return $this->hasMany(Review::class);
+        return $this->hasMany(Review::class,'user_id');
     }
+
+    public function reviewing()
+    {
+        return $this->hasMany(Review::class,'writer_id');
+    }
+
+    public function level()
+    {
+        return $this->belongsTo(Level::class);
+    }
+
+
 
 
     public  function registerMediaCollections():void

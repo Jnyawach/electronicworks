@@ -8,5 +8,6 @@
                 {{ session('status') }}
             </div>
         @endif
+
     </div>
 @endsection
