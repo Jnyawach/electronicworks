@@ -39,7 +39,8 @@ class User extends Authenticatable implements HasMedia,Wallet, WalletFloat
         'is_active',
         'cellphone',
        'sec_cellphone',
-        'level_id'
+        'level_id',
+        'status_id',
     ];
 
     /**

@@ -74,13 +74,18 @@
                             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-end  sign-drop"
                                 aria-labelledby="dropdownMenuButton1">
                                 <li>
-                                    @if(Auth::user()->role->name=='Writer')
+                                    @role('Writer')
                                         <a class="dropdown-item" href="{{route('freelancer.index')}}">Dashboard
                                             <i class="fas fa-house-user ms-2"></i></a>
-                                        @elseif(Auth::user()->role->name=='Client')
+                                        @endrole
+                                    @role('Client')
                                         <a class="dropdown-item" href="{{route('dashboard.index')}}">Dashboard
                                             <i class="fas fa-house-user ms-2"></i></a>
-                                        @endif
+                                      @endrole
+                                    @role('Admin')
+                                    <a class="dropdown-item" href="{{route('admin.index')}}">Dashboard
+                                        <i class="fas fa-house-user ms-2"></i></a>
+                                    @endrole
                                    </li>
                                 <hr>
                                 <li>

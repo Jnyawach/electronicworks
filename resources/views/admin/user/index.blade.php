@@ -49,113 +49,9 @@
                         </div>
                     </div>
                 </div>
-                <!--Delayed projects-->
-                <div class="row mt-3">
-                    <div class="col-12 mx-auto">
-                        <div class="card shadow-sm">
-                            <div class="card-header p-3">
-                                <h5 style="font-size: 18px">Users<span class="float-end fw-bold">Total: 4152</span></h5>
-                            </div>
-                            <div class="card-body">
-                                <table id="table_id" class="display">
-                                    <thead>
-                                    <tr>
-                                        <th>User Id</th>
-                                        <th>Name</th>
-                                        <th>Registration date</th>
-                                        <th>Type</th>
-                                        <th>Status</th>
-                                        <th>View </th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>2347654</td>
-                                        <td>Allan</td>
-                                        <td>May 3, 2021</td>
-                                        <td>Writer</td>
-                                        <td class="text-danger">Deactivated</td>
-                                        <td><a href="#" class="text-decoration-none text-success">View profile</a> </td>
-                                    </tr>
-                                    <tr>
-                                        <td>2347654</td>
-                                        <td>Allan</td>
-                                        <td>May 3, 2021 </td>
-                                        <td>Writer</td>
-                                        <td>Active</td>
-                                        <td><a href="#" class="text-decoration-none text-success">View profile</a> </td>
-                                    </tr>
-                                    <tfoot>
-                                    <th>User Id</th>
-                                    <th>Name</th>
-                                    <th>Registration date</th>
-                                    <th>Type</th>
-                                    <th>Status</th>
-                                    <th>View </th>
-                                    </tfoot>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
 
-                    </div>
-                </div>
-                <!--End Delayed projects-->
-
-                <div class="row mt-3">
-                    <div class="col-12 mx-auto">
-                        <div class="card shadow-sm">
-                            <div class="card-header p-3">
-                                <h5 style="font-size: 18px">Low
-                                    rating users<span class="float-end fw-bold">Total: 4</span></h5>
-                            </div>
-                            <div class="card-body">
-                                <table id="table_id2" class="display">
-                                    <thead>
-                                    <tr>
-                                        <th>User Id</th>
-                                        <th>Name</th>
-                                        <th>Registration date</th>
-                                        <th>Rating</th>
-                                        <th>Status</th>
-                                        <th>View </th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>2347654</td>
-                                        <td>Allan</td>
-                                        <td>May 3, 2021</td>
-                                        <td>1.2</td>
-                                        <td class="text-danger">Deactivated</td>
-                                        <td><a href="#" class="text-decoration-none text-success">View profile</a> </td>
-                                    </tr>
-                                    <tr>
-                                        <td>2347654</td>
-                                        <td>Allan</td>
-                                        <td>May 3, 2021 </td>
-                                        <td>1.8</td>
-                                        <td>Active</td>
-                                        <td><a href="#" class="text-decoration-none text-success">View profile</a> </td>
-                                    </tr>
-                                    <tfoot>
-                                    <th>User Id</th>
-                                    <th>Name</th>
-                                    <th>Registration date</th>
-                                    <th>Rating</th>
-                                    <th>Status</th>
-                                    <th>View </th>
-                                    </tfoot>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <!--Admin Users-->
-                    <div class="row mt-3">
+                    <!--Admin Users-->
+                    <div class="row mt-3 mb-5">
                         <div class="col-12 mx-auto">
                             <div class="card shadow-sm">
                                 <div class="card-header p-3">
@@ -215,7 +111,7 @@
                                                                     @method('PATCH')
                                                                     @csrf
                                                                     <input type="hidden" name="status_id"
-                                                                           value="4">
+                                                                           value="3">
                                                                     <button type="submit" class="btn">Disable <i
                                                                             class="fas fa-check-square ms-2"></i></button>
                                                                 </form>
@@ -241,6 +137,7 @@
 
                                         </tr>
                                         @endforeach
+                                        </tbody>
                                         @endif
 
                                         <tfoot>
@@ -251,7 +148,7 @@
                                         <th>Account</th>
                                         <th>Action </th>
                                         </tfoot>
-                                        </tbody>
+
                                     </table>
                                 </div>
                             </div>
@@ -263,30 +160,6 @@
 
         </div>
 
-
-        <!-- ============================================================== -->
-        <!-- footer -->
-        <!-- ============================================================== -->
-        <div class="footer bg-light p-3">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                        Copyright © 2021 Electronic Works</a>.
-                    </div>
-                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                        <div class="text-md-right footer-links d-none d-sm-block">
-                            <a href="javascript: void(0);">About</a>
-                            <a href="javascript: void(0);">Support</a>
-                            <a href="javascript: void(0);">Contact Us</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ============================================================== -->
-        <!-- end footer -->
-        <!-- ============================================================== -->
     </div>
     <!-- ============================================================== -->
     <!-- end wrapper  -->

@@ -73,8 +73,8 @@ class RegisterController extends Controller
             'last_name'=>$data['last_name'],
             'password' => Hash::make($data['password']),
         ]);
-        $user->assignRole('Super');
-        return redirect('welcome');
+        $user->assignRole('Client');
+        return $user;
 
     }
 }

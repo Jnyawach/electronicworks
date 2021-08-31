@@ -81,7 +81,7 @@
                         </div>
                         <!--action button-->
                     </div>
-                    <h4 class="fs-5">{{$user->role->name}}</h4>
+
                     <h4>Created: <span>{{$user->created_at->diffForHumans()}}</span> </h4>
                     <h4>Status: <span>{{$user->status->name}} <i class="fas fa-certificate ms-1"></i></span></h4>
                     <!---Update password modal--->
@@ -152,8 +152,8 @@
                         <h5 class="mt-5">About</h5>
                         <hr>
                         <h5>Email: <span>{{$user->email}}</span></h5>
-                        <h5>Cellphone: <span>08766289221</span></h5>
-                        <h5>Secondary Cellphone: <span>N/A</span></h5>
+                        <h5>Cellphone: <span>{{$user->cellphone}}</span></h5>
+                        <h5>Secondary Cellphone: <span>{{$user->sec_cellphone}}</span></h5>
 
                     </div>
 

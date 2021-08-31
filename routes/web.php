@@ -64,6 +64,10 @@ use App\Http\Controllers\Admin\AdminLedgerController;
 use App\Http\Controllers\Admin\AdminWithdrawalController;
 use App\Http\Controllers\Admin\AdminRefundController;
 use App\Http\Controllers\Admin\AdminCancelController;
+use App\Http\Controllers\Admin\AdminRoleController;
+use App\Http\Controllers\Admin\AdminPermissionController;
+use App\Http\Controllers\Admin\AdminAssignController;
+use App\Http\Controllers\Admin\AdminRevokeController;
 
 use \App\Http\Controllers\General\ContactController;
 use \App\Http\Controllers\General\TermsController;
@@ -121,6 +125,8 @@ Route::group(['middleware'=>'auth'], function (){
     Route::resource('admin/homepage/user', AdminUserController::class);
     Route::resource('admin/homepage/client', AdminClientController::class);
     Route::patch('disable/{id}',['as'=>'disable', 'uses'=>DisableUser::class]);
+    Route::patch('assignPermission/{id}',['as'=>'assignPermission', 'uses'=>AdminAssignController::class]);
+    Route::patch('revokePermission/{id}',['as'=>'revokePermission', 'uses'=>AdminRevokeController::class]);
     Route::resource('admin/homepage/writer', AdminWriterController::class);
     Route::resource('admin/homepage/exam', AdminExamController::class);
     Route::resource('admin/homepage/essay', AdminEssayController::class);
@@ -146,6 +152,8 @@ Route::group(['middleware'=>'auth'], function (){
     Route::resource('admin/accounts/order', AdminOrderController::class);
     Route::resource('admin/accounts/withdrawal', AdminWithdrawalController::class);
     Route::resource('admin/homepage/accounts', AdminLedgerController::class);
+    Route::resource('admin/homepage/roles', AdminRoleController::class);
+    Route::resource('admin/homepage/permission', AdminPermissionController::class);
     Route::patch('admin/task/assign/{id}',  [AdminProjectController::class, 'assign'])->name('assign');
     Route::delete('admin/task/unassign/{id}',  [AdminProjectController::class, 'unassign'])->name('unassign');
     Route::resource('admin/homepage/admin-refund', AdminRefundController::class);

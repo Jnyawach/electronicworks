@@ -20,7 +20,7 @@ class AdminClientController extends Controller
     public function index()
     {
         //
-        $clients=User::where('role_id', 2)->get();
+        $clients=User::role('Client')->get();
         $active=$clients->where('status_id', 1);
         return view('admin.client.index', compact('clients','active'));
     }

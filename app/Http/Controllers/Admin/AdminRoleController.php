@@ -1,17 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Client;
+namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
-
+use App\Models\Permission;
 use App\Models\Role;
-use App\Models\Status;
-use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules\Password;
 
-class ClientController extends Controller
+class AdminRoleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,13 +16,8 @@ class ClientController extends Controller
     public function index()
     {
         //
-        if (Auth::user()->status->name==='Active'){
-               return view('dashboard.index');
-           }else{
-               return view('waiting/wait');
-           }
-
-
+        $roles=Role::all();
+        return  view('admin.role.index', compact('roles'));
     }
 
     /**
@@ -49,6 +39,12 @@ class ClientController extends Controller
     public function store(Request $request)
     {
         //
+
+        $role=Role::create([
+            'name'=>$request->role,
+            'guard_name'=>$request->guard_name
+        ]);
+        return  redirect()->back()->with('status','Role created Successfully');
     }
 
     /**
@@ -60,8 +56,10 @@ class ClientController extends Controller
     public function show($id)
     {
         //
-        $client=User::findOrFail($id);
-        return  view('dashboard.show', compact('client'));
+        $role=Role::findOrFail($id);
+        $permissions=Permission::all();
+        return  view('admin.role.show', compact('role','permissions'));
+
     }
 
     /**
@@ -73,8 +71,6 @@ class ClientController extends Controller
     public function edit($id)
     {
         //
-        $client=User::findOrFail($id);
-        return view('dashboard.edit', compact('client'));
     }
 
     /**
@@ -87,27 +83,12 @@ class ClientController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $validated = $request->validate([
-            'name' => 'required|max:255',
-            'last_name' => 'required|max:255',
-            'email' => 'required|email',
-            'cellphone'=>'max:12',
-            'sec_cellphone'=>'max:12',
-
+        $role=Role::findOrFail($id);
+        $role->update([
+            'name'=>$request->role,
+            'guard_name'=>$request->guard_name
         ]);
-        $client=User::findOrFail($id);
-
-        $client->update([
-            'name'=>$validated['name'],
-            'last_name'=>$validated['last_name'],
-            'email'=>$validated['email'],
-            'role_id'=>2,
-            'cellphone'=>$validated['cellphone'],
-            'sec_cellphone'=>$validated['sec_cellphone'],
-            'status_id'=>1,
-        ]);
-        return redirect('dashboard')->with('status', 'Profile Successfully');
-
+        return  redirect()->back()->with('status','Role updated Successfully');
     }
 
     /**
@@ -119,5 +100,8 @@ class ClientController extends Controller
     public function destroy($id)
     {
         //
+        $role=Role::findOrFail($id);
+        $role->delete();
+        return  redirect()->back()->with('status','Role deleted Successfully');
     }
 }

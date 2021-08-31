@@ -99,6 +99,22 @@
                             </div>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-41" aria-controls="submenu-2"><i class="fas fa-user-tag"></i>Roles</a>
+                            <div id="submenu-41" class="collapse submenu" style="">
+                                <ul class="nav flex-column">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{route('roles.index')}}">Roles</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{route('permission.index')}}">Permissions</a>
+                                    </li>
+
+
+
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false"
                                data-target="#submenu-99" aria-controls="submenu-99">
                                 <i class="far fa-edit"></i>Application

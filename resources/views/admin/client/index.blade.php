@@ -104,6 +104,16 @@
                                                                         <button type="submit" class="btn">Enable <i
                                                                                 class="fas fa-check-square ms-2"></i></button>
                                                                     </form>
+                                                                    @elseif($client->status->name=='Inactive')
+                                                                    <form method="POST" action="{{route('disable',
+                                                                    $client->id)}}">
+                                                                        @method('PATCH')
+                                                                        @csrf
+                                                                        <input type="hidden" name="status_id"
+                                                                               value="1">
+                                                                        <button type="submit" class="btn">Activate <i
+                                                                                class="fas fa-check-square ms-2"></i></button>
+                                                                    </form>
                                                                 @else
                                                                     <form method="POST" action="{{route('disable',
                                                             $client->id)}}">
