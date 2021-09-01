@@ -19,6 +19,7 @@ class DisableUser extends Controller
         //
         $client=User::findOrFail($id);
         $client->update(['status_id'=>$request->status_id]);
+        $client->givePermissionTo('approved-client');
         return redirect()->back()->with('status', 'User status changed');
 
     }

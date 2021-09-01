@@ -21,7 +21,7 @@
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="message1">
                                 <li>
-                                    @if($client->role->name=='Client')
+                                    @if($client->hasPermissionTo('pending-client'))
 
                                         <form method="POST" action="{{route('disable',
                                                             $client->id)}}">
@@ -32,7 +32,7 @@
                                             <button type="submit" class="btn">Accept <i
                                                     class="fas fa-check-square ms-2"></i></button>
                                         </form>
-                                        @endif
+                                       @endif
                                 </li>
                                 <li>
                                     <form method="POST" action="{{route('client.destroy',
@@ -50,7 +50,7 @@
                         </div>
                         <!--action button-->
                     </div>
-                    <h4 class="fs-5">{{$client->role->name}}</h4>
+                    <h4 class="fs-5">{{$client->getRoleNames()->first()}}</h4>
                     <h4>Created: <span>{{$client->created_at->diffForHumans()}}</span> </h4>
                     <h4>Status: <span>{{$client->status->name}} <i class="fas fa-certificate ms-1"></i></span></h4>
 
@@ -60,7 +60,7 @@
                         <h5>Email: <span>{{$client->email}}</span></h5>
                         <h5>Cellphone: <span>{{$client->cellphone?$client->cellphone:'N/A'}}</span></h5>
                         <h5>Secondary Cellphone: <span>{{$client->sec_cellphone?$client->sec_cellphone:'N/A'}}</span></h5>
-                        @if($client->role->name=='Writer')
+                       @if($client->hasPermissionTo('complete-writer'))
                             <h5>University: <span>{{$client->detail?$client->detail->university:'N/A'}}</span></h5>
                             <h5>Department: <span>{{$client->detail?$client->detail->department:'N/A'}}</span></h5>
                             <h5>Course: <span>{{$client->detail?$client->detail->course:'N/A'}}</span></h5>
@@ -79,13 +79,13 @@
                             hire m-2" target="_blank">View Identity Card</a>
                                     @endif
                             </div>
-                        @endif
+                       @endif
 
                     </div>
 
                 </div>
             </div>
-            @if($client->role->name=='Writer')
+            @if($client->hasPermissionTo('complete-writer'))
 
             <div class="">
                 <hr>
@@ -153,7 +153,7 @@
                 </div>
 
             </div>
-                @endif
+               @endif
 
         </div>
 

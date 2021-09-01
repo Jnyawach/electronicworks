@@ -120,7 +120,7 @@ use \App\Http\Controllers\Manager\ManagerCancelController;
 
 
 //admin routes
-Route::group(['middleware'=>'auth'], function (){
+Route::group(['middleware'=>['auth','role:Admin']], function (){
     Route::resource('admin', AdminController::class);
     Route::resource('admin/homepage/user', AdminUserController::class);
     Route::resource('admin/homepage/client', AdminClientController::class);
@@ -159,7 +159,7 @@ Route::group(['middleware'=>'auth'], function (){
     Route::resource('admin/homepage/admin-refund', AdminRefundController::class);
 });
 // client controller
-Route::group(['middleware'=>'auth'], function (){
+Route::group(['middleware'=>['auth','role:Admin|Client']], function (){
     Route::resource('dashboard', ClientController::class);
     Route::resource('dashboard/jobs/awaiting', ClientProgressController::class);
     Route::resource('dashboard/jobs/checking', ClientReviewController::class);
@@ -172,8 +172,7 @@ Route::group(['middleware'=>'auth'], function (){
     Route::get('dashboard/client-invoice/client-paid',  [ClientInvoiceController::class, 'client_paid'])->name('client-paid');
     Route::get('dashboard/client-invoice/client-refund',  [ClientInvoiceController::class, 'client_refund'])->name('client-refund');
     Route::resource('dashboard/homepage/client-invoice', ClientInvoiceController::class);
-    Route::get('/{waiting}',['as'=>'waiting', 'uses'=>RedirectController::class])->name('page')
-        ->where('waiting','wait|congratulations|deactivated');
+
     Route::resource('dashboard/homepage/jobs', ClientJobsController::class);
     Route::resource('dashboard/homepage/refund', ClientReturnController::class);
     Route::patch('dashboard/jobs/accept/{id}',  [ClientJobsController::class, 'accept'])->name('accept');
@@ -181,15 +180,23 @@ Route::group(['middleware'=>'auth'], function (){
 
 
 });
-//writer routes
-Route::group(['middleware'=>'auth'], function (){
+
+//Registering Writers
+Route::group(['middleware'=>['auth','role:Admin|Writer','permission:incomplete-writer']], function (){
     Route::get('registration/writer_details',['as'=>'detailing', 'uses'=>RegistrationPages::class]);
-});
-//writer roots with auth
-Route::group([], function (){
-    Route::resource('registration', WriterRegistrationController::class);
     Route::resource('english_test', EnglishTestController::class);
     Route::resource('essay_test', EssayTestController::class);
+
+});
+//writer routes
+Route::group([], function (){
+    Route::resource('registration', WriterRegistrationController::class);
+
+});
+//writer roots with auth
+Route::group(['middleware'=>['auth','role:Admin|Writer','permission:complete-writer']], function (){
+    Route::get('/{waiting}',['as'=>'waiting', 'uses'=>RedirectController::class])->name('page')
+        ->where('waiting','wait|congratulations|deactivated|declined');
     Route::resource('freelancer', WriterController::class);
     Route::get('freelancer/finances/writer-unpaid',  [WriterAccountController::class, 'writerUnpaid'])->name('writer-unpaid');
     Route::get('freelancer/finances/writer-paid',  [WriterAccountController::class, 'writerPaid'])->name('writer-paid');

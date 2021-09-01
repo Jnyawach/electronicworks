@@ -19,11 +19,12 @@ class EssayTestController extends Controller
     public function index()
     {
         //
-        if (Auth::user()->condition==1){
-            return redirect('congratulations');
+        if (Auth::user()->essay==null){
+            $essay=Essay::inRandomOrder()->limit(1)->get();
+            return  view('essay_test.index', compact('essay'));
         }
-        $essay=Essay::inRandomOrder()->limit(1)->get();
-        return  view('essay_test.index', compact('essay'));
+        return redirect('congratulations');
+
     }
 
     /**
@@ -72,6 +73,8 @@ class EssayTestController extends Controller
             'essay_body'=>$validated['essay_body'],
             'essay_id' => $validated['essay_id'],
         ]);
+        $user->revokePermissionTo('incomplete-writer');
+        $user->givePermissionTo('complete-writer');
         return redirect('congratulations');
         }
     }

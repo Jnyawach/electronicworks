@@ -18,8 +18,8 @@ class AdminApplicationController extends Controller
     public function index()
     {
         //
-        $writers=User::where('status_id', 2)->where('condition', 1)->where('role_id', 3)->get();
-        $clients=User::where('status_id', 2)->where('condition', 1)->where('role_id', 2)->get();
+        $writers=User::role('Writer')->where('status_id',2)->get();
+        $clients=User::role('Client')->where('status_id',2)->get();
         return  view('admin.application.index', compact('writers', 'clients'));
 
     }
@@ -102,6 +102,8 @@ class AdminApplicationController extends Controller
             $writer->update([
                'level_id'=>1,
             ]);
+            $writer->givePermissionTo('activated-writer');
+
             Mail::send('emails.approved', ['mess'=>$writer], function ($message) use($writer){
                 $message->to($writer->email);
                 $message->from('nyawach41@gmail.com');

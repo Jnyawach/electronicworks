@@ -17,7 +17,6 @@
 
 </head>
 <body class="@yield('body-class')">
-
 <header class=" fixed-top w-100">
 
 
@@ -105,7 +104,18 @@
         <div class="container">
             <nav class="nav">
                 @auth
-                    <a class="nav-link" href="{{route('dashboard.index')}}">Dashboard</a>
+                    @role('Writer')
+                    <a class="nav-link" href="{{route('freelancer.index')}}">Dashboard
+                        </a>
+                    @endrole
+                    @role('Client')
+                    <a class="nav-link" href="{{route('dashboard.index')}}">Dashboard
+                        </a>
+                    @endrole
+                    @role('Admin')
+                    <a class="nav-link" href="{{route('admin.index')}}">Dashboard
+                        </a>
+                    @endrole
                 @endauth
                 <a class="nav-link" href="#">Find Writers</a>
                 <a class="nav-link active" aria-current="page" href="#">Browse Projects</a>

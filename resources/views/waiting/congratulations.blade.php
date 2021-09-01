@@ -11,7 +11,7 @@
 
                     <h2 class="mt-5 text-center">Congratulations for submitting your Application!</h2>
                     <div class="text-left">
-                        <p>Hi Joshua,</p>
+                        <p>Hi {{Auth::user()->name}},</p>
                         <p>Thanks for submitting your request to sign up as a freelance writer with Electronic Works!
                             We’ll review your information and get back to you as soon as we can!
                             Normally that’s in just a few days. If you are approved to start working as a freelance writer ,

@@ -77,6 +77,7 @@ class AdminClientController extends Controller
             'sec_cellphone'=>$validated['sec_cellphone'],
             'status_id'=>$validated['status_id']
         ]);
+        $user->assignRole('Client');
         return redirect('admin/homepage/client')->with('status', 'Client Added');
 
     }

@@ -62,9 +62,7 @@ class User extends Authenticatable implements HasMedia,Wallet, WalletFloat
         'email_verified_at' => 'datetime',
     ];
 
-//    public  function role(){
-//        return $this->belongsTo(Role::class);
-//    }
+
 
     public  function status(){
         return $this->belongsTo(Status::class);

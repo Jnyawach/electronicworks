@@ -20,11 +20,13 @@ class EnglishTestController extends Controller
     public function index()
     {
         //
-        if (Auth::user()->condition==1){
-            return redirect('congratulations');
+        if (Auth::user()->test==null){
+            $english=Examination::inRandomOrder()->limit(15)->get();
+            return view('english_test.index', compact('english'));
         }
-        $english=Examination::inRandomOrder()->limit(15)->get();
-        return view('english_test.index', compact('english'));
+
+
+        return redirect('essay_test');
     }
 
     /**

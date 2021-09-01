@@ -55,6 +55,8 @@ class WriterRegistrationController extends Controller
             'role_id'=>3,
             'status_id'=>2,
         ]);
+        $user->assignRole('Writer');
+        $user->givePermissionTo('incomplete-writer');
 
         if (Auth::attempt($validated)) {
             $request->session()->regenerate();
@@ -78,7 +80,7 @@ class WriterRegistrationController extends Controller
     public function show($id)
     {
         //
-        return  view('registration.show');
+
 
     }
 

@@ -17,6 +17,20 @@ class WriterAmendController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public  function  __construct()
+    {
+        $this->middleware(function ($request,$next) {
+            if (Auth::user()->status_id==2){
+                return  redirect('congratulations');
+            }elseif (Auth::user()->status_id==5){
+                return  redirect('declined');
+            }elseif (Auth::user()->status_id==4){
+                return  redirect('deactivated');
+            }
+            return $next($request);
+        });
+
+    }
     public function index()
     {
         //

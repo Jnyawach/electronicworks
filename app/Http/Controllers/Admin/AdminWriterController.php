@@ -21,7 +21,7 @@ class AdminWriterController extends Controller
     public function index()
     {
         //
-        $writers=User::where('role_id', 3)->get();
+        $writers=User::role('writer')->get();
         $active=$writers->where('status_id', 1);
         return view('admin.writer.index', compact('writers', 'active'));
     }
@@ -111,6 +111,8 @@ class AdminWriterController extends Controller
             'user_id'=>$user->id,
 
         ]);
+        $user->assignRole('Writer');
+        $user->givePermissionTo('complete-writer');
         if($file=$request->file('cert')) {
 
             $writerDetails->addMedia($request->cert)->toMediaCollection('cert');

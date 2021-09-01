@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class FilterController extends Controller
@@ -16,6 +17,20 @@ class FilterController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    public  function  __construct()
+    {
+        $this->middleware(function ($request,$next) {
+            if (Auth::user()->status_id==2){
+                return  redirect('congratulations');
+            }elseif (Auth::user()->status_id==5){
+                return  redirect('declined');
+            }elseif (Auth::user()->status_id==4){
+                return  redirect('deactivated');
+            }
+            return $next($request);
+        });
+
+    }
     public function __invoke(Request $request)
     {
         //

@@ -10,6 +10,7 @@ use App\Models\Role;
 use App\Models\Status;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MainController extends Controller
 {
@@ -23,8 +24,11 @@ class MainController extends Controller
         //
         $fields=Descipline::all();
         $users=User::all()->count();
-
-
+        if (Auth::check()){
+            if (Auth::user()->hasPermissionTo('incomplete-writer')){
+                return  redirect('registration/writer_details');
+            }
+        }
         return  view('welcome', compact('fields', 'users'));
     }
 
