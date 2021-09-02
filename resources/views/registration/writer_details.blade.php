@@ -229,7 +229,7 @@
                                 </div>
                                 <hr class="mt-5">
                                 <h4 class="m-5" style="font-size: 18px">Categories</h4>
-                                <small>Select up to 8 categories</small>
+                                <small class="text-danger">Select up to 8 categories</small>
                                 <div class="row">
                                     @foreach($disciplines as $discipline)
                                     <div class="col-sm-12 col-md-3 col-lg-3 m-1">
@@ -275,12 +275,16 @@
     </section>
 @endsection
 @section('scripts')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script>
-        var limit = 3;
-        $('input.single-checkbox').on('change', function(evt) {
-            if($(this).siblings(':checked').length >= limit) {
-                this.checked = false;
-            }
+        $(document).ready(function() {
+            var limit = 8;
+
+            $('.single-checkbox').on('change', function(evt) {
+                if ($('.single-checkbox:checked').length > limit) {
+                    this.checked = false;
+                }
+            });
         });
     </script>
 @endsection

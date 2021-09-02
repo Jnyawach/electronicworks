@@ -29,7 +29,7 @@
                         <h5 class="fw-bold col">{{ $writer->name}} &nbsp; {{ $writer->last_name}}</h5>
 
                     </div>
-                    <h4 class="fs-5">{{ $writer->role->name}}</h4>
+
                     <h4 class="fs-5 ">Rating:<span><i class="fas fa-star">
                            </i><i class="fas fa-star"></i>
                                <i class="fas fa-star"></i>

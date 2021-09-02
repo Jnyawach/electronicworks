@@ -117,11 +117,10 @@
                         </a>
                     @endrole
                 @endauth
-                <a class="nav-link" href="#">Find Writers</a>
-                <a class="nav-link active" aria-current="page" href="#">Browse Projects</a>
-                <a class="nav-link" href="#">My projects</a>
-                <a class="nav-link" href="#">Pending </a>
-                <a class="nav-link" href="#">Revisions</a>
+                <a class="nav-link" href="{{route('find-writers.index')}}">Find Writers</a>
+                <a class="nav-link"  href="{{route('project.index')}}">Browse Projects</a>
+                <a class="nav-link" href="{{route('pending.index')}}">My projects</a>
+                    <a class="nav-link" href="{{route('amend.index')}}">Revisions</a>
 
             </nav>
         </div>

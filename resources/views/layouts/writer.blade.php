@@ -103,9 +103,8 @@
             <nav class="nav">
 
                 <a class="nav-link" href="{{route('project.index')}}">Browse Projects</a>
-                <a class="nav-link" href="#">My projects</a>
-                <a class="nav-link" href="#">Pending <span class="badge bg-danger ms-2">4</span></a>
-                <a class="nav-link" href="#">Revisions <span class="badge bg-danger ms-2">1</span></a>
+                <a class="nav-link" href="{{route('pending.index')}}">My projects</a>
+                <a class="nav-link" href="{{route('amend.index')}}">Revisions <span class="badge bg-danger ms-2">1</span></a>
                 <a class="nav-link" href="#">Message <span class="badge bg-danger ms-2">5</span></a>
 
             </nav>

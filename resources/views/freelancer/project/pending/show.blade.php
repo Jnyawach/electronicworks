@@ -6,7 +6,7 @@
         <div class="card">
             <div class="card-header">
                 <h5>{{$project->title}}
-                    @if(\Carbon\Carbon::now()<=$project->updated_at->addMinutes(1500))
+                    @if(\Carbon\Carbon::now()<=$project->updated_at->addMinutes(15))
                <button type="submit" class="float-end btn-sm btn-danger " form="unclaim">Un-claim Project</button>
                 @endif
                 </h5>

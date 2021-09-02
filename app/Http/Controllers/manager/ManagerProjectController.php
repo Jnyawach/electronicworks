@@ -39,7 +39,7 @@ class ManagerProjectController extends Controller
         $project=Project::latest()->first();
         $citation=Citation::pluck('name','id')->all();
         $field=Descipline::pluck('name','id')->all();
-        $writer=User::where('role_id',3)->where('status_id', 1)->pluck('name','id')->all();
+        $writer=User::permission('activated-writer')->role('Writer')->pluck('name','id')->all();
         return  view('manager.work.create',
             compact('citation', 'field','writer','project'));
     }
@@ -135,7 +135,7 @@ class ManagerProjectController extends Controller
         $project=Project::findOrFail($id);
         $citation=Citation::pluck('name','id')->all();
         $field=Descipline::pluck('name','id')->all();
-        $writer=User::where('role_id',3)->where('status_id', 1)->pluck('name','id')->all();
+        $writer=User::permission('activated-writer')->role('Writer')->pluck('name','id')->all();
         return view('manager.work.edit', compact('project','citation', 'field','writer'));
     }
 

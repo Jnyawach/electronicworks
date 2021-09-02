@@ -18,8 +18,9 @@ class ReviewController extends Controller
     {
         //
         $reviews=Review::latest()->take(5)->get();
-        $writer=User::where('role_id',3)->count();
-        return  view('reviews.index', compact('reviews', 'writer'));
+        $writer_count=User::role('Writer')->count();
+        $review_stats=Review::all();
+        return  view('reviews.index', compact('reviews', 'writer_count','review_stats'));
     }
 
     /**

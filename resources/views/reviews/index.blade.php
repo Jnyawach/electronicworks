@@ -12,7 +12,7 @@
                     <hr>
                     @if($reviews->count()>0)
                         @foreach($reviews as $review)
-                    <div class="card shadow-sm mt-3">
+                     <div class="card shadow-sm mt-3">
                         <div class="card-header">
                             <h5 class="w-100">{{$review->project->title}}-
                                 <span class="text-right">{{$review->created_at->diffForHumans()}}</span></h5>
@@ -54,11 +54,15 @@
                         </div>
                     </div>
                         @endforeach
+                        @else
+                        <h5>There are no reviews currently</h5>
                     @endif
 
                 </div>
                 <div class="col-sm-11 col-md-4 col-lg-4 mx-auto">
+                    @if($reviews->count()>0)
                     @include('includes.statistics')
+                        @endif
                 </div>
             </div>
         </div>

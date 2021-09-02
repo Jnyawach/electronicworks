@@ -79,6 +79,7 @@ use \App\Http\Controllers\General\DeclineRefundRequest;
 use \App\Http\Controllers\General\ApproveRefundRequest;
 use \App\Http\Controllers\General\ReviewSubmitController;
 use \App\Http\Controllers\General\ReviewController;
+use \App\Http\Controllers\General\FindWritersController;
 
 use \App\Http\Controllers\MainController;
 
@@ -193,10 +194,14 @@ Route::group([], function (){
     Route::resource('registration', WriterRegistrationController::class);
 
 });
-//writer roots with auth
+//Writer Complete but not activated
 Route::group(['middleware'=>['auth','role:Admin|Writer','permission:complete-writer']], function (){
     Route::get('/{waiting}',['as'=>'waiting', 'uses'=>RedirectController::class])->name('page')
         ->where('waiting','wait|congratulations|deactivated|declined');
+});
+//writer roots with auth
+Route::group(['middleware'=>['auth','role:Admin|Writer','permission:activated-writer']], function (){
+
     Route::resource('freelancer', WriterController::class);
     Route::get('freelancer/finances/writer-unpaid',  [WriterAccountController::class, 'writerUnpaid'])->name('writer-unpaid');
     Route::get('freelancer/finances/writer-paid',  [WriterAccountController::class, 'writerPaid'])->name('writer-paid');
@@ -222,6 +227,7 @@ Route::group([], function (){
     Route::resource('privacy', PrivacyController::class);
     Route::resource('reviews', ReviewController::class);
     Route::resource('help-and-support', SupportController::class);
+    Route::resource('find-writers', FindWritersController::class);
     Route::get('about-us',  [MainController::class, 'about'])->name('about');
     Route::patch('response/{id}', ['as'=>'response', 'uses'=>ResponseController::class]);
     Route::patch('note/{id}', ['as'=>'note', 'uses'=>NoteController::class]);
@@ -236,7 +242,7 @@ Route::group([], function (){
 });
 
 // manager controller
-Route::group([], function (){
+Route::group(['middleware'=>'role:Manager|Admin'], function (){
     Route::resource('manager', ManagerController::class);
     Route::resource('manager/homepage/author', ManagerUserController::class);
     Route::resource('manager/homepage/work', ManagerProjectController::class);

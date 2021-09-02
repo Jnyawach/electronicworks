@@ -152,6 +152,7 @@
                                                     @method('PATCH')
                                                     @csrf
                                                     <input type="hidden" value="{{$bid->user_id}}" name="writer">
+                                                    <input type="hidden" value="{{$bid->id}}" name="bid">
                                                     <button type="submit" class=" btn-primary btn-sm m-0">Assign<i
                                                             class="fas fa-long-arrow-alt-right ms-2"></i></button>
 

@@ -21,20 +21,6 @@
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="message1">
                                 <li>
-                                    @if($client->role=='Client')
-
-                                        <form method="POST" action="{{route('disable',
-                                                            $client->id)}}">
-                                            @method('PATCH')
-                                            @csrf
-                                            <input type="hidden" name="status_id"
-                                                   value="1">
-                                            <button type="submit" class="btn">Accept <i
-                                                    class="fas fa-check-square ms-2"></i></button>
-                                        </form>
-                                    @endif
-                                </li>
-                                <li>
                                     <form method="POST" action="{{route('client.destroy',
                                       $client->id)}}">
                                         @method('DELETE')
@@ -50,7 +36,6 @@
                         </div>
                         <!--action button-->
                     </div>
-                    <h4 class="fs-5">{{$client->role->name}}</h4>
                     <h4>Created: <span>{{$client->created_at->diffForHumans()}}</span> </h4>
                     <h4>Status: <span>{{$client->status->name}} <i class="fas fa-certificate ms-1"></i></span></h4>
 
@@ -60,7 +45,7 @@
                         <h5>Email: <span>{{$client->email}}</span></h5>
                         <h5>Cellphone: <span>{{$client->cellphone?$client->cellphone:'N/A'}}</span></h5>
                         <h5>Secondary Cellphone: <span>{{$client->sec_cellphone?$client->sec_cellphone:'N/A'}}</span></h5>
-                        @if($client->role->name=='Writer')
+
                             <h5>University: <span>{{$client->detail?$client->detail->university:'N/A'}}</span></h5>
                             <h5>Department: <span>{{$client->detail?$client->detail->department:'N/A'}}</span></h5>
                             <h5>Course: <span>{{$client->detail?$client->detail->course:'N/A'}}</span></h5>
@@ -79,15 +64,14 @@
                                    ?$client->detail->getFirstMedia('identity')->name:'Certificate not provided'}}</a>
                             </div>
                             @endif
-                        @endif
+
 
                     </div>
 
                 </div>
             </div>
-            @if($client->role->name=='Writer')
 
-                <div class="">
+            <div class="">
                     <hr>
                     <h5>Essay</h5>
                     <p> {!! $client->essay->essay_body !!}</p>
@@ -119,7 +103,7 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <form action="{{route('application.update',$client->id)}}" method="POST" id="approve">
+                                    <form action="{{route('writer_application.update',$client->id)}}" method="POST" id="approve">
                                         @method('PATCH')
                                         @csrf
                                         <small class="text-danger">Please use this form to approve or reject user
@@ -152,7 +136,7 @@
                     </div>
 
                 </div>
-            @endif
+
 
         </div>
 

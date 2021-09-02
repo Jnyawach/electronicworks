@@ -86,12 +86,16 @@
                         <!--action button-->
                     </div>
                     <h4 class="fs-5">{{ $writer->getRoleNames()->first()}}</h4>
-                    <h4 class="fs-5 ">Rating:<span><i class="fas fa-star">
-                           </i><i class="fas fa-star"></i>
-                               <i class="fas fa-star"></i>
-                               <i class="fas fa-star"></i>
-                               <i class="far fa-star"></i>
-                           4.5/5 &nbsp;| &nbsp;800 Rating</span></h4>
+                    <h4 class="fs-5 ">Rating:
+                        @if($writer->reviewing->count()>0)
+                        <span>@for($i = 0; $i < 5; $i++)
+                            <i class="fa{{ $writer->reviewing->sum('stars')/$writer->reviewing->count()  <= $i ? 'r' : '' }} fa-star"></i>
+                        @endfor</span>
+                        {{$writer->reviewing->sum('stars')/$writer->reviewing->count()}}/5 &nbsp;| &nbsp;{{$writer->reviewing->count()}} Ratings
+                            @else
+                            <span>No Rating</span>
+                    @endif
+                    </h4>
                     <h4>Created: <span>{{ $writer->created_at->diffForHumans()}}</span> </h4>
                     <h4>Status: <span>{{ $writer->status->name}}<i class="fas fa-certificate ms-1"></i></span></h4>
                     <h4>Gender: <span>{{ $writer->detail->gender}}</span></h4>

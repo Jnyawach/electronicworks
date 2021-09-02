@@ -13,7 +13,7 @@
                         <div class="row">
                             @if(isset($projects))
                                 @foreach($projects as $project)
-                                    <a href="{{route('jobs.show',$project->slug)}}" class="text-decoration-none"
+                                    <a href="{{route('market.show',$project->slug)}}" class="text-decoration-none"
                                        title="click to see details">
                                         <div class="col-sm-12 mx-auto">
                                             <div class="conte p-2">

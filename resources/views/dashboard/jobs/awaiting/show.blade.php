@@ -63,15 +63,19 @@
                                                     {{$project->writers->name}}</h5>
                                             </a>
 
-                                            <h5 class="m-0">Projects completed: 80</h5>
+                                            <h5 class="m-0">Projects completed: {{$project->writers->jobs->count()}}</h5>
 
-                                            <h4 class="mt-0 pt-0" style="font-family: 'Avenir Bold'">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="far fa-star"></i>
-                                                4.5/5 </h4>
+                                            @if($project->writers->reviewing->count()>0)
+                                                <h4>
+                                                    {{$project->writers->reviewing->sum('stars')/$project->writers->reviewing->count()}} /5
+
+                                                    @for($i = 0; $i < 5; $i++)
+                                                        <i class="fa{{ $project->writers->reviewing->sum('stars')/$project->writers->reviewing->count()  <= $i ? 'r' : '' }} fa-star"></i>
+                                                    @endfor
+                                                </h4>
+                                            @else
+                                                <h4>No Reviews</h4>
+                                            @endif
                                             <ul class="nav">
                                                 <li class="nav-item">
                                                     <form class="ms-auto m-0">

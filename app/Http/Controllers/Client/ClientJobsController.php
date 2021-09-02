@@ -41,7 +41,7 @@ class ClientJobsController extends Controller
         $citation=Citation::pluck('name','id')->all();
         $project=Project::latest()->first();
         $field=Descipline::pluck('name','id')->all();
-        $writer=User::where('role_id',3)->where('status_id', 1)->pluck('name','id')->all();
+        $writer=User::permission('activated-writer')->role('Writer')->pluck('name','id')->all();
         return  view('dashboard.jobs.create', compact('citation', 'field','writer','project'));
     }
 
@@ -96,7 +96,6 @@ class ClientJobsController extends Controller
             'words'=>$validated['words'],
             'status'=>1,
             'progress_id'=>$progress,
-            'sku'=>$validated['sku'],
             'deadline'=>$validated['deadline'],
         ]);
         $project->update(['sku'=>'EL00'.$project->id]);
@@ -134,7 +133,7 @@ class ClientJobsController extends Controller
         $project=Project::findOrFail($id);
         $citation=Citation::pluck('name','id')->all();
         $field=Descipline::pluck('name','id')->all();
-        $writer=User::where('role_id',3)->where('status_id', 1)->pluck('name','id')->all();
+        $writer=User::permission('activated-writer')->role('Writer')->pluck('name','id')->all();
         return view('dashboard.jobs.edit', compact('project','citation', 'field','writer'));
     }
 

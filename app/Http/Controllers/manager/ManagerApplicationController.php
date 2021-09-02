@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class ManagerApplicationController extends Controller
 {
@@ -16,7 +17,7 @@ class ManagerApplicationController extends Controller
     public function index()
     {
         //
-        $writers=User::where('status_id', 2)->where('condition', 1)->where('role_id', 3)->get();
+        $writers=User::role('Writer')->where('status_id',2)->get();
         return  view('manager/writer_application.index', compact('writers'));
     }
 
@@ -51,7 +52,7 @@ class ManagerApplicationController extends Controller
     {
         //
         $client=User::findOrFail($id);
-        return  view('manager/writer_application.show', compact('client'));
+        return  view('manager.writer_application.show', compact('client'));
     }
 
     /**
@@ -75,6 +76,39 @@ class ManagerApplicationController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $writer=User::findOrFail($id);
+        $writer->update([
+            'status_id'=>$request->status,
+
+        ]);
+
+        $writer->detail()->update([
+            'score'=>$request->score,
+        ]);
+        if ($request->status==4){
+            Mail::send('emails.rejected', ['mess'=>$writer], function ($message) use($writer){
+                $message->to($writer->email);
+                $message->from('nyawach41@gmail.com');
+                $message->subject('Rejected');
+
+
+            });
+            return  redirect('manager/homepage/writer_application')->with('status', 'Writer Successfully Rejected');
+        }elseif($request->status==1){
+            $writer->update([
+                'level_id'=>1,
+            ]);
+            $writer->givePermissionTo('activated-writer');
+
+            Mail::send('emails.approved', ['mess'=>$writer], function ($message) use($writer){
+                $message->to($writer->email);
+                $message->from('nyawach41@gmail.com');
+                $message->subject('Approved');
+            });
+            return  redirect('manager/homepage/writer_application')->with('status', 'Writer Successfully Approved');
+        }else{
+            return  redirect('manager/homepage/writer_application')->with('status', 'Please Recheck Application');
+        }
     }
 
     /**

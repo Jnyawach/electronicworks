@@ -21,7 +21,7 @@ class AdminWriterController extends Controller
     public function index()
     {
         //
-        $writers=User::role('writer')->get();
+        $writers=User::permission('complete-writer')->role('Writer')->get();
         $active=$writers->where('status_id', 1);
         return view('admin.writer.index', compact('writers', 'active'));
     }

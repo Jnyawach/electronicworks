@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Manager;
-use App\Http\Controllers\Controller;
+namespace App\Http\Controllers\General;
 
+use App\Http\Controllers\Controller;
+use App\Models\Review;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class ManagerUserController extends Controller
+class FindWritersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +17,10 @@ class ManagerUserController extends Controller
     public function index()
     {
         //
-        $writers=User::role('writer')->get();
-        $active=$writers->where('status_id', 1);
-        return  view('manager.author.index', compact('writers', 'active'));
+        $review_stats=Review::all();
+        $writers=User::permission('complete-writer')->role('Writer')->paginate(10);
+        $writer_count=User::role('Writer')->count();
+        return  view('find-writers.index', compact('writers','review_stats','writer_count' ));
     }
 
     /**
@@ -51,8 +53,6 @@ class ManagerUserController extends Controller
     public function show($id)
     {
         //
-        $writer=User::findOrFail($id);
-        return view('manager.author.show', compact('writer'));
     }
 
     /**

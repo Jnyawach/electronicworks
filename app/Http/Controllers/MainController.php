@@ -25,9 +25,12 @@ class MainController extends Controller
         $fields=Descipline::all();
         $users=User::all()->count();
         if (Auth::check()){
-            if (Auth::user()->hasPermissionTo('incomplete-writer')){
-                return  redirect('registration/writer_details');
+            if (Auth::user()->hasRole('Writer')){
+                if (Auth::user()->hasPermissionTo('incomplete-writer')){
+                    return  redirect('registration/writer_details');
+                }
             }
+
         }
         return  view('welcome', compact('fields', 'users'));
     }
