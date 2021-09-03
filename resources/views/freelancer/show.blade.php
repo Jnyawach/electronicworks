@@ -47,7 +47,7 @@
                         </div>
                         <!--action button-->
                     </div>
-                    <h4 class="fs-5">{{ $writer->role->name}}</h4>
+                    <h4 class="fs-5">Writer</h4>
                     <h4 class="fs-5 ">Rating:<span><i class="fas fa-star">
                            </i><i class="fas fa-star"></i>
                                <i class="fas fa-star"></i>

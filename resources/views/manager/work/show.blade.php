@@ -9,7 +9,7 @@
                     <!--In progress card-->
                     <div class="card  shadow-sm mb-5 view-order">
                         <div class="card-header d-inline-flex">
-                            <h5><span>ID No.{{$project->id}}</span> {{$project->title}}</h5>
+                            <h5><span>ID No.{{$project->sku}}</span> {{$project->title}}</h5>
                             @if(isset($project->writers->name))
                                 <a href="{{route('task.edit', $project->id)}}" class="btn-sm
                                 ms-auto m-0">
@@ -74,15 +74,19 @@
                                                         {{$project->writers->name}}</h5>
                                                 </a>
 
-                                                <h5 class="m-0">Projects completed: 80</h5>
+                                                <h5 class="m-0">Projects completed: {{$project->writers->jobs->count()}}</h5>
+                                                @if($project->writers->reviewing->count()>0)
+                                                    <h4>
+                                                        {{$project->writers->reviewing->sum('stars')/$project->writers->reviewing->count()}} /5
 
-                                                <h4 class="mt-0 pt-0" style="font-family: 'Avenir Bold'">
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="far fa-star"></i>
-                                                    4.5/5 </h4>
+                                                        @for($i = 0; $i < 5; $i++)
+                                                            <i class="fa{{ $project->writers->reviewing->sum('stars')/$project->writers->reviewing->count()  <= $i ? 'r' : '' }} fa-star"></i>
+                                                        @endfor
+                                                    </h4>
+                                                @else
+                                                    <h4>No Reviews</h4>
+                                                @endif
+
                                                 <ul class="nav">
                                                     <li class="nav-item">
                                                         <form class="ms-auto m-0">
@@ -103,15 +107,14 @@
                                                             writer</a>
                                                     </li>
                                                     <li class="nav-item">
-                                                        <form class="ms-auto m-0" action="{{route('relocate',
+                                                        <form class="ms-auto m-0" action="{{route('unassign',
                                                         $project->id)}}"
                                                               method="POST">
                                                             @method('DELETE')
                                                             @csrf
+                                                            <input type="hidden" value="{{$project->id}}" name="project">
                                                             <input type="hidden" value="{{$project->writer_id}}"
                                                                    name="writer">
-
-                                                            <input type="hidden" value="{{$project->id}}" name="project">
                                                             <button type="submit" class="btn btn-outline-danger
                                                         rounded-0">UnAssign</button>
 
@@ -136,20 +139,23 @@
                                                 ->getUrl('avatar_icon'):'/images/no-image.png' )}}"
                                                              class="rounded float-start img-fluid me-2" style="height: 60px">
                                                         <h5 class="mb-0">{{$bid->user->name}}</h5>
-                                                        <h5 class="m-0">Projects completed: 80later</h5>
+                                                        <h5 class="m-0">Projects completed: {{$bid->user->jobs->count()}}</h5>
 
-                                                        <h4 class="mt-0 pt-0" style="font-family: 'Avenir Bold'">
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="far fa-star"></i>
-                                                            4.5/5 </h4>
+                                                        @if($bid->user->reviewing->count()>0)
+                                                            <h4 class="mt-0 pt-0" style="font-family: 'Avenir Bold'">
+                                                                {{$bid->user->reviewing->sum('stars')/$bid->user->reviewing->count()}} /5
+
+                                                                @for($i = 0; $i < 5; $i++)
+                                                                    <i class="fa{{ $bid->user->reviewing->sum('stars')/$bid->user->reviewing->count()  <= $i ? 'r' : '' }} fa-star"></i>
+                                                                @endfor
+                                                            </h4>
+                                                        @else
+                                                            <h4>No Reviews</h4>
+                                                        @endif
                                                     </div>
 
                                                     <div class="col-sm-12 col-md-5 col-lg-5">
-                                                        <form class="ms-auto m-0" action="{{route('allocate',
-                                                        $project->id)}}"
+                                                        <form class="ms-auto m-0" action="{{route('assign',$project->id)}}"
                                                               method="POST">
                                                             @method('PATCH')
                                                             @csrf
@@ -186,4 +192,3 @@
         </div>
     </div>
 @endsection
-

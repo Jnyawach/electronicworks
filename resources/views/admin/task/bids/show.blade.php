@@ -64,13 +64,17 @@
                                                 <h5 class="mb-0">{{$bid->user->name}}</h5>
                                                 <h5 class="m-0">Projects completed: 80later</h5>
 
-                                                <h4 class="mt-0 pt-0" style="font-family: 'Avenir Bold'">
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="far fa-star"></i>
-                                                    4.5/5 </h4>
+                                                @if($bid->user->reviewing->count()>0)
+                                                    <h4 class="mt-0 pt-0" style="font-family: 'Avenir Bold'">
+                                                        {{$bid->user->reviewing->sum('stars')/$bid->user->reviewing->count()}} /5
+
+                                                        @for($i = 0; $i < 5; $i++)
+                                                            <i class="fa{{ $bid->user->reviewing->sum('stars')/$bid->user->reviewing->count()  <= $i ? 'r' : '' }} fa-star"></i>
+                                                        @endfor
+                                                    </h4>
+                                                @else
+                                                    <h4>No Reviews</h4>
+                                                @endif
                                             </div>
 
                                             <div class="col-sm-12 col-md-5 col-lg-5">

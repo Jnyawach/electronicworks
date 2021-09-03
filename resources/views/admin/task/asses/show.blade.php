@@ -70,7 +70,7 @@
                                     <button type="submit" class="btn btn-primary">Submit to Client</button>
                                 </form>
                                 <h5 class="mt-3">Or return for revision with comments</h5>
-                                <form action="{{route('amend.update',$project->submission->id)}}" method="POST">
+                                <form action="{{route('asses.update',$project->submission->id)}}" method="POST">
                                     @method('PATCH')
                                     @csrf
 
@@ -82,7 +82,7 @@
                                         <label for="reason" class="control-label">Add Comment:</label>
                                         <textarea class="form-control complete" id="reason"
                                                   style="height: 300px" name="reason">
-                                                    {{old('comment')}}
+                                                    {{old('reason')}}
                                                 </textarea>
                                         <small class="text-danger">
                                             @error('reason')

@@ -47,21 +47,7 @@
                             </div>
 
                         </div>
-                        <div class="form-group mt-3 mb-5">
-                            <div class="input-group ">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" ><i class="far fa-envelope"></i></span>
-                                </div>
-                                <input type="email" class="form-control incomplete" placeholder="Email Address"
-                                       aria-label="email" name="email" required value="{{$client->email }}">
 
-                            </div>
-                            <small class="text-danger">
-                                @error('email')
-                                {{ $message }}
-                                @enderror
-                            </small>
-                        </div>
 
 
                         <div class="form-group row mb-3">

@@ -46,7 +46,7 @@
                         </div>
                         <!--action button-->
                     </div>
-                    <h4 class="fs-5">{{$client->role->name}}</h4>
+                    <h4 class="fs-5">Account Type: Client</h4>
                     <h4>Created: <span>{{$client->created_at->diffForHumans()}}</span> </h4>
                     <h4>Status: <span>{{$client->status->name}} <i class="fas fa-certificate ms-1"></i></span></h4>
                     <!---Update password modal--->

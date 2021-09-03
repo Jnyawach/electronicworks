@@ -5,6 +5,7 @@
     <h5>Edit Profile</h5>
     <hr class="dropdown-divider">
     <h4>Writer details</h4>
+    <p>Email: <span>{{$writer->email}}</span></p>
     <div class="row">
         <div class="col-12">
             <form class="m-4" method="POST" action="{{route('freelancer.update', $writer->id)}}"
@@ -37,20 +38,6 @@
                         </small>
                     </div>
                 </div>
-                <div class="form-group row mt-3">
-                    <div class="col-sm-11 col-md-5 col-lg-5">
-                        <label for="email" class="control-label">Email:</label>
-                        <input type="email" class="form-control complete" placeholder="Email Address"
-                               aria-label="email" name="email" required id="email" value="{{ $writer->email}}">
-
-                        <small class="text-danger">
-                            @error('email')
-                            {{ $message }}
-                            @enderror
-                        </small>
-                    </div>
-                </div>
-
                 <div class="form-group row  required mt-3">
                     <div class="col-sm-12 col-md-6 col-lg-6 ">
                         <label for="cellphone" class="control-label">Primary Cellphone:</label>

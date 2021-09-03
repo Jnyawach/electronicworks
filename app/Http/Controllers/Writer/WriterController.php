@@ -103,7 +103,6 @@ class WriterController extends Controller
         $validated = $request->validate([
             'name' => 'required|max:255',
             'last_name' => 'required|max:255',
-            'email' => 'required|email|',
             'role_id'=>'required',
             'cellphone'=>'max:12',
             'sec_cellphone'=>'max:12',
@@ -126,7 +125,6 @@ class WriterController extends Controller
         $user->update([
             'name'=>$validated['name'],
             'last_name'=>$validated['last_name'],
-            'email'=>$validated['email'],
             'role_id'=>$validated['role_id'],
             'cellphone'=>$validated['cellphone'],
             'sec_cellphone'=>$validated['sec_cellphone'],

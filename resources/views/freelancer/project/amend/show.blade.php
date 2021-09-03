@@ -1,5 +1,5 @@
 @extends('layouts.writer')
-@section('title', 'Bid for Projects')
+@section('title', $project->sku. '-Revision')
 @section('content')
     @include('includes.ckeditor')
     <div class="container">
@@ -32,8 +32,8 @@
                         @endif
                         <hr class="dotted">
                         <h5>Revision</h5>
-                        <h4 class="fw-bold text-danger">Attached Comments:</h4>
-                        <small class="text-success">Please revise as per the comments</small>
+                        <h4 class="fw-bold text-danger">Please revise as per the comments</h4>
+                        <small class="text-success">Attached Comments:</small>
                         <p>{!! $project->submission->reason !!}</p>
                         <hr class="dotted">
                         <h5>Submission Revision</h5>
