@@ -22,8 +22,8 @@ class AdminOrderController extends Controller
 
         $projects=Project::all();
         $store=Store::first();
-        $users=User::where('role_id', 3)->get();
-        $unpaid=Project::where('progress_id',4)->where('delivery',0)->sum('client_pay');
+        $users=User::role('Writer')->get();
+        $unpaid=Project::where('progress_id',4)->where('payment',0)->sum('client_pay');
         $earning=$projects->sum('client_pay');
         return  view('admin.accounts.order.index',
             compact('projects','store','users', 'unpaid','earning'));

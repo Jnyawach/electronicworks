@@ -74,7 +74,7 @@
 
                                         @if($project->writers->reviewing->count()>0)
                                                 <h4>
-                                                {{$writer->reviewing->sum('stars')/$project->writers->reviewing->count()}} /5
+                                                {{$project->writers->reviewing->sum('stars')/$project->writers->reviewing->count()}} /5
 
                                                @for($i = 0; $i < 5; $i++)
                                                         <i class="fa{{ $project->writers->reviewing->sum('stars')/$project->writers->reviewing->count()  <= $i ? 'r' : '' }} fa-star"></i>
@@ -108,7 +108,7 @@
                                                       method="POST">
                                                     @method('DELETE')
                                                     @csrf
-                                                    <input type="hidden" value="{{$project->id}}" name="project">
+                                                    <input type="hidden" value="{{$project->writer_id}}" name="writer">
                                                     <button type="submit" class="btn btn-outline-danger
                                                         rounded-0">UnAssign</button>
 
@@ -155,6 +155,7 @@
                                                     @method('PATCH')
                                                     @csrf
                                                     <input type="hidden" value="{{$bid->user_id}}" name="writer">
+                                                    <input type="hidden" value="{{$bid->id}}" name="bid">
                                                     <button type="submit" class=" btn-primary btn-sm m-0">Assign<i
                                                             class="fas fa-long-arrow-alt-right ms-2"></i></button>
 

@@ -23,7 +23,8 @@ class MainController extends Controller
     {
         //
         $fields=Descipline::all();
-        $users=User::all()->count();
+        $users=User::role('writer')->count();
+        $project=Project::all()->count();
         if (Auth::check()){
             if (Auth::user()->hasRole('Writer')){
                 if (Auth::user()->hasPermissionTo('incomplete-writer')){
@@ -32,7 +33,7 @@ class MainController extends Controller
             }
 
         }
-        return  view('welcome', compact('fields', 'users'));
+        return  view('welcome', compact('fields', 'users','project'));
     }
 
     /**

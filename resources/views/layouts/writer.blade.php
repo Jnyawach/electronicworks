@@ -11,6 +11,7 @@
     <link href="{{asset('fonts/fonts.css')}}" rel="stylesheet">
     <link href="{{asset('fontawesome/css/all.css')}}" rel="stylesheet">
     <link href="{{asset('css/main.css')}}" rel="stylesheet">
+
     @yield('styles')
     <link rel = "icon" href =
     "{{asset('images/icon.png')}}"
@@ -103,9 +104,16 @@
             <nav class="nav">
 
                 <a class="nav-link" href="{{route('project.index')}}">Browse Projects</a>
-                <a class="nav-link" href="{{route('pending.index')}}">My projects</a>
-                <a class="nav-link" href="{{route('amend.index')}}">Revisions <span class="badge bg-danger ms-2">1</span></a>
-                <a class="nav-link" href="#">Message <span class="badge bg-danger ms-2">5</span></a>
+                <a class="nav-link" href="{{route('pending.index')}}">Assigned Projects
+                    <span class="badge bg-primary">{{Auth::user()->jobs->where('progress_id',2)->count()}}</span>
+                </a>
+                <a class="nav-link" href="{{route('amend.index')}}">Revisions <span class="badge bg-primary">{{Auth::user()->jobs->where('progress_id',5)->count()}}</span></a>
+                <a class="nav-link" href="{{route('allocated.index')}}">Pre-assigned <span class="badge bg-primary">{{Auth::user()->jobs->where('progress_id',8)->count()
+                }}</span></a>
+                <a class="nav-link" href="{{route('evaluation.index')}}">Review <span class="badge bg-primary">{{Auth::user()->jobs->where('progress_id',3)->count()
+                }}</span></a>
+                <a class="nav-link" href="#">Inbox <span class="badge bg-danger">5</span></a>
+                <a class="nav-link" href="#">Notifications</a>
 
             </nav>
         </div>
@@ -190,6 +198,8 @@
             @yield('content')
 
         </div>
+
+
     </div>
 
     <!--end of page content-->
@@ -265,9 +275,9 @@
 </footer>
 
 
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
 <script
     src="https://code.jquery.com/jquery-3.6.0.js"
     integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
@@ -278,6 +288,7 @@
         crossorigin="anonymous"></script>
 
 <script src="{{asset('js/main.js')}}"></script>
+
 @yield('scripts')
 
 

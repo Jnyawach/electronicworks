@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Writer;
 use App\Http\Controllers\Controller;
 
+use App\Models\Notification;
 use App\Models\User;
 use App\Models\WriterDetail;
 use Illuminate\Http\Request;
@@ -36,8 +37,10 @@ class WriterController extends Controller
     {
         //
         $user=User::findOrFail(Auth::id());
+        $chart=$user->jobs;
+        $notification=Notification::latest()->first();
 
-        return view('freelancer.index', compact('user'));
+        return view('freelancer.index', compact('user', 'notification'));
 
 
     }

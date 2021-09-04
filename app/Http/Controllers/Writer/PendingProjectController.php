@@ -98,7 +98,7 @@ class PendingProjectController extends Controller
         Mail::send('emails.assesing', ['mess'=> $submission], function ($message) use( $submission){
             $message->to('nyawach41@gmail.com');
             $message->from(Auth::user()->email);
-            $message->subject('Submitted');
+            $message->subject('Submitted for Review');
 
         });
         $project->update([

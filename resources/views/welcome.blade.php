@@ -32,7 +32,7 @@
                 <div class="col-sm-11 col-md-4 col-lg-3 mx-auto qualified">
                     <div class="row">
                         <div class="col-3">
-                            <h3>10K</h3>
+                            <h3>{{Coduo\PHPHumanizer\NumberHumanizer::metricSuffix($project)}}</h3>
                         </div>
                         <div class="col-4">
                             <h4>COMPLETED JOBS</h4>
@@ -46,7 +46,7 @@
                 <div class="col-sm-11 col-md-4 col-lg-3 mx-auto qualified2">
                     <div class="row">
                         <div class="col-3">
-                            <h3>{{$users}}</h3>
+                            <h3>{{Coduo\PHPHumanizer\NumberHumanizer::metricSuffix($users)}}</h3>
                         </div>
                         <div class="col-4">
                             <h4>QUALIFIED WRITERS</h4>

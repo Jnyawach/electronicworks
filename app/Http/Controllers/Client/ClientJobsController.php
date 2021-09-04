@@ -237,7 +237,7 @@ class ClientJobsController extends Controller
             $message->subject('Please Proceed');
 
         });
-        return redirect('dashboard/jobs/market')->with('status','Assigned Successfully');
+        return redirect()->back()->with('status','Assigned Successfully');
     }
 
     public  function reject(Request $request, $id){
