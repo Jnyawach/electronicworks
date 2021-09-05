@@ -4,10 +4,13 @@ namespace App\Http\Controllers\Writer;
 use App\Http\Controllers\Controller;
 
 use App\Models\Notification;
+use App\Models\Project;
 use App\Models\User;
 use App\Models\WriterDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use LaravelDaily\LaravelCharts\Classes\LaravelChart;
 
 class WriterController extends Controller
 {
@@ -37,10 +40,28 @@ class WriterController extends Controller
     {
         //
         $user=User::findOrFail(Auth::id());
-        $chart=$user->jobs;
-        $notification=Notification::latest()->first();
 
-        return view('freelancer.index', compact('user', 'notification'));
+        $notification=Notification::latest()->first();
+        $chart_options = [
+            'chart_title' => 'Order By Months',
+            'report_type' => 'group_by_date',
+            'model' => 'App\Models\Project',
+            'group_by_field' => 'created_at',
+            'group_by_period' => 'day',
+            'chart_type' => 'line',
+            'filter_field' => 'created_at',
+            'filter_days' => 30,
+            'where_raw'=>("writer_id=$user->id")
+
+
+
+
+
+        ];
+        $chart1 = new LaravelChart($chart_options);
+
+
+        return view('freelancer.index', compact('user', 'notification','chart1'));
 
 
     }

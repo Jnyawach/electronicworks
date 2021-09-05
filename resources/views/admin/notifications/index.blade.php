@@ -1,4 +1,4 @@
-@extends('layouts.manager_layout')
+@extends('layouts.admin_layout')
 @section('title', 'Notifications')
 @section('content')
 
@@ -21,7 +21,12 @@
                                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                                     data-bs-target="#flush-collapse{{$notification->id}}" aria-expanded="false"
                                                     aria-controls="flush-collapse{{$notification->id}}">
-                                                {{$notification->title}}
+                                                @if($notification->status==1)
+                                                <h5 class="fs-5">{{$notification->title}}</h5>
+                                                    @elseif($notification->status==0)
+                                                    <h5 class="fs-5 text-secondary">{{$notification->title}} (disabled)</h5>
+                                                    @endif
+
 
 
                                             </button>
@@ -83,6 +88,7 @@
 
 
                         </div>
+                    {{$notifications->links()}}
 
                 @endif
             </div>

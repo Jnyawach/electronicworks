@@ -18,8 +18,8 @@ class AdminApplicationController extends Controller
     public function index()
     {
         //
-        $writers=User::role('Writer')->where('status_id',2)->get();
-        $clients=User::role('Client')->where('status_id',2)->get();
+        $writers=User::role('Writer')->permission('complete-writer')->where('status_id',2)->get();
+        $clients=User::role('Client')->permission('complete-writer')->where('status_id',2)->get();
         return  view('admin.application.index', compact('writers', 'clients'));
 
     }

@@ -70,7 +70,7 @@
                                                 {{$project->writers->name}}</h5>
                                         </a>
 
-                                        <h5 class="m-0">Projects completed: {{$project->writers->count()}}</h5>
+                                        <h5 class="m-0">Projects completed: {{$project->writers()->count()}}</h5>
 
                                         @if($project->writers->reviewing->count()>0)
                                                 <h4>

@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Manager;
-use App\Http\Controllers\Controller;
+namespace App\Http\Controllers\Client;
 
-use App\Models\Project;
-use App\Models\Store;
-use App\Models\User;
+use App\Http\Controllers\Controller;
+use App\Models\Notification;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
-class ManagerStatementController extends Controller
+class ClientNotificationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,10 +17,9 @@ class ManagerStatementController extends Controller
     public function index()
     {
         //
-        $orders=Project::all();
-        $store=Store::first();
-        $writers=User::role('Writer')->permission('complete-writer')->get();
-        return  view('manager.statement.index', compact('orders','store','writers'));
+        $notifications=Notification::where('category','client')->orWhere('category','all')
+            ->where('status',1)->paginate(10);
+        return  view('dashboard.client-notification.index', compact('notifications'));
     }
 
     /**
@@ -54,8 +52,10 @@ class ManagerStatementController extends Controller
     public function show($id)
     {
         //
-        $writer=User::findOrFail($id);
-        return view('manager.statement.show', compact('writer'));
+        $notification=Notification::findBySlugOrFail($id);
+        $latestNotification=Notification::whereMonth('created_at', Carbon::now()->format('m'))
+            ->where('category','client')->orWhere('category','all')->get();
+        return  view('dashboard.client-notification.show', compact('notification','latestNotification'));
     }
 
     /**

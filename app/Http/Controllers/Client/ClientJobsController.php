@@ -231,10 +231,10 @@ class ClientJobsController extends Controller
             'client_delivery'=>$deadline,
         ]);
         $user=User::findOrfail($request->writer);
-        Mail::send('emails.assign', ['user'=> $user], function ($message) use($user){
+        Mail::send('emails.assign', ['user'=> $user,'project'=>$project], function ($message) use($user,$project){
             $message->to($user->email);
             $message->from('nyawach41@gmail.com');
-            $message->subject('Please Proceed');
+            $message->subject('Please Proceed-'.$project->sku);
 
         });
         return redirect()->back()->with('status','Assigned Successfully');
@@ -256,10 +256,10 @@ class ClientJobsController extends Controller
             'client_delivery'=>$deadline,
         ]);
         $user=User::findOrfail($request->writer);
-        Mail::send('emails.unassigned', ['user'=> $user], function ($message) use($user){
+        Mail::send('emails.unassigned', ['user'=> $user,'project'=> $project], function ($message) use($user, $project){
             $message->to($user->email);
             $message->from('nyawach41@gmail.com');
-            $message->subject('Project Unassigned');
+            $message->subject('Cancelled Project-'. $project->sku);
 
 
         });

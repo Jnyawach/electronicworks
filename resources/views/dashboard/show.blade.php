@@ -25,11 +25,10 @@
                         </form>
                     </div>
                     <div class="mt-5 writer-progress">
-                        <h5>Status: <span>Offline</span></h5>
-                        <h5>Projects completed: <span>600</span></h5>
-                        <h5>Projects cancelled: <span>10</span></h5>
-                        <h5>Projects in progress: <span>32</span></h5>
-                        <h5>Total Projects Posted: <span>32</span></h5>
+                        <h5>Status: <span>Online</span></h5>
+                        <h5>Projects cancelled: <span>{{$client->projects->where('progress_id',9)->count()}}</span></h5>
+                        <h5>Projects in progress: <span>{{$client->projects->where('progress_id',2)->count()}}</span></h5>
+                        <h5>Total Projects Posted: <span>{{$client->projects->count()}}</span></h5>
 
 
                     </div>

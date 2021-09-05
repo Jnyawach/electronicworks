@@ -20,7 +20,7 @@ class ManagerOrdersController extends Controller
         //
         $projects=Project::all();
         $store=Store::first();
-        $users=User::where('role_id', 3)->get();
+        $users=User::role('Writer')->get();
         $unpaid=Project::where('progress_id',4)->where('delivery',0)->sum('client_pay');
         $earning=$projects->sum('client_pay');
         return  view('manager.statement.orders.index',

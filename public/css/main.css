@@ -1172,3 +1172,7 @@ Container / Wrapper
     color: white!important;
     background-color: var(--primary2) !important;
 }
+.notification:hover{
+    font-family: "Avenir Bold"!important;
+    color: var(--secondary) !important;
+}

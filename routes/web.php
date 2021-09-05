@@ -20,6 +20,7 @@ use \App\Http\Controllers\client\ClientAssignedController;
 use \App\Http\Controllers\client\ClientInvoiceController;
 use \App\Http\Controllers\client\ClientCancelController;
 use \App\Http\Controllers\client\ClientReturnController;
+use \App\Http\Controllers\client\ClientNotificationController;
 
 use App\Http\Controllers\Allusers\RedirectController;
 use App\Http\Controllers\Admin\AdminExamController;
@@ -40,6 +41,7 @@ use App\Http\Controllers\Writer\WriterAssignedController;
 use App\Http\Controllers\Writer\WriterAccountController;
 use App\Http\Controllers\Writer\WriterCompletedController;
 use App\Http\Controllers\Writer\WriterReturnController;
+use App\Http\Controllers\Writer\WriterNotificationController;
 
 
 use App\Http\Controllers\Admin\AdminFaqsController;
@@ -169,6 +171,7 @@ Route::group(['middleware'=>['auth','role:Admin|Client']], function (){
     Route::resource('dashboard/jobs/market', ClientBidsController::class);
     Route::resource('dashboard/jobs/assigned', ClientAssignedController::class);
     Route::resource('dashboard/jobs/cancelled', ClientCancelController::class);
+    Route::resource('dashboard/homepage/client-notification', ClientNotificationController::class);
     Route::get('dashboard/client-invoice/client-unpaid',  [ClientInvoiceController::class, 'client_unpaid'])->name('client-unpaid');
     Route::get('dashboard/client-invoice/client-paid',  [ClientInvoiceController::class, 'client_paid'])->name('client-paid');
     Route::get('dashboard/client-invoice/client-refund',  [ClientInvoiceController::class, 'client_refund'])->name('client-refund');
@@ -214,6 +217,7 @@ Route::group(['middleware'=>['auth','role:Admin|Writer','permission:activated-wr
     Route::resource('freelancer/project/finished', WriterCompletedController::class);
     Route::post('bidding', ['as'=>'bidding', 'uses'=>BiddingController::class]);
     Route::resource('freelancer/homepage/project',  WriterProjectController::class);
+    Route::resource('freelancer/homepage/writer-notification',  WriterNotificationController::class);
     Route::resource('freelancer/project/allocated',  WriterAssignedController::class);
     Route::get('freelancer/project/categories/{id}',  [WriterProjectController::class, 'filters'])->name('filters');
     Route::get('freelancer/project/filtered',  FilterController::class)->name('filter');

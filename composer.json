@@ -16,6 +16,7 @@
         "laravel/framework": "^8.40",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.0",
+        "laraveldaily/laravel-charts": "^0.1.25",
         "madnest/madzipper": "^1.1",
         "moneyphp/money": "^4.0",
         "spatie/laravel-medialibrary": "^9.0.0",

@@ -141,24 +141,26 @@
                 <hr>
                 <h5>Notifications</h5>
                 <div class="row">
+                    @if($writers>0)
                     <div class="col-sm-12 col-md-4 col-lg-4 mx-auto">
                         <div class="card shadow-sm">
                             <div class="card-header">
                                 <h5 style=" font-size: 18px">
-                                    Writer application
-                                </h5>
+
+                                </h5> Writer application
                             </div>
                             <div class="card-body">
                                 <p class="card-text">
-                                    You 3 new writer applications
+                                    You {{$writers}} new writer applications
                                 </p>
-                                <a href="#" class="btn btn-primary hire">View<i
+                                <a href="{{route('application.index')}}" class="btn btn-primary hire">View<i
                                         class="fas fa-long-arrow-alt-right ms-2"></i></a>
                             </div>
                         </div>
 
                     </div>
-
+                    @endif
+                        @if($clients>0)
                     <div class="col-sm-12 col-md-4 col-lg-4 mx-auto">
                         <div class="card shadow-sm">
                             <div class="card-header">
@@ -168,14 +170,15 @@
                             </div>
                             <div class="card-body">
                                 <p class="card-text">
-                                    You 3 new writer applications
+                                    You {{$clients}} new client applications
                                 </p>
-                                <a href="#" class="btn btn-primary hire">View<i
+                                <a href="{{route('application.index')}}" class="btn btn-primary hire">View<i
                                         class="fas fa-long-arrow-alt-right ms-2"></i></a>
                             </div>
                         </div>
 
                     </div>
+                        @endif
 
                     <div class="col-sm-12 col-md-4 col-lg-4 mx-auto">
                         <div class="card shadow-sm">
@@ -203,7 +206,7 @@
                     <div class="col-12 mx-auto">
                         <div class="card shadow-sm">
                             <div class="card-header p-3">
-                                <h5 style="font-size: 18px">Revisions<span class="float-end">12</span></h5>
+                                <h5 style="font-size: 18px">Pending Revisions<span class="float-end">{{$projects->where('progress_id',5)->count()}}</span></h5>
                             </div>
                             <div class="card-body">
                                 <table id="table_id2" class="display">
@@ -216,27 +219,26 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    @foreach($projects->where('progress_id',5) as $revision)
                                     <tr>
-                                        <td>2347654</td>
-                                        <td>Impacts of Covid-19 on Businesses
+                                        <td>{{$revision->sku}}</td>
+                                        <td>
+                                            {{\Coduo\PHPHumanizer\StringHumanizer::truncate($revision->title, 100)}}
                                         </td>
-                                        <td>May 3, 2021 7:14am</td>
-                                        <td><a href="#" class="text-decoration-none text-success">Alex</a> </td>
+                                        <td>{{\Carbon\Carbon::parse($revision->writer_delivery)->diffForHumans()}}</td>
+                                        <td><a href="{{route('writer.show',$revision->writer_id)}}" class="text-decoration-none text-success">{{$revision->writers->name}}</a> </td>
                                     </tr>
-                                    <tr>
-                                        <td>2347654</td>
-                                        <td>Impacts of Covid-19 on Businesses
-                                        </td>
-                                        <td>May 3, 2021 7:14am</td>
-                                        <td><a href="#" class="text-decoration-none text-success">Alex</a> </td>
-                                    </tr>
+                                    @endforeach
+
+                                    </tbody>
+                                    <tfoot>
                                     <tr>
                                         <th>Job Id</th>
                                         <th>Title</th>
                                         <th>Delivery time</th>
                                         <th>writer</th>
                                     </tr>
-                                    </tbody>
+                                    </tfoot>
                                 </table>
                             </div>
                         </div>
@@ -249,7 +251,7 @@
                     <div class="col-12 mx-auto">
                         <div class="card shadow-sm">
                             <div class="card-header p-3">
-                                <h5 style="font-size: 18px">Submitted projects<span class="float-end">12</span></h5>
+                                <h5 style="font-size: 18px">Submitted for Review<span class="float-end">{{$projects->where('progress_id',3)->count()}}</span></h5>
                             </div>
                             <div class="card-body">
                                 <table id="table_id3" class="display">
@@ -262,27 +264,24 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    @foreach($projects->where('progress_id',3) as $review)
                                     <tr>
-                                        <td>2347654</td>
-                                        <td>Impacts of Covid-19 on Businesses
-                                        </td>
-                                        <td>May 3, 2021 7:14am</td>
-                                        <td><a href="#" class="text-decoration-none text-success">Alex</a> </td>
+                                        <td>{{$review->sku}}</td>
+                                        <td>{{\Coduo\PHPHumanizer\StringHumanizer::truncate($review->title, 100)}}}</td>
+                                        <td>{{\Carbon\Carbon::parse($review->client_delivery)->diffForHumans()}}</td>
+                                        <td><a href="{{route('asses.show',$review->slug)}}" class="text-decoration-none text-success">See details</a> </td>
                                     </tr>
-                                    <tr>
-                                        <td>2347654</td>
-                                        <td>Impacts of Covid-19 on Businesses
-                                        </td>
-                                        <td>May 3, 2021 7:14am</td>
-                                        <td><a href="#" class="text-decoration-none text-success">Alex</a> </td>
-                                    </tr>
+                                    @endforeach
+
+                                    </tbody>
+                                    <tfoot>
                                     <tr>
                                         <th>Job Id</th>
                                         <th>Title</th>
                                         <th>Delivery time</th>
                                         <th>writer</th>
                                     </tr>
-                                    </tbody>
+                                    </tfoot>
                                 </table>
                             </div>
                         </div>
@@ -290,6 +289,14 @@
                     </div>
                 </div>
                 <!--end completed projects-->
+
+                <!--Orders Analysis by Month-->
+                <div class="row mt-3">
+                    <div class="col-12">
+                        <h5 class="text-uppercase fs-5">{{Carbon\Carbon::now()->monthName}} ORDER HISTORY</h5>
+                        <div>{!! $chart1->renderHtml() !!}</div>
+                    </div>
+                </div>
 
             </div>
 
@@ -313,4 +320,6 @@
             $('#table_id3').DataTable();
         } );
     </script>
+    {!! $chart1->renderChartJsLibrary() !!}
+    {!! $chart1->renderJs() !!}
 @endsection

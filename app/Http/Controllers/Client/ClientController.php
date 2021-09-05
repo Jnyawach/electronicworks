@@ -3,13 +3,16 @@
 namespace App\Http\Controllers\Client;
 use App\Http\Controllers\Controller;
 
+use App\Models\Notification;
 use App\Models\Role;
 use App\Models\Status;
+use App\Models\Submission;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
+use LaravelDaily\LaravelCharts\Classes\LaravelChart;
 
 class ClientController extends Controller
 {
@@ -22,7 +25,22 @@ class ClientController extends Controller
     {
         //
         if (Auth::user()->status->name==='Active'){
-               return view('dashboard.index');
+            $user=User::findOrFail(Auth::id());
+            $chart_options = [
+                'chart_title' => 'Order By Months',
+                'report_type' => 'group_by_date',
+                'model' => 'App\Models\Project',
+                'group_by_field' => 'created_at',
+                'group_by_period' => 'day',
+                'chart_type' => 'line',
+                'filter_field' => 'created_at',
+                'filter_days' => 30,
+                'where_raw'=>("client_id=$user->id")
+            ];
+            $notification=Notification::latest()->first();
+            $chart1 = new LaravelChart($chart_options);
+
+               return view('dashboard.index', compact('chart1','notification'));
            }else{
                return view('waiting/wait');
            }

@@ -8,6 +8,7 @@ use App\Models\EssayWriting;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class EssayTestController extends Controller
 {
@@ -75,6 +76,12 @@ class EssayTestController extends Controller
         ]);
         $user->revokePermissionTo('incomplete-writer');
         $user->givePermissionTo('complete-writer');
+            Mail::send('emails.application', ['mess'=>$user], function ($message) use($user){
+                $message->to($user->email);
+                $message->from('nyawach41@gmail.com');
+                $message->subject('Application Received');
+
+            });
         return redirect('congratulations');
         }
     }

@@ -9,17 +9,32 @@
                 <hr>
                 <form action="{{route('notifications.store')}}" method="POST">
                     @csrf
-                    <div class="form-group">
+                    <div class="form-group row">
+                        <div class="col-sm-12 col-md-7 col-lg-7">
                         <label class="form-check-label" for="email">
                             Email Notification(optional):
                         </label>
                         <select class="form-select" aria-label="Default select example" name="email"
-                                style="width: 600px">
-                            <option selected>Email to</option>
-                            <option value="2">Email Notification to client</option>
-                            <option value="3"> Email Notification to Writers</option>
+                               >
+                            <option selected value="">Email to</option>
+                            <option value="Client">Email Notification to client</option>
+                            <option value="Writer"> Email Notification to Writers</option>
 
                         </select>
+                        </div>
+                        <div class="col-sm-12 col-md-5 col-lg-5">
+                            <label class="form-check-label" for="category">
+                                Visibility:
+                            </label>
+                            <select class="form-select" aria-label="Default select example" name="category"
+                                   >
+                                <option value="{{old('category')}}">{{old('category')}}</option>
+                                <option value="writer">Writers</option>
+                                <option value="client">Client</option>
+                                <option value="all" selected>All</option>
+
+                            </select>
+                        </div>
                     </div>
 
                     <div class="form-group required mt-3 row">

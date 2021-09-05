@@ -22,8 +22,8 @@ class AdminLedgerController extends Controller
         //
         $orders=Project::all();
         $store=Store::first();
-        $writers=User::where('role_id', 3)
-            ->where('condition',1)->get();
+        $writers=User::role('Writer')->permission('complete-writer')->get();
+
         return view('admin.accounts.index', compact('orders','store','writers'));
     }
 

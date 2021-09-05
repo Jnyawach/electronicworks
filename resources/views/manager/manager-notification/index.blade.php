@@ -21,7 +21,12 @@
                                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                                     data-bs-target="#flush-collapse{{$notification->id}}" aria-expanded="false"
                                                     aria-controls="flush-collapse{{$notification->id}}">
-                                                {{$notification->title}}
+                                                @if($notification->status==1)
+                                                    <h5 class="fs-5">{{$notification->title}}</h5>
+                                                @elseif($notification->status==0)
+                                                    <h5 class="fs-5 text-secondary">{{$notification->title}} (disabled)</h5>
+                                                @endif
+
 
 
                                             </button>
@@ -35,12 +40,12 @@
                                                 <p><span>{{$notification->created_at->diffForHumans()}}</span></p>
                                                 <div class=" d-inline-flex">
 
-                                                    <a href="{{route('manager-notification.edit', $notification->id)}}"
+                                                    <a href="{{route('notifications.edit', $notification->id)}}"
                                                        title="Edit" class="btn
                                             btn-primary hire
                                             m-1">Edit<i
                                                             class="fas fa-external-link-alt ms-2"></i></a>
-                                                    <form method="POST" action="{{route('manager-notification.destroy',
+                                                    <form method="POST" action="{{route('notifications.destroy',
                                                     $notification->id)}}" >
                                                         @csrf
                                                         @method('DELETE')
@@ -83,14 +88,11 @@
 
 
                         </div>
+                        {{$notifications->links()}}
 
                     @endif
-                </div>
-                <div class="text-center">
-                    {{$notifications->links()}}
                 </div>
             </div>
         </div>
     </div>
 @endsection
-

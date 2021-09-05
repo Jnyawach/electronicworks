@@ -74,8 +74,7 @@
                         class="badge bg-danger">1</span></a>
             </li>
             <li>
-                <a href="{{route('client-invoice.index')}}"><span><i class="fas
-                fa-file-invoice"></i></span>Invoices</a>
+                <a href="{{route('client-notification.index')}}"><span><i class="fas fa-bell"></i></span>Notifications</a>
             </li>
         </ul>
 
@@ -134,20 +133,20 @@
 
     <!--end of page content-->
 </div>
-<footer class="mt-0">
+<footer class=" mt-0">
     <div class="container p-5">
         <div class="row">
             <div class="col-sm-11 col-md-4 col-lg-4 mx-auto text-center">
                 <img src="{{asset('images/e-works.png')}}" class="img-fluid" alt="Electronic Works logo">
                 <ul class="nav foot-nav justify-content-center">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">About Us</a>
+                        <a class="nav-link" href="{{route('about')}}">About Us</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Privacy</a>
+                        <a class="nav-link" href="{{route('privacy.index')}}">Privacy</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Work</a>
+                        <a class="nav-link" href="{{route('registration.index')}}">Work</a>
                     </li>
 
                 </ul>
@@ -159,7 +158,7 @@
                         <a class="nav-link" href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" title="Youtube"><i class="fab fa-youtube-square"></i></a>
+                        <a class="nav-link" href="#" title="Youtube"><i class="fab fa-youtube-square"></i></i></a>
                     </li>
 
                 </ul>
@@ -167,7 +166,7 @@
 
             <div class="col-sm-11 col-md-4 col-lg-4 mx-auto">
                 <h5>Find Us</h5>
-                <img src="{{asset('images/map.png')}}" class="img-fluid mt-3" alt="Location Map">
+                <img src="images/map.png" class="img-fluid mt-3" alt="Location Map">
                 <p class="mt-3">Email:info@electronicworks.com<br>
                     Phone:+254 7111 111 110
                 </p>
@@ -176,22 +175,22 @@
                 <h5>Company</h5>
                 <ul class="nav flex-column foot-menu">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">Help & Support</a>
+                        <a class="nav-link active" href="{{route('contact.index')}}">Help & Support</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Reviews</a>
+                        <a class="nav-link" href="{{route('reviews.index')}}">Reviews</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">FAQS</a>
+                        <a class="nav-link" href="{{route('help-and-support.index')}}">FAQS</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " href="#">Contact us</a>
+                        <a class="nav-link " href="{{route('contact.index')}}">Contact us</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " href="#">Privacy Policy</a>
+                        <a class="nav-link " href="{{route('privacy.index')}}">Privacy Policy</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " href="#">Terms & Conditions</a>
+                        <a class="nav-link " href="{{route('terms_condition.index')}}">Terms of use</a>
                     </li>
                 </ul>
             </div>

@@ -9,6 +9,7 @@
 
     <div class="row">
         <div class="col-sm-12 col-md-8 col-lg-8 mx-auto">
+
             <!--In progress card-->
             <div class="card  shadow-sm m-2">
                 <div class="card-header d-inline-flex">
@@ -43,7 +44,7 @@
             <div class="card  shadow-sm m-2">
                 <div class="card-header d-inline-flex">
                     <h5 class="fw-bold">Revisions ({{Auth::user()->jobs->where('progress_id',5)->count()}})</h5>
-                    <a href="#" class="ms-auto">see all&nbsp; <i class="fas fa-long-arrow-alt-right"></i></a>
+                    <a href="{{route('amend.index')}}" class="ms-auto">see all&nbsp; <i class="fas fa-long-arrow-alt-right"></i></a>
                 </div>
                 <div class="card-body">
                     @if(Auth::user()->jobs->where('progress_id',5)->count()>0)
@@ -68,57 +69,9 @@
                 </div>
             </div>
             <!-- end of revisions-->
-            <div class="row mb-5">
-                <div class="col-12 mx-auto">
-                    <div class="card shadow-sm expenditure">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-sm-12 col-md-4 col-lg-4 p-3">
-                                    <div>
-                                        <h5>Orders</h5>
-                                        <h4 class="fw-bold">{{\Carbon\Carbon::now()->format('M-Y')}}</h4>
-                                    </div>
-                                    <div class="mt-5">
-                                        <h1>$ {{Auth::user()->jobs->where('payment',1)->sum('writer_pay')}}</h1>
-                                        <h4>Total Earnings</h4>
-                                    </div>
-                                    <div class="mt-5">
-                                        <h1>{{Auth::user()->jobs->count()}}</h1>
-                                        <h4>Total Orders</h4>
-                                    </div>
 
 
-                                </div>
-                                <div class="col-sm-12 col-md-8 col-lg-8 p-3">
-                                    <h5>FEBRUARY</h5>
-                                    <div>
-                                        <canvas id="myChart" width="400" height="250"></canvas>
-                                    </div>
 
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="card-footer">
-                            <div class="row">
-                                <div class="col-4 mx-auto">
-                                    <h1>$ {{Auth::user()->payment->sum('amount')}}</h1>
-                                    <h4>Cleared invoices</h4>
-                                </div>
-                                <div class="col-4 mx-auto">
-                                    <h1>$ {{Auth::user()->balanceFloat}}</h1>
-                                    <h4>Pending invoices</h4>
-                                </div>
-                                <div class="col-4 mx-auto">
-                                    <h1>$ {{Auth::user()->jobs->where('payment',2)->sum('writer_pay')}}</h1>
-                                    <h4>Refunded invoices</h4>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
 
         </div>
 
@@ -155,6 +108,55 @@
             </div>
         </div>
     </div>
+    <div class="row mb-5">
+        <div class="col-12 mx-auto">
+            <div class="card shadow-sm expenditure">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-3 col-lg-3 p-3">
+                            <div>
+                                <h5>Orders</h5>
+                                <h4 class="fw-bold">{{\Carbon\Carbon::now()->format('M-Y')}}</h4>
+                            </div>
+                            <div class="mt-5">
+                                <h1>$ {{Auth::user()->jobs->where('payment',1)->sum('writer_pay')}}</h1>
+                                <h4>Total Earnings</h4>
+                            </div>
+                            <div class="mt-5">
+                                <h1>{{Auth::user()->jobs->count()}}</h1>
+                                <h4>Total Orders</h4>
+                            </div>
+
+
+                        </div>
+                        <div class="col-sm-12 col-md-9 col-lg-9 p-3">
+                            <h5 class="text-uppercase">{{Carbon\Carbon::now()->monthName}} ORDER HISTORY</h5>
+                            <div>{!! $chart1->renderHtml() !!}</div>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-4 mx-auto">
+                            <h1>$ {{Auth::user()->payment->sum('amount')}}</h1>
+                            <h4>Cleared invoices</h4>
+                        </div>
+                        <div class="col-4 mx-auto">
+                            <h1>$ {{Auth::user()->balanceFloat}}</h1>
+                            <h4>Pending invoices</h4>
+                        </div>
+                        <div class="col-4 mx-auto">
+                            <h1>$ {{Auth::user()->jobs->where('payment',2)->sum('writer_pay')}}</h1>
+                            <h4>Refunded invoices</h4>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
     <!--Notification Toast-->
     @if($notification->count()>0)
     <div class="toast position-fixed bottom-0 end-0 p-3"  role="alert" aria-live="assertive" aria-atomic="true" style="z-index: 11" data-bs-autohide="false">
@@ -167,6 +169,9 @@
         <div class="toast-body">
 
                <small>{{$notification->title}}</small>
+            <a href="{{route('writer-notification.show',$notification->id)}}" class="text-success">
+                Read more<i class="fas fa-long-arrow-alt-right ms-2"></i>
+            </a>
 
         </div>
     </div>
@@ -182,4 +187,7 @@
             $(".toast").toast('show');
         });
     </script>
+    {!! $chart1->renderChartJsLibrary() !!}
+    {!! $chart1->renderJs() !!}
+
     @endsection

@@ -18,7 +18,7 @@ class AdminNotificationController extends Controller
     public function index()
     {
         //
-        $notifications=Notification::all();
+        $notifications=Notification::paginate(10);
         return  view('admin.notifications.index', compact('notifications'));
     }
 
@@ -45,12 +45,13 @@ class AdminNotificationController extends Controller
         $validated=$request->validate([
             'status'=>'required|max:5',
             'title'=>'required|max:255',
-            'body'=>'required'
+            'body'=>'required',
+            'category'=>'required'
         ]);
 
         $notification=Notification::create($validated);
-        if(isset($request->email)){
-            $users=User::where('status_id',1)->where('role_id', $request->email)->get();
+        if($request->email>0){
+            $users=User::role($request->email)->where('status_id',1)->get();
             foreach ($users as $user){
                 Mail::send('emails.notification', ['mess'=>$notification,'user'=>$user], function ($message) use
                 ($notification,$user){
@@ -102,13 +103,19 @@ class AdminNotificationController extends Controller
         $validated=$request->validate([
             'status'=>'required|max:5',
             'title'=>'required|max:255',
-            'body'=>'required'
+            'body'=>'required',
+            'category'=>'required'
         ]);
 
         $note=Notification::findOrFail($id);
-        $notification=$note->update();
+        $notification=$note->update([
+            'status'=>$validated['status'],
+            'title'=>$validated['title'],
+            'body'=>$validated['body'],
+            'category'=>$validated['category'],
+        ]);
         if(isset($request->email)){
-            $users=User::where('status_id',1)->where('role_id', $request->email)->get();
+            $users=User::role($request->email)->where('status_id',1)->get();
             foreach ($users as $user){
                 Mail::send('emails.notification', ['mess'=>$notification,'user'=>$user], function ($message) use
                 ($notification,$user){

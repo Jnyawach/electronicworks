@@ -83,7 +83,7 @@
                                                         <tbody>
                                                         <tr>
                                                             <td align="center" class="esd-block-text es-p10t es-p20b" style="padding: 0;margin: 0;padding-top: 10px;padding-bottom: 20px;">
-                                                                <p style="font-family: tahoma, verdana, segoe, sans-serif;font-size: 15px;color: #76ba1b;line-height: 200%;margin: 0;-webkit-text-size-adjust: none;-ms-text-size-adjust: none;mso-line-height-rule: exactly;"><b>Approved-Electronic Works Writer Application</b></p>
+                                                                <p style="font-family: tahoma, verdana, segoe, sans-serif;font-size: 15px;color: #76ba1b;line-height: 200%;margin: 0;-webkit-text-size-adjust: none;-ms-text-size-adjust: none;mso-line-height-rule: exactly;"><strong>Congratulations for submitting your Application!</strong></p>
                                                             </td>
                                                         </tr>
                                                         </tbody>
@@ -95,7 +95,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="esd-structure es-p40b es-p20r es-p20l" align="left" style="padding: 0;margin: 0;padding-left: 20px;padding-right: 20px;padding-bottom: 40px;">
+                                    <td class="esd-structure es-p20r es-p20l" align="left" style="padding: 0;margin: 0;padding-left: 20px;padding-right: 20px;">
                                         <table cellpadding="0" cellspacing="0" width="100%" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;border-collapse: collapse;border-spacing: 0px;">
                                             <tbody>
                                             <tr>
@@ -105,11 +105,9 @@
                                                         <tr>
                                                             <td align="left" class="esd-block-text es-p25t es-p40b" style="padding: 0;margin: 0;padding-top: 25px;padding-bottom: 40px;">
                                                                 <p style="font-family: tahoma, verdana, segoe, sans-serif;line-height: 200%;color: #2f4f4f;margin: 0;-webkit-text-size-adjust: none;
-                                                                -ms-text-size-adjust: none;mso-line-height-rule: exactly;font-size: 14px;">Hi {{$mess->name}},<br>Your application to become a
-                                                                    freelancer with
-                                                                electronic works has been approved. We are glad to have you as part of our team. Please follow the <a href="https://electronicworks
-                                                                .com//register"></a> link <a/>to sign
-                                                                    in to your account. And let’s have fun... in a good way though. Best regards.</p>
+                                                                -ms-text-size-adjust: none;mso-line-height-rule: exactly;font-size: 14px;">Hi {{$mess->name}},<br>Thanks for submitting your request to
+                                                                    sign up as
+                                                                 a freelance writer with Electronic Works! We’ll review your information and get back to you as soon as we can! Normally that’s in just a few days. If you are approved to start working as a freelance writer , you will receive an email notifying you to sign in to your account. We appreciate your patience</p>
                                                             </td>
                                                         </tr>
                                                         </tbody>

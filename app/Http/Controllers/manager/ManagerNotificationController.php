@@ -45,12 +45,13 @@ class ManagerNotificationController extends Controller
         $validated=$request->validate([
             'status'=>'required|max:5',
             'title'=>'required|max:255',
-            'body'=>'required'
+            'body'=>'required',
+            'category'=>'required'
         ]);
 
         $notification=Notification::create($validated);
         if(isset($request->email)){
-            $users=User::where('status_id',1)->where('role_id', $request->email)->get();
+            $users=User::role($request->email)->where('status_id',1)->get();
             foreach ($users as $user){
                 Mail::send('emails.notification', ['mess'=>$notification,'user'=>$user], function ($message) use
                 ($notification,$user){
@@ -102,13 +103,14 @@ class ManagerNotificationController extends Controller
         $validated=$request->validate([
             'status'=>'required|max:5',
             'title'=>'required|max:255',
-            'body'=>'required'
+            'body'=>'required',
+            'category'=>'required'
         ]);
 
         $note=Notification::findOrFail($id);
         $notification=$note->update();
         if(isset($request->email)){
-            $users=User::where('status_id',1)->where('role_id', $request->email)->get();
+            $users=User::role($request->email)->where('status_id',1)->get();
             foreach ($users as $user){
                 Mail::send('emails.notification', ['mess'=>$notification,'user'=>$user], function ($message) use
                 ($notification,$user){

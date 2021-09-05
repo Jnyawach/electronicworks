@@ -113,7 +113,7 @@
                 <a class="nav-link" href="{{route('evaluation.index')}}">Review <span class="badge bg-primary">{{Auth::user()->jobs->where('progress_id',3)->count()
                 }}</span></a>
                 <a class="nav-link" href="#">Inbox <span class="badge bg-danger">5</span></a>
-                <a class="nav-link" href="#">Notifications</a>
+                <a class="nav-link" href="{{route('writer-notification.index')}}">Notifications <span class="text-danger"><i class="fas fa-bell"></i></span></a>
 
             </nav>
         </div>

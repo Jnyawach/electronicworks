@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddPhoneNumberUsersTable extends Migration
+class AadCategoryToNotifications extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class AddPhoneNumberUsersTable extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table('notifications', function (Blueprint $table) {
             //
-            $table->string('cellphone')->nullable();
-            $table->string('sec_cellphone')->nullable();
+            $table->string('category');
+            $table->string('slug');
         });
     }
 
@@ -27,7 +27,7 @@ class AddPhoneNumberUsersTable extends Migration
      */
     public function down()
     {
-        Schema::table('user', function (Blueprint $table) {
+        Schema::table('notifications', function (Blueprint $table) {
             //
         });
     }
