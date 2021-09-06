@@ -249,7 +249,7 @@
                                             <td>{{$review->sku}}</td>
                                             <td>{{\Coduo\PHPHumanizer\StringHumanizer::truncate($review->title, 100)}}}</td>
                                             <td>{{\Carbon\Carbon::parse($review->client_delivery)->diffForHumans()}}</td>
-                                            <td><a href="{{route('asses.show',$review->slug)}}" class="text-decoration-none text-success">See details</a> </td>
+                                            <td><a href="{{route('manager-asses.show',$review->slug)}}" class="text-decoration-none text-success">See details</a> </td>
                                         </tr>
                                     @endforeach
 

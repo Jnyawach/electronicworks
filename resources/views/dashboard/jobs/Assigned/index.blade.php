@@ -6,7 +6,7 @@
             <div class="col-sm-12 col-md-11 col-lg-11 mx-auto">
                 <div class="card jobs">
                     <div class="body pt-3">
-                        <h5 class="m-2 fw-bold">Assigned projects</h5>
+                        <h5 class="m-2 fw-bold">Pre-ssigned projects</h5>
                         <hr class="dropdown-divider">
                         <div class="row">
                             @if(isset($projects))

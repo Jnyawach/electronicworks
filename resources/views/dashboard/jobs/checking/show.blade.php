@@ -37,7 +37,7 @@
                                             </span>
                                         @endif
                                     </span>&nbsp;
-                                    Payout: <span>${{$project->words/300*$project->cost}}</span>&nbsp;
+                                    Payout: <span>${{$project->client_pay}}</span>&nbsp;
                                     Client: <span>{{$project->clients->name}}</span>
                                 </h5>
                                 <hr class="dotted">

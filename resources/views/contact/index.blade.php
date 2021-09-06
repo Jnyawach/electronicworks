@@ -82,7 +82,7 @@
 
                                     <div class="form-group">
                                  <textarea class="form-control" rows="7" id="message" rows="3"
-                                      placeholder="Message" required name="body">{{old('message')
+                                      placeholder="Message" required name="body">{{old('body')
                                       }}</textarea>
                                     </div>
 

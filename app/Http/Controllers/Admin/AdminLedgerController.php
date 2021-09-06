@@ -9,6 +9,7 @@ use App\Models\Store;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class AdminLedgerController extends Controller
 {
@@ -22,7 +23,7 @@ class AdminLedgerController extends Controller
         //
         $orders=Project::all();
         $store=Store::first();
-        $writers=User::role('Writer')->permission('complete-writer')->get();
+        $writers=User::role('Writer')->permission('activated-writer')->get();
 
         return view('admin.accounts.index', compact('orders','store','writers'));
     }
@@ -54,13 +55,21 @@ class AdminLedgerController extends Controller
         ]);
         $user=User::findOrFail($validated['writer']);
 
-        $user->payment()->create([
+
+        $payment=$user->payment()->create([
+
+            'trans_code'=>$validated['trans_code'],
             'amount'=>$validated['amount'],
-           'trans_code'=>$validated['trans_code'],
-           'authorized_by_id'=>Auth::id(),
+            'authorized_by_id'=>Auth::id(),
        ]);
        $user->withdrawFloat($validated['amount']);
-       //Send email to user
+        Mail::send('emails.payment', ['user'=> $user,'payment'=> $payment], function ($message) use($user, $payment){
+            $message->to($user->email);
+            $message->from('nyawach41@gmail.com');
+            $message->subject('Payment-'.$payment->id);
+
+
+        });
        return redirect()->back()->with('status','Writer Paid Successfully');
     }
 

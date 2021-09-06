@@ -167,8 +167,8 @@
             <div class="col-sm-11 col-md-4 col-lg-4 mx-auto">
                 <h5>Find Us</h5>
                 <img src="images/map.png" class="img-fluid mt-3" alt="Location Map">
-                <p class="mt-3">Email:info@electronicworks.com<br>
-                    Phone:+254 7111 111 110
+                <p class="mt-3">Email:support@electronicworks.com<br>
+                    Phone:+254 717 109 280
                 </p>
             </div>
             <div class="col-sm-11 col-md-4 col-lg-4 mx-auto">

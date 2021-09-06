@@ -22,6 +22,9 @@
         </o:OfficeDocumentSettings>
     </xml>
     <![endif]-->
+    <!--[if !mso]><!-- -->
+
+    <!--<![endif]-->
 
 </head>
 
@@ -74,19 +77,27 @@
                             <table class="es-content-body" width="600" cellspacing="0" cellpadding="0" bgcolor="#ffffff" align="center" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;border-collapse: collapse;border-spacing: 0px;background-color: #ffffff;">
                                 <tbody>
                                 <tr>
-                                    <td class="es-p20t es-p20r es-p20l esd-structure" align="left" style="padding: 0;margin: 0;padding-top: 20px;padding-left: 20px;padding-right: 20px;">
-                                        <table width="100%" cellspacing="0" cellpadding="0" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;border-collapse: collapse;border-spacing: 0px;">
+                                    <td class="esd-structure es-p20t es-p20r es-p20l" align="left" style="padding: 0;margin: 0;padding-top: 20px;padding-left: 20px;padding-right: 20px;">
+                                        <!--[if mso]><table width="560" cellpadding="0" cellspacing="0"><tr><td width="270" valign="top"><![endif]-->
+                                        <table cellpadding="0" cellspacing="0" class="es-left" align="left" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;border-collapse: collapse;border-spacing: 0px;float: left;">
                                             <tbody>
                                             <tr>
-                                                <td class="esd-container-frame" width="560" valign="top" align="center" style="padding: 0;margin: 0;">
-                                                    <table width="100%" cellspacing="0" cellpadding="0" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;border-collapse: collapse;border-spacing: 0px;">
+                                                <td width="270" class="es-m-p20b esd-container-frame" align="left" style="padding: 0;margin: 0;">
+                                                    <table cellpadding="0" cellspacing="0" width="100%" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;border-collapse: collapse;border-spacing: 0px;">
                                                         <tbody>
                                                         <tr>
-                                                            <td align="center" class="esd-block-text es-p10t es-p20b" style="padding: 0;margin: 0;padding-top: 10px;padding-bottom: 20px;">
-                                                                <p style="font-family: tahoma, verdana, segoe, sans-serif;font-size: 15px;color: #76ba1b;line-height: 200%;text-align: left;margin:
-                                                                0;-webkit-text-size-adjust: none;-ms-text-size-adjust: none;mso-line-height-rule: exactly;"><b>{{$project->sku}}- Has been
-                                                                        submited for review.&nbsp;
-                                                                    </b></p>
+                                                            <td align="left" class="esd-block-text" style="padding: 0;margin: 0;">
+                                                                <p style="font-family: tahoma, verdana, segoe, sans-serif;font-size: 16px;color: #4c9a2a;margin: 0;-webkit-text-size-adjust: none;
+                                                                -ms-text-size-adjust: none;mso-line-height-rule: exactly;line-height: 150%;"><strong><span style="font-family:lato,'helvetica neue',
+                                                                helvetica,arial,sans-serif;"><span style="color:#2F4F4F;">{{$payment->created_at->isoFormat('MMM Do Y')}} Invoice</span> - PAID<br>ACCOUNT
+                                                                            DETAILS<br>Name:
+                                                                            <span style="color:#2F4F4F;">{{$user->name}} {{$user->last_name}}</span><br>Type: <span style="color:#2F4F4F;">Writer
+                                                                                Account</span><br>Status:
+                                                                            <span
+                                                                                style="color:#2F4F4F;">{{$user->status->name}}</span><br>Cellphone: <span style="color:#2F4F4F;
+">{{$user->cellphone}}</span><br>Email:
+                                                                            <span
+                                                                                style="color:#2F4F4F;">{{$user->email}}</span></span></strong></p>
                                                             </td>
                                                         </tr>
                                                         </tbody>
@@ -95,21 +106,61 @@
                                             </tr>
                                             </tbody>
                                         </table>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="esd-structure es-p20r es-p20l" align="left" style="padding: 0;margin: 0;padding-left: 20px;padding-right: 20px;">
-                                        <table cellpadding="0" cellspacing="0" width="100%" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;border-collapse: collapse;border-spacing: 0px;">
+                                        <!--[if mso]></td><td width="20"></td><td width="270" valign="top"><![endif]-->
+                                        <table cellpadding="0" cellspacing="0" class="es-right" align="right" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;border-collapse: collapse;border-spacing: 0px;float: right;">
                                             <tbody>
                                             <tr>
-                                                <td width="570" class="esd-container-frame" align="center" valign="top" style="padding: 0;margin: 0;">
+                                                <td width="270" align="left" class="esd-container-frame" style="padding: 0;margin: 0;">
                                                     <table cellpadding="0" cellspacing="0" width="100%" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;border-collapse: collapse;border-spacing: 0px;">
                                                         <tbody>
                                                         <tr>
-                                                            <td align="left" class="esd-block-text es-p40b" style="padding: 0;margin: 0;padding-bottom: 40px;">
-                                                                <p style="font-family: tahoma, verdana, segoe, sans-serif;line-height: 200%;color: #2f4f4f;margin: 0;-webkit-text-size-adjust: none;
-                                                                -ms-text-size-adjust: none;mso-line-height-rule: exactly;font-size: 14px;">The task <strong>{{$project->sku}}</strong>
-                                                                   has been submitted for review</p>
+                                                            <td align="right" class="esd-block-text" style="padding: 0;margin: 0;">
+                                                                <p style="font-family: lato, 'helvetica neue', helvetica, arial, sans-serif;font-size: 16px;color: #4c9a2a;margin: 0;
+                                                                -webkit-text-size-adjust: none;-ms-text-size-adjust: none;mso-line-height-rule: exactly;line-height: 150%;"><strong>INVOICE NO: <span
+                                                                            style="color:#2F4F4F;">{{$payment->id}}</span><br>Date: <span style="color:#2F4F4F;
+">{{$payment->create_at->isoFormat('MMM Do Y')}}</span><br>Status: <span
+                                                                            style="color:#2F4F4F;">PAID</span></strong></p>
+                                                            </td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <!--[if mso]></td></tr></table><![endif]-->
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="esd-structure es-p25t es-p25b" align="left" style="padding: 0;margin: 0;padding-top: 25px;padding-bottom: 25px;">
+                                        <table cellpadding="0" cellspacing="0" width="100%" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;border-collapse: collapse;border-spacing: 0px;">
+                                            <tbody>
+                                            <tr>
+                                                <td width="600" class="esd-container-frame" align="center" valign="top" style="padding: 0;margin: 0;">
+                                                    <table cellpadding="0" cellspacing="0" width="100%" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;border-collapse: collapse;border-spacing: 0px;">
+                                                        <tbody>
+                                                        <tr>
+                                                            <td align="left" class="esd-block-text" style="padding: 0;margin: 0;">
+                                                                <p style="color: #4c9a2a;line-height: 150%;margin: 0;-webkit-text-size-adjust: none;-ms-text-size-adjust: none;mso-line-height-rule: exactly;font-family: arial, 'helvetica neue', helvetica, sans-serif;font-size: 14px;"><br></p>
+                                                                <table border="1" cellspacing="1" cellpadding="1" style="width: 600px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;border-collapse: collapse;border-spacing: 0px;" class="es-table">
+                                                                    <tbody>
+                                                                    <tr>
+                                                                        <td style="font-family: tahoma, verdana, segoe, sans-serif;color: #4c9a2a;padding: 0;margin: 0;"><strong>Date</strong></td>
+                                                                        <td style="font-family: tahoma, verdana, segoe, sans-serif;color: #4c9a2a;padding: 0;margin: 0;"><strong>Description</strong></td>
+                                                                        <td style="font-family: tahoma, verdana, segoe, sans-serif;color: #4c9a2a;padding: 0;margin: 0;"><strong><span>Amount($)</span></strong></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="color: #daa520;padding: 0;margin: 0;">{{$payment->created_at->isoFormat('MMM Do Y')}}</td>
+                                                                        <td style="color: #daa520;padding: 0;margin: 0;">{{$payment->trans_code}}</td>
+                                                                        <td style="padding: 0;margin: 0;">{{$payment->amount}}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="padding: 0;margin: 0;"><strong>Total</strong></td>
+                                                                        <td style="padding: 0;margin: 0;"><br></td>
+                                                                        <td style="padding: 0;margin: 0;"><strong>{{$payment->amount}}</strong></td>
+                                                                    </tr>
+                                                                    </tbody>
+                                                                </table>
                                                             </td>
                                                         </tr>
                                                         </tbody>
@@ -193,4 +244,3 @@
 </body>
 
 </html>
-

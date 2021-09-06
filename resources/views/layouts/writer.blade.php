@@ -211,13 +211,13 @@
                 <img src="{{asset('images/e-works.png')}}" class="img-fluid" alt="Electronic Works logo">
                 <ul class="nav foot-nav justify-content-center">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">About Us</a>
+                        <a class="nav-link" href="{{route('about')}}">About Us</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Privacy</a>
+                        <a class="nav-link" href="{{route('privacy.index')}}">Privacy</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Work</a>
+                        <a class="nav-link" href="{{route('registration.index')}}">Work</a>
                     </li>
 
                 </ul>
@@ -237,9 +237,9 @@
 
             <div class="col-sm-11 col-md-4 col-lg-4 mx-auto">
                 <h5>Find Us</h5>
-                <img src="{{asset('images/map.png')}}" class="img-fluid mt-3" alt="Location Map">
-                <p class="mt-3">Email:info@electronicworks.com<br>
-                    Phone:+254 7111 111 110
+                <img src="images/map.png" class="img-fluid mt-3" alt="Location Map">
+                <p class="mt-3">Email:support@electronicworks.com<br>
+                    Phone:+254 717 109 280
                 </p>
             </div>
             <div class="col-sm-11 col-md-4 col-lg-4 mx-auto">

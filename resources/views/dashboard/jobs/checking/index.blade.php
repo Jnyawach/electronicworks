@@ -19,7 +19,7 @@
                                                     {{$project->title}}</h5>
                                                 <h4 class="fs-6 fw-bold m-1">Remaining
                                                     {{\Carbon\Carbon::parse($project->client_delivery)
-                                           ->diffForHumans()}}&nbsp;<span>Payment</span> Kshs.{{number_format($project->words/300*350, 2)}}
+                                           ->diffForHumans()}}&nbsp;<span>Payment</span> ${{$project->client_pay}}
                                                     &nbsp;<span>Posted:</span>{{$project->created_at ->diffForHumans()}}
                                                 </h4>
                                                 <p>{!!Illuminate\Support\Str::limit($project->instruction, 110)!!}</p>

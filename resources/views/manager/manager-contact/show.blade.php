@@ -1,4 +1,4 @@
-@extends('layouts.admin_layout')
+@extends('layouts.manager_layout')
 @section('title', $message->subject)
 @section('content')
     @include('includes.ckeditor')
@@ -14,15 +14,8 @@
                                     Actions<i class="fas fa-ellipsis-v ms-2"></i>
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                    <li>
-                                        <form action="{{route('support.destroy',$message->id)}}" method="POST">
-                                            @method('DELETE')
-                                            @csrf
-                                            <button type="submit" class="btn dropdown-item">Delete <i class="far
-                                        fa-trash-alt"></i></button>
-                                        </form>
-                                    </li>
-                                    <li><a class="dropdown-item" href="{{route('support.index')}}">Exit<i
+
+                                    <li><a class="dropdown-item" href="{{route('manager-contact.index')}}">Exit<i
                                                 class="fas fa-external-link-alt ms-2"></i></a></li>
                                 </ul>
                             </div>
@@ -40,7 +33,7 @@
                         </p>
                         <hr class="dotted">
                         @if(is_null($message->response))
-                            <form action="{{route('response',$message->id)}}" method="POST">
+                            <form action="{{route('manager-contact.update',$message->id)}}" method="POST">
                                 @method('PATCH')
                                 @csrf
                                 <div class="form-group row mt-3">

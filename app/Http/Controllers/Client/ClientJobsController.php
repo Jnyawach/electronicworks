@@ -75,13 +75,6 @@ class ClientJobsController extends Controller
             $progress=1;
         }else{
             $progress=8;
-            $user=User::findOrfail($request->writer_id);
-            Mail::send('emails.pre_assign', ['user'=> $user], function ($message) use($user){
-                $message->to($user->email);
-                $message->from('nyawach41@gmail.com');
-                $message->subject('You have a Pre-Assigned in your account');
-            });
-
         }
 
         $project=Project::create([
@@ -99,6 +92,14 @@ class ClientJobsController extends Controller
             'deadline'=>$validated['deadline'],
         ]);
         $project->update(['sku'=>'EL00'.$project->id]);
+        if ($request->writer_id>0){
+            $user=User::findOrfail($request->writer_id);
+            Mail::send('emails.pre_assign', ['user'=> $user,'project'=>$project], function ($message) use($user,$project){
+                $message->to($user->email);
+                $message->from('nyawach41@gmail.com');
+                $message->subject('You have a Pre-Assigned Task-'.$project->sku);
+            });
+        }
 
 
         if($files=$request->file('materials')) {
@@ -237,7 +238,7 @@ class ClientJobsController extends Controller
             $message->subject('Please Proceed-'.$project->sku);
 
         });
-        return redirect()->back()->with('status','Assigned Successfully');
+        return redirect('dashboard/jobs/assigned')->with('status','Assigned Successfully');
     }
 
     public  function reject(Request $request, $id){

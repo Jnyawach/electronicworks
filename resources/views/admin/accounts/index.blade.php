@@ -67,22 +67,13 @@
                                         <tbody>
                                         @if($writers->count()>0)
                                             @foreach($writers as $writer)
+                                                @if($writer->balanceFloat>0)
                                                 <tr>
                                                     <td>{{$writer->name}}</td>
                                                     <td>{{$writer->balanceFloat}}</td>
                                                     <td class="text-danger
-                                            fw-bold">{{\AmrShawky\LaravelCurrency\Facade\Currency::
-                                                convert()
-                                                        ->from('USD')
-                                                        ->to('KES')
-                                                        ->amount($writer->balanceFloat*0.8)
-                                                        ->round(2)
-                                                        ->get()
+                                                    fw-bold">{{$writer->balanceFloat-20.00 }}</td>
 
-
-
-
-                                                }}</td>
                                                     <td>
                                                         @if($writer->payment->last()==null)
 
@@ -121,9 +112,8 @@
                                                                     <div class="modal-body p-4">
                                                                         <h5>Submit withdrawal request</h5>
                                                                         <ol>
-                                                                            <li>You can only remit upto 80% of your
-                                                                                account
-                                                                                balance
+                                                                            <li>
+                                                                                The Writer must retain a minimum of $20 in his/her account
                                                                             </li>
                                                                             <li>Payment Should be processed on 15th of
                                                                                 every month
@@ -134,7 +124,7 @@
                                                                             </li>
                                                                         </ol>
                                                                         <form action="{{route('accounts.store')}}"
-                                                                              method="POST" id="finance" >
+                                                                              method="POST" id="finance{{$writer->id}}" >
                                                                             @csrf
                                                                             <input type="hidden" name="writer"
                                                                                    value="{{$writer->id}}">
@@ -142,11 +132,11 @@
                                                                             <div class="form-group required">
                                                                                 <input type="hidden" aria-label="amount"
                                                                                        class="form-control complete"
-                                                                                       id="amount" name="amount" value="{{$writer->balanceFloat*0.8}}"
+                                                                                       id="amount" name="amount" value="{{$writer->balanceFloat-20.00}}"
                                                                                        required>
 
-                                                                                <h5 class="fs-5 fw-bold">80% of the writer account balance is
-                                                                                    $ {{$writer->balanceFloat*0.8}}</h5>
+                                                                                <h5 class="fs-5 fw-bold">$20 less of the writer account balance is
+                                                                                    $ {{$writer->balanceFloat-20.00}}</h5>
                                                                             </div>
                                                                             <div class="form-group required">
                                                                                 <label for="code" class="control-label">
@@ -180,7 +170,7 @@
                                                                     </div>
                                                                     <div class="modal-footer">
                                                                         <button type="submit" class="btn btn-primary"
-                                                                                form="finance">Submit
+                                                                                form="finance{{$writer->id}}">Submit
                                                                         </button>
                                                                     </div>
                                                                 </div>
@@ -195,6 +185,7 @@
                                                     </td>
 
                                                 </tr>
+                                                @endif
                                             @endforeach
                                         @endif
                                         </tbody>

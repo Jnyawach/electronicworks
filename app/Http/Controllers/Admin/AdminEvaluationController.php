@@ -90,12 +90,12 @@ class AdminEvaluationController extends Controller
                 'delivery'=>1,
             ]);
 
-            Mail::send('emails.submitted', ['mess'=> $submission,'client'=>$client], function ($message) use(
-                $submission,
+            Mail::send('emails.submitted', ['mess'=> $project,'client'=>$client], function ($message) use(
+                $project,
                 $client){
                 $message->to('nyawach41@gmail.com');
                 $message->from('cervekenya@gmail.com');
-                $message->subject('Submitted');
+                $message->subject('Your Order has been Submitted-'.$project->sku);
 
             });
             return redirect('admin/task/asses')->with('status','Project sent to client successfully');

@@ -83,6 +83,7 @@ class ManagerAssesController extends Controller
         $submission=Submission::findOrFail($id);
         $project=Project::findOrFail($request->project);
 
+
         if (is_null($request->reason)){
             $client=User::findOrFail($request->client);
             $project->update([
@@ -91,12 +92,11 @@ class ManagerAssesController extends Controller
 
             ]);
 
-            Mail::send('emails.submitted', ['mess'=> $submission,'client'=>$client], function ($message) use(
-                $submission,
-                $client){
-                $message->to('nyawach41@gmail.com');
+
+            Mail::send('emails.submitted', ['project'=> $project,'client'=>$client], function ($message) use($project, $client){
+                $message->to($client->email);
                 $message->from('cervekenya@gmail.com');
-                $message->subject('Submitted');
+                $message->subject('Your Order has been Submitted-'.$project->sku);
 
             });
             return redirect('manager/homepage/manager-asses')->with('status','Project sent to client successfully');
@@ -124,7 +124,7 @@ class ManagerAssesController extends Controller
                 'writer_delivery'=>$dead,
                 'client_delivery'=>$deadline,
             ]);
-            return redirect('manager/homepage/manager-asses')->with('status','Project sent for revision');
+            return redirect('manager/work/manager-asses')->with('status','Project sent for revision');
         }
     }
 

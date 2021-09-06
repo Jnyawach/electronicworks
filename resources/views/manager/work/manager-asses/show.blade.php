@@ -1,4 +1,4 @@
-@extends('layouts.admin_layout')
+@extends('layouts.manager_layout')
 @section('title','Projects')
 @section('content')
     @include('includes.ckeditor')
@@ -60,7 +60,7 @@
                                             class="fas fa-folder
                         me-2"></i></span>{{$project->submission->getFirstMedia('attachment')->name}}</a>
                                 <hr class="dotted">
-                                <form action="{{route('asses.update',$project->submission->id)}}" method="POST">
+                                <form action="{{route('manager-asses.update',$project->submission->id)}}" method="POST">
                                     @method('PATCH')
                                     @csrf
 
@@ -70,7 +70,7 @@
                                     <button type="submit" class="btn btn-primary">Submit to Client</button>
                                 </form>
                                 <h5 class="mt-3">Or return for revision with comments</h5>
-                                <form action="{{route('amend.update',$project->submission->id)}}" method="POST">
+                                <form action="{{route('manager-asses.update',$project->submission->id)}}" method="POST">
                                     @method('PATCH')
                                     @csrf
 
