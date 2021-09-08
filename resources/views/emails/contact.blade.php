@@ -166,7 +166,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td align="center" class="esd-block-text es-p35b" style="padding: 0;margin: 0;padding-bottom: 35px;">
-                                                                <p style="font-size: 15px;font-family: tahoma, verdana, segoe, sans-serif;color: #ffffff;line-height: 150%;margin: 0;-webkit-text-size-adjust: none;-ms-text-size-adjust: none;mso-line-height-rule: exactly;">© 2021 Electronic Works All rights reserved<br>Email:support@electronicworks.com Tel: 0717109280<br>Cerve Hse. Suite 405 Moi Ave. Nairobi</p>
+                                                                <p style="font-size: 15px;font-family: tahoma, verdana, segoe, sans-serif;color: #ffffff;line-height: 150%;margin: 0;-webkit-text-size-adjust: none;-ms-text-size-adjust: none;mso-line-height-rule: exactly;">© {{ date('Y') }} Electronic Works All rights reserved<br>Email:support@electronicworks.com Tel: 0717109280<br>Cerve Hse. Suite 405 Moi Ave. Nairobi</p>
                                                             </td>
                                                         </tr>
                                                         <tr>

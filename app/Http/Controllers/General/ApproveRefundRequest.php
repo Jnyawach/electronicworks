@@ -9,6 +9,7 @@ use App\Models\Store;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class ApproveRefundRequest extends Controller
 {
@@ -45,6 +46,14 @@ class ApproveRefundRequest extends Controller
             'earning'=>0,
             'progress_id'=>7,
         ]);
+        Mail::send('emails.refund', ['refund'=> $refund,'project'=> $project,'client'=> $client], function ($message)
+        use($refund, $project, $client){
+            $message->to( $client->email);
+            $message->from('nyawach41@gmail.com');
+            $message->subject('Refund Declined-'. $project->sku);
+
+
+        });
 
         return  redirect()->back()->with('status','Refund initiated successfully');
 

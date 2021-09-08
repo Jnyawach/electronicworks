@@ -21,7 +21,7 @@ use Spatie\Permission\Models\Permission;
 
 
 
-class User extends Authenticatable implements HasMedia,Wallet, WalletFloat
+class User extends Authenticatable implements HasMedia,Wallet, WalletFloat, MustVerifyEmail
 {
     use HasFactory, Notifiable, InteractsWithMedia,HasWallet,HasWalletFloat, HasWallets,
         HasRoles;

@@ -1,6 +1,8 @@
 <?php
 
 
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdminUserController;
@@ -123,7 +125,7 @@ use \App\Http\Controllers\Manager\ManagerCancelController;
 
 
 //admin routes
-Route::group(['middleware'=>['auth','role:Admin']], function (){
+Route::group(['middleware'=>['auth','role:Admin','verified']], function (){
     Route::resource('admin', AdminController::class);
     Route::resource('admin/homepage/user', AdminUserController::class);
     Route::resource('admin/homepage/client', AdminClientController::class);
@@ -162,7 +164,7 @@ Route::group(['middleware'=>['auth','role:Admin']], function (){
     Route::resource('admin/homepage/admin-refund', AdminRefundController::class);
 });
 // client controller
-Route::group(['middleware'=>['auth','role:Admin|Client']], function (){
+Route::group(['middleware'=>['auth','role:Admin|Client','verified']], function (){
     Route::resource('dashboard', ClientController::class);
     Route::resource('dashboard/jobs/awaiting', ClientProgressController::class);
     Route::resource('dashboard/jobs/checking', ClientReviewController::class);
@@ -186,7 +188,7 @@ Route::group(['middleware'=>['auth','role:Admin|Client']], function (){
 });
 
 //Registering Writers
-Route::group(['middleware'=>['auth','role:Admin|Writer','permission:incomplete-writer']], function (){
+Route::group(['middleware'=>['auth','role:Admin|Writer','permission:incomplete-writer','verified']], function (){
     Route::get('registration/writer_details',['as'=>'detailing', 'uses'=>RegistrationPages::class]);
     Route::resource('english_test', EnglishTestController::class);
     Route::resource('essay_test', EssayTestController::class);
@@ -198,12 +200,12 @@ Route::group([], function (){
 
 });
 //Writer Complete but not activated
-Route::group(['middleware'=>['auth','role:Admin|Writer','permission:complete-writer']], function (){
+Route::group(['middleware'=>['auth','role:Admin|Writer','permission:complete-writer','verified']], function (){
     Route::get('/{waiting}',['as'=>'waiting', 'uses'=>RedirectController::class])->name('page')
         ->where('waiting','wait|congratulations|deactivated|declined');
 });
 //writer roots with auth
-Route::group(['middleware'=>['auth','role:Admin|Writer','permission:activated-writer']], function (){
+Route::group(['middleware'=>['auth','role:Admin|Writer','permission:activated-writer','verified']], function (){
 
     Route::resource('freelancer', WriterController::class);
     Route::get('freelancer/finances/writer-unpaid',  [WriterAccountController::class, 'writerUnpaid'])->name('writer-unpaid');
@@ -246,7 +248,7 @@ Route::group([], function (){
 });
 
 // manager controller
-Route::group(['middleware'=>'role:Manager|Admin'], function (){
+Route::group(['middleware'=>'role:Manager|Admin','verified'], function (){
     Route::resource('manager', ManagerController::class);
     Route::resource('manager/homepage/author', ManagerUserController::class);
     Route::resource('manager/homepage/work', ManagerProjectController::class);
@@ -275,6 +277,7 @@ Route::group(['middleware'=>'role:Manager|Admin'], function (){
 });
 
 
-Auth::routes();
+Auth::routes(['verify'=>true]);
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -30,10 +30,11 @@ class DeclineRefundRequest extends Controller
             'authority_id'=>Auth::id(),
             'status'=>2,
         ]);
-        Mail::send('emails.refund_decline', ['mess'=>$refund,'user'=>$user], function ($message) use($refund,$user){
-            $message->to($user->email);
+        Mail::send('emails.refund_decline', ['refund'=> $refund,'client'=> $user], function ($message)
+        use($refund,  $user){
+            $message->to( $user->email);
             $message->from('nyawach41@gmail.com');
-            $message->subject('Refund Declined');
+            $message->subject('Refund Approved-'. $refund->project->sku);
 
 
         });

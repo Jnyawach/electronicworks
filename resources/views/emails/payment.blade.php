@@ -118,7 +118,7 @@
                                                                 <p style="font-family: lato, 'helvetica neue', helvetica, arial, sans-serif;font-size: 16px;color: #4c9a2a;margin: 0;
                                                                 -webkit-text-size-adjust: none;-ms-text-size-adjust: none;mso-line-height-rule: exactly;line-height: 150%;"><strong>INVOICE NO: <span
                                                                             style="color:#2F4F4F;">{{$payment->id}}</span><br>Date: <span style="color:#2F4F4F;
-">{{$payment->create_at->isoFormat('MMM Do Y')}}</span><br>Status: <span
+">{{$payment->created_at->isoFormat('MMM Do Y')}}</span><br>Status: <span
                                                                             style="color:#2F4F4F;">PAID</span></strong></p>
                                                             </td>
                                                         </tr>
@@ -206,7 +206,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td align="center" class="esd-block-text es-p35b" style="padding: 0;margin: 0;padding-bottom: 35px;">
-                                                                <p style="font-size: 15px;font-family: tahoma, verdana, segoe, sans-serif;color: #ffffff;line-height: 150%;margin: 0;-webkit-text-size-adjust: none;-ms-text-size-adjust: none;mso-line-height-rule: exactly;">© 2021 Electronic Works All rights reserved<br>Email:support@electronicworks.com Tel: 0717109280<br>Cerve Hse. Suite 405 Moi Ave. Nairobi</p>
+                                                                <p style="font-size: 15px;font-family: tahoma, verdana, segoe, sans-serif;color: #ffffff;line-height: 150%;margin: 0;-webkit-text-size-adjust: none;-ms-text-size-adjust: none;mso-line-height-rule: exactly;">© {{ date('Y') }} Electronic Works All rights reserved<br>Email:support@electronicworks.com Tel: 0717109280<br>Cerve Hse. Suite 405 Moi Ave. Nairobi</p>
                                                             </td>
                                                         </tr>
                                                         <tr>

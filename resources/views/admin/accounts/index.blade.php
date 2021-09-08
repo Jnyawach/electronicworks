@@ -59,7 +59,7 @@
                                         <tr>
                                             <th>Name</th>
                                             <th>Balance($)</th>
-                                            <th>Payable Amount(Kshs)</th>
+                                            <th>Payable Amount($)</th>
                                             <th>Status</th>
                                             <th>Action</th>
                                         </tr>
