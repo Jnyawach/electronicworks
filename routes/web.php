@@ -1,8 +1,7 @@
 <?php
 
 
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
-use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdminUserController;
@@ -84,6 +83,7 @@ use \App\Http\Controllers\General\ApproveRefundRequest;
 use \App\Http\Controllers\General\ReviewSubmitController;
 use \App\Http\Controllers\General\ReviewController;
 use \App\Http\Controllers\General\FindWritersController;
+use \App\Http\Controllers\General\InboxController;
 
 use \App\Http\Controllers\MainController;
 
@@ -234,6 +234,8 @@ Route::group([], function (){
     Route::resource('reviews', ReviewController::class);
     Route::resource('help-and-support', SupportController::class);
     Route::resource('find-writers', FindWritersController::class);
+    Route::get('messaging',[InboxController::class,'messaging'])->name('messaging');
+    Route::resource('inbox', InboxController::class);
     Route::get('about-us',  [MainController::class, 'about'])->name('about');
     Route::patch('response/{id}', ['as'=>'response', 'uses'=>ResponseController::class]);
     Route::patch('note/{id}', ['as'=>'note', 'uses'=>NoteController::class]);

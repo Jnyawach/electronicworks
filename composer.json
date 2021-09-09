@@ -19,6 +19,7 @@
         "laraveldaily/laravel-charts": "^0.1.25",
         "madnest/madzipper": "^1.1",
         "moneyphp/money": "^4.0",
+        "pusher/pusher-php-server": "^7.0",
         "spatie/flysystem-dropbox": "^1.0.0",
         "spatie/laravel-backup": "^7.6",
         "spatie/laravel-medialibrary": "^9.0.0",
