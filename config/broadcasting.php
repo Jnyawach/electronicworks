@@ -59,7 +59,7 @@ return [
             'driver' => 'null',
         ],
         'options' => [
-            'cluster' => 'ap2',
+            'cluster' => env('PUSHER_CLUSTER'),
             'useTLS' => true
         ],
 

@@ -169,7 +169,7 @@
         <div class="toast-body">
 
                <small>{{$notification->title}}</small>
-            <a href="{{route('writer-notification.show',$notification->id)}}" class="text-success">
+            <a href="{{route('writer-notification.show',$notification->slug)}}" class="text-success">
                 Read more<i class="fas fa-long-arrow-alt-right ms-2"></i>
             </a>
 

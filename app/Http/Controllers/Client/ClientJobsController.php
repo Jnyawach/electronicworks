@@ -41,8 +41,8 @@ class ClientJobsController extends Controller
         $citation=Citation::pluck('name','id')->all();
         $project=Project::latest()->first();
         $field=Descipline::pluck('name','id')->all();
-        $writer=User::permission('activated-writer')->role('Writer')->pluck('name','id')->all();
-        return  view('dashboard.jobs.create', compact('citation', 'field','writer','project'));
+        $writers=User::permission('activated-writer')->role('Writer')->get();
+        return  view('dashboard.jobs.create', compact('citation', 'field','writers','project'));
     }
 
     /**

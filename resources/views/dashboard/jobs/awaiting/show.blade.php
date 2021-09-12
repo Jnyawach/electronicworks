@@ -58,10 +58,8 @@
                                                 $project->writers->getFirstMedia('avatar')
                                                 ->getUrl('avatar_icon'):'/images/no-image.png' )}}"
                                                  class="rounded float-start img-fluid me-2" style="height: 60px">
-                                            <a href="{{route('writer.show',$project->writer_id)}}">
-                                                <h5 class="mb-0">
-                                                    {{$project->writers->name}}</h5>
-                                            </a>
+                                            <h5 class="mb-0">{{$project->writers->name}}</h5>
+
 
                                             <h5 class="m-0">Projects completed: {{$project->writers->jobs->count()}}</h5>
 

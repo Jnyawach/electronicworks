@@ -1,5 +1,6 @@
 @extends('layouts.client_layout')
 @section('title', 'Create Project')
+
 @section('content')
     @include('includes.ckeditor')
 
@@ -92,15 +93,18 @@
                                             </div>
                                             <div class="form-group mt-4">
                                                 <label for="writer" class="control-label">Request for a
-                                                    specific writer(optional):</label>
+                                                    specific writer:</label>
                                                 <select class="form-select" style="width: 400px" id="writer"
                                                         name="writer_id">
                                                     <option selected value="0">Choose writer</option>
 
-                                                    @foreach($writer as $id=>$free)
-                                                        <option value="{{$id}}">{{$free}}</option>
+                                                    @foreach($writers as $writer)
+                                                        <option value="{{$writer->id}}">
+                                                           <h4 class="fw-bold">{{$writer->name}}</h4>
+                                                        </option>
                                                     @endforeach
                                                 </select>
+
                                                 <small class="text-danger">
                                                     @error('writer_id')
                                                     {{ $message }}
@@ -108,8 +112,8 @@
                                                 </small>
                                                 <small>The writers will submit a bid.
                                                     If you want a specific writer for the project please select the
-                                                    writer. This project will automatically assigned to the writer.
-                                                    <a href="#" class="text-success">See writer rating & reviews</a>
+                                                    writer.<br> This project will automatically assigned to the writer.
+                                                    <a href="{{route('find-writers.index')}}" class="text-success">See writer rating & reviews</a>
                                                 </small>
 
                                             </div>
@@ -176,6 +180,17 @@
     <script>
         CKEDITOR.replace( 'instructions', );
     </script>
+    <script>
+        $(document).ready(function(){
+            $("#searchbar").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#wrote #writers").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+
 @endsection
 
 

@@ -132,6 +132,14 @@
                             <a class="nav-link" href="{{route('returned.index')}}">Revisions</a>
                             @endrole
 
+                        @auth
+                                @if(Auth::user()->receiver->where('seen',0)->count()>0)
+                                <a href="{{route('messages')}}" target="_blank" class="nav-link">Messages&nbsp; <span
+                                        class="badge bg-danger">{{Auth::user()->receiver->where('seen',0)->count()}}</span></a>
+                                @endif
+                        @endauth
+
+
             </nav>
         </div>
     </section>

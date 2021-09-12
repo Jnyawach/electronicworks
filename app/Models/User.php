@@ -115,6 +115,10 @@ class User extends Authenticatable implements HasMedia,Wallet, WalletFloat, Must
     {
         return $this->belongsTo(Level::class);
     }
+    public function receiver()
+    {
+        return $this->hasMany( ChMessage::class,'to_id');
+    }
 
 
 

@@ -65,10 +65,8 @@
                                                 $project->writers->getFirstMedia('avatar')
                                                 ->getUrl('avatar_icon'):'/images/no-image.png' )}}"
                                              class="rounded float-start img-fluid me-2" style="height: 60px">
-                                        <a href="{{route('writer.show',$project->writer_id)}}">
-                                            <h5 class="mb-0">
-                                                {{$project->writers->name}}</h5>
-                                        </a>
+                                        <h5 class="mb-0">{{$project->writers->name}}</h5>
+
 
                                         <h5 class="m-0">Projects completed: {{$project->writers()->count()}}</h5>
 
@@ -143,7 +141,7 @@
                                                         @for($i = 0; $i < 5; $i++)
                                                                 <i class="fa{{ $bid->user->reviewing->sum('stars')/$bid->user->reviewing->count()  <= $i ? 'r' : '' }} fa-star"></i>
                                                             @endfor
-                                                </h4>
+                                                     </h4>
                                                             @else
                                                                 <h4>No Reviews</h4>
                                                             @endif

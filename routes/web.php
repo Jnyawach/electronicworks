@@ -85,6 +85,8 @@ use \App\Http\Controllers\General\ReviewController;
 use \App\Http\Controllers\General\FindWritersController;
 use \App\Http\Controllers\General\InboxController;
 
+use \App\Http\Controllers\Restricted\WriterSelectController;
+
 use \App\Http\Controllers\MainController;
 
 
@@ -277,6 +279,11 @@ Route::group(['middleware'=>'role:Manager|Admin','verified'], function (){
     Route::resource('manager/homepage/writer_application', ManagerApplicationController::class);
     Route::resource('manager/homepage/manager-refund', ManagerRefundController::class);
 });
+
+Route::group([],function (){
+    Route::post('writer-select',['as'=>'writer-select', 'uses'=>WriterSelectController::class]);
+});
+
 
 
 Auth::routes(['verify'=>true]);
