@@ -90,7 +90,7 @@ class AdminEvaluationController extends Controller
                 'delivery'=>1,
             ]);
 
-            Mail::send('emails.submitted', ['mess'=> $project,'client'=>$client], function ($message) use(
+            Mail::send('emails.submitted', ['project'=> $project,'client'=>$client], function ($message) use(
                 $project,
                 $client){
                 $message->to('nyawach41@gmail.com');

@@ -91,7 +91,7 @@
                                                     Total file size should not exceed 10MB</small>
 
                                             </div>
-                                            <div class="form-group mt-4">
+                                            <!--<div class="form-group mt-4">
                                                 <label for="writer" class="control-label">Request for a
                                                     specific writer:</label>
                                                 <select class="form-select" style="width: 400px" id="writer"
@@ -116,7 +116,7 @@
                                                     <a href="{{route('find-writers.index')}}" class="text-success">See writer rating & reviews</a>
                                                 </small>
 
-                                            </div>
+                                            </div>-->
 
                                             <div class="form-group required mt-4">
                                                 <label for="deadline"  class="control-label">Delivery (in Hours)
@@ -180,16 +180,7 @@
     <script>
         CKEDITOR.replace( 'instructions', );
     </script>
-    <script>
-        $(document).ready(function(){
-            $("#searchbar").on("keyup", function() {
-                var value = $(this).val().toLowerCase();
-                $("#wrote #writers").filter(function() {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-                });
-            });
-        });
-    </script>
+
 
 @endsection
 

@@ -6,22 +6,24 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Admin\AdminClientController;
-use \App\Http\Controllers\Admin\DisableUser;
-use \App\Http\Controllers\Allusers\ProfileController;
-use \App\Http\Controllers\Allusers\ChangePasswordController;
-use \App\Http\Controllers\Admin\AdminWriterController;
-use \App\Http\Controllers\client\ClientController;
-use \App\Http\Controllers\client\ClientJobsController;
-use \App\Http\Controllers\client\ClientProgressController;
-use \App\Http\Controllers\client\ClientReviewController;
-use \App\Http\Controllers\client\ClientSubmissionController;
-use \App\Http\Controllers\client\ClientRevisionController;
-use \App\Http\Controllers\client\ClientBidsController;
-use \App\Http\Controllers\client\ClientAssignedController;
-use \App\Http\Controllers\client\ClientInvoiceController;
-use \App\Http\Controllers\client\ClientCancelController;
-use \App\Http\Controllers\client\ClientReturnController;
-use \App\Http\Controllers\client\ClientNotificationController;
+use App\Http\Controllers\Admin\DisableUser;
+use App\Http\Controllers\Allusers\ProfileController;
+use App\Http\Controllers\Allusers\ChangePasswordController;
+use App\Http\Controllers\Admin\AdminWriterController;
+use App\Http\Controllers\client\ClientController;
+use App\Http\Controllers\client\ClientJobsController;
+use App\Http\Controllers\client\ClientProgressController;
+use App\Http\Controllers\client\ClientReviewController;
+use App\Http\Controllers\client\ClientSubmissionController;
+use App\Http\Controllers\client\ClientRevisionController;
+use App\Http\Controllers\client\ClientBidsController;
+use App\Http\Controllers\client\ClientAssignedController;
+use App\Http\Controllers\client\ClientInvoiceController;
+use App\Http\Controllers\client\ClientCancelController;
+use App\Http\Controllers\client\ClientReturnController;
+use App\Http\Controllers\client\ClientNotificationController;
+use App\Http\Controllers\client\WriterAssignController;
+use App\Http\Controllers\client\WriterSelectController;
 
 use App\Http\Controllers\Allusers\RedirectController;
 use App\Http\Controllers\Admin\AdminExamController;
@@ -43,6 +45,7 @@ use App\Http\Controllers\Writer\WriterAccountController;
 use App\Http\Controllers\Writer\WriterCompletedController;
 use App\Http\Controllers\Writer\WriterReturnController;
 use App\Http\Controllers\Writer\WriterNotificationController;
+use App\Http\Controllers\Writer\WriterChatController;
 
 
 use App\Http\Controllers\Admin\AdminFaqsController;
@@ -85,7 +88,7 @@ use \App\Http\Controllers\General\ReviewController;
 use \App\Http\Controllers\General\FindWritersController;
 use \App\Http\Controllers\General\InboxController;
 
-use \App\Http\Controllers\Restricted\WriterSelectController;
+
 
 use \App\Http\Controllers\MainController;
 
@@ -179,8 +182,8 @@ Route::group(['middleware'=>['auth','role:Admin|Client','verified']], function (
     Route::get('dashboard/client-invoice/client-unpaid',  [ClientInvoiceController::class, 'client_unpaid'])->name('client-unpaid');
     Route::get('dashboard/client-invoice/client-paid',  [ClientInvoiceController::class, 'client_paid'])->name('client-paid');
     Route::get('dashboard/client-invoice/client-refund',  [ClientInvoiceController::class, 'client_refund'])->name('client-refund');
-    Route::resource('dashboard/homepage/client-invoice', ClientInvoiceController::class);
-
+    Route::resource('dashboard/client-invoice', ClientInvoiceController::class);
+    Route::get('dashboard/jobs/writer-select',['as'=>'writer-select', 'uses'=>WriterSelectController::class]);
     Route::resource('dashboard/homepage/jobs', ClientJobsController::class);
     Route::resource('dashboard/homepage/refund', ClientReturnController::class);
     Route::patch('dashboard/jobs/accept/{id}',  [ClientJobsController::class, 'accept'])->name('accept');
@@ -210,6 +213,7 @@ Route::group(['middleware'=>['auth','role:Admin|Writer','permission:complete-wri
 Route::group(['middleware'=>['auth','role:Admin|Writer','permission:activated-writer','verified']], function (){
 
     Route::resource('freelancer', WriterController::class);
+
     Route::get('freelancer/finances/writer-unpaid',  [WriterAccountController::class, 'writerUnpaid'])->name('writer-unpaid');
     Route::get('freelancer/finances/writer-paid',  [WriterAccountController::class, 'writerPaid'])->name('writer-paid');
     Route::get('freelancer/finances/writer-refund',  [WriterAccountController::class, 'writerRefund'])->name('writer-returned');
@@ -223,6 +227,7 @@ Route::group(['middleware'=>['auth','role:Admin|Writer','permission:activated-wr
     Route::resource('freelancer/homepage/project',  WriterProjectController::class);
     Route::resource('freelancer/homepage/writer-notification',  WriterNotificationController::class);
     Route::resource('freelancer/project/allocated',  WriterAssignedController::class);
+    Route::resource('freelancer/homepage/chat',  WriterChatController::class);
     Route::get('freelancer/project/categories/{id}',  [WriterProjectController::class, 'filters'])->name('filters');
     Route::get('freelancer/project/filtered',  FilterController::class)->name('filter');
 
@@ -280,9 +285,9 @@ Route::group(['middleware'=>'role:Manager|Admin','verified'], function (){
     Route::resource('manager/homepage/manager-refund', ManagerRefundController::class);
 });
 
-Route::group([],function (){
-    Route::post('writer-select',['as'=>'writer-select', 'uses'=>WriterSelectController::class]);
-});
+
+
+
 
 
 

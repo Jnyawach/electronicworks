@@ -72,6 +72,10 @@ class Project extends Model implements HasMedia
         return $this->hasMany(Bidding::class);
     }
 
+    public  function messages(){
+        return $this->hasMany(Message::class);
+    }
+
     public  function submission(){
         return $this->hasOne(Submission::class);
     }

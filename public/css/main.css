@@ -781,7 +781,10 @@ a[data-toggle="collapse"] {
 }
 /** messaging page*/
 
-.chat{max-width:1280px;}
+.chat{
+    max-width:1280px;
+
+}
 img{ max-width:100%;}
 .inbox_people {
     background:rgba(172,223,135, 0.1);

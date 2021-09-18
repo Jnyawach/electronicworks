@@ -112,10 +112,10 @@
                 }}</span></a>
                 <a class="nav-link" href="{{route('evaluation.index')}}">Review <span class="badge bg-primary">{{Auth::user()->jobs->where('progress_id',3)->count()
                 }}</span></a>
-                @if(Auth::user()->receiver->where('seen',0)->count()>0)
-                    <a href="{{route('messages')}}" target="_blank" class="nav-link">Inbox&nbsp; <span
-                            class="badge bg-danger">{{Auth::user()->receiver->where('seen',0)->count()}}</span></a>
-                @endif
+
+                    <a href="{{route('chat.index')}}"  class="nav-link">Inbox&nbsp; <span
+                            class="badge bg-danger">3</span></a>
+
                 <a class="nav-link" href="{{route('writer-notification.index')}}">Notifications <span class="text-danger"><i class="fas fa-bell"></i></span></a>
 
             </nav>
@@ -181,8 +181,8 @@
                 </a>
             </li>
             <li>
-                <a href="{{route('messages')}}" target="_blank"><span><i class="fas fa-envelope"></i></span>Messages&nbsp; <span
-                        class="badge bg-danger">{{Auth::user()->receiver->where('seen',0)->count()}}</span></a>
+                <a href="{{route('chat.index')}}" ><span><i class="fas fa-envelope"></i></span>Messages&nbsp; <span
+                        class="badge bg-danger">3</span></a>
             </li>
             <li>
                 <a href="{{route('finances.index')}}"><span><i class="fas fa-file-invoice"></i></span>Finances</a>

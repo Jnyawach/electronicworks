@@ -70,8 +70,8 @@
                 </a>
             </li>
             <li>
-                <a href="{{route('messages')}}" target="_blank"><span><i class="fas fa-envelope"></i></span>Messages&nbsp; <span
-                        class="badge bg-danger">{{Auth::user()->receiver->where('seen',0)->count()}}</span></a>
+                <a href="#" ><span><i class="fas fa-envelope"></i></span>Messages&nbsp; <span
+                        class="badge bg-danger">2</span></a>
             </li>
             <li>
                 <a href="{{route('client-notification.index')}}"><span><i class="fas fa-bell"></i></span>Notifications</a>
@@ -109,8 +109,8 @@
                     <li>
                         <hr class="dropdown-divider">
                     </li>
-                    <li><a class="dropdown-item" href="{{route('messages')}}" >Messages&nbsp; <span
-                                class="badge bg-danger">{{Auth::user()->receiver->where('seen',0)->count()}}</span></a>
+                    <li><a class="dropdown-item" href="#" >Messages&nbsp; <span
+                                class="badge bg-danger">2</span></a>
                     </li>
                     <li>
                         <hr class="dropdown-divider">

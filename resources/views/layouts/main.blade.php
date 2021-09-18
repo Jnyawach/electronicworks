@@ -133,10 +133,10 @@
                             @endrole
 
                         @auth
-                                @if(Auth::user()->receiver->where('seen',0)->count()>0)
-                                <a href="{{route('messages')}}" target="_blank" class="nav-link">Messages&nbsp; <span
-                                        class="badge bg-danger">{{Auth::user()->receiver->where('seen',0)->count()}}</span></a>
-                                @endif
+
+                                <a href="{{route('chat.index')}}" target="_blank" class="nav-link">Messages&nbsp; <span
+                                        class="badge bg-danger">4</span></a>
+
                         @endauth
 
 

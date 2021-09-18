@@ -61,7 +61,6 @@ class ClientJobsController extends Controller
             'instruction'=>'required',
             'materials'=>'',
             'materials.*'=>'max:10000',
-            'writer_id'=>'',
             'deadline'=>'required',
             'words'=>'required',
 
@@ -83,7 +82,7 @@ class ClientJobsController extends Controller
             'descipline_id'=>$validated['descipline_id'],
             'client_id'=>Auth::id(),
             'instruction'=>$validated['instruction'],
-            'writer_id'=>$validated['writer_id'],
+            'writer_id'=>0,
             'writer_delivery'=>$dead,
             'client_delivery'=>$deadline,
             'words'=>$validated['words'],
@@ -106,7 +105,7 @@ class ClientJobsController extends Controller
             $project->addMedia($files)->toMediaCollection('materials');
 
         }
-        return  redirect('dashboard/homepage/jobs')->with('status','Project created successfully');
+        return  redirect()->route('writer-select',compact('project'));
     }
 
     /**
@@ -238,7 +237,7 @@ class ClientJobsController extends Controller
             $message->subject('Please Proceed-'.$project->sku);
 
         });
-        return redirect('dashboard/jobs/assigned')->with('status','Assigned Successfully');
+        return redirect('dashboard/jobs/awaiting')->with('status','Assigned Successfully');
     }
 
     public  function reject(Request $request, $id){

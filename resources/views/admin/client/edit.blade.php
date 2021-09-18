@@ -90,28 +90,7 @@
                                     @enderror
                                 </small>
                             </div>
-                            <div class="col-sm-12 col-md-6 col-lg-6">
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" ><i class="fas fa-user"></i></span>
-                                    </div>
-                                    <select class="form-select incomplete" name="role_id" required>
-                                        <option selected value="{{$client->role_id}}">{{$client->role->name}}</option>
-                                        @foreach($role as $id=>$rol)
-                                            <option value="{{$id}}">{{$rol}}</option>
-                                        @endforeach
-
-                                    </select>
-
-                                </div>
-                                <small>Select the user role (Client)</small>
-                                <small class="text-danger">
-                                    @error('role')
-                                    {{ $message }}
-                                    @enderror
-                                </small>
-
-                            </div>
+                            
 
                         </div>
 
