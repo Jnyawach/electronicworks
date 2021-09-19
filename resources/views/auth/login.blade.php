@@ -5,7 +5,7 @@
     <section class="sign-up">
         <div class="container mt-5 mb-5">
             <div class="row ">
-                <div class="col-7 mx-auto mt-5">
+                <div class="col-sm-12 col-md-10 col-lg-7 mx-auto mt-5">
                     <div class="card m-5 p-5" >
                         <div class="card-body">
                             <h5 class="card-title text-center">LOGIN TO ELECTRONIC WORKS</h5>

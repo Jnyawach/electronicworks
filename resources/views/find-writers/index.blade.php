@@ -62,7 +62,14 @@
                                     <div class="col-sm-6 col-md-3 col-lg-3">
                                         <img src="{{url($writer->getFirstMedia('avatar')? $writer->getFirstMedia('avatar')
                                    ->getUrl('avatar_card'):'/images/no-image.png' )}}" class="img-fluid float-start me-3" style="height: 60px">
-                                        <h5 class="mt-3 fs-5 fw-bold">{{$writer->name}}</h5>
+                                        <h5 class="mt-2 fs-5 fw-bold">{{$writer->name}}</h5>
+                                        <h4 style="font-size: 13px">
+                                            @if($writer->isOnline())
+                                                Online
+                                                @else
+                                                last seen {{\Carbon\Carbon::parse($writer->last_seen)->diffForHumans()}}
+                                                @endif
+                                        </h4>
                                     </div>
 
                                     <div class="col-sm-6 col-md-3 col-lg-3 text-center">

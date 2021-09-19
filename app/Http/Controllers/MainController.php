@@ -103,11 +103,12 @@ class MainController extends Controller
     }
 
     public  function about(){
-        $writer=User::where('role_id',3)->count();
+        $writer_count=User::role('Writer')->count();
         $projects=Project::all();
         $fields=Descipline::all();
         $reviews=Review::latest()->take(4)->get();
-        return view('about-us', compact('writer','projects','fields','reviews'));
+        $review_stats=Review::all();
+        return view('about-us', compact('writer_count','projects','fields','reviews','review_stats'));
     }
 
 }

@@ -23,7 +23,7 @@
     <nav class="navbar navbar-expand-lg navbar-light p-2 ps-3 pe-4 w-100 main-bar">
         <a class="navbar-brand" href="/"><img src="{{asset('images/e-logo.png')}}" class="img-fluid" style="height:
         50px"></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="menu">

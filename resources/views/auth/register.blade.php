@@ -5,7 +5,7 @@
     <section class="sign-up">
         <div class="container mt-5 mb-5">
             <div class="row ">
-                <div class="col-10 mx-auto mt-5">
+                <div class="col-sm-12 col-md-10 col-lg-10 mx-auto mt-5">
                     <div class="card m-5 p-5" >
                         <div class="card-body">
                             <h5 class="card-title text-center">SIGN UP TO ELECTRONIC WORKS</h5>
@@ -97,7 +97,7 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <div class="col-6 mx-auto text-center">
+                                    <div class="col-sm-12 col-md-8 col-lg-6 mx-auto text-center">
                                         <button type="submit" class="btn btn-primary mt-3">SUBMIT</button>
                                         <hr>
                                         <h4 style="font-size: 18px">Already have an account?</h4>
