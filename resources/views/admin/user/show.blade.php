@@ -25,7 +25,11 @@
                         </form>
                     </div>
                     <div class="mt-5 writer-progress">
-                        <h5>Status: <span>Offline</span></h5>
+                        <h5>Status: @if($user->isOnline()) <span>online</span>
+                            @else
+                                <span>Last seen {{\Carbon\Carbon::parse($user->last_seen)->diffForHumans()}}</span>
+                            @endif
+                        </h5>
 
                     </div>
                 </div>

@@ -98,6 +98,42 @@
 
 
                         </div>
+                        <div class="form-group row mt-5">
+                            <div class="col-sm-12 col-md-6 col-lg-6 ">
+                                <div class="input-group ">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-mobile-alt"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control incomplete " placeholder="Cellphone"
+                                           aria-label="cellphone" name="cellphone" value="{{old('cellphone')}}">
+
+                                </div>
+                                <small class="text-danger">
+                                    @error('cellphone')
+                                    {{ $message }}
+                                    @enderror
+                                </small>
+                            </div>
+
+                            <div class="col-sm-12 col-md-6 col-lg-6 ">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" ><i class="fas fa-mobile-alt"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control incomplete"
+                                           placeholder="Secondary cellphone"
+                                           aria-label="Secondary cellphone" name="sec_cellphone" value="{{old('sec_cellphone')}}">
+
+                                </div>
+                                <small class="text-danger">
+                                    @error('sec_cellphone')
+                                    {{ $message }}
+                                    @enderror
+                                </small>
+                            </div>
+
+
+                        </div>
 
                         <div class="form-group row">
                             <div class="col-12">

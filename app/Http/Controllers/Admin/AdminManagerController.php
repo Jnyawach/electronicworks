@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rules\Password;
 
-class AdminUserController extends Controller
+
+class AdminManagerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,10 +20,8 @@ class AdminUserController extends Controller
     public function index()
     {
         //
-        $admins=User::role('Admin')->get();
-        $client=User::role('Client')->get()->count();
-        $writer=User::role('Writer')->get()->count();
-        return view('admin.user.index', compact('admins','client','writer'));
+        $users=User::role('Manager')->get();
+        return  view('admin.administrator.index', compact('users'));
     }
 
     /**
@@ -32,8 +32,7 @@ class AdminUserController extends Controller
     public function create()
     {
         //
-
-        return  view('admin.user.create');
+        return  view('admin.administrator.create');
     }
 
     /**
@@ -45,8 +44,9 @@ class AdminUserController extends Controller
     public function store(Request $request)
     {
         //
+        $pass=$request->password;
 
-        $validated = $request->validate([
+        $validated=$request->validate([
             'name' => 'required|max:255',
             'last_name' => 'required|max:255',
             'email' => 'required|email|unique:users',
@@ -59,22 +59,30 @@ class AdminUserController extends Controller
                 ->uncompromised(),
             'password_confirmation' => 'required|max:16|min:8',
             'cellphone'=>'required|max:16',
-            'sec_cellphone'=>'required|max:16'
+            'sec_cellphone'=>'required|max:16',
+
 
         ]);
-
         $user=User::create([
             'name'=>$validated['name'],
             'last_name'=>$validated['last_name'],
             'email'=>$validated['email'],
             'password' => Hash::make($validated['password']),
-            'status_id'=>1,
             'sec_cellphone'=>$validated['sec_cellphone'],
             'cellphone'=>$validated['cellphone'],
+            'status_id'=>1,
         ]);
-        $user->assignRole('Admin');
-        return redirect('admin/homepage/user')->with('status', 'Admin User Created');
 
+        $user->assignRole('Manager');
+        $user->givePermissionTo('activated-manager');
+        Mail::send('emails.manager', ['user'=>$user, 'pass'], function ($message) use($user, $pass){
+            $message->to($user->email);
+            $message->from('nyawach41@gmail.com');
+            $message->subject('Administrator Account setup');
+
+
+        });
+        return  redirect('admin/homepage/administrator')->with('status','Users successfully created');
     }
 
     /**
@@ -87,7 +95,7 @@ class AdminUserController extends Controller
     {
         //
         $user=User::findOrFail($id);
-        return  view('admin.user.show', compact('user'));
+        return  view('admin.administrator.show', compact('user'));
     }
 
     /**
@@ -99,9 +107,9 @@ class AdminUserController extends Controller
     public function edit($id)
     {
         //
-        $user= User::findOrFail($id);
+        $user=User::findOrFail($id);
+        return  view('admin.administrator.edit', compact('user'));
 
-        return  view('admin.user.edit', compact('user'));
     }
 
     /**
@@ -130,7 +138,7 @@ class AdminUserController extends Controller
             'cellphone'=>$validated['cellphone'],
 
         ]);
-        return redirect('admin/homepage/user')->with('status', 'Admin User updated');
+        return  redirect('admin/homepage/administrator')->with('status','User updated successfully');
     }
 
     /**
@@ -142,9 +150,8 @@ class AdminUserController extends Controller
     public function destroy($id)
     {
         //
-        $user= User::findOrFail($id);
+        $user=User::findOrFail($id);
         $user->delete();
-        return redirect('admin/homepage/user')->with('status', 'Admin User Deleted');
-
+        return  redirect('admin/homepage/administrator')->with('status','User deleted');
     }
 }

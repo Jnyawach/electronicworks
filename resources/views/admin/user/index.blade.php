@@ -27,7 +27,7 @@
                         <div class="card shadow-sm">
                             <a href="#" class="text-decoration-none">
                                 <div class="card-body p-4">
-                                    <h4 class="fs-4 fw-bold">58</h4>
+                                    <h4 class="fs-4 fw-bold">{{$client}}</h4>
                                     <h5 class="fs-5">CLIENT</h5>
 
                                 </div>
@@ -38,7 +38,7 @@
                         <div class="card shadow-sm">
                             <a href="#" class="text-decoration-none">
                                 <div class="card-body p-4">
-                                    <h4 class="fs-4 fw-bold">1580</h4>
+                                    <h4 class="fs-4 fw-bold">{{$writer}}</h4>
                                     <h5 class="fs-5">WRITERS</h5>
 
                                 </div>
@@ -147,6 +147,9 @@
                                         </tfoot>
 
                                     </table>
+                                </div>
+                                <div class="card-footer">
+                                    <a href="{{route('user.create')}}">Add Admin</a>
                                 </div>
                             </div>
 

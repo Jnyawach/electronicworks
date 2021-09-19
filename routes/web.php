@@ -74,6 +74,7 @@ use App\Http\Controllers\Admin\AdminRoleController;
 use App\Http\Controllers\Admin\AdminPermissionController;
 use App\Http\Controllers\Admin\AdminAssignController;
 use App\Http\Controllers\Admin\AdminRevokeController;
+use App\Http\Controllers\Admin\AdminManagerController;
 
 use \App\Http\Controllers\General\ContactController;
 use \App\Http\Controllers\General\TermsController;
@@ -169,6 +170,7 @@ Route::group(['middleware'=>['auth','role:Admin','verified']], function (){
     Route::get('admin/task/admin-select',  [AdminProjectController::class, 'adminSelect'])->name('admin-select');
     Route::patch('admin-selecting/{id}',  [AdminProjectController::class, 'adminSelecting'])->name('admin-selecting');
     Route::resource('admin/homepage/admin-refund', AdminRefundController::class);
+    Route::resource('admin/homepage/administrator', AdminManagerController::class);
 });
 // client controller
 Route::group(['middleware'=>['auth','role:Admin|Client','verified']], function (){

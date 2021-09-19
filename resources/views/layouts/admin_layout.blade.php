@@ -85,7 +85,10 @@
                             <div id="submenu-2" class="collapse submenu" style="">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{{route('user.index')}}">Admin & Managers</a>
+                                        <a class="nav-link" href="{{route('user.index')}}">Admin</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{route('administrator.index')}}">Managers</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{route('writer.index')}}">Writers</a>

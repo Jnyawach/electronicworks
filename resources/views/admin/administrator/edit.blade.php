@@ -11,7 +11,7 @@
             <small class="text-danger">This user has super manager rights</small>
             <div class="row">
                 <div class="col-8">
-                    <form class="mt-5" method="POST" action="{{route('user.update',$user->id)}}">
+                    <form class="mt-5" method="POST" action="{{route('administrator.update',$user->id)}}">
                         @method('PATCH')
                         @csrf
 
