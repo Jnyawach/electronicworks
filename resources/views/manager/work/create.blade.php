@@ -62,20 +62,7 @@
                                                     </small>
                                                 </div>
                                             </div>
-                                            <div class="form-group required mt-4">
-                                                <label for="sku" class="control-label">Project SKU:</label><br>
-                                                <input type="text" id="sku" name="sku"
-                                                       class="complete form-control" value="EL00{{$project->id+1}}"
-                                                       required
-                                                       style="width: 600px" ><br>
-                                                <small class="text-danger">
-                                                    @error('sku')
-                                                    {{ $message }}
-                                                    @enderror
-                                                </small>
 
-
-                                            </div>
                                             <div class="form-group required mt-4">
                                                 <label for="instructions" class="control-label">Paper instructions:</label>
                                                 <textarea class="form-control complete" id="instructions"
@@ -104,29 +91,6 @@
                                                 </small>
                                                 <small>Please zip the multiple files before upload.
                                                     Total file size should not exceed 10MB</small>
-
-                                            </div>
-                                            <div class="form-group mt-4">
-                                                <label for="writer" class="control-label">Request for a
-                                                    specific writer:</label>
-                                                <select class="form-select" style="width: 400px" id="writer"
-                                                        name="writer_id">
-                                                    <option selected value="0">Choose writer</option>
-
-                                                    @foreach($writer as $id=>$free)
-                                                        <option value="{{$id}}">{{$free}}</option>
-                                                    @endforeach
-                                                </select>
-                                                <small class="text-danger">
-                                                    @error('writer_id')
-                                                    {{ $message }}
-                                                    @enderror
-                                                </small>
-                                                <small>The writers will submit a bid.
-                                                    If you want a specific writer for the project please select the
-                                                    writer. This project will automatically assigned to the writer.
-                                                    <a href="#" class="text-success">See writer rating & reviews</a>
-                                                </small>
 
                                             </div>
 

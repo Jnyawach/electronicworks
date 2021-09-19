@@ -70,12 +70,6 @@ class ClientJobsController extends Controller
         $dead=Carbon::now()->addHour($deadlineWriter);
         $deadline=Carbon::now()->addHour($request->deadline);
 
-        if($request->writer_id ==0){
-            $progress=1;
-        }else{
-            $progress=8;
-        }
-
         $project=Project::create([
             'title'=>$validated['title'],
             'citation_id'=>$validated['citation_id'],
@@ -87,19 +81,10 @@ class ClientJobsController extends Controller
             'client_delivery'=>$deadline,
             'words'=>$validated['words'],
             'status'=>1,
-            'progress_id'=>$progress,
+            'progress_id'=>1,
             'deadline'=>$validated['deadline'],
         ]);
         $project->update(['sku'=>'EL00'.$project->id]);
-        if ($request->writer_id>0){
-            $user=User::findOrfail($request->writer_id);
-            Mail::send('emails.pre_assign', ['user'=> $user,'project'=>$project], function ($message) use($user,$project){
-                $message->to($user->email);
-                $message->from('nyawach41@gmail.com');
-                $message->subject('You have a Pre-Assigned Task-'.$project->sku);
-            });
-        }
-
 
         if($files=$request->file('materials')) {
             $project->addMedia($files)->toMediaCollection('materials');
@@ -154,21 +139,13 @@ class ClientJobsController extends Controller
             'instruction'=>'required',
             'materials'=>'',
             'materials.*'=>'max:10000',
-            'writer_id'=>'',
             'deadline'=>'required',
             'words'=>'required',
-
-
         ]);
         $deadlineWriter=$request->deadline*0.75;
         $dead=Carbon::now()->addHour($deadlineWriter);
         $deadline=Carbon::now()->addHour($request->deadline);
 
-        if($request->writer_id ==0){
-            $progress=1;
-        }else{
-            $progress=2;
-        }
 
         $project=Project::findOrFail($id);
         $invoice=Invoice::where('status', 1)->get()->last();
@@ -178,12 +155,11 @@ class ClientJobsController extends Controller
             'descipline_id'=>$validated['descipline_id'],
             'client_id'=>Auth::id(),
             'instruction'=>$validated['instruction'],
-            'writer_id'=>$validated['writer_id'],
             'writer_delivery'=>$dead,
             'client_delivery'=>$deadline,
             'words'=>$validated['words'],
             'status'=>1,
-            'progress_id'=>$progress,
+            'progress_id'=>1,
             'deadline'=>$validated['deadline'],
             'invoice_id'=>$invoice->id,
         ]);

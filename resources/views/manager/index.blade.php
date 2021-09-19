@@ -8,6 +8,7 @@
         <div class="container-fluid dashboard-content">
             <!--Header user-projects-invoices-->
             <div class="container">
+                @include('includes.status')
                 <div class="row">
                     <div class="col-sm-12 col-md-4 col-lg-4 mx-auto">
                         <div class="card shadow-sm">

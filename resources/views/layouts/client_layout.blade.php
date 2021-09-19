@@ -70,6 +70,10 @@
                 </a>
             </li>
             <li>
+                <a href="{{route('client-invoice.index')}}"><span><i class="fas fa-file-invoice-dollar"></i></span>Finances
+                </a>
+            </li>
+            <li>
                 <a href="#" ><span><i class="fas fa-envelope"></i></span>Messages&nbsp; <span
                         class="badge bg-danger">2</span></a>
             </li>

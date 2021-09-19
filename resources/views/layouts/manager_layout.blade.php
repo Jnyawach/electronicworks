@@ -38,7 +38,7 @@
                 <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
                    aria-expanded="false" style="color: white !important;">{{Auth::user()->name}}</a>
                 <ul class="dropdown-menu sign-drop">
-                    <li><a class="dropdown-item" href="{{route('user.show', Auth::id())}}">Profile
+                    <li><a class="dropdown-item" href="{{route('manager.show', Auth::id())}}">Profile
                             &nbsp;
                             <i class="fas fa-long-arrow-alt-right"></i></a>
                     </li>

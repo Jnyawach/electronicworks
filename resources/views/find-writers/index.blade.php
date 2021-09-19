@@ -71,11 +71,13 @@
 
                                         <h4> @for($i = 0; $i < 5; $i++)
                                             <i class="fa{{ $writer->reviewing->sum('stars')/$writer->reviewing->count()  <= $i ? 'r' : '' }} fa-star"></i>
-                                        @endfor
+
+                                            @endfor
+                                        </h4>
                                             @else
                                                 <h4>No Reviews</h4>
                                             @endif
-                                     </h4>
+
 
                                     </div>
                                     <div class="col-sm-6 col-md-3 col-lg-3 text-center">

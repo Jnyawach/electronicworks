@@ -43,9 +43,8 @@ class AdminProjectController extends Controller
         $project=Project::latest()->first();
         $citation=Citation::pluck('name','id')->all();
         $field=Descipline::pluck('name','id')->all();
-        $writer=User::permission('activated-writer')->role('Writer')->pluck('name','id')->all();
         return  view('admin.task.create',
-            compact('citation', 'field','writer','project'));
+            compact('citation', 'field','project'));
     }
 
     /**
@@ -64,7 +63,6 @@ class AdminProjectController extends Controller
             'instruction'=>'required',
             'materials'=>'',
             'materials.*'=>'max:10000',
-            'writer_id'=>'',
             'deadline'=>'required',
             'words'=>'required',
 
@@ -74,31 +72,18 @@ class AdminProjectController extends Controller
         $dead=Carbon::now()->addHour($deadlineWriter);
         $deadline=Carbon::now()->addHour($request->deadline);
 
-        if($request->writer_id ==0){
-            $progress=1;
-        }else{
-            $progress=8;
-            $user=User::findOrfail($request->writer_id);
-            Mail::send('emails.pre_assign', ['user'=> $user], function ($message) use($user){
-                $message->to($user->email);
-                $message->from('nyawach41@gmail.com');
-                $message->subject('You have a Pre-Assigned in your account');
-            });
-
-        }
-
         $project=Project::create([
             'title'=>$validated['title'],
             'citation_id'=>$validated['citation_id'],
             'descipline_id'=>$validated['descipline_id'],
             'client_id'=>Auth::id(),
             'instruction'=>$validated['instruction'],
-            'writer_id'=>$validated['writer_id'],
+            'writer_id'=>0,
             'writer_delivery'=>$dead,
             'client_delivery'=>$deadline,
             'words'=>$validated['words'],
             'status'=>1,
-            'progress_id'=>$progress,
+            'progress_id'=>1,
             'deadline'=>$validated['deadline'],
 
 
@@ -110,7 +95,7 @@ class AdminProjectController extends Controller
             $project->addMedia($files)->toMediaCollection('materials');
 
         }
-        return  redirect('admin/homepage/task')->with('status','Project created successfully');
+        return  redirect('admin/task/admin-select')->with('status','Project created successfully');
     }
 
     /**
@@ -138,8 +123,7 @@ class AdminProjectController extends Controller
         $project=Project::findOrFail($id);
         $citation=Citation::pluck('name','id')->all();
         $field=Descipline::pluck('name','id')->all();
-        $writer=User::permission('activated-writer')->role('Writer')->pluck('name','id')->all();
-        return view('admin.task.edit', compact('project','citation', 'field','writer'));
+        return view('admin.task.edit', compact('project','citation', 'field'));
     }
 
     /**
@@ -169,12 +153,6 @@ class AdminProjectController extends Controller
         $dead=Carbon::now()->addHour($deadlineWriter);
         $deadline=Carbon::now()->addHour($request->deadline);
 
-        if($request->writer_id ==0){
-            $progress=1;
-        }else{
-            $progress=2;
-        }
-
         $project=Project::findOrFail($id);
         $invoice=Invoice::where('status', 1)->get()->last();
         $project->update([
@@ -183,12 +161,11 @@ class AdminProjectController extends Controller
             'descipline_id'=>$validated['descipline_id'],
             'client_id'=>Auth::id(),
             'instruction'=>$validated['instruction'],
-            'writer_id'=>$validated['writer_id'],
+
             'writer_delivery'=>$dead,
             'client_delivery'=>$deadline,
             'words'=>$validated['words'],
             'status'=>1,
-            'progress_id'=>$progress,
             'deadline'=>$validated['deadline'],
             'invoice_id'=>$invoice->id,
         ]);
@@ -274,5 +251,27 @@ class AdminProjectController extends Controller
         });
         return redirect()->back()->with('status','Unassigned Successfully');
 
+    }
+
+    public function adminSelect(){
+        $project=Auth::user()->projects()->where('progress_id',1)->latest()->first();
+
+        $writers=User::role('Writer')->permission('activated-writer')->get();
+        return  view('admin/task/admin-select', compact('writers','project'));
+    }
+
+    public  function adminSelecting(Request $request, $id){
+        $project=Project::findOrFail($id);
+        $project->update([
+            'writer_id'=>$request->writer,
+            'progress_id'=>8,
+        ]);
+        $user=User::findOrfail($request->writer);
+        Mail::send('emails.pre_assign', ['user'=> $user,'project'=>$project], function ($message) use($user,$project){
+            $message->to($user->email);
+            $message->from('nyawach41@gmail.com');
+            $message->subject('You have a Pre-Assigned Task-'.$project->sku);
+        });
+        return  redirect('admin/homepage/task')->with('status','Project Created and Pre-assigned to'.$user->name);
     }
 }

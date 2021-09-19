@@ -74,6 +74,8 @@ class ManagerController extends Controller
     public function show($id)
     {
         //
+        $user=User::findOrFail($id);
+        return  view('manager.show', compact('user'));
     }
 
     /**
@@ -85,6 +87,8 @@ class ManagerController extends Controller
     public function edit($id)
     {
         //
+        $user=User::findOrFail($id);
+        return  view('manager.edit',compact('user'));
     }
 
     /**
@@ -97,6 +101,22 @@ class ManagerController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $validated=$request->validate([
+            'name'=>'required|max:25',
+            'last_name'=>'required|max:25',
+            'cellphone'=>'required|max:25',
+            'sec_cellphone'=>'required|max:25'
+        ]);
+        $user=User::findOrFail($id);
+        $user->update([
+            'name'=>$validated['name'],
+            'last_name'=>$validated['last_name'],
+            'cellphone'=>$validated['cellphone'],
+             'sec_cellphone'=>$validated['sec_cellphone']
+
+        ]);
+
+        return  redirect('manager')->with('status', 'Profile Updated Successfully');
     }
 
     /**

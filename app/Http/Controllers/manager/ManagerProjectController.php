@@ -60,28 +60,14 @@ class ManagerProjectController extends Controller
             'instruction'=>'required',
             'materials'=>'',
             'materials.*'=>'max:10000',
-            'writer_id'=>'',
             'deadline'=>'required',
             'words'=>'required',
-            'sku'=>'required|unique:projects'
+
 
         ]);
         $deadlineWriter=$request->deadline*0.75;
         $dead=Carbon::now()->addHour($deadlineWriter);
         $deadline=Carbon::now()->addHour($request->deadline);
-
-        if($request->writer_id ==0){
-            $progress=1;
-        }else{
-            $progress=8;
-            $user=User::findOrfail($request->writer_id);
-            Mail::send('emails.pre_assign', ['user'=> $user], function ($message) use($user){
-                $message->to($user->email);
-                $message->from('nyawach41@gmail.com');
-                $message->subject('You have a Pre-Assigned in your account');
-            });
-
-        }
 
         $project=Project::create([
             'title'=>$validated['title'],
@@ -89,24 +75,24 @@ class ManagerProjectController extends Controller
             'descipline_id'=>$validated['descipline_id'],
             'client_id'=>Auth::id(),
             'instruction'=>$validated['instruction'],
-            'writer_id'=>$validated['writer_id'],
+            'writer_id'=>0,
             'writer_delivery'=>$dead,
             'client_delivery'=>$deadline,
             'words'=>$validated['words'],
             'status'=>1,
-            'progress_id'=>$progress,
-            'sku'=>$validated['sku'],
+            'progress_id'=>1,
             'deadline'=>$validated['deadline'],
 
 
         ]);
+        $project->update(['sku'=>'EL00'.$project->id]);
 
 
         if($files=$request->file('materials')) {
             $project->addMedia($files)->toMediaCollection('materials');
 
         }
-        return  redirect('manager/homepage/work')->with('status','Project created successfully');
+        return  redirect('manager/work/manager-select')->with('status','Project created successfully');
 
     }
 
@@ -159,18 +145,12 @@ class ManagerProjectController extends Controller
             'writer_id'=>'',
             'deadline'=>'required',
             'words'=>'required',
-            'sku'=>'required'
+
 
         ]);
         $deadlineWriter=$request->deadline*0.75;
         $dead=Carbon::now()->addHour($deadlineWriter);
         $deadline=Carbon::now()->addHour($request->deadline);
-
-        if($request->writer_id ==0){
-            $progress=1;
-        }else{
-            $progress=2;
-        }
 
         $project=Project::findOrFail($id);
         $invoice=Invoice::where('status', 1)->get()->last();
@@ -180,13 +160,11 @@ class ManagerProjectController extends Controller
             'descipline_id'=>$validated['descipline_id'],
             'client_id'=>Auth::id(),
             'instruction'=>$validated['instruction'],
-            'writer_id'=>$validated['writer_id'],
+
             'writer_delivery'=>$dead,
             'client_delivery'=>$deadline,
             'words'=>$validated['words'],
             'status'=>1,
-            'progress_id'=>$progress,
-            'sku'=>$validated['sku'],
             'deadline'=>$validated['deadline'],
             'invoice_id'=>$invoice->id,
         ]);
@@ -263,5 +241,25 @@ class ManagerProjectController extends Controller
         });
         return redirect()->back()->with('status','Unassigned Successfully');
 
+    }
+    public function managerSelect(){
+        $project=Auth::user()->projects()->where('progress_id',1)->latest()->first();
+
+        $writers=User::role('Writer')->permission('activated-writer')->get();
+        return  view('manager/work/manager-select', compact('writers','project'));
+    }
+    public  function managerWriter(Request $request, $id){
+        $project=Project::findOrFail($id);
+        $project->update([
+            'writer_id'=>$request->writer,
+            'progress_id'=>8,
+        ]);
+        $user=User::findOrfail($request->writer);
+        Mail::send('emails.pre_assign', ['user'=> $user,'project'=>$project], function ($message) use($user,$project){
+            $message->to($user->email);
+            $message->from('nyawach41@gmail.com');
+            $message->subject('You have a Pre-Assigned Task-'.$project->sku);
+        });
+        return  redirect('manager/homepage/work')->with('status','Project Created and Pre-assigned to'.$user->name);
     }
 }

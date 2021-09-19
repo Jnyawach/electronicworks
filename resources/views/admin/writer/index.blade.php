@@ -135,9 +135,10 @@
 
 
                                             </tr>
+
                                     @endforeach
                                     @endif
-
+                                    </tbody>
                                     <tfoot>
                                     <th>User Id</th>
                                     <th>Name</th>
@@ -146,7 +147,7 @@
                                     <th>Account</th>
                                     <th>Action </th>
                                     </tfoot>
-                                    </tbody>
+
                                 </table>
                             </div>
                             <div class="card-footer">

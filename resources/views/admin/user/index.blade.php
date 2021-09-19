@@ -8,11 +8,8 @@
         <div class="container-fluid dashboard-content">
 
             <div class="container ">
-                @if (session('status'))
-                    <div class="alert alert-success">
-                        {{ session('status') }}
-                    </div>
-                @endif
+
+                @include('includes.status')
                 <div class="row">
                     <div class="col-sm-12 col-md-4 col-lg-4 mx-auto text-center m-2">
                         <div class="card shadow-sm">

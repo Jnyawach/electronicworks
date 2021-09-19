@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use HighIdeas\UsersOnline\Traits\UsersOnlineTrait;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -24,7 +25,7 @@ use Spatie\Permission\Models\Permission;
 class User extends Authenticatable implements HasMedia,Wallet, WalletFloat, MustVerifyEmail
 {
     use HasFactory, Notifiable, InteractsWithMedia,HasWallet,HasWalletFloat, HasWallets,
-        HasRoles;
+        HasRoles,UsersOnlineTrait;
 
     /**
      * The attributes that are mass assignable.
