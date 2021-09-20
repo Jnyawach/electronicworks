@@ -259,7 +259,7 @@ Route::group([], function (){
     Route::patch('refund_decline/{id}',['as'=>'refundDecline', 'uses'=>DeclineRefundRequest::class]);
     Route::patch('refund_approve/{id}',['as'=>'refundApprove', 'uses'=>ApproveRefundRequest::class]);
     Route::post('/profile',['as'=>'profile', 'uses'=>ProfileController::class]);
-    Route::get('/field',['uses'=>FieldController::class]);
+    Route::get('/field',['as'=>'field.index','uses'=>FieldController::class]);
     Route::post('review_submit',['as'=>'reviewSubmit', 'uses'=>ReviewSubmitController::class]);
 });
 

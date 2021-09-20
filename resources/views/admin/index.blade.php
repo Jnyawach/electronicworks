@@ -20,15 +20,15 @@
                             <div class="card-footer">
                                 <div class="row">
                                     <div class="col-sm-6 col-md-4 col-lg-4 text-center">
-                                        <h5 class="mb-0 fw-bold">{{\Coduo\PHPHumanizer\NumberHumanizer::metricSuffix($users->where('role_id',3)->count())}}</h5>
+                                        <h5 class="mb-0 fw-bold">{{\Coduo\PHPHumanizer\NumberHumanizer::metricSuffix($writerCount->count())}}</h5>
                                         <h4 class="mt-0 fw-normal">Writers</h4>
                                     </div>
                                     <div class="col-sm-6 col-md-4 col-lg-4 text-center">
-                                        <h5 class="mb-0 fw-bold">{{\Coduo\PHPHumanizer\NumberHumanizer::metricSuffix($users->where('role_id',2)->count())}}</h5>
+                                        <h5 class="mb-0 fw-bold">{{\Coduo\PHPHumanizer\NumberHumanizer::metricSuffix($clientCount->count())}}</h5>
                                         <h4 class="mt-0 fw-normal">Clients</h4>
                                     </div>
                                     <div class="col-sm-6 col-md-4 col-lg-4 text-center">
-                                        <h5 class="mb-0 fw-bold">{{\Coduo\PHPHumanizer\NumberHumanizer::metricSuffix($users->where('role_id',4)->count())}}</h5>
+                                        <h5 class="mb-0 fw-bold">{{\Coduo\PHPHumanizer\NumberHumanizer::metricSuffix($manager->count())}}</h5>
                                         <h4 class="mt-0 fw-normal">Manager</h4>
                                     </div>
                                 </div>
@@ -72,7 +72,7 @@
                             <div class="card-footer">
                                 <div class="row">
                                     <div class="col-sm-6 col-md-4 col-lg-4 text-center">
-                                        <h5 class="mb-0 fw-bold">${{$users->where('role_id',3)->sum('balanceFloat')}}</h5>
+                                        <h5 class="mb-0 fw-bold">${{$writerCount->sum('balanceFloat')}}</h5>
                                         <h4 class="mt-0 fw-normal">Writers</h4>
                                     </div>
                                     <div class="col-sm-6 col-md-4 col-lg-4 text-center">
@@ -80,7 +80,7 @@
                                         <h4 class="mt-0 fw-normal">Profit</h4>
                                     </div>
                                     <div class="col-sm-6 col-md-4 col-lg-4 text-center">
-                                        <h5 class="mb-0 fw-bold">{{$users->where('role_id',2)->sum('balanceFloat')}}</h5>
+                                        <h5 class="mb-0 fw-bold">{{$clientCount->sum('balanceFloat')}}</h5>
                                         <h4 class="mt-0 fw-normal">Client</h4>
                                     </div>
                                 </div>

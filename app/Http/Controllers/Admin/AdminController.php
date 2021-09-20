@@ -28,6 +28,9 @@ class AdminController extends Controller
             ->where('writer_id','>',0)->get();
         $writers=User::role('Writer')->permission('complete-writer')->where('status_id',2)->get()->count();
         $clients=User::role('Client')->permission('complete-writer')->where('status_id',2)->get()->count();
+        $manager=User::role('Manager')->get();
+        $writerCount=User::role('Writer')->get();
+        $clientCount=User::role('Client')->get();
         $chart_options = [
             'chart_title' => 'Order By Months',
             'report_type' => 'group_by_date',
@@ -40,7 +43,7 @@ class AdminController extends Controller
         ];
         $chart1 = new LaravelChart($chart_options);
         return  view('admin.index',
-            compact('users','projects','store'
+            compact('users','projects','store','manager','writerCount','clientCount'
         ,'delayed','writers','clients','chart1'));
     }
 

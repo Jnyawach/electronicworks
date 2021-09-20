@@ -26,7 +26,9 @@ class ManagerController extends Controller
         $delayed=Project::where('writer_delivery','<',Carbon::now())->where('delivery',0)
             ->where('writer_id','>',0)->get();
         $writers=User::role('Writer')->permission('complete-writer')->where('status_id',2)->get()->count();
-
+        $manager=User::role('Manager')->get();
+        $writerCount=User::role('Writer')->get();
+        $clientCount=User::role('Client')->get();
         $chart_options = [
             'chart_title' => 'Order By Months',
             'report_type' => 'group_by_date',
@@ -39,7 +41,7 @@ class ManagerController extends Controller
         ];
         $chart1 = new LaravelChart($chart_options);
         return  view('manager.index',
-            compact('users','projects','store'
+            compact('users','projects','store','manager','writerCount','clientCount'
                 ,'delayed','writers','chart1'));
 
     }

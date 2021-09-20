@@ -59,10 +59,9 @@
                         <div class="row mt-5 mb-5">
 
                             <div class="col-sm-10 col-md-4 col-lg-4 mx-auto text-center">
-                                <h2>{{Coduo\PHPHumanizer\NumberHumanizer::metricSuffix(5000)}}</h2>
+                                <h2>{{Coduo\PHPHumanizer\NumberHumanizer::metricSuffix($projects)}}</h2>
                                 <h6>ORDERS COMPLETED</h6>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
+                                <p>Completed and delivered to clients</p>
 
                             </div>
 
@@ -75,7 +74,7 @@
                             </div>
 
                             <div class="col-sm-10 col-md-4 col-lg-4 mx-auto text-center">
-                                <h2>300</h2>
+                                <h2>{{$writer}}</h2>
                                 <h6>REGISTERED WRITERS</h6>
                                 <p>Vetted and certified writers available for projects.
                                 </p>

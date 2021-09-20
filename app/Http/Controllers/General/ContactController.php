@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\General;
 use App\Http\Controllers\Controller;
 
-use App\Models\contact;
+use App\Models\Contact;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -47,7 +47,7 @@ class ContactController extends Controller
                 'subject'=>'required|max:255',
                 'body'=>'required',
             ]);
-            $mess=contact::create([
+            $mess=Contact::create([
                 'name'=>$validated['name'],
                 'status'=>0,
                 'email'=>$validated['email'],

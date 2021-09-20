@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Writer;
 use App\Http\Controllers\Controller;
 
+use App\Models\Project;
 use App\Models\User;
 use App\Models\WriterDetail;
 use Illuminate\Http\Request;
@@ -22,7 +23,9 @@ class WriterRegistrationController extends Controller
         if ($user = Auth::user()){
             return  redirect()->back();
         }
-        return view('registration.index');
+        $projects=Project::all()->count();
+        $writer=User::role('Writer')->get()->count();
+        return view('registration.index', compact('projects','writer'));
     }
 
     /**
