@@ -97,12 +97,17 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <div class="col-sm-12 col-md-8 col-lg-6 mx-auto text-center">
+                                    <div class="col-sm-12 col-md-8 col-lg-7 mx-auto text-center">
+                                        <small>By submitting this form you are agreeing to
+                                            <a href="{{route('terms_condition.index')}}" style="color: #1a6b0c!important;" class="text-decoration-none">
+                                                Terms & Conditions </a>and  <a href="{{route('privacy.index')}}" class="text-decoration-none" style="color: #1a6b0c!important;">Privacy
+                                                Policy</a> of Electronic Works</small>
                                         <button type="submit" class="btn btn-primary mt-3">SUBMIT</button>
                                         <hr>
                                         <h4 style="font-size: 18px">Already have an account?</h4>
                                         <a href="{{route('login')}}" title="Login" class="btn btn-outline-primary mt-3
                                         free">Login</a>
+
                                     </div>
                                 </div>
 

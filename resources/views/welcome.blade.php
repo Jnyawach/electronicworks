@@ -166,6 +166,9 @@
                 </div>
                         @endforeach
                     @endforeach
+                    <div class="col-sm-11 col-md-3 col-lg-3">
+                       <a href="#" class="btn-link text-decoration-none more">Show more<i class="fas fa-long-arrow-alt-right ms-2"></i></a>
+                    </div>
             </div>
         </div>
     </section>

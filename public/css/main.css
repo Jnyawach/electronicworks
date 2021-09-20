@@ -62,6 +62,7 @@ a{
     color: var(--secondary)!important;
 
 }
+
 /* Center the loader */
 #loader {
     position: absolute;
@@ -305,6 +306,9 @@ label.star:before {
     border: 1px solid var(--primary2) !important;
     border: none;
     margin: 0px!important;
+}
+.btn-link:hover{
+    color: var(--primary2) !important;
 }
 .statistics{
     background: rgba(172,223,135, 0.1);

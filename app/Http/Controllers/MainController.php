@@ -22,7 +22,7 @@ class MainController extends Controller
     public function index()
     {
         //
-        $fields=Descipline::all();
+        $fields=Descipline::inRandomOrder()->take(25)->get();
         $users=User::role('writer')->count();
         $project=Project::all()->count();
         if (Auth::check()){
