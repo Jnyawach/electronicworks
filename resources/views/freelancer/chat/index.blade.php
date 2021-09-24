@@ -29,7 +29,7 @@
                                 <div class="chat_ib">
                                     <h5 class="text-uppercase fw-bold">{{$project->sku}}</h5>
                                     <p>{{$project->messages->last()?$project->messages->last()->body:''}}</p>
-                                    <h4 class="fw-bold" style="font-size: 13px"><span>7:40AM</span></h4>
+                                    <h4 class="fw-bold" style="font-size: 13px"><span>7:50AM</span></h4>
                                 </div>
                             </div>
                         </div>
