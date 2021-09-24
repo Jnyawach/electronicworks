@@ -16,7 +16,7 @@ class ManagerUserController extends Controller
     public function index()
     {
         //
-        $writers=User::role('writer')->get();
+        $writers=User::role('writer')->permission('activated-writer')->get();
         $active=$writers->where('status_id', 1);
         return  view('manager.author.index', compact('writers', 'active'));
     }

@@ -76,7 +76,11 @@
                                                 <td>{{$writer->id}}</td>
                                                 <td>{{$writer->name}}</td>
                                                 <td>{{$writer->created_at->isoFormat('MMM Do Y')}}</td>
-                                                <td class="text-success">online</td>
+                                                <td class="text-success">@if($writer->isOnline())
+                                                    online
+                                                  @else
+                                                        Last seen {{\Carbon\Carbon::parse($writer->last_seen)->diffForHumans()}}
+                                                @endif</td>
                                                 <td>{{$writer->status->name}}</td>
                                                 <td>
                                                     <!---remember to use auth for super admin-->
