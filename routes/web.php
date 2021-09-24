@@ -76,46 +76,46 @@ use App\Http\Controllers\Admin\AdminAssignController;
 use App\Http\Controllers\Admin\AdminRevokeController;
 use App\Http\Controllers\Admin\AdminManagerController;
 
-use \App\Http\Controllers\General\ContactController;
-use \App\Http\Controllers\General\TermsController;
-use \App\Http\Controllers\General\PrivacyController;
-use \App\Http\Controllers\General\SupportController;
-use \App\Http\Controllers\General\CheckComplete;
-use \App\Http\Controllers\General\CheckNotPaid;
-use \App\Http\Controllers\General\DeclineRefundRequest;
-use \App\Http\Controllers\General\ApproveRefundRequest;
-use \App\Http\Controllers\General\ReviewSubmitController;
-use \App\Http\Controllers\General\ReviewController;
-use \App\Http\Controllers\General\FindWritersController;
-use \App\Http\Controllers\General\InboxController;
-use \App\Http\Controllers\General\FieldController;
+use App\Http\Controllers\General\ContactController;
+use App\Http\Controllers\General\TermsController;
+use App\Http\Controllers\General\PrivacyController;
+use App\Http\Controllers\General\SupportController;
+use App\Http\Controllers\General\CheckComplete;
+use App\Http\Controllers\General\CheckNotPaid;
+use App\Http\Controllers\General\DeclineRefundRequest;
+use App\Http\Controllers\General\ApproveRefundRequest;
+use App\Http\Controllers\General\ReviewSubmitController;
+use App\Http\Controllers\General\ReviewController;
+use App\Http\Controllers\General\FindWritersController;
+use App\Http\Controllers\General\InboxController;
+use App\Http\Controllers\General\FieldController;
 
 
 
-use \App\Http\Controllers\MainController;
+use App\Http\Controllers\MainController;
 
 
 
-use \App\Http\Controllers\Manager\ManagerController;
-use \App\Http\Controllers\Manager\ManagerUserController;
-use \App\Http\Controllers\Manager\ManagerApplicationController;
-use \App\Http\Controllers\Manager\ManagerProjectController;
-use \App\Http\Controllers\Manager\ManagerBiddingController;
-use \App\Http\Controllers\Manager\ManagerAssignedController;
-use \App\Http\Controllers\Manager\ManagerProgressController;
-use \App\Http\Controllers\Manager\ManagerAssesController;
-use \App\Http\Controllers\Manager\ManagerRevisionController;
-use \App\Http\Controllers\Manager\ManagerCompletedController;
-use \App\Http\Controllers\Manager\ManagerEnglishController;
-use \App\Http\Controllers\Manager\ManagerEssayController;
-use \App\Http\Controllers\Manager\ManagerDisciplineController;
-use \App\Http\Controllers\Manager\ManagerNotificationController;
-use \App\Http\Controllers\Manager\ManagerContactController;
-use \App\Http\Controllers\Manager\ManagerFaqController;
-use \App\Http\Controllers\Manager\ManagerStatementController;
-use \App\Http\Controllers\Manager\ManagerOrdersController;
-use \App\Http\Controllers\Manager\ManagerRefundController;
-use \App\Http\Controllers\Manager\ManagerCancelController;
+use App\Http\Controllers\Manager\ManagerController;
+use App\Http\Controllers\Manager\ManagerUserController;
+use App\Http\Controllers\Manager\ManagerApplicationController;
+use App\Http\Controllers\Manager\ManagerProjectController;
+use App\Http\Controllers\Manager\ManagerBiddingController;
+use App\Http\Controllers\Manager\ManagerAssignedController;
+use App\Http\Controllers\Manager\ManagerProgressController;
+use App\Http\Controllers\Manager\ManagerAssesController;
+use App\Http\Controllers\Manager\ManagerRevisionController;
+use App\Http\Controllers\Manager\ManagerCompletedController;
+use App\Http\Controllers\Manager\ManagerEnglishController;
+use App\Http\Controllers\Manager\ManagerEssayController;
+use App\Http\Controllers\Manager\ManagerDisciplineController;
+use App\Http\Controllers\Manager\ManagerNotificationController;
+use App\Http\Controllers\Manager\ManagerContactController;
+use App\Http\Controllers\Manager\ManagerFaqController;
+use App\Http\Controllers\Manager\ManagerStatementController;
+use App\Http\Controllers\Manager\ManagerOrdersController;
+use App\Http\Controllers\Manager\ManagerRefundController;
+use App\Http\Controllers\Manager\ManagerCancelController;
 
 
 
